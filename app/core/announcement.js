@@ -140,7 +140,7 @@ const readNotification = notifyId => {
 };
 
 const removeNotification = (notifyId, success, failure) => {
-  removeDeliveredNotification(notifyId.toString());
+  removeDeliveredNotification(notifyId);
   deleteNotify(notifyId, success, failure);
   reloadNotificationList();
 };

@@ -124,6 +124,10 @@ class ModalNotify extends React.Component {
         this.checkGeolocationState();
       }
 
+      if (this.isVisibleGeolocation) {
+        this.checkBluetoothState();
+      }
+
       if (
         // Nếu trước đó là winzard request quyền vị trí và bị từ chối vĩnh viễn
         this.statusLocation === 'blocked' &&
@@ -204,6 +208,8 @@ class ModalNotify extends React.Component {
       () => {
         this.state.isVisibleLocation &&
           this.setState({isVisibleLocation: false});
+        this.isVisibleGeolocation = true;
+        this.checkBluetoothState();
       },
       error => {
         if (error.code === 2) {
@@ -245,7 +251,6 @@ class ModalNotify extends React.Component {
 
   setStatusBluetooth(status) {
     this.isVisibleBLE = status;
-    console.log('setStatusBluetooth', status);
     (this.isVisibleGeolocation || this.isVisibleBLE) &&
       this.setState({isVisibleBLE: !status});
 

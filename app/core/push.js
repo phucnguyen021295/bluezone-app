@@ -96,17 +96,15 @@ const handleUploadHistoryF12 = async notify => {
 
 // DeleteNotification
 const validateDeleteNotification = notify => {
-  return !!(notify.data?.Notify.NotifyID || notify.data.notifyId);
+  return !(notify.data?.Notify.NotifyID || notify.data.notifyId);
 };
 const handleDeleteNotification = notify => {
-  // debugger;
-  // if (validateDeleteNotification(notify)) {
-  //   // TODO bo sung ghi log cho nay
-  //   return;
-  // }
-  // debugger;
+  if (validateDeleteNotification(notify)) {
+    // TODO bo sung ghi log cho nay
+    return;
+  }
   const _notifyId = notify.data?.notifyId || notify.data?.Notify?.NotifyID;
-  removeNotification(_notifyId, () => {}, () => {});
+  removeNotification(_notifyId.toString(), () => {}, () => {});
 };
 
 // UploadHistoryF01Auto

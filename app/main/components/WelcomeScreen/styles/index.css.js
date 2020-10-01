@@ -42,7 +42,7 @@ const HEIGHT_DEFAULT = heightPercentageToDP((40 / 720) * 100);
 const MAR_TOP2 = heightPercentageToDP((42 / 720) * 100);
 const MAR_TOP3 = heightPercentageToDP((34 / 720) * 100);
 const HEI_BTN = heightPercentageToDP((27 / 720) * 100);
-const WID_BTN = widthPercentageToDP((60 / 360) * 100);
+const WID_BTN = widthPercentageToDP((138 / 360) * 100);
 const MARGIN_QR = widthPercentageToDP((130 / 360) * 100);
 const HEIGHT_BTN_OK = heightPercentageToDP((63 / 720) * 100);
 const HEIGHT_ANN = heightPercentageToDP((225 / 720) * 100);
@@ -195,8 +195,7 @@ const styles = StyleSheet.create({
 
   closeButton: {
     height: HEI_BTN,
-    borderWidth: 0.95,
-    borderColor: '#015cd0',
+    backgroundColor: '#015cd0',
     borderRadius: 17,
     width: WID_BTN,
   },

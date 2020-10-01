@@ -385,7 +385,7 @@ class WelcomeScreen extends React.Component {
               onPress={this.onGoBack}
               text={formatMessage(message.close)}
               styleBtn={styles.closeButton}
-              styleText={{fontSize: fontSize.smaller, color: '#015cd0'}}
+              styleText={{fontSize: fontSize.smaller, color: '#ffffff'}}
             />
           </View>
         </View>
