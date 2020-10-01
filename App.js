@@ -369,6 +369,7 @@ class App extends React.Component {
                   name="NotifyDetail"
                   component={NotifyDetail}
                 />
+                <Stack.Screen name="DetailNew" component={DetailNew} />
               </Stack.Navigator>
             ) : !isHome ? (
               <Stack.Navigator
@@ -380,6 +381,12 @@ class App extends React.Component {
                   name={WELCOME_INITIAL_ROUTE}
                   component={this.WelcomeProps}
                 />
+                <Stack.Screen
+                  path="NotifyDetail"
+                  name="NotifyDetail"
+                  component={NotifyDetail}
+                />
+                <Stack.Screen name="DetailNew" component={DetailNew} />
               </Stack.Navigator>
             ) : (
               <Stack.Navigator

@@ -66,7 +66,7 @@
   "bluezone.auth.safeText3": " ",
   "bluezone.auth.infectedText2": " ",
   "bluezone.auth.infectedText3": " ",
-  "bluezone.auth.titleFirstLoading": "Đang khởi đồng bộ...",
+  "bluezone.auth.titleFirstLoading": "Đang khởi tạo đồng bộ...",
   "bluezone.auth.titleLoading": "Đang khởi tạo Bluezone",
   "bluezone.auth.close": "Đóng",
 
@@ -242,7 +242,7 @@
   "bluezone.welcome.alert": "Thông báo",
   "bluezone.welcome.contentAlert": "Chức năng đang phát triển, sẽ cập nhật trong thời gian tới",
   "bluezone.welcome.closeAlert": "Đóng",
-  "bluezone.welcome.perpetualCalendar": "Lịch vạn niên",
+  "bluezone.welcome.perpetualCalendar": "Lịch Vạn Niên",
   "bluezone.welcome.notify": "Bạn chưa tiếp xúc gần với F0 nào!",
   "bluezone.welcome.close": "OK"
 }

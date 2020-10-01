@@ -39,7 +39,7 @@ export default defineMessages({
   },
   perpetualCalendar: {
     id: 'bluezone.welcome.perpetualCalendar',
-    defaultMessage: 'Lịch vạn niên',
+    defaultMessage: 'Lịch Vạn Niên',
   },
   notify: {
     id: 'bluezone.welcome.notify',

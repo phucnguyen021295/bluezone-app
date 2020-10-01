@@ -55,6 +55,7 @@ function pushNotify(notifyObj, language = 'vi') {
   const _big = (isVI ? bigText : bigTextEn) || bigText || bigTextEn;
   const _buttonText = isVI ? buttonText : buttonTextEn;
 
+  debugger;
   const notification = createNotification()
     .setNotificationId(notifyObj.data.notifyId)
     .setTitle(_title)

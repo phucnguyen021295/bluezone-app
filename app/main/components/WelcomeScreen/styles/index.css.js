@@ -30,7 +30,7 @@ import {
 } from '../../../../core/utils/dimension';
 
 const HEIGHT_HEADER = heightPercentageToDP((338 / 720) * 100);
-const HEIGHT_IMG = heightPercentageToDP((68 / 720) * 100);
+const HEIGHT_IMG = heightPercentageToDP((72 / 720) * 100);
 const PADDING_HOR = widthPercentageToDP((26 / 360) * 100);
 const PAD_TOP = heightPercentageToDP((28 / 720) * 100);
 const PAD_TOP1 = heightPercentageToDP((19 / 720) * 100);
@@ -46,6 +46,8 @@ const WID_BTN = widthPercentageToDP((60 / 360) * 100);
 const MARGIN_QR = widthPercentageToDP((130 / 360) * 100);
 const HEIGHT_BTN_OK = heightPercentageToDP((63 / 720) * 100);
 const HEIGHT_ANN = heightPercentageToDP((225 / 720) * 100);
+const CALENDAR_PADDING_TOP = heightPercentageToDP((13 / 720) * 100);
+const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((18 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -57,8 +59,13 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: PAD_VER,
+    paddingTop: CALENDAR_PADDING_TOP,
   },
+
+  btncalendar: {
+    paddingBottom: CALENDAR_PADDING_BOTTOM
+  },
+
   titleCalendar: {
     color: '#fff',
     fontSize: fontSize.huger,
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: fontSize.normal,
-    color: 'black',
+    color: '#393939',
     lineHeight: LINE_HEI,
     fontStyle: 'italic',
   },
@@ -188,10 +195,10 @@ const styles = StyleSheet.create({
 
   closeButton: {
     height: HEI_BTN,
-    paddingHorizontal: 8,
-    borderWidth: 1,
+    borderWidth: 0.95,
     borderColor: '#015cd0',
     borderRadius: 17,
+    width: WID_BTN,
   },
 
   buttonIcon: {
@@ -204,6 +211,7 @@ const styles = StyleSheet.create({
     marginTop: MAR_TOP,
     fontSize: fontSize.fontSize11,
     color: '#a7a7a7',
+    marginRight: 8
   },
   announce: {
     height: HEIGHT_ANN,

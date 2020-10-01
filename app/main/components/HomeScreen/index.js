@@ -246,7 +246,7 @@ class HomeTab extends React.Component {
           <View style={style.watchScan}>
             <Radar navigation={navigation} />
           </View>
-          <View style={[style.button]}>
+          <View style={style.button}>
             <ButtonIconText
               onPress={this.onWatchHistory}
               text={formatMessage(message.historyButton)}
@@ -258,10 +258,10 @@ class HomeTab extends React.Component {
             <ButtonIconText
               onPress={this.onChangeNavigateIntroduce}
               text={formatMessage(message.utilities)}
-              source={require('./styles/images/bluezoner.png')}
+              source={require('./styles/images/icon_utilities.png')}
               styleBtn={style.buttonHistory}
               styleText={{fontSize: fontSize.normal}}
-              styleIcon={style.buttonIcon}
+              styleIcon={style.buttonIcon1}
             />
           </View>
         </View>

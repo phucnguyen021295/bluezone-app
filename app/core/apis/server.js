@@ -35,8 +35,8 @@ export const DOMAIN_CONFIG = dev
   : 'https://apiconfigbz.bkav.com';
 
 export const DOMAIN_NEW = dev
-  ? 'https://bznews.bkav.com'
-  : 'https://bznews.bkav.com';
+  ? 'https://bznews.bkav.com:8543'
+  : 'https://bznews.bkav.com:8543';
 
 export const CONFIG_APP_FILE_NAME = dev
   ? 'configAppTest.json'

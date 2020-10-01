@@ -96,15 +96,17 @@ const handleUploadHistoryF12 = async notify => {
 
 // DeleteNotification
 const validateDeleteNotification = notify => {
-  return !!(notify.data.notifyId || notify?.data?.Notify.NotifyID);
+  return !!(notify.data?.Notify.NotifyID || notify.data.notifyId);
 };
 const handleDeleteNotification = notify => {
-  if (validateDeleteNotification(notify)) {
-    // TODO bo sung ghi log cho nay
-    return;
-  }
-  const _notifyId = notify.data.notifyId || notify.data.Notify.NotifyID;
-  removeNotification(_notifyId);
+  // debugger;
+  // if (validateDeleteNotification(notify)) {
+  //   // TODO bo sung ghi log cho nay
+  //   return;
+  // }
+  // debugger;
+  const _notifyId = notify.data?.notifyId || notify.data?.Notify?.NotifyID;
+  removeNotification(_notifyId, () => {}, () => {});
 };
 
 // UploadHistoryF01Auto
@@ -179,7 +181,6 @@ const handleReportPushAnalytics = notify => {
     return;
   }
 
-  debugger;
   const key = notify.data.Notify.key;
   reportPushAnalytics(key);
 };

@@ -245,6 +245,7 @@ class ModalNotify extends React.Component {
 
   setStatusBluetooth(status) {
     this.isVisibleBLE = status;
+    console.log('setStatusBluetooth', status);
     (this.isVisibleGeolocation || this.isVisibleBLE) &&
       this.setState({isVisibleBLE: !status});
 
@@ -260,6 +261,7 @@ class ModalNotify extends React.Component {
   }
 
   onStartBluetooth() {
+    console.log('setStatusBluetooth', 'onStartBluetooth');
     enableBluetooth();
   }
 

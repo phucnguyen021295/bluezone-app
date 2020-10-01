@@ -50,7 +50,7 @@ export default defineMessages({
   },
   titleFirstLoading: {
     id: 'bluezone.auth.titleFirstLoading',
-    defaultMessage: 'Đang khởi đồng bộ...',
+    defaultMessage: 'Đang khởi tạo đồng bộ...',
   },
   titleLoading: {
     id: 'bluezone.auth.titleLoading',
