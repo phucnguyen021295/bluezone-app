@@ -30,6 +30,7 @@ import {dev} from '../../../core/apis/server';
 
 // Components
 import {
+  SafeAreaView,
   StatusBar,
   View,
   Dimensions,

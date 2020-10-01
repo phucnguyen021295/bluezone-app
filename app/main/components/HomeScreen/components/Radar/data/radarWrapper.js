@@ -21,27 +21,16 @@
 
 'use strict';
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Image} from 'react-native';
-
-function ImageBackgroundBase(props) {
-  const {style, uri} = props;
-
-  return (
-    <Image
-        // resizeMode={'contain'}
-      style={[style]}
-      blurRadius={2}
-      source={uri}
-      backgroundColor={'rgb(0,0,0)'}
-      opacity={0.5}
-    />
-  );
-}
-
-ImageBackgroundBase.propTypes = {
-  style: PropTypes.object,
+export default {
+  v: '5.7.1',
+  fr: 30,
+  ip: 0,
+  op: 60,
+  w: 720,
+  h: 720,
+  nm: 'Rada 1',
+  ddd: 0,
+  assets: [],
+  layers: [],
+  markers: [],
 };
-
-export default ImageBackgroundBase;

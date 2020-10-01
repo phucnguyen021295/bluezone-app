@@ -41,7 +41,7 @@ import styles from './styles/index.css';
 
 const handleForcusChangeList = [];
 
-const rigisterForcusTabbar = handleChange => {
+const registerForcusTabbar = handleChange => {
   for (let i = 0; i < handleForcusChangeList.length; i++) {
     if (handleForcusChangeList[i] === handleChange) {
       return;
@@ -78,22 +78,22 @@ class CountNotification extends React.Component {
     // Đăng kí event click vào tab notify
     // this.props.navigation.addListener('focus', () => {
     //   this.resetCount();
-    // });
-    rigisterForcusTabbar(this.resetCount);
+    // });console.log('addCount:' + (prevState.count + count));
+    registerForcusTabbar(this.resetCount);
   }
 
   componentWillUnmount() {
-    // this.removeNotificationDisplayedListener.remove();
+    this.removeNotificationDisplayedListener();
   }
 
   async getCount() {
     const timespanNotification = await getTimespanNotification();
-    setTimespanNotification(new Date());
-    getCountNotification(timespanNotification || 0, this.addCount);
+    getCountNotification(timespanNotification || 0, this.showCount);
   }
 
   addCount = count => {
     this.setState(prevState => {
+      setBadge(prevState.count + count);
       return {
         count: prevState.count + count,
       };

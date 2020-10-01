@@ -21,18 +21,6 @@
 
 'use strict';
 
-import {dev} from '../apis/server';
-
-const orig = global.console.log;
-
-global.console.log = function log() {
-  if (dev) {
-    orig.apply(global.console, [
-      `[${new Date()
-        .toISOString()
-        .replace('T', ' ')
-        .replace(/\..+/, '')}]`,
-      ...arguments,
-    ]);
-  }
-};
+if (!__DEV__) {
+  global.console.log = function log() {};
+}

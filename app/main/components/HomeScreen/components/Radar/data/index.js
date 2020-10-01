@@ -1,61 +1,114 @@
-/**
- * Copyright 2016-present, Bkav, Cop.
- * All rights reserved.
+/*
+ * @Project Bluezone
+ * @Author Bluezone Global (contact@bluezone.ai)
+ * @Createdate 04/26/2020, 16:36
  *
- * This source code is licensed under the Bkav license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
+ * This file is part of Bluezone (https://bluezone.ai)
  *
- * @author phucnhb@bkav.com on 12/09/2020.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * History:
- * @modifier abc@bkav.com on xx/xx/xxxx đã chỉnh sửa abcxyx (Chỉ các thay đổi quan trọng mới cần ghi lại note này)
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 'use strict';
 
 import {weakDots, normalDots, strongDots} from './dot';
 
-const maxRealDots = {
-  weak: Math.floor(weakDots.length / 1.25),
-  normal: Math.floor(normalDots.length / 1.25),
-  strong: Math.floor(strongDots.length / 1.25),
-};
+const RSSI_LEVELS = [-70, -90];
 
 const maxAllDots = Math.floor(
   (weakDots.length + normalDots.length + strongDots.length) / 1.25,
 );
 
-const isWeak = rssi => {
-  return rssi <= -90;
+const isWeak = (rssi, rssiLevels = RSSI_LEVELS) => {
+  return rssi <= rssiLevels[1];
 };
-const isNormal = rssi => {
-  return rssi > -90 && rssi <= -70;
+const isNormal = (rssi, rssiLevels = RSSI_LEVELS) => {
+  return rssi > rssiLevels[1] && rssi <= rssiLevels[0];
 };
-const isStrong = rssi => {
-  return rssi > -70;
+const isStrong = (rssi, rssiLevels = RSSI_LEVELS) => {
+  return rssi > rssiLevels[0];
+};
+
+const getTypeDotByRSSI = (rssi, rssiLevels = RSSI_LEVELS) => {
+  if (!RSSI_LEVELS) {
+    rssiLevels = RSSI_LEVELS;
+  }
+  if (isWeak(rssi, rssiLevels)) {
+    return 'weak';
+  }
+  if (isNormal(rssi, rssiLevels)) {
+    return 'normal';
+  }
+  return 'strong';
+};
+
+const getNewTypeDot = (oldType, rssi) => {
+  const newType = getTypeDotByRSSI(rssi);
+  if (newType === oldType) {
+    return newType;
+  }
+
+  let rssiLevels;
+  if (oldType === 'weak') {
+    rssiLevels = [RSSI_LEVELS[0], RSSI_LEVELS[1] + 5];
+  }
+  if (oldType === 'normal') {
+    rssiLevels = [RSSI_LEVELS[0] + 5, RSSI_LEVELS[1] - 5];
+  }
+  if (oldType === 'strong') {
+    rssiLevels = [RSSI_LEVELS[0] - 5, RSSI_LEVELS[1]];
+  }
+  return getTypeDotByRSSI(rssi, rssiLevels);
 };
 
 // Tra ve 1 so random trong khoang min, max
 const getRandomArbitrary = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max + 1 - min) + min);
+};
+
+const getRandomDotCount = count => {
+  let min = 0;
+  let max = 0;
+  if (count <= 1) {
+    min = 1;
+    max = 3;
+  } else if (count >= 2 && count <= 7) {
+    min = count;
+    max = count + 2;
+  } else {
+    const realAllDots = count >= maxAllDots ? maxAllDots : count;
+    min = realAllDots;
+    max = Math.floor(realAllDots * 1.25);
+  }
+  return getRandomArbitrary(min, max);
+};
+
+const getMaxCountByType = type => {
+  if (type === 'strong') {
+    return strongDots.length;
+  }
+  if (type === 'normal') {
+    return normalDots.length;
+  }
+  if (type === 'weak') {
+    return weakDots.length;
+  }
+  return 0;
 };
 
 const getRandomDotAmountSafe = (weakCount, normalCount, strongCount) => {
   const allDots = weakCount + normalCount + strongCount;
-  let min = 0;
-  let max = 0;
-  if (allDots === 0) {
-    min = 1;
-    max = 3;
-  } else {
-    // Kiem tra de dam bao so Dot quet duoc + 25% se khong vuot qua so diem co the ve
-    const realAllDots = allDots >= maxAllDots ? maxAllDots : allDots;
-    // Lay random trong khoang tu _num toi _num * 1.25
-    min = realAllDots;
-    max = Math.floor(realAllDots * 1.25);
-  }
-  let dotAmount = getRandomArbitrary(min, max);
+  const dotAmount = getRandomDotCount(allDots);
 
   // Tinh toan dam bao so luong Dot quet duong khong vuot qua so diem co the ve ra
   let remain = 0;
@@ -79,23 +132,31 @@ const getRandomDotAmountSafe = (weakCount, normalCount, strongCount) => {
     weakCount = weakDots.length;
   }
 
-  // Phan phoi so dotAmount random cho cac trang thai
-  if (dotAmount <= strongCount) {
-    strongCount = dotAmount;
-    normalCount = 0;
-    weakCount = 0;
-  } else if (dotAmount <= strongCount + normalCount) {
-    normalCount = dotAmount - strongCount;
-    weakCount = 0;
-  } else if (dotAmount <= strongCount + normalCount + weakCount) {
-    weakCount = dotAmount - strongCount - normalCount;
+  let fakeCount = dotAmount - allDots;
+  const countObject = {
+    weak: weakCount,
+    normal: normalCount,
+    strong: strongCount,
+  };
+  const dotTypes = ['weak', 'normal', 'strong'];
+  const result = {};
+  for (let j = 0; j < dotTypes.length; j++) {
+    const type = dotTypes[j];
+    const max = getMaxCountByType(type);
+    let count = countObject[type];
+    if (fakeCount > 0) {
+      if (count + fakeCount <= max) {
+        count = count + fakeCount;
+        fakeCount = 0;
+      } else {
+        fakeCount = fakeCount - (max - count);
+        count = max;
+      }
+    }
+    result[type] = count;
   }
 
-  return {
-    weakCount,
-    normalCount,
-    strongCount,
-  };
+  return result;
 };
 
 const getRandomDotArr = (length, max) => {
@@ -139,4 +200,24 @@ const getRandomDotIndex = (bzs = []) => {
   return {strong, normal, weak};
 };
 
-export {getRandomDotIndex};
+// NhatPA: Cac ham duoi day chi danh cho viec random cac fake Point, con cac real Point luon duoc giu nguyen.
+const getRandomDotArrDontExistYet = (dotsExist = [], amount, max) => {
+  const arr = [];
+
+  while (arr.length < amount) {
+    const r = Math.floor(Math.random() * max);
+    if (dotsExist.indexOf(r) === -1 && arr.indexOf(r) === -1) {
+      arr.push(r);
+    }
+  }
+  return arr;
+};
+
+export {
+  getRandomDotIndex,
+  getRandomDotArrDontExistYet,
+  getTypeDotByRSSI,
+  getNewTypeDot,
+  getRandomArbitrary,
+  getRandomDotCount,
+};

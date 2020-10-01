@@ -162,18 +162,18 @@ export default defineMessages({
   },
   lableF: {
     id: 'bluezone.warning.lableF',
-    defaultMessage: 'bluezone.warning.lableF',
+    defaultMessage: 'Chưa ghi nhận người dùng Bluezone nhiễm hoặc nghi nhiễm Covid-19 ở gần bạn !',
   },
   lableF0: {
     id: 'bluezone.warning.lableF0',
-    defaultMessage: 'bluezone.warning.textF0',
+    defaultMessage: 'Đã ghi nhận nhiễm COVID-19 !',
   },
   lableF1: {
     id: 'bluezone.warning.lableF1',
-    defaultMessage: 'bluezone.warning.lableF1',
+    defaultMessage: 'Bạn đã tiếp xúc gần người dùng Bluezone là người nhiễm COVID-19 !',
   },
   lableF2: {
     id: 'bluezone.warning.lableF2',
-    defaultMessage: 'bluezone.warning.lableF2',
+    defaultMessage: 'Bạn đã tiếp xúc gần người dùng Bluezone là người có nguy cơ nhiễm COVID-19 !',
   },
 });

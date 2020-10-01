@@ -148,6 +148,8 @@ const configuration = {
   SupportPhoneNumber: '0888128896',
   LinkDetail: 'https://www.bluezone.gov.vn',
   LinkDetailEn: 'https://bluezone.ai/',
+  LinkDetail1: 'https://bluezone.gov.vn/dieu-khoan-su-dung',
+  LinkDetail1En: 'https://bluezone.ai/terms-of-use',
   LinkRulesVi: 'https://bluezone.gov.vn/dieu-khoan-su-dung',
   LinkRulesEn: 'https://bluezone.ai/terms-of-use',
   MailTo: 'lienhe@bluezone.gov.vn',

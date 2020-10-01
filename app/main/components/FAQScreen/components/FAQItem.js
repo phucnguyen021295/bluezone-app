@@ -62,8 +62,6 @@ class FAQItem extends React.Component {
   render() {
     const {data, selected, id, index} = this.props;
 
-    console.log(id);
-
     if (!data) {
       return null;
     }
