@@ -184,8 +184,10 @@ const deleteNotify = (notifyId, success, failure) => {
     txn.executeSql(
       'DELETE FROM notify WHERE notifyId = ?',
       [notifyId],
-      success,
-      failure,
+      (txTemp, results) => {
+        success(txTemp, results);
+      },
+      failure(),
     );
   });
 };

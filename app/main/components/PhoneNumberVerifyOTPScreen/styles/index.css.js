@@ -166,6 +166,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   buttonConfirm: {
+    zIndex: 999,
     marginHorizontal: 43,
     marginBottom: 27,
   },

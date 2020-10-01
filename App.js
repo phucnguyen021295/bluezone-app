@@ -84,6 +84,12 @@ const PHONE_NUMBER_VERITY_OTP_WIZARD_NAME = 'PhoneNumberVerifyOTPWizard';
 const REGISTER_INFOMATION_WIZARD_NAME = 'RegisterInfomationWizard';
 const START_USE_WIZARD_NAME = 'StartUseWizard';
 const WELCOME_WIZARD_NAME = 'WelcomeWizard';
+
+const PAGE_WEBVIEW_LOADING_NAME = 'PageViewLoading';
+const DETAIL_NEW_LOADING_NAME = 'DetailNewLoading';
+const PAGE_WEBVIEW_WELCOME_NAME = 'PageViewWelcome';
+const DETAIL_NEW_WELCOME_NAME = 'DetailNewWelcome';
+
 let wizard = [
   LOADING_SCREEN_NAME,
   INTRODUTION_WIZARD_NAME,
@@ -274,7 +280,7 @@ class App extends React.Component {
   }
 
   onNotificationOpened = remoteMessage => {
-    const {loading} = this.state;
+    const {loading, isHome} = this.state;
     console.log('onNotificationOpened');
     if (!remoteMessage) {
       return;
@@ -304,20 +310,28 @@ class App extends React.Component {
       (obj.data._group === NOTIFICATION_TYPE.SEND_URL_NEW ||
         obj.data._group === NOTIFICATION_TYPE.SEND_HTML_NEWS)
     ) {
+      const params = {
+        item: {
+          title: obj.title,
+          data: obj?.data?.data,
+        },
+      };
       if (obj.data._group === NOTIFICATION_TYPE.SEND_HTML_NEWS) {
-        navigate('DetailNew', {
-          item: {
-            title: obj.title,
-            data: obj?.data?.data,
-          },
-        });
+        if (loading) {
+          navigate(DETAIL_NEW_LOADING_NAME, params);
+        } else if (isHome) {
+          navigate('DetailNew', params);
+        } else {
+          navigate(DETAIL_NEW_WELCOME_NAME, params);
+        }
       } else {
-        navigate('PageView', {
-          item: {
-            title: obj.title,
-            data: obj?.data?.data,
-          },
-        });
+        if (loading) {
+          navigate(PAGE_WEBVIEW_LOADING_NAME, params);
+        } else if (isHome) {
+          navigate('PageView', params);
+        } else {
+          navigate(PAGE_WEBVIEW_WELCOME_NAME, params);
+        }
       }
     }
     // getNotifications().cancelNotification(remoteMessage.notification._notificationId);
@@ -369,6 +383,14 @@ class App extends React.Component {
                   name="NotifyDetail"
                   component={NotifyDetail}
                 />
+                <Stack.Screen
+                  name={DETAIL_NEW_LOADING_NAME}
+                  component={DetailNew}
+                />
+                <Stack.Screen
+                  name={PAGE_WEBVIEW_LOADING_NAME}
+                  component={PageView}
+                />
               </Stack.Navigator>
             ) : !isHome ? (
               <Stack.Navigator
@@ -379,6 +401,19 @@ class App extends React.Component {
                 <Stack.Screen
                   name={WELCOME_INITIAL_ROUTE}
                   component={this.WelcomeProps}
+                />
+                <Stack.Screen
+                  path="NotifyDetail"
+                  name="NotifyDetail"
+                  component={NotifyDetail}
+                />
+                <Stack.Screen
+                  name={DETAIL_NEW_WELCOME_NAME}
+                  component={DetailNew}
+                />
+                <Stack.Screen
+                  name={PAGE_WEBVIEW_WELCOME_NAME}
+                  component={PageView}
                 />
               </Stack.Navigator>
             ) : (

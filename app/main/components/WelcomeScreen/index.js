@@ -30,7 +30,6 @@ import {dev} from '../../../core/apis/server';
 
 // Components
 import {
-  SafeAreaView,
   StatusBar,
   View,
   Dimensions,
@@ -44,7 +43,7 @@ import Header from './Header/Header';
 import HeaderFull from './Header/HeaderFull';
 import ImageBackgroundBase from './ImageBackgroundBase';
 
-import Text, {LightText} from '../../../base/components/Text';
+import Text, {LightText, ItalicText} from '../../../base/components/Text';
 import ButtonText from '../../../base/components/ButtonText';
 import ButtonIconText from '../../../base/components/ButtonIconText';
 
@@ -234,14 +233,10 @@ class WelcomeScreen extends React.Component {
   };
 
   onChange = () => {
-    const {
-      width,
-      images,
-      setHeight,
-    } = this.state;
-    const heightNatural = width * images.height / images.width;
-    const bars = (HEIGHT_HEADER - setHeight - heightNatural)/HEIGHT_HEADER;
-    if(bars > 0.15) {
+    const {width, images, setHeight} = this.state;
+    const heightNatural = (width * images.height) / images.width;
+    const bars = (HEIGHT_HEADER - setHeight - heightNatural) / HEIGHT_HEADER;
+    if (bars > 0.15) {
       this.setState(prev => {
         const scale = prev.display === 'fit' ? 'full' : 'fit';
         setDisplayOriginalImg(scale);
@@ -294,8 +289,8 @@ class WelcomeScreen extends React.Component {
     const {Language} = configuration;
     const dow = Language === 'vi' ? dayVi : dayEn;
     const dayOfWeek = dow[moment().weekday()];
-    const heightNatural = width * images.height / images.width;
-    const bars = (HEIGHT_HEADER - setHeight - heightNatural)/HEIGHT_HEADER;
+    const heightNatural = (width * images.height) / images.width;
+    const bars = (HEIGHT_HEADER - setHeight - heightNatural) / HEIGHT_HEADER;
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
@@ -342,61 +337,43 @@ class WelcomeScreen extends React.Component {
               />
             )}
             <LightText
-                style={[
-                  styles.titleImg,
-                  {
-                    bottom:
-                        display === 'fit' ? (HEIGHT_HEADER - setHeight - heightImg) / 2 + 12 : 12,
-                  },
-                ]}>
+              style={[
+                styles.titleImg,
+                {
+                  bottom:
+                    display === 'fit'
+                      ? (HEIGHT_HEADER - setHeight - heightImg) / 2 + 12
+                      : 12,
+                },
+              ]}>
               {Language === 'vi' ? images.address : images.addressEn}
             </LightText>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnQRCode} onPress={this.onSelect}>
-            <FastImage
-              style={{
-                width: HEIGHT_IMG,
-                height: HEIGHT_IMG,
-              }}
-              source={require('./styles/images/qrcode.png')}
-            />
-            <ModalBase
-              isVisibleModal={isVisible}
-              title={formatMessage(message.alert)}
-              description={formatMessage(message.contentAlert)}>
-              <View style={styles.modalFooter}>
-                <ButtonConfirm
-                  text={formatMessage(message.closeAlert)}
-                  onPress={this.onClose}
-                />
-              </View>
-            </ModalBase>
           </TouchableOpacity>
         </View>
         <TouchableOpacity
           style={styles.maxim}
           activeOpacity={1}
           onPress={this.onChangeImg}
-          disabled={!dev}
-        >
-          <Text style={styles.title} onLayout={this.onLayout}>
+          disabled={!dev}>
+          <LightText style={styles.title} onLayout={this.onLayout}>
             {info.content}
-          </Text>
-          <Text style={styles.note}>{info.user}</Text>
+          </LightText>
+          <LightText style={styles.note}>{info.user}</LightText>
         </TouchableOpacity>
         <View style={styles.body}>
           <View style={styles.announce}>
             <View style={styles.calendar}>
               <Text style={styles.titleCalendar}>
                 {Language === 'vi'
-                    ? `${dayOfWeek} - ${this.getDate()}`
-                    : `${dayOfWeek}, ${this.getDate()}`}
+                  ? `${dayOfWeek} - ${this.getDate()}`
+                  : `${dayOfWeek}, ${this.getDate()}`}
               </Text>
               <Text style={styles.titleLunar}>{this.getLunar()}</Text>
               <ButtonIconText
-                  text={formatMessage(message.perpetualCalendar)}
-                  onPress={this.onSelect}
-                  styleText={styles.textInvite}
+                text={formatMessage(message.perpetualCalendar)}
+                onPress={this.onSelect}
+                styleText={styles.textInvite}
+                styleBtn={styles.btncalendar}
               />
             </View>
             <View>
@@ -408,7 +385,7 @@ class WelcomeScreen extends React.Component {
               onPress={this.onGoBack}
               text={formatMessage(message.close)}
               styleBtn={styles.closeButton}
-              styleText={{fontSize: fontSize.fontSize16, color: '#015cd0'}}
+              styleText={{fontSize: fontSize.smaller, color: '#ffffff'}}
             />
           </View>
         </View>

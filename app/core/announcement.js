@@ -31,7 +31,7 @@ import {
 import {pushNotify} from './notify';
 import {getLanguage} from './storage';
 import {notifyScreenTool} from '../main/components/NotifyScreen';
-import {removeDeliveredNotification} from './fcm';
+import {removeDeliveredNotification, cancelNotification} from './fcm';
 
 const isHtmlNews = notify => {
   return notify.data.Type === NOTIFICATION_TYPE.SEND_HTML_NEWS;

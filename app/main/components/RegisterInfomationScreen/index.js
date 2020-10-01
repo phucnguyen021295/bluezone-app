@@ -131,8 +131,8 @@ class RegisterInformationScreen extends React.Component {
 
     this.setState({isProcessing: true}, () => {
       AddDeclareInformation(
-        PhoneNumber,
         TokenFirebase,
+        PhoneNumber,
         fullName,
         address,
         this.onAddDeclareInfoSuccess,

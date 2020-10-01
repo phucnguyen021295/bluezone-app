@@ -28,14 +28,14 @@ import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
 const HEADER_PADDING_BOTTOM = heightPercentageToDP((20 / 720) * 100);
 const HEADER_BACKGROUND_HEIGHT = heightPercentageToDP((152.4 / 720) * 100);
-const BTN_MARGIN_BOTTOM = heightPercentageToDP((12 / 720) * 100);
-const SCANNING_HEIGHT = heightPercentageToDP((150 / 720) * 100);
-const LOGO_BLUEZONE_HEIGHT = heightPercentageToDP((34.6 / 720) * 100);
+const BTN_MARGIN_BOTTOM = heightPercentageToDP((15 / 720) * 100);
+const SCANNING_HEIGHT = heightPercentageToDP((162 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const LOGO_BLUEZONE_WIDTH = heightPercentageToDP((28.8 / 720) * 100);
 const LOGO_PADDING_BOTTOM = heightPercentageToDP((8 / 720) * 100);
-const SCAN_PADDING_BOTTOM = heightPercentageToDP((12 / 720) * 100);
+const SCAN_PADDING_BOTTOM = heightPercentageToDP((13 / 720) * 100);
 const HEADER_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
-const TEXTF_PADDING_TOP = heightPercentageToDP((12 / 720) * 100);
+const TEXTF_PADDING_TOP = heightPercentageToDP((17 / 720) * 100);
 const TEXT_WHY_PADDING_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const TEXT_WHY_MARGIN_BOTTOM = heightPercentageToDP((8 / 720) * 100);
 const RADA = heightPercentageToDP((176 / 720) * 100);
@@ -81,18 +81,24 @@ const styles = StyleSheet.create({
 
   buttonScan: {
     backgroundColor: '#015cd0',
-    paddingVertical: 12,
+    height: BTN_HEIGHT,
     marginBottom: SCAN_PADDING_BOTTOM,
   },
 
   buttonHistory: {
     backgroundColor: '#119a01',
-    paddingVertical: 12,
+    height: BTN_HEIGHT,
   },
 
   buttonIcon: {
     width: 15,
     height: 18,
+    marginRight: 6,
+  },
+
+  buttonIcon1: {
+    width: 12,
+    height: 12,
     marginRight: 6,
   },
 
@@ -361,7 +367,6 @@ const styles = StyleSheet.create({
 export {
   HEADER_PADDING_BOTTOM,
   HEADER_BACKGROUND_HEIGHT,
-  LOGO_BLUEZONE_HEIGHT,
   LOGO_BLUEZONE_WIDTH,
 };
 

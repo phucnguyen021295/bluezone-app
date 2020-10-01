@@ -145,12 +145,21 @@ class HomeTab extends React.Component {
 
   onChangeNavigateIntroduce() {
     this.props.navigation.navigate('Welcome');
+<<<<<<< HEAD
   }
 
   onWatchHistory() {
     this.props.navigation.navigate('ContactHistory');
   }
 
+=======
+  }
+
+  onWatchHistory() {
+    this.props.navigation.navigate('ContactHistory');
+  }
+
+>>>>>>> c103cbed284b10fe605ff6c60f6469243a87d847
   renderReminderModal() {
     const {navigation} = this.props;
     const {isUpdateVersion, isPermission, showModal} = this.state;
@@ -246,7 +255,7 @@ class HomeTab extends React.Component {
           <View style={style.watchScan}>
             <Radar navigation={navigation} />
           </View>
-          <View style={[style.button]}>
+          <View style={style.button}>
             <ButtonIconText
               onPress={this.onWatchHistory}
               text={formatMessage(message.historyButton)}
@@ -258,10 +267,14 @@ class HomeTab extends React.Component {
             <ButtonIconText
               onPress={this.onChangeNavigateIntroduce}
               text={formatMessage(message.utilities)}
+<<<<<<< HEAD
               source={require('./styles/images/bluezoner.png')}
+=======
+              source={require('./styles/images/icon_utilities.png')}
+>>>>>>> c103cbed284b10fe605ff6c60f6469243a87d847
               styleBtn={style.buttonHistory}
               styleText={{fontSize: fontSize.normal}}
-              styleIcon={style.buttonIcon}
+              styleIcon={style.buttonIcon1}
             />
           </View>
         </View>
