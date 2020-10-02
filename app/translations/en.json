@@ -137,7 +137,7 @@
     "bluezone.info.email": "contact@bluezone.gov.vn",
     "bluezone.info.note": "* Use this function only at the request of the competent Health Authority.",
     "bluezone.info.infoDetail1": "See also Terms of Use:",
-    "bluezone.info.linkDetail1": "www.bluezone.gov.vn/dieukhoansudung",
+    "bluezone.info.linkDetail1": "https://bluezone.ai/terms-of-use",
 
     "bluezone.warning.doubtContent1": "You MIGHT have had close contact with people infected with Covid-19",
     "bluezone.warning.doubtContent2": "There is one people infected with Covid-19 included in your contact history ",

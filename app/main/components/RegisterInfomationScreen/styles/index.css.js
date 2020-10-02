@@ -34,6 +34,7 @@ const MARGIN_TOP_PHONE = heightPercentageToDP((38 / 720) * 100);
 const MARGIN_BOTTOM_PHONE = heightPercentageToDP((35 / 720) * 100);
 const PADDING_HORIZONTAL_TITLE = heightPercentageToDP((86 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
+const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 
 const styles = StyleSheet.create({
   header: {
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     marginVertical: MARGIN_TOP_LAYOUT,
   },
   textInput: {
-    height: 40,
+    height: INPUT_HEIGHT,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#e8e8e8',

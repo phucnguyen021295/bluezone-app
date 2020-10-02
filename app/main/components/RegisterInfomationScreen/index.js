@@ -33,6 +33,8 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
   Linking,
+  Keyboard,
+  UIManager,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 
@@ -54,10 +56,7 @@ import configuration from '../../../configuration';
 
 import message from '../../../core/msg/registerInformation';
 import Modal from 'react-native-modal';
-import {
-  ButtonClose,
-  ButtonConfirm,
-} from '../../../base/components/ButtonText/ButtonModal';
+import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import ModalBase from '../../../base/components/ModalBase';
 
 const visibleModal = {
@@ -66,6 +65,12 @@ const visibleModal = {
   isVisibleWrongAddress: false,
   isVisibleVerifyError: false,
 };
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 class RegisterInformationScreen extends React.Component {
   // Render any loading content that you like here
@@ -96,9 +101,34 @@ class RegisterInformationScreen extends React.Component {
     );
     this.onResetModal = this.onResetModal.bind(this);
     this.onLinkingRules = this.onLinkingRules.bind(this);
+    this.hasWhiteSpace = this.hasWhiteSpace.bind(this);
+    this.keyboardDidShow = this.keyboardDidShow.bind(this);
+    this.keyboardDidHide = this.keyboardDidHide.bind(this);
+  }
+
+  componentDidMount() {
+    Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+    Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+  }
+
+  componentWillUnmount() {
+    Keyboard.removeListener('keyboardDidShow', this.keyboardDidShow);
+    Keyboard.removeListener('keyboardDidHide', this.keyboardDidHide);
+  }
+
+  keyboardDidShow() {
+    this.setState({isShowKeyboard: true});
+  }
+
+  keyboardDidHide() {
+    this.setState({isShowKeyboard: false});
   }
 
   onChangeText(value, name) {
+    if (this.hasWhiteSpace(value)) {
+      name === 'fullName' ? this.fullnameRef.clear() : this.addressRef.clear();
+      return;
+    }
     this.setState({[name]: value});
   }
 
@@ -234,6 +264,10 @@ class RegisterInformationScreen extends React.Component {
     });
   }
 
+  hasWhiteSpace(s) {
+    return /\s/g.test(s);
+  }
+
   renderModal() {
     const {intl} = this.props;
     const {
@@ -294,7 +328,7 @@ class RegisterInformationScreen extends React.Component {
 
   render() {
     const {intl} = this.props;
-    const {fullName, address, isSelected} = this.state;
+    const {fullName, address, isSelected, isShowKeyboard} = this.state;
     const {formatMessage} = intl;
     const disabled = !(fullName && address);
     return (
@@ -321,12 +355,17 @@ class RegisterInformationScreen extends React.Component {
               this.scrollView.scrollToEnd({animated: true});
             }}>
             <View style={[styles.layout1]}>
-              <Text style={styles.title}>{formatMessage(message.title)}</Text>
+              <Text
+                style={[
+                  styles.title,
+                  {color: isShowKeyboard ? '#ffffff' : '#000000'},
+                ]}>
+                {formatMessage(message.title)}
+              </Text>
             </View>
             <View style={[styles.phone]}>
               <TextInput
                 ref={this.setFullnameRef}
-                autoFocus={true}
                 style={[styles.textInput]}
                 placeholderTextColor={'#b5b5b5'}
                 allowFontScaling={false}
