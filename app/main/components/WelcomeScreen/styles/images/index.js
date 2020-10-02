@@ -181,11 +181,11 @@ export const dataVi = [
   {
     content:
       'Bầu ơi, thương lấy bí cùng,\n' +
-      'Tuy rằng khác giống nhưng chung một giàn',
+      'Tuy rằng khác giống nhưng chung một giàn.',
     user: 'Ca dao',
   },
   {
-    content: 'Thua thầy một vạn không bằng kém bạn một ly',
+    content: 'Thua thầy một vạn không bằng kém bạn một ly.',
     user: 'Tục ngữ',
   },
   {
@@ -215,13 +215,13 @@ export const dataVi = [
   },
   {
     content:
-      'Ai mà phụ nghĩa quên công\n' + 'Thì đeo trăm cánh hoa hồng chång thơm',
+      'Ai mà phụ nghĩa quên công\n' + 'Thì đeo trăm cánh hoa hồng chång thơm.',
     user: 'Ca dao',
   },
   {
     content:
       'Chim khôn kêu tiếng rảnh rang\n' +
-      'Người khôn nói tiếng dịu dàng dễ nghe,',
+      'Người khôn nói tiếng dịu dàng dễ nghe.',
     user: 'Ca dao',
   },
   {
@@ -236,13 +236,13 @@ export const dataVi = [
   },
   {
     content:
-      'Muốn no thì phải chăm làm\n' + 'Một hạt thóc vàng, chín giọt mô hôi',
+      'Muốn no thì phải chăm làm\n' + 'Một hạt thóc vàng, chín giọt mô hôi.',
     user: 'Ca dao',
   },
   {
     content:
       'Nhiễu điều phủ lấy giá gương\n' +
-      'Người trong một nước phải thương nhau cùng',
+      'Người trong một nước phải thương nhau cùng.',
     user: 'Ca dao',
   },
   {
@@ -287,7 +287,7 @@ export const dataVi = [
   },
   {
     content:
-      'Thức lâu mới biết đêm dài\n' + 'Ở lâu mới biết lòng người có nhân,',
+      'Thức lâu mới biết đêm dài\n' + 'Ở lâu mới biết lòng người có nhân.',
     user: 'Ca dao',
   },
   {
@@ -377,7 +377,7 @@ export const dataVi = [
   },
   {
     content:
-      'Điều tôi muốn biết trước tiên không phải là bạn đã thất bại ra sao mà là bạn đã chấp nhận nó như thế nào',
+      'Điều tôi muốn biết trước tiên không phải là bạn đã thất bại ra sao mà là bạn đã chấp nhận nó như thế nào.',
     user: 'Abraham Lincoln',
   },
   {
@@ -406,7 +406,7 @@ export const dataVi = [
   },
   {
     content:
-      'Đoàn kết, đoàn kết, đại đoàn kết. Thành công, thành công, đại thành công',
+      'Đoàn kết, đoàn kết, đại đoàn kết. Thành công, thành công, đại thành công.',
     user: 'Bác Hồ',
   },
   {

@@ -47,7 +47,8 @@ const MARGIN_QR = widthPercentageToDP((130 / 360) * 100);
 const HEIGHT_BTN_OK = heightPercentageToDP((63 / 720) * 100);
 const HEIGHT_ANN = heightPercentageToDP((225 / 720) * 100);
 const CALENDAR_PADDING_TOP = heightPercentageToDP((13 / 720) * 100);
-const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((18 / 720) * 100);
+const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((15 / 720) * 100);
+const TEXT_CALENDAR_PADDING_TOP = heightPercentageToDP((11 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -63,7 +64,8 @@ const styles = StyleSheet.create({
   },
 
   btncalendar: {
-    paddingBottom: CALENDAR_PADDING_BOTTOM
+    paddingBottom: CALENDAR_PADDING_BOTTOM,
+    paddingTop: TEXT_CALENDAR_PADDING_TOP,
   },
 
   titleCalendar: {
@@ -73,16 +75,17 @@ const styles = StyleSheet.create({
   titleLunar: {
     color: '#fff',
     fontSize: fontSize.biggest2,
+    fontFamily: 'ArialMT',
   },
 
   textInvite: {
-    fontSize: fontSize.smaller,
+    fontSize: fontSize.fontSize14,
     color: '#fff',
   },
   titleAlert: {
     color: '#015cd0',
     textAlign: 'center',
-    fontSize: fontSize.normal,
+    fontSize: fontSize.fontSize14,
   },
 
   modalFooter: {
@@ -129,7 +132,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: fontSize.normal,
+    fontSize: fontSize.fontSize14,
     color: '#393939',
     lineHeight: LINE_HEI,
     fontStyle: 'italic',

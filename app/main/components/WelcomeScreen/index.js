@@ -38,6 +38,7 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  AppState
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Header from './Header/Header';
@@ -96,45 +97,42 @@ class WelcomeScreen extends React.Component {
     };
     this.onDimensionsChange = this.onDimensionsChange.bind(this);
     this.changeDisplay = this.changeDisplay.bind(this);
+    this.handleAppStateChange = this.handleAppStateChange.bind(this);
+    this.randomDisplay = this.randomDisplay.bind(this);
   }
 
   async componentDidMount() {
-    const {Language} = configuration;
     this.changeDisplay();
-    const infoDates = await getDateOfWelcome();
-    const date = infoDates ? infoDates.date : '';
-    const image = infoDates ? infoDates.image : null;
-    const maxim = infoDates ? infoDates.maxim : null;
-    const dayOfWeek = this.getDate();
-    const data = Language === 'vi' ? dataVi : dataEn;
-    if (date === dayOfWeek) {
-      this.setState({
-        images: Images[image],
-        info: data[maxim],
-      });
-    } else {
-      const imgNumber = this.getRandomInt(Images.length);
-      const maximNumber = this.getRandomInt(data.length);
-      setDateOfWelcome({
-        date: dayOfWeek,
-        image: imgNumber,
-        maxim: maximNumber,
-      });
-      this.setState({
-        images: Images[imgNumber],
-        info: data[maximNumber],
-      });
-    }
+    this.randomDisplay();
     Dimensions.addEventListener('change', this.onDimensionsChange);
+    AppState.addEventListener('change', this.handleAppStateChange);
   }
 
   componentWillUnmount() {
     Dimensions.removeEventListener('change', this.onDimensionsChange);
+    AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
   onDimensionsChange(e) {
     this.setState({
       width: e.window.width,
+    });
+  }
+
+  handleAppStateChange(appState) {
+    if (appState === 'active') {
+      this.randomDisplay();
+    }
+  }
+
+  randomDisplay() {
+    const {Language} = configuration;
+    const data = Language === 'vi' ? dataVi : dataEn;
+    const imgNumber = this.getRandomInt(Images.length);
+    const maximNumber = this.getRandomInt(data.length);
+    this.setState({
+      images: Images[imgNumber],
+      info: data[maximNumber],
     });
   }
 
