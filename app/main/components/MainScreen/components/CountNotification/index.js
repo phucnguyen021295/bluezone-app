@@ -29,12 +29,16 @@ import {withNavigation} from '@react-navigation/compat';
 // Component
 import Badge from '../Badge';
 
-import {registerNotificationDisplay, setBadge} from '../../../../../core/fcm';
+import {
+  registerNotificationDisplay,
+  registerNotificationOpened,
+  setBadge,
+} from '../../../../../core/fcm';
 import {
   getTimespanNotification,
   setTimespanNotification,
 } from '../../../../../core/storage';
-import {getCountNotification} from '../../../../../core/db/SqliteDb';
+import {getNewsNotification} from '../../../../../core/db/SqliteDb';
 
 // Styles
 import styles from './styles/index.css';
@@ -64,6 +68,8 @@ class CountNotification extends React.Component {
     };
 
     this.getCount = this.getCount.bind(this);
+    this.onNotificationOpened = this.onNotificationOpened.bind(this);
+    this.getNotificationsSuccess = this.getNotificationsSuccess.bind(this);
   }
 
   componentDidMount() {
@@ -78,27 +84,56 @@ class CountNotification extends React.Component {
     // Đăng kí event click vào tab notify
     // this.props.navigation.addListener('focus', () => {
     //   this.resetCount();
-    // });console.log('addCount:' + (prevState.count + count));
+    // });
+
+    this.removeNotificationOpenedListener = registerNotificationOpened(
+      this.onNotificationOpened,
+    );
+
     registerForcusTabbar(this.resetCount);
   }
 
   componentWillUnmount() {
     this.removeNotificationDisplayedListener();
+    this.removeNotificationOpenedListener();
+  }
+
+  onNotificationOpened(remoteMessage) {
+    if (!remoteMessage) {
+      return;
+    }
+    const obj = remoteMessage.notification;
+    const notifyId = obj.data.notifyId;
+    if (!notifyId) {
+      return;
+    }
+    this.notifications = this.notifications.filter(
+      item => item.notifyId !== notifyId,
+    );
+    this.showCount(this.notifications.length);
   }
 
   async getCount() {
     const timespanNotification = await getTimespanNotification();
-    getCountNotification(timespanNotification || 0, this.showCount);
+    getNewsNotification(
+      timespanNotification || 0,
+      this.getNotificationsSuccess,
+    );
   }
 
-  addCount = count => {
-    this.setState(prevState => {
-      setBadge(prevState.count + count);
-      return {
-        count: prevState.count + count,
-      };
-    });
-  };
+  // addCount = count => {
+  //   this.setState(prevState => {
+  //     setBadge(prevState.count + count);
+  //     return {
+  //       count: prevState.count + count,
+  //     };
+  //   });
+  // };
+
+  getNotificationsSuccess(list) {
+    this.notifications = list;
+    this.showCount(list.length);
+  }
 
   showCount = count => {
     setBadge(count);

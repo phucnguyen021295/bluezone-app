@@ -224,10 +224,31 @@ const getCountNotification = (timestamp, callback) => {
   db = open();
   db.transaction(tx => {
     tx.executeSql(
-      'SELECT COUNT(*) AS count FROM notify WHERE timestamp > ?',
+      'SELECT COUNT(*) AS count FROM notify WHERE timestamp > ? AND (unRead != 1 OR unRead IS NULL)',
       [timestamp],
       (txTemp, results) => {
         callback(results.rows.item(0).count);
+      },
+    );
+  });
+};
+
+const getNewsNotification = (timestamp, callback) => {
+  db = open();
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT notifyId FROM notify WHERE timestamp >= ? AND (unRead != 1 OR unRead IS NULL)',
+      [timestamp],
+      (txTemp, results) => {
+        let temp = [];
+        if (results.rows.length > 0) {
+          for (let i = 0; i < results.rows.length; ++i) {
+            temp.push(results.rows.item(i));
+          }
+        }
+        callback(temp);
+      },
+      (error, error2) => {
       },
     );
   });
@@ -383,6 +404,7 @@ export {
   deleteNotify,
   getNotifyList,
   getCountNotification,
+  getNewsNotification,
   addDevLog,
   getPartialDevLog,
   getAllDevLog,
