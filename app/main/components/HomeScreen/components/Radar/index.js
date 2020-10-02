@@ -39,12 +39,8 @@ import {injectIntl, intlShape} from 'react-intl';
 // Data
 import radar from './data/radar';
 import radarOutline from './data/radarOutline';
-import {
-  radarBackground1,
-  radarBackground2,
-  radarBackground3,
-  radarBackground4,
-} from './data/radarBackground';
+import {radarBackgroundAnimate,} from './data/radarBackground';
+
 import {weakDots, normalDots, strongDots} from './data/dot';
 import {
   getRandomDotArrDontExistYet,
@@ -107,6 +103,7 @@ class Index extends React.Component {
     };
     this.blueZoners = {};
     this.objectRadar = {};
+    this.levelRadar = 1;
   }
 
   componentDidMount() {
@@ -167,11 +164,20 @@ class Index extends React.Component {
   };
 
   changeLevelRadar = countBluezoner => {
-    const {levelRadar} = this.state;
-    if (levelRadar !== this.getLevelRadar(countBluezoner)) {
-      this.setState({levelRadar: this.getLevelRadar(countBluezoner)});
+    if (this.levelRadar !== this.getLevelRadar(countBluezoner)) {
+      this.animateLevelRadar(this.getLevelRadar(countBluezoner))
+      // this.setState({levelRadar: this.getLevelRadar(countBluezoner)});
     }
   };
+
+  animateLevelRadar = (newLevel) => {
+    let t1;
+    let t2;
+    t1 = (this.levelRadar - 1) * 20;
+    t2 = (newLevel - 1) * 20;
+    this.radarBackgroundAnimate.play(t1, t2);
+    this.levelRadar = newLevel;
+  }
 
   getLevelRadar = count => {
     let i = 0;
@@ -398,26 +404,32 @@ class Index extends React.Component {
   }
 
   onOpenScanScreen = () => {
-    dev &&
-      this.props.navigation.navigate('WatchScan', {
-        logs: logBlueZone,
-      });
+    // dev &&
+    //   this.props.navigation.navigate('WatchScan', {
+    //     logs: logBlueZone,
+    //   });
+
+    if (this.levelRadar === 4) {
+      this.animateLevelRadar(1)
+    } else {
+      this.animateLevelRadar(this.levelRadar + 1);
+    }
   };
 
-  getSourceBackgroundRadar = levelRadar => {
-    if (levelRadar === 1) {
-      return radarBackground1;
-    }
-    if (levelRadar === 2) {
-      return radarBackground2;
-    }
-    if (levelRadar === 3) {
-      return radarBackground3;
-    }
-    if (levelRadar === 4) {
-      return radarBackground4;
-    }
-  };
+  // getSourceBackgroundRadar = levelRadar => {
+  //   if (levelRadar === 1) {
+  //     return radarBackground1;
+  //   }
+  //   if (levelRadar === 2) {
+  //     return radarBackground2;
+  //   }
+  //   if (levelRadar === 3) {
+  //     return radarBackground3;
+  //   }
+  //   if (levelRadar === 4) {
+  //     return radarBackground4;
+  //   }
+  // };
 
   render() {
     const {Language} = configuration;
@@ -441,16 +453,10 @@ class Index extends React.Component {
           renderMode="HARDWARE"
         />
         <LottieView
-          loop={false}
-          source={this.getSourceBackgroundRadar(1)}
-          autoPlay
-          renderMode="HARDWARE"
-        />
-        <LottieView
-          loop={false}
-          source={this.getSourceBackgroundRadar(levelRadar)}
-          autoPlay
-          renderMode="HARDWARE"
+            loop={false}
+            source={radarBackgroundAnimate}
+            ref={ref => this.radarBackgroundAnimate = ref}
+            renderMode="HARDWARE"
         />
         <LottieView
           ref={this.setRadarRef}
