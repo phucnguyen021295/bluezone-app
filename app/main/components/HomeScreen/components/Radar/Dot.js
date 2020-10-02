@@ -59,19 +59,20 @@ class Dot extends React.Component {
     if (this.playAgain) {
       this.isPlaying = true;
       this.playAgain = false;
-      if (dot.otherBeginFrame === 0) {
+      const timeNow = new Date().getTime();
+      const radarFrame = Math.floor(
+        ((timeNow - objectRadar.timeStart) / 1000) * 30,
+      );
+      const k = dot.otherBeginFrame - radarFrame;
+
+      if (dot.otherBeginFrame === 0 && dot.otherBeginFrame - k <= 0) {
         this.ref && this.ref.play();
+      }
+
+      if (Math.abs(k) >= 4) {
+        this.ref && this.ref.play(dot.otherBeginFrame - k, dot.otherEndFrame);
       } else {
-        const timeNow = new Date().getTime();
-        const radarFrame = Math.floor(
-          ((timeNow - objectRadar.timeStart) / 1000) * 30,
-        );
-        const k = dot.otherBeginFrame - radarFrame;
-        if (Math.abs(k) >= 4) {
-          this.ref && this.ref.play(dot.otherBeginFrame - k, dot.otherEndFrame);
-        } else {
-          this.ref && this.ref.play(dot.otherBeginFrame, dot.otherEndFrame);
-        }
+        this.ref && this.ref.play(dot.otherBeginFrame, dot.otherEndFrame);
       }
       return;
     }

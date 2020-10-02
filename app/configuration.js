@@ -206,17 +206,17 @@ const configuration = {
         repeatTime: 86400000,
       },
       {
-        id: '119',
+        id: '120',
         dayStartTime: 64800000,
         repeatTime: 86400000,
       },
       {
-        id: '119',
+        id: '122',
         dayStartTime: 72000000,
         repeatTime: 86400000,
       },
       {
-        id: '119',
+        id: '124',
         dayStartTime: 75600000,
         repeatTime: 86400000,
       },

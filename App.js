@@ -108,6 +108,7 @@ import {
   removeDeliveredNotification,
 } from './app/core/fcm';
 import {getIsFirstLoading, setIsFirstLoading} from './app/core/storage';
+import {readNotification} from './app/core/announcement';
 
 // Components
 const HomeScreen = decorateMainAppStart(Home);
@@ -286,6 +287,9 @@ class App extends React.Component {
       return;
     }
     const obj = remoteMessage.notification;
+    if (obj.data.unRead !== 1) {
+      readNotification(obj.data.notifyId);
+    }
     if (
       (obj && obj.data._group === 'INFO') ||
       (obj && obj.data._group === NOTIFICATION_TYPE.SEND_SHORT_NEWS)

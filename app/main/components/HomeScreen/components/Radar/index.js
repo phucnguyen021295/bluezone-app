@@ -422,6 +422,12 @@ class Index extends React.Component {
         />
         <LottieView
           loop={false}
+          source={this.getSourceBackgroundRadar(1)}
+          autoPlay
+          renderMode="HARDWARE"
+        />
+        <LottieView
+          loop={false}
           source={this.getSourceBackgroundRadar(levelRadar)}
           autoPlay
           renderMode="HARDWARE"
