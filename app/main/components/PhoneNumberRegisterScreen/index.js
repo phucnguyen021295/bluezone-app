@@ -364,6 +364,7 @@ class RegisterScreen extends React.Component {
                   lineWidth={true}
                   onCheckColor={'#015cd0'}
                   onTintColor={'#707070'}
+                  tintColors={{true: '#015cd0', false: '#707070'}}
                 />
                 <Text style={styles.textCheckBox}>
                   {formatMessage(message.textCheckbox1)}
