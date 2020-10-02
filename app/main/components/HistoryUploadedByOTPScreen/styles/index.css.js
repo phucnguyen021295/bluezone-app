@@ -25,6 +25,10 @@ import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
+import {heightPercentageToDP} from '../../../../core/utils/dimension';
+
+const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
+const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -53,16 +57,16 @@ const styles = StyleSheet.create({
   },
   colorButtonConfirm: {
     backgroundColor: blue_bluezone,
-    height: 46,
+    height: BTN_HEIGHT,
   },
 
   btnConfim: {
     backgroundColor: '#e8e8e8',
-    height: 46,
+    height: BTN_HEIGHT,
   },
 
   inputOTPMax: {
-    height: 40,
+    height: INPUT_HEIGHT,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#e8e8e8',

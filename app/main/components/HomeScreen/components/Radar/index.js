@@ -53,11 +53,24 @@ import {
   getRandomDotCount,
 } from './data';
 import {dev} from '../../../../../core/apis/server';
+import {isIPhoneX} from '../../../../../core/utils/isIPhoneX';
+import configuration from '../../../../../configuration';
+import {
+  SCANNING_EN_HEIGHT,
+  SCANNING_VI_HEIGHT,
+  BOTTOM_IPHONEX_HEIGHT,
+} from '../../styles/index.css';
 
 // Const
 const TIMEOUT = 30000;
 const RADAR_LEVELS = [2, 6, 10];
 export let logBlueZone = [];
+const RADAR_HEIGHT_VI = isIPhoneX
+  ? SCANNING_VI_HEIGHT - BOTTOM_IPHONEX_HEIGHT
+  : SCANNING_VI_HEIGHT;
+const RADAR_HEIGHT_EN = isIPhoneX
+  ? SCANNING_EN_HEIGHT - BOTTOM_IPHONEX_HEIGHT
+  : SCANNING_EN_HEIGHT;
 
 class Index extends React.Component {
   constructor(props) {
@@ -407,11 +420,18 @@ class Index extends React.Component {
   };
 
   render() {
+    const {Language} = configuration;
     const {levelRadar} = this.state;
 
     return (
       <TouchableOpacity
-        style={style.circleScan}
+        style={[
+          style.circleScan,
+          {
+            width: Language === 'vi' ? RADAR_HEIGHT_VI : RADAR_HEIGHT_EN,
+            height: Language === 'vi' ? RADAR_HEIGHT_VI : RADAR_HEIGHT_EN,
+          },
+        ]}
         activeOpacity={1}
         onPress={this.onOpenScanScreen}>
         <LottieView

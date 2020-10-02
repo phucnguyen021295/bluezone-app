@@ -30,6 +30,7 @@ const HEADER_BẠCKGROUND_LOGO = heightPercentageToDP((160 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((70 / 720) * 100);
 const TITLE_PADDINGTOP = heightPercentageToDP((25 / 720) * 100);
 const DATE_PADDINGBOTTOM = heightPercentageToDP((25 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonSend: {
-    height: 46,
+    height: BTN_HEIGHT,
     // width: '100%',
     backgroundColor: '#119a01',
     marginTop: 20,
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     color: '#AAAAAA',
     textAlign: 'center',
     marginBottom: 12,
-    paddingTop: 15
+    paddingTop: 15,
   },
 });
 

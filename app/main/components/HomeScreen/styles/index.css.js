@@ -26,19 +26,20 @@ import * as fontSize from '../../../../core/fontSize';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
+const BOTTOM_IPHONEX_HEIGHT = heightPercentageToDP((34 / 720) * 100);
 const HEADER_PADDING_BOTTOM = heightPercentageToDP((20 / 720) * 100);
 const HEADER_BACKGROUND_HEIGHT = heightPercentageToDP((152.4 / 720) * 100);
-const BTN_MARGIN_BOTTOM = heightPercentageToDP((15 / 720) * 100);
-const SCANNING_HEIGHT = heightPercentageToDP((162 / 720) * 100);
-const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
+const BTN_MARGIN_BOTTOM = heightPercentageToDP((10 / 720) * 100);
+const SCANNING_VI_HEIGHT = heightPercentageToDP((192 / 720) * 100);
+const SCANNING_EN_HEIGHT = heightPercentageToDP((180 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 const LOGO_BLUEZONE_WIDTH = heightPercentageToDP((28.8 / 720) * 100);
 const LOGO_PADDING_BOTTOM = heightPercentageToDP((8 / 720) * 100);
-const SCAN_PADDING_BOTTOM = heightPercentageToDP((13 / 720) * 100);
+const SCAN_PADDING_BOTTOM = heightPercentageToDP((10 / 720) * 100);
 const HEADER_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
 const TEXTF_PADDING_TOP = heightPercentageToDP((17 / 720) * 100);
 const TEXT_WHY_PADDING_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const TEXT_WHY_MARGIN_BOTTOM = heightPercentageToDP((8 / 720) * 100);
-const RADA = heightPercentageToDP((176 / 720) * 100);
 
 const styles = StyleSheet.create({
   background: {
@@ -60,11 +61,6 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  scan: {
-    height: RADA,
-    width: RADA,
   },
 
   marginRight23: {
@@ -216,16 +212,6 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
 
-  numberBluezone: {
-    borderRadius: SCANNING_HEIGHT / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 4,
-    borderColor: '#e5e5e5',
-    width: SCANNING_HEIGHT,
-    height: SCANNING_HEIGHT,
-  },
-
   scanButton: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -323,18 +309,8 @@ const styles = StyleSheet.create({
   },
 
   circleScan: {
-    width: SCANNING_HEIGHT,
-    height: SCANNING_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  circleSnail: {
-    width: SCANNING_HEIGHT,
-    height: SCANNING_HEIGHT,
-    position: 'absolute',
-    top: 0,
-    left: 0,
   },
 
   textF: {
@@ -360,14 +336,10 @@ const styles = StyleSheet.create({
   textWhyBtn: {
     fontSize: fontSize.normal,
     color: '#0166de',
-    fontWeight: '600'
+    fontWeight: '600',
   },
 });
 
-export {
-  HEADER_PADDING_BOTTOM,
-  HEADER_BACKGROUND_HEIGHT,
-  LOGO_BLUEZONE_WIDTH,
-};
+export {HEADER_PADDING_BOTTOM, HEADER_BACKGROUND_HEIGHT, LOGO_BLUEZONE_WIDTH, SCANNING_VI_HEIGHT, SCANNING_EN_HEIGHT, BOTTOM_IPHONEX_HEIGHT};
 
 export default styles;

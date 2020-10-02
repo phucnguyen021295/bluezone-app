@@ -31,6 +31,8 @@ import {heightPercentageToDP} from "../../../../core/utils/dimension";
 const MARGIN_TOP_CONTENT = heightPercentageToDP((62 / 720) * 100);
 const MARGIN_BOTTOM_CONTENT = heightPercentageToDP((64 / 720) * 100);
 const MARGIN_TOP_PHONE = heightPercentageToDP((38 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
+const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 
 const styles = StyleSheet.create({
   layout1: {
@@ -172,12 +174,12 @@ const styles = StyleSheet.create({
   },
   colorButtonConfirm: {
     backgroundColor: blue_bluezone,
-    height: 46,
+    height: BTN_HEIGHT,
   },
 
   btnConfim: {
     backgroundColor: '#e8e8e8',
-    height: 46,
+    height: BTN_HEIGHT,
   },
 
   iconButtonConfirm: {
@@ -202,7 +204,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.larger,
   },
   inputOTPMax: {
-    height: 40,
+    height: INPUT_HEIGHT,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#e8e8e8',

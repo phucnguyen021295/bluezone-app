@@ -25,6 +25,7 @@ import {Platform, StyleSheet} from 'react-native';
 import {large, normal, smaller} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
 const MARGIN_TOP_HEADER = heightPercentageToDP((37 / 720) * 100);
@@ -32,11 +33,12 @@ const MARGIN_TOP_LAYOUT = heightPercentageToDP((58 / 720) * 100);
 const MARGIN_TOP_PHONE = heightPercentageToDP((38 / 720) * 100);
 const MARGIN_BOTTOM_PHONE = heightPercentageToDP((35 / 720) * 100);
 const PADDING_HORIZONTAL_TITLE = heightPercentageToDP((86 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#ffffff',
-    marginTop: MARGIN_TOP_HEADER,
+    marginTop: isIPhoneX ? 0 : MARGIN_TOP_HEADER,
   },
   layout1: {
     marginVertical: MARGIN_TOP_LAYOUT,
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
 
   btnNext: {
     marginHorizontal: 30,
-    height: 46,
+    height: BTN_HEIGHT,
   },
 
   checkboxContainer: {

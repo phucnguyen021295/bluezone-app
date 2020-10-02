@@ -23,13 +23,16 @@
 
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
+import {heightPercentageToDP} from '../../../../core/utils/dimension';
+
+const PADDING_VERTICAL = heightPercentageToDP((14 / 720) * 100);
+const IMAGE = heightPercentageToDP((16 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
     borderRadius: 12,
-    paddingVertical: 14,
     alignItems: 'center',
   },
 
@@ -40,8 +43,8 @@ const styles = StyleSheet.create({
   },
 
   scanImage: {
-    width: 16,
-    height: 16,
+    width: IMAGE,
+    height: IMAGE,
     marginRight: 3,
   },
 });

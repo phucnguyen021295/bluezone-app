@@ -28,6 +28,11 @@ import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
 const HEADER_HEIGHT = heightPercentageToDP((44 / 720) * 100);
+const NOTIFY_HEIGHT = heightPercentageToDP((72 / 720) * 100);
+const NOTIFY_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
+const AVATAR_HEIGHT = heightPercentageToDP((52 / 720) * 100);
+const AVATAR_WIDTH = heightPercentageToDP((52 / 720) * 100);
+const TEXT_LIGHT_HEIGHT = heightPercentageToDP((22 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -84,23 +89,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   NotifyContainer: {
-    paddingVertical: 10,
-    height: 72,
+    paddingVertical: NOTIFY_PADDING_VERTICAL,
+    height: NOTIFY_HEIGHT,
     flexDirection: 'row',
     paddingHorizontal: 20,
     marginVertical: 5,
   },
   avatar: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: AVATAR_WIDTH,
+    height: AVATAR_HEIGHT,
+    borderRadius: AVATAR_HEIGHT / 2,
   },
 
   backgroundAvatar: {
-    width: 52,
-    height: 52,
+    width: AVATAR_WIDTH,
+    height: AVATAR_HEIGHT,
     backgroundColor: 'rgba(1,92,208,0.6)',
-    borderRadius: 26,
+    borderRadius: AVATAR_HEIGHT / 2,
   },
 
   content: {
@@ -108,13 +113,13 @@ const styles = StyleSheet.create({
     marginLeft: 13,
   },
   titleText: {
-    lineHeight: 22,
+    lineHeight: TEXT_LIGHT_HEIGHT,
     fontSize: fontSize.larger,
     color: '#000000',
   },
 
   titleTextUnread: {
-    lineHeight: 22,
+    lineHeight: TEXT_LIGHT_HEIGHT,
     fontSize: fontSize.larger,
   },
 

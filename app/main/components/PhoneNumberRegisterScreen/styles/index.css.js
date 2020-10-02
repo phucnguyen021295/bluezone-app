@@ -32,6 +32,7 @@ const MARGIN_TOP_LAYOUT = heightPercentageToDP((50 / 720) * 100);
 const PADDING_TOP_INPUT = heightPercentageToDP((23 / 720) * 100);
 const PADDING_BOTTOM_INPUT = heightPercentageToDP((35 / 720) * 100);
 const BOTTOM_PHONE = heightPercentageToDP((38 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 
 const styles = StyleSheet.create({
   header: {
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
 
   btnNext: {
     marginHorizontal: 30,
-    height: 46,
+    height: BTN_HEIGHT,
   },
 
   checkboxContainer: {

@@ -83,6 +83,7 @@
 		<string>OpenSans-Bold.ttf</string>
 		<string>OpenSans-Light.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
+    <string>ARIALMT.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
