@@ -38,7 +38,7 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-  AppState
+  AppState,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Header from './Header/Header';
@@ -362,22 +362,29 @@ class WelcomeScreen extends React.Component {
         <View style={styles.body}>
           <View style={styles.announce}>
             <View style={styles.calendar}>
-              <Text style={styles.titleCalendar}>
-                {Language === 'vi'
-                  ? `${dayOfWeek} - ${this.getDate()}`
-                  : `${dayOfWeek}, ${this.getDate()}`}
-              </Text>
-              <Text style={styles.titleLunar}>{this.getLunar()}</Text>
-              <ButtonIconText
-                text={formatMessage(message.perpetualCalendar)}
-                onPress={this.onSelect}
-                styleText={styles.textInvite}
-                styleBtn={styles.btncalendar}
-              />
+              {Language === 'vi' ? (
+                <>
+                  <Text style={styles.titleCalendar}>
+                    {`${dayOfWeek} - ${this.getDate()}`}
+                  </Text>
+                  <Text style={styles.titleLunar}>{this.getLunar()}</Text>
+                  <ButtonIconText
+                    text={formatMessage(message.perpetualCalendar)}
+                    onPress={this.onSelect}
+                    styleText={styles.textInvite}
+                    styleBtn={styles.btncalendar}
+                  />
+                </>
+              ) : (
+                <>
+                  <Text style={styles.titleCalendar}>{dayOfWeek}</Text>
+                  <Text style={styles.titleLunar}>{this.getDate()}</Text>
+                </>
+              )}
             </View>
-            <View>
-              <Text style={styles.titleAlert}>{textF}</Text>
-            </View>
+          </View>
+          <View style={styles.viewText}>
+            <Text style={styles.titleAlert}>{textF}</Text>
           </View>
           <View style={styles.closeButtonContainer}>
             <ButtonText

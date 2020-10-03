@@ -32,8 +32,8 @@ import {
 const HEIGHT_HEADER = heightPercentageToDP((338 / 720) * 100);
 const HEIGHT_IMG = heightPercentageToDP((72 / 720) * 100);
 const PADDING_HOR = widthPercentageToDP((26 / 360) * 100);
-const PAD_TOP = heightPercentageToDP((28 / 720) * 100);
-const PAD_TOP1 = heightPercentageToDP((19 / 720) * 100);
+const PAD_TOP = heightPercentageToDP((14 / 720) * 100);
+const PAD_TOP1 = heightPercentageToDP((17 / 720) * 100);
 const MAR_TOP = heightPercentageToDP((11 / 720) * 100);
 const PAD_VER = heightPercentageToDP((13 / 720) * 100);
 const RIGHT_IMG = widthPercentageToDP((22 / 360) * 100);
@@ -46,9 +46,10 @@ const WID_BTN = widthPercentageToDP((138 / 360) * 100);
 const MARGIN_QR = widthPercentageToDP((130 / 360) * 100);
 const HEIGHT_BTN_OK = heightPercentageToDP((63 / 720) * 100);
 const HEIGHT_ANN = heightPercentageToDP((225 / 720) * 100);
-const CALENDAR_PADDING_TOP = heightPercentageToDP((13 / 720) * 100);
+const BTN_PADDING_BOTTOM = heightPercentageToDP((32 / 720) * 100);
 const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((15 / 720) * 100);
 const TEXT_CALENDAR_PADDING_TOP = heightPercentageToDP((11 / 720) * 100);
+const CALENDAR_HEIGHT = heightPercentageToDP((125 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -58,13 +59,13 @@ const styles = StyleSheet.create({
   calendar: {
     backgroundColor: '#015cd0',
     borderRadius: 17,
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: CALENDAR_PADDING_TOP,
+    justifyContent: 'center',
+    height: CALENDAR_HEIGHT,
   },
 
   btncalendar: {
-    paddingBottom: CALENDAR_PADDING_BOTTOM,
+    // paddingBottom: CALENDAR_PADDING_BOTTOM,
     paddingTop: TEXT_CALENDAR_PADDING_TOP,
   },
 
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: PADDING_HOR,
     backgroundColor: '#ffffff',
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
     zIndex: 100,
   },
 
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   },
 
   closeButtonContainer: {
-    height: HEIGHT_BTN_OK,
+    paddingBottom: BTN_PADDING_BOTTOM,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -216,10 +217,15 @@ const styles = StyleSheet.create({
     marginRight: 8
   },
   announce: {
-    height: HEIGHT_ANN,
     paddingTop: PAD_TOP1,
     justifyContent: 'space-between',
   },
+
+  viewText: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
 
 export {HEIGHT_HEADER, HEIGHT_IMG, HEIGHT_DEFAULT, RIGHT_IMG, PADDING_HOR};
