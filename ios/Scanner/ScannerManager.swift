@@ -7,7 +7,7 @@
 
 import Foundation
 import CoreBluetooth
-
+import CoreLocation
 
 @objc(ScannerManager)
 public class ScannerManager: RCTViewManager {
@@ -27,6 +27,11 @@ public class ScannerManager: RCTViewManager {
   // Scan Bluetooth
   var mBleCentral: BleCentralManager!
   var mBlePeripheral: BlePeripheralManager!
+    
+  // create delegate location manager and an ibeacon
+  let mLocationMangager = CLLocationManager()
+
+  let mIbeacon = CLBeaconRegion(proximityUUID: AppConstant.IBEACON_UUID!, identifier: AppConstant.IBEACON_IDENTIFIER)
 
   // Bien luu thong tin scan duoc
   private var mScannedUserId = [(contactBlId : Data, time: Int64)]()
@@ -88,6 +93,12 @@ public class ScannerManager: RCTViewManager {
   @objc func startService() {
     print("onStartViaManager");
       DispatchQueue.main.async {
+        // set delegate and request location access
+        self.mLocationMangager.delegate = self
+        self.mLocationMangager.requestAlwaysAuthorization()
+        // start monitoring iBeacon
+        self.startMonitoring()
+        
         self.onStartService()
       }
   }
@@ -142,6 +153,12 @@ public class ScannerManager: RCTViewManager {
     print("onSetTimeDelay");
     TIME_DELAY_SAVE_DB = Int(truncatingIfNeeded: time)
   }
+    
+    // monitoring iBeacon
+    func startMonitoring() {
+      mLocationMangager.startMonitoring(for: mIbeacon)
+      mLocationMangager.startRangingBeacons(in: mIbeacon)
+    }
 
   public func onStartService() {
       // Tạo thiết bị mới, check nếu gọi thành công thì sẽ start việc tìm kiếm
@@ -260,6 +277,49 @@ public class ScannerManager: RCTViewManager {
         }
 
         return ret;
+    }
+}
+
+// protocol location to range beacon
+extension ScannerManager: CLLocationManagerDelegate {
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("did update location")
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        print("did start monitoring \(region.identifier)")
+        self.mLocationMangager.requestState(for: self.mIbeacon)
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        if state == .inside {
+            self.mLocationMangager.startRangingBeacons(in: self.mIbeacon)
+        }
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        print("did didRangeBeacons")
+    }
+
+    public func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("did monitoring failed \(error.localizedDescription)")
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("did enter region")
+        // Tạo thiết bị mới, check nếu gọi thành công thì sẽ start việc tìm kiếm
+        if mBlePeripheral == nil {
+            startAdvertising()
+        }
+
+        // Scan thiết bị
+        if self.mBleCentral == nil {
+            scanPeripheral()
+        }
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        print("did exit region")
     }
 }
 

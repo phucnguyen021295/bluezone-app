@@ -404,16 +404,16 @@ class Index extends React.Component {
   }
 
   onOpenScanScreen = () => {
-    // dev &&
-    //   this.props.navigation.navigate('WatchScan', {
-    //     logs: logBlueZone,
-    //   });
+    dev &&
+      this.props.navigation.navigate('WatchScan', {
+        logs: logBlueZone,
+      });
 
-    if (this.levelRadar === 4) {
-      this.animateLevelRadar(1)
-    } else {
-      this.animateLevelRadar(this.levelRadar + 1);
-    }
+    // if (this.levelRadar === 4) {
+    //   this.animateLevelRadar(1)
+    // } else {
+    //   this.animateLevelRadar(this.levelRadar + 1);
+    // }
   };
 
   // getSourceBackgroundRadar = levelRadar => {

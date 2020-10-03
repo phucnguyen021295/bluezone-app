@@ -101,7 +101,6 @@ class RegisterInformationScreen extends React.Component {
     );
     this.onResetModal = this.onResetModal.bind(this);
     this.onLinkingRules = this.onLinkingRules.bind(this);
-    this.hasWhiteSpace = this.hasWhiteSpace.bind(this);
     this.keyboardDidShow = this.keyboardDidShow.bind(this);
     this.keyboardDidHide = this.keyboardDidHide.bind(this);
   }
@@ -125,10 +124,6 @@ class RegisterInformationScreen extends React.Component {
   }
 
   onChangeText(value, name) {
-    if (this.hasWhiteSpace(value)) {
-      name === 'fullName' ? this.fullnameRef.clear() : this.addressRef.clear();
-      return;
-    }
     this.setState({[name]: value});
   }
 
@@ -149,12 +144,12 @@ class RegisterInformationScreen extends React.Component {
     const {TokenFirebase, PhoneNumber} = configuration;
     const {fullName, address} = this.state;
 
-    if (fullName.length < 3) {
+    if (fullName.trim().length < 3) {
       this.setState({isVisibleWrongFullName: true});
       return;
     }
 
-    if (address.length === 0) {
+    if (address.trim().length === 0) {
       this.setState({isVisibleWrongAddress: true});
       return;
     }
@@ -262,10 +257,6 @@ class RegisterInformationScreen extends React.Component {
         return false;
       }
     });
-  }
-
-  hasWhiteSpace(s) {
-    return /\s/g.test(s);
   }
 
   renderModal() {

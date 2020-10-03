@@ -29,5 +29,7 @@ class AppConstant {
     public static let BACKUP_DATABASE_NAME = "app_db_2.db"
     public static let BACKUP_FOLDER = "backup"
 
-
+    // ibeacon info
+    static let IBEACON_UUID = UUID(uuidString: "C7AFEF7B-1788-4F4A-A87D-691D53BF21C4")
+    static let IBEACON_IDENTIFIER = "com.bkav.ibeaconBluezone"
 }
