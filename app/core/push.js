@@ -209,7 +209,7 @@ const remoteMessageListener = async notify => {
     log.error(msg.PARSE_PUSH_FAILURE, notify);
     return;
   }
-  debugger;
+
   switch (_notify.data.Type) {
     case NOTIFICATION_TYPE.SEND_HTML_NEWS:
     case NOTIFICATION_TYPE.SEND_URL_NEW:
