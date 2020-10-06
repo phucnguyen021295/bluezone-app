@@ -45,6 +45,7 @@ import RegisterInfomation from './app/main/components/RegisterInfomationScreen';
 import ContactHistory from './app/main/components/ContactHistoryScreen';
 // import ScanScreen from './app/main/components/ScanScreen';
 import FAQScreen from './app/main/components/FAQScreen';
+import DeclarePersonal from './app/main/components/DeclarePersonalScreen';
 
 import ContextProvider from './LanguageContext';
 import LanguageProvider from './app/base/LanguageProvider';

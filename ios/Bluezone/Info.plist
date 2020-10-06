@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Cho phép ứng dụng truy cập vị trí, để tìm vị trí gần nhất</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -56,6 +54,8 @@
 	<string>Bluezone sử dụng Bluetooth để ghi nhận thiết bị điện tử của những người dùng khác khi họ ở gần bạn</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Bluezone sử dụng Bluetooth để ghi nhận thiết bị điện tử của những người dùng khác khi họ ở gần bạn</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Cho phép ứng dụng truy cập vị trí, để tìm vị trí gần nhất</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Cho phép ứng dụng truy cập vị trí, để tìm vị trí gần nhất.</string>
 	<key>UIAppFonts</key>

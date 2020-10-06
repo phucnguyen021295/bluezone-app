@@ -21,45 +21,43 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
-    justifyContent: 'center',
-  },
-
-  content: {
+    flex: 1,
     backgroundColor: '#FFFFFF',
-    borderRadius: 14,
+    ...Platform.select({
+      ios: {
+        paddingTop: 0,
+      },
+      android: {
+        paddingTop: 20,
+      },
+    }),
+  },
+  textHeader: {
+    color: '#015cd0',
+    fontSize: fontSize.huge,
   },
 
-  body: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 16,
+  sexStyle: {
+    paddingVertical: 10,
   },
 
-  title: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    fontWeight: 'bold',
+  titleSex: {
+    fontSize: fontSize.smaller,
+    paddingBottom: 10,
   },
 
-  description: {
-    fontSize: fontSize.fontSize16,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-
-  bottomHalfModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-
-  contentStyle: {
-    backgroundColor: '#ffffff'
+  inputNumberHome: {
+    borderColor: '#dddddd',
+    borderWidth: 1,
+    borderRadius: 6,
+    height: 40,
+    paddingHorizontal: 12,
+    fontSize: fontSize.smaller,
   },
 });
 
