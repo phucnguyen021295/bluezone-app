@@ -1,7 +1,7 @@
 /*
  * @Project Bluezone
  * @Author Bluezone Global (contact@bluezone.ai)
- * @Createdate 04/26/2020, 16:36
+ * @Createdate 04/28/2020, 21:55
  *
  * This file is part of Bluezone (https://bluezone.ai)
  *
@@ -21,46 +21,30 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
-import * as fontSize from '../../../../core/fontSize';
+import React from 'react';
+import {TouchableOpacity, View} from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-    justifyContent: 'center',
-  },
+// Styles
+import styles from './styles/index.css';
 
-  content: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-  },
+function RadioButton(props) {
+  const {checked, onPress, radioStyle, checkedCircleStyle} = props;
+  return (
+    <TouchableOpacity style={[styles.circle, radioStyle]} onPress={onPress}>
+      {checked ? (
+        <View style={[styles.checkedCircle, checkedCircleStyle]} />
+      ) : (
+        <View />
+      )}
+    </TouchableOpacity>
+  );
+}
 
-  body: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 16,
-  },
+RadioButton.defaultProps = {
+  checked: false,
+  onPress: () => {},
+  radioStyle: {},
+  checkedCircleStyle: {},
+};
 
-  title: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-
-  description: {
-    fontSize: fontSize.fontSize16,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-
-  bottomHalfModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-
-  contentStyle: {
-    backgroundColor: '#ffffff'
-  },
-});
-
-export default styles;
+export default RadioButton;

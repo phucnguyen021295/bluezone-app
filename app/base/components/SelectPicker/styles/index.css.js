@@ -25,41 +25,28 @@ import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-    justifyContent: 'center',
-  },
-
-  content: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-  },
-
-  body: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 16,
+  containerStyle: {
+    borderColor: '#dddddd',
+    borderWidth: 1,
+    borderRadius: 6,
+    height: 40,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
   title: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    fontSize: fontSize.smaller,
   },
 
-  description: {
-    fontSize: fontSize.fontSize16,
-    textAlign: 'center',
-    marginTop: 10,
+  item: {
+    paddingHorizontal: 20,
+    paddingVertical: 8,
   },
 
-  bottomHalfModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-
-  contentStyle: {
-    backgroundColor: '#ffffff'
+  titlePicker: {
+    fontSize: fontSize.normal,
   },
 });
 

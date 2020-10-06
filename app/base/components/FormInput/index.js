@@ -1,7 +1,7 @@
 /*
  * @Project Bluezone
  * @Author Bluezone Global (contact@bluezone.ai)
- * @Createdate 04/26/2020, 16:36
+ * @Createdate 04/28/2020, 21:55
  *
  * This file is part of Bluezone (https://bluezone.ai)
  *
@@ -21,46 +21,30 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
-import * as fontSize from '../../../../core/fontSize';
+import React from 'react';
+import {TextInput, View} from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-    justifyContent: 'center',
-  },
+// Components
+import {MediumText} from '../Text';
 
-  content: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-  },
+// Styles
+import styles from './styles/index.css';
 
-  body: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 16,
-  },
+function FormInput(props) {
+  const {title, containerStyle, textStyle, inputStyle, ...otherProps} = props;
+  return (
+    <View style={[styles.containerStyle, containerStyle]}>
+      <MediumText text={title} style={[styles.titleStyle, textStyle]} />
+      <TextInput style={[styles.inputStyle, inputStyle]} {...otherProps} />
+    </View>
+  );
+}
 
-  title: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
+FormInput.defaultProps = {
+  title: '',
+  containerStyle: {},
+  textStyle: {},
+  inputStyle: {},
+};
 
-  description: {
-    fontSize: fontSize.fontSize16,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-
-  bottomHalfModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-
-  contentStyle: {
-    backgroundColor: '#ffffff'
-  },
-});
-
-export default styles;
+export default FormInput;

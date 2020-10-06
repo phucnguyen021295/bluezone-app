@@ -1,7 +1,7 @@
 /*
  * @Project Bluezone
  * @Author Bluezone Global (contact@bluezone.ai)
- * @Createdate 04/26/2020, 16:36
+ * @Createdate 04/28/2020, 21:55
  *
  * This file is part of Bluezone (https://bluezone.ai)
  *
@@ -22,44 +22,23 @@
 'use strict';
 
 import {StyleSheet} from 'react-native';
-import * as fontSize from '../../../../core/fontSize';
 
 const styles = StyleSheet.create({
-  container: {
-    margin: 20,
+  circle: {
+    height: 20,
+    width: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ACACAC',
+    alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: 10,
   },
-
-  content: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-  },
-
-  body: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 16,
-  },
-
-  title: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-
-  description: {
-    fontSize: fontSize.fontSize16,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-
-  bottomHalfModal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-
-  contentStyle: {
-    backgroundColor: '#ffffff'
+  checkedCircle: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    backgroundColor: '#131313',
   },
 });
 
