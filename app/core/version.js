@@ -133,6 +133,12 @@ const getVersionValue = version => {
   } else if (version.endsWith('-deploygate.dev')) {
     hasSuffixes = true;
     suffixes = '-deploygate.dev';
+  } else if (version.endsWith('-internal')) {
+    hasSuffixes = true;
+    suffixes = '-internal';
+  } else if (version.endsWith('-internal.dev')) {
+    hasSuffixes = true;
+    suffixes = '-internal.dev';
   }
   if (hasSuffixes) {
     return version.slice(0, version.length - suffixes.length);
@@ -166,6 +172,7 @@ const checkPriorityOfNewVersion = (
 
 const CurrentLanguageVersion = getVersionValue(Service.getVersion());
 const CurrentVersionValue = getVersionValue(Service.getVersion());
+const internalVersion = Service.getVersion().indexOf('internal') >= 0;
 const CurrentConfigVersion = '';
 const CurrentAppVersion = '';
 const CurrentFAQVersion = '';
@@ -178,4 +185,5 @@ export {
   CurrentAppVersion,
   CurrentFAQVersion,
   versionCompare,
+  internalVersion,
 };

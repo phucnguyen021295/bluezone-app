@@ -24,6 +24,9 @@
 import {StyleSheet, Platform} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
+
+const MARGIN_TOP_HEADER = heightPercentageToDP((20 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -31,6 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
+    marginTop: isIPhoneX ? 0 : MARGIN_TOP_HEADER,
   },
   btnBack: {
     position: 'absolute',
@@ -42,9 +46,9 @@ const styles = StyleSheet.create({
     zIndex: 99,
   },
   textTitle: {
-    fontSize: fontSize.huge,
     textAlign: 'center',
-    color: '#000',
+    color: '#015cd0',
+    fontSize: fontSize.bigger,
   },
   icon: {
     paddingLeft: 20,

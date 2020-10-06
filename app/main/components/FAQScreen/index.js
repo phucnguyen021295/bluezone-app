@@ -172,12 +172,7 @@ class FAQScreen extends React.Component {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <StatusBar hidden={true} />
-        <Header
-          title={formatMessage(message.faq)}
-          showBack={showBack}
-          styleHeader={styles.header}
-          styleTitle={{color: '#015cd0', fontSize: fontSize.bigger}}
-        />
+        <Header title={formatMessage(message.faq)} showBack={showBack} />
         <FlatList
           style={{flex: 1}}
           ref={this.setRef}

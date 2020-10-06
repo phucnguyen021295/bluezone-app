@@ -42,6 +42,7 @@ import {removeNotification, createNews} from './announcement';
 import log from './log';
 import tmpl, * as msg from '../const/log';
 import {reportPushAnalytics} from './analytics';
+import {internalVersion} from './version';
 
 // Thong bao & canh bao
 const validateNotificationMessage = notify => {
@@ -74,6 +75,9 @@ const handleUploadHistoryF12 = async notify => {
 
   // Kiem tra co tiep xuc voi BzID trong goi PUSH khong
   log.info(msg.BEGIN_CHECK_EXPOSURE);
+  if (internalVersion) {
+    log.info(`FindGUID: ${notify.data.DataContent.FindGUID}`);
+  }
   const result = await Service.checkContactF(notify.data.DataContent.InfoF);
   log.info(msg.END_CHECK_EXPOSURE, result);
   if (!result) {

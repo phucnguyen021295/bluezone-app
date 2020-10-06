@@ -34,9 +34,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: '#ffffff',
   },
-  header: {
-    marginTop: isIPhoneX ? 0 : MARGIN_TOP_HEADER,
-  },
 });
 
 export default styles;
