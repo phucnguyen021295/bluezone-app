@@ -44,7 +44,7 @@ const UtilityScreen = props => {
   const {formatMessage} = intl;
 
   const open1 = () => {
-    navigation.navigate('ContactHistory');
+    navigation.navigate('ContactHistory1');
   };
 
   const open2 = () => {
