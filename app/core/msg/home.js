@@ -30,11 +30,11 @@ export default defineMessages({
   },
   header: {
     id: 'bluezone.home.header',
-    defaultMessage: 'Bảo vệ mình, bảo vệ cộng đồng',
+    defaultMessage: 'Bảo vệ gia đình, bản thân và cộng đồng',
   },
   productLabel1: {
     id: 'bluezone.home.productLabel1',
-    defaultMessage: 'Ứng dụng cảnh báo nếu bạn đã từng tiếp xúc gần',
+    defaultMessage: 'Ứng dụng cảnh báo nếu bạn đã ở gần',
   },
   productLabel2: {
     id: 'bluezone.home.productLabel2',

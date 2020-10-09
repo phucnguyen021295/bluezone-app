@@ -31,7 +31,9 @@ const MARGINTOP_TITLE = heightPercentageToDP((16 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
 const MARGINTOP_BODY = heightPercentageToDP((28 / 720) * 100);
 const MARGINTOP_FOTTER = heightPercentageToDP((20 / 720) * 100);
-const MARGIN_BOTTON_FOTTER = heightPercentageToDP((38 / 720) * 100);
+const MARGIN_BOTTON_FOTTER = heightPercentageToDP((40 / 720) * 100);
+const TEXT_LINE_HEIGHT = heightPercentageToDP((25 / 720) * 100);
+const BUTTON_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: fontSize.normal,
-    lineHeight: 23,
+    lineHeight: TEXT_LINE_HEIGHT,
   },
 
   borderLogo: {
@@ -87,8 +89,9 @@ const styles = StyleSheet.create({
   button: {
     color: blue_bluezone,
     fontSize: fontSize.normal,
-    paddingVertical: 10,
+    paddingVertical: BUTTON_PADDING_VERTICAL,
     paddingHorizontal: 10,
+    lineHeight: TEXT_LINE_HEIGHT,
   },
 });
 

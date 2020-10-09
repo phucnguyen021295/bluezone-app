@@ -48,7 +48,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
             "ks": {
                 "o": {
                     "a": 0,
-                    "k": 100,
+                    "k": 104,
                     "ix": 11
                 },
                 "r": {
@@ -77,9 +77,9 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                 "s": {
                     "a": 0,
                     "k": [
-                        100,
-                        100,
-                        100
+                        104,
+                        104,
+                        104
                     ],
                     "ix": 6
                 }
@@ -1154,7 +1154,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             26.223
                                         ],
                                         [
-                                            -105.367,
+                                            -104.367,
                                             21.078
                                         ],
                                         [
@@ -1186,7 +1186,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             -15.651
                                         ],
                                         [
-                                            -105.413,
+                                            -104.413,
                                             -20.848
                                         ],
                                         [
@@ -1246,7 +1246,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             -82.989
                                         ],
                                         [
-                                            -64.105,
+                                            -64.104,
                                             -86.239
                                         ],
                                         [
@@ -1283,7 +1283,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             -21.079,
-                                            -105.367
+                                            -104.367
                                         ],
                                         [
                                             -15.883,
@@ -1315,7 +1315,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             20.849,
-                                            -105.413
+                                            -104.413
                                         ],
                                         [
                                             25.995,
@@ -1375,7 +1375,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             86.238,
-                                            -64.105
+                                            -64.104
                                         ],
                                         [
                                             89.28,
@@ -1410,7 +1410,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             -26.223
                                         ],
                                         [
-                                            105.367,
+                                            104.367,
                                             -21.078
                                         ],
                                         [
@@ -1442,7 +1442,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             15.651
                                         ],
                                         [
-                                            105.412,
+                                            104.412,
                                             20.848
                                         ],
                                         [
@@ -1539,7 +1539,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             21.078,
-                                            105.366
+                                            104.366
                                         ],
                                         [
                                             15.883,
@@ -1571,7 +1571,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             -20.849,
-                                            105.412
+                                            104.412
                                         ],
                                         [
                                             -25.996,
@@ -1631,7 +1631,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             -86.239,
-                                            64.105
+                                            64.104
                                         ],
                                         [
                                             -89.28,
@@ -1660,7 +1660,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             },
                             "o": {
                                 "a": 0,
-                                "k": 100,
+                                "k": 104,
                                 "ix": 4
                             },
                             "w": {
@@ -1697,8 +1697,8 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             "s": {
                                 "a": 0,
                                 "k": [
-                                    100,
-                                    100
+                                    104,
+                                    104
                                 ],
                                 "ix": 3
                             },
@@ -1709,7 +1709,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             },
                             "o": {
                                 "a": 0,
-                                "k": 100,
+                                "k": 104,
                                 "ix": 7
                             },
                             "sk": {
@@ -2774,7 +2774,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                     "v": [
                                         [
                                             -176.264,
-                                            105.91
+                                            104.91
                                         ],
                                         [
                                             -181.248,
@@ -2862,7 +2862,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             -176.495,
-                                            -105.526
+                                            -104.526
                                         ],
                                         [
                                             -171.104,
@@ -2901,7 +2901,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             -170.855
                                         ],
                                         [
-                                            -105.91,
+                                            -104.91,
                                             -176.264
                                         ],
                                         [
@@ -2989,12 +2989,12 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             -181.46
                                         ],
                                         [
-                                            105.525,
+                                            104.525,
                                             -176.496
                                         ],
                                         [
                                             114.059,
-                                            -171.105
+                                            -171.104
                                         ],
                                         [
                                             122.317,
@@ -3030,7 +3030,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             176.264,
-                                            -105.911
+                                            -104.911
                                         ],
                                         [
                                             181.249,
@@ -3118,7 +3118,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         ],
                                         [
                                             176.495,
-                                            105.525
+                                            104.525
                                         ],
                                         [
                                             171.104,
@@ -3157,7 +3157,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             170.855
                                         ],
                                         [
-                                            105.911,
+                                            104.911,
                                             176.264
                                         ],
                                         [
@@ -3245,7 +3245,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                             181.461
                                         ],
                                         [
-                                            -105.525,
+                                            -104.525,
                                             176.496
                                         ],
                                         [
@@ -3307,7 +3307,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             },
                             "o": {
                                 "a": 0,
-                                "k": 100,
+                                "k": 104,
                                 "ix": 4
                             },
                             "w": {
@@ -3344,8 +3344,8 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             "s": {
                                 "a": 0,
                                 "k": [
-                                    100,
-                                    100
+                                    104,
+                                    104
                                 ],
                                 "ix": 3
                             },
@@ -3356,7 +3356,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             },
                             "o": {
                                 "a": 0,
-                                "k": 100,
+                                "k": 104,
                                 "ix": 7
                             },
                             "sk": {
@@ -3506,7 +3506,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                 "a": 1,
                                 // "k": [
                                 //     0.004000000393,
-                                //     0.851000019148,
+                                //     0.851110419148,
                                 //     0.948999980852,
                                 //     1
                                 // ],
@@ -3531,7 +3531,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         "t":0,
                                         "s":[
                                             0.004000000393,
-                                            0.851000019148,
+                                            0.851110419148,
                                             0.948999980852,
                                             1
                                         ]
@@ -3653,7 +3653,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                                 0.167
                                             ]
                                         },
-                                        "t":100,
+                                        "t":104,
                                         "s":[
                                             0,
                                             0.439215686275,
@@ -3708,7 +3708,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                                         "t":140,
                                         "s":[
                                             0.004000000393,
-                                            0.851000019148,
+                                            0.851110419148,
                                             0.948999980852,
                                             1
                                         ]
@@ -3719,7 +3719,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             },
                             "o": {
                                 "a": 0,
-                                "k": 100,
+                                "k": 104,
                                 "ix": 5
                             },
                             "r": 1,
@@ -3749,8 +3749,8 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             "s": {
                                 "a": 0,
                                 "k": [
-                                    100,
-                                    100
+                                    104,
+                                    104
                                 ],
                                 "ix": 3
                             },
@@ -3761,7 +3761,7 @@ export const radarBackgroundAnimate = Object.assign({}, n, {
                             },
                             "o": {
                                 "a": 0,
-                                "k": 100,
+                                "k": 104,
                                 "ix": 7
                             },
                             "sk": {

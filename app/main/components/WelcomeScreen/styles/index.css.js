@@ -29,15 +29,16 @@ import {
   widthPercentageToDP,
 } from '../../../../core/utils/dimension';
 
-const HEIGHT_HEADER = heightPercentageToDP((338 / 720) * 100);
+const HEIGHT_HEADER = heightPercentageToDP((316 / 720) * 100);
+const HEIGHT_SCAN_HEADER = heightPercentageToDP((90 / 720) * 100);
 const HEIGHT_IMG = heightPercentageToDP((72 / 720) * 100);
 const PADDING_HOR = widthPercentageToDP((26 / 360) * 100);
 const PAD_TOP = heightPercentageToDP((14 / 720) * 100);
 const PAD_TOP1 = heightPercentageToDP((17 / 720) * 100);
-const MAR_TOP = heightPercentageToDP((11 / 720) * 100);
+const MAR_TOP = heightPercentageToDP((5 / 720) * 100);
 const PAD_VER = heightPercentageToDP((13 / 720) * 100);
 const RIGHT_IMG = widthPercentageToDP((22 / 360) * 100);
-const LINE_HEI = heightPercentageToDP((20 / 720) * 100);
+const LINE_HEI = heightPercentageToDP((19 / 720) * 100);
 const HEIGHT_DEFAULT = heightPercentageToDP((40 / 720) * 100);
 const MAR_TOP2 = heightPercentageToDP((42 / 720) * 100);
 const MAR_TOP3 = heightPercentageToDP((34 / 720) * 100);
@@ -50,6 +51,7 @@ const BTN_PADDING_BOTTOM = heightPercentageToDP((32 / 720) * 100);
 const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((15 / 720) * 100);
 const TEXT_CALENDAR_PADDING_TOP = heightPercentageToDP((11 / 720) * 100);
 const CALENDAR_HEIGHT = heightPercentageToDP((125 / 720) * 100);
+const TEXT_F_LINE_HEIGHT = heightPercentageToDP((20 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -87,6 +89,7 @@ const styles = StyleSheet.create({
     color: '#015cd0',
     textAlign: 'center',
     fontSize: fontSize.fontSize14,
+    lineHeight: TEXT_F_LINE_HEIGHT,
   },
 
   modalFooter: {
@@ -195,6 +198,7 @@ const styles = StyleSheet.create({
     paddingBottom: BTN_PADDING_BOTTOM,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: MAR_TOP3
   },
 
   closeButton: {
@@ -224,10 +228,10 @@ const styles = StyleSheet.create({
   viewText: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
   }
 });
 
-export {HEIGHT_HEADER, HEIGHT_IMG, HEIGHT_DEFAULT, RIGHT_IMG, PADDING_HOR};
+export {HEIGHT_HEADER, HEIGHT_IMG, HEIGHT_DEFAULT, RIGHT_IMG, PADDING_HOR, HEIGHT_SCAN_HEADER};
 
 export default styles;

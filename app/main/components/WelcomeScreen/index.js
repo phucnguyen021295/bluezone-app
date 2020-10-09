@@ -54,6 +54,7 @@ import styles, {
   HEIGHT_HEADER,
   HEIGHT_IMG,
   HEIGHT_DEFAULT,
+  HEIGHT_SCAN_HEADER
 } from './styles/index.css';
 import {injectIntl, intlShape} from 'react-intl';
 import {Images, dataVi, dataEn, dayVi, dayEn, monthEn} from './styles/images';
@@ -290,18 +291,10 @@ class WelcomeScreen extends React.Component {
     const dayOfWeek = dow[moment().weekday()];
     const heightNatural = (width * images.height) / images.width;
     const bars = (HEIGHT_HEADER - setHeight - heightNatural) / HEIGHT_HEADER;
+    debugger;
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
-        <ImageBackgroundBase
-          uri={Images[0].uri}
-          style={{
-            width: width,
-            height: HEIGHT_HEADER - setHeight,
-            position: 'absolute',
-            top: 0,
-          }}
-        />
         <View style={{zIndex: 200}}>
           <ImageBackgroundBase
             uri={images.uri}
@@ -335,19 +328,16 @@ class WelcomeScreen extends React.Component {
                 onLoad={this.onLoad}
               />
             )}
-            <LightText
-              style={[
-                styles.titleImg,
-                {
-                  bottom:
-                    display === 'fit'
-                      ? (HEIGHT_HEADER - setHeight - heightImg) / 2 + 12
-                      : 12,
-                },
-              ]}>
-              {Language === 'vi' ? images.address : images.addressEn}
-            </LightText>
           </TouchableOpacity>
+          <LightText
+            style={[
+              styles.titleImg,
+              {
+                bottom: 12,
+              },
+            ]}>
+            {Language === 'vi' ? images.address : images.addressEn}
+          </LightText>
         </View>
         <TouchableOpacity
           style={styles.maxim}
