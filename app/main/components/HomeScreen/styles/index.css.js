@@ -21,7 +21,7 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 import {
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    paddingHorizontal: HEADER_PADDING_HORIZONTAL,
+    paddingHorizontal: Platform.OS === 'ios' ? 0 : HEADER_PADDING_HORIZONTAL,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: HEADER_PADDING_TOP,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.larger,
     color: '#ffffff',
     marginBottom: TEXT_HEADER_MARGIN_BOTTOM,
-    letterSpacing: 0.8,
+    letterSpacing: Platform.OS === 'ios' ? 0 : 0.8,
     fontWeight: '700',
   },
 

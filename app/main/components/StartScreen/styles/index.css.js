@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     textAlign: 'center',
-    marginTop: MARGINTOP_FOTTER,
+    // marginTop: MARGINTOP_FOTTER,
     marginBottom: MARGIN_BOTTON_FOTTER,
   },
 
