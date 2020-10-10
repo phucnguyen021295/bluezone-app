@@ -46,6 +46,7 @@ import ContactHistory from './app/main/components/ContactHistoryScreen';
 // import ScanScreen from './app/main/components/ScanScreen';
 import FAQScreen from './app/main/components/FAQScreen';
 import DeclarePersonal from './app/main/components/DeclarePersonalScreen';
+import DeclareDaily from './app/main/components/DeclareDailyScreen';
 
 import ContextProvider from './LanguageContext';
 import LanguageProvider from './app/base/LanguageProvider';
@@ -468,6 +469,7 @@ class App extends React.Component {
                 />
                 {/*<Stack.Screen name="ScanScreen" component={ScanScreen} />*/}
                 <Stack.Screen name="Welcome" component={Welcome} />
+                <Stack.Screen name="DeclareDaily" component={DeclareDaily} />
                 <Stack.Screen name="FAQScreen">
                   {props => <FAQScreen {...props} showBack={true} />}
                 </Stack.Screen>

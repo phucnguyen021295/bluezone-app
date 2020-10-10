@@ -79,7 +79,12 @@ const handleUploadHistoryF12 = async notify => {
     log.info(`FindGUID: ${notify.data.DataContent.FindGUID}`);
   }
   const result = await Service.checkContactF(notify.data.DataContent.InfoF);
-  log.info(msg.END_CHECK_EXPOSURE, result);
+  if (internalVersion) {
+    log.info(`${msg.END_CHECK_EXPOSURE} => ${result}`);
+  } else {
+    log.info(msg.END_CHECK_EXPOSURE, result);
+  }
+
   if (!result) {
     return;
   }

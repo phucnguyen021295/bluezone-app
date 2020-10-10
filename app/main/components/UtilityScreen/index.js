@@ -44,15 +44,15 @@ const UtilityScreen = props => {
   const {formatMessage} = intl;
 
   const open1 = () => {
-    navigation.navigate('ContactHistory1');
+    navigation.navigate('DeclareDaily');
   };
 
   const open2 = () => {
-    navigation.navigate('ContactHistory');
+    navigation.navigate('DeclareDaily');
   };
 
   const open3 = () => {
-    navigation.navigate('ContactHistory');
+    navigation.navigate('DeclareDaily');
   };
 
   return (
