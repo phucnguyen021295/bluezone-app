@@ -228,9 +228,9 @@ class HomeTab extends React.Component {
               cacheControl={'immutable'}
             />
             <View style={[style.header]}>
-              <Text style={style.textHeader}>
+              <MediumText style={style.textHeader}>
                 {formatMessage(message.header)}
-              </Text>
+              </MediumText>
               <Text style={style.texthea}>
                 {formatMessage(message.productLabel1)}
               </Text>

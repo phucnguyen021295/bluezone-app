@@ -29,8 +29,10 @@ import {blue_bluezone} from '../../../../core/color';
 const LOGO_HEIGHT = heightPercentageToDP((72 / 720) * 100);
 const MARGIN_TOP_HEADER = heightPercentageToDP((63 / 720) * 100);
 const MARGIN_HOZITAL_BORDER = heightPercentageToDP((40 / 720) * 100);
-const MARGIN_TOP_BODY = heightPercentageToDP((45 / 720) * 100);
-const BOTTOM_BTN = heightPercentageToDP((38 / 720) * 100);
+const MARGIN_TOP_BODY = heightPercentageToDP((57 / 720) * 100);
+const BOTTOM_BTN = heightPercentageToDP((30 / 720) * 100);
+const TEXT_LIGHT_HEIGHT = heightPercentageToDP((24.4 / 720) * 100);
+const BUTTON_PADDING_VERTICAL = heightPercentageToDP((20 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: fontSize.normal,
-    lineHeight: 25,
+    lineHeight: TEXT_LIGHT_HEIGHT,
   },
 
   borderLogo: {
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   button: {
     color: blue_bluezone,
     fontSize: fontSize.normal,
-    paddingVertical: 20,
+    paddingVertical: BUTTON_PADDING_VERTICAL,
     paddingHorizontal: 20,
   },
 });

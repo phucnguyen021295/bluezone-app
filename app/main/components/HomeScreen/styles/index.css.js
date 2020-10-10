@@ -21,25 +21,29 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../core/utils/dimension';
 
 const BOTTOM_IPHONEX_HEIGHT = heightPercentageToDP((34 / 720) * 100);
 const HEADER_PADDING_BOTTOM = heightPercentageToDP((20 / 720) * 100);
-const HEADER_BACKGROUND_HEIGHT = heightPercentageToDP((152.4 / 720) * 100);
-const BTN_MARGIN_BOTTOM = heightPercentageToDP((10 / 720) * 100);
-const SCANNING_VI_HEIGHT = heightPercentageToDP((192 / 720) * 100);
+const HEADER_BACKGROUND_HEIGHT = heightPercentageToDP((152.3 / 720) * 100);
+const BTN_MARGIN_BOTTOM = heightPercentageToDP((14 / 720) * 100);
+const SCANNING_VI_HEIGHT = heightPercentageToDP((176 / 720) * 100);
 const SCANNING_EN_HEIGHT = heightPercentageToDP((180 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((40 / 720) * 100);
-const LOGO_BLUEZONE_WIDTH = heightPercentageToDP((28.8 / 720) * 100);
-const LOGO_PADDING_BOTTOM = heightPercentageToDP((8 / 720) * 100);
-const SCAN_PADDING_BOTTOM = heightPercentageToDP((10 / 720) * 100);
+const TEXT_HEADER_MARGIN_BOTTOM = heightPercentageToDP((7 / 720) * 100);
+const LOGO_PADDING_BOTTOM = heightPercentageToDP((13.7 / 720) * 100);
+const SCAN_PADDING_BOTTOM = heightPercentageToDP((11 / 720) * 100);
 const HEADER_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
-const TEXTF_PADDING_TOP = heightPercentageToDP((17 / 720) * 100);
+const TEXTF_PADDING_TOP = heightPercentageToDP((9 / 720) * 100);
 const TEXT_WHY_PADDING_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const TEXT_WHY_MARGIN_BOTTOM = heightPercentageToDP((8 / 720) * 100);
+const HEADER_PADDING_HORIZONTAL = widthPercentageToDP((15 / 360) * 100);
 
 const styles = StyleSheet.create({
   background: {
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    paddingHorizontal: 20,
+    paddingHorizontal: Platform.OS === 'ios' ? 0 : HEADER_PADDING_HORIZONTAL,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: HEADER_PADDING_TOP,
@@ -147,11 +151,11 @@ const styles = StyleSheet.create({
 
   textHeader: {
     textAlign: 'center',
-    // fontFamily: 'OpenSans',
-    fontSize: fontSize.huge,
-    fontWeight: 'bold',
+    fontSize: fontSize.larger,
     color: '#ffffff',
-    paddingBottom: 3,
+    marginBottom: TEXT_HEADER_MARGIN_BOTTOM,
+    letterSpacing: Platform.OS === 'ios' ? 0 : 0.8,
+    fontWeight: '700',
   },
 
   texthea: {
@@ -319,6 +323,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 53,
     paddingTop: TEXTF_PADDING_TOP,
     color: '#015cd0',
+    lineHeight: 18.5
   },
 
   textHoi: {
@@ -340,6 +345,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export {HEADER_PADDING_BOTTOM, HEADER_BACKGROUND_HEIGHT, LOGO_BLUEZONE_WIDTH, SCANNING_VI_HEIGHT, SCANNING_EN_HEIGHT, BOTTOM_IPHONEX_HEIGHT};
+export {
+  HEADER_PADDING_BOTTOM,
+  HEADER_BACKGROUND_HEIGHT,
+  SCANNING_VI_HEIGHT,
+  SCANNING_EN_HEIGHT,
+  BOTTOM_IPHONEX_HEIGHT,
+};
 
 export default styles;
