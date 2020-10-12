@@ -82,11 +82,11 @@ export default Object.assign({}, radarWrapper, {
                 y: [0.167, 0.167, 0.167],
               },
               t: 39,
-              s: [106, 106, 106],
+              s: [108.5, 108.5, 108.5], // CHINH SUA BAN KINH RADA
             },
             {
               t: 53.0000021587343,
-              s: [105, 105, 106],
+              s: [107.5, 107.5, 108.5], // CHINH SUA BAN KINH RADA
             },
           ],
           ix: 6,
@@ -169,7 +169,7 @@ export default Object.assign({}, radarWrapper, {
               },
               e: {
                 a: 0,
-                k: [7.755, -106.237],
+                k: [7.755, -105.237],
                 ix: 6,
               },
               t: 1,
@@ -191,7 +191,7 @@ export default Object.assign({}, radarWrapper, {
               },
               s: {
                 a: 0,
-                k: [106, 106],
+                k: [100, 100],
                 ix: 3,
               },
               r: {
@@ -343,7 +343,7 @@ export default Object.assign({}, radarWrapper, {
               },
               s: {
                 a: 0,
-                k: [106, 106],
+                k: [100, 100],
                 ix: 3,
               },
               r: {
