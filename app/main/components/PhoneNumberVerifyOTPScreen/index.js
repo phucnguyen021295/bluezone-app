@@ -167,7 +167,7 @@ class VerifyOTPScreen extends React.Component {
 
     if (!gotoMainScreen && !goBack) {
       setTimeout(() => {
-        this.props.navigation.replace('RegisterInfomation', {
+        this.props.navigation.replace('RegisterInformation', {
           phoneNumber: this.PhoneNumber,
         });
       }, 900);

@@ -29,7 +29,8 @@ import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 const HEADER_HEIGHT = heightPercentageToDP((70 / 720) * 100);
 const HEADER_IPHONE_X_HEIGHT = heightPercentageToDP((50 / 720) * 100);
 const HEADER_PADDING_TOP = heightPercentageToDP((37 / 720) * 100);
-const HEADER_IPHONE_X_PADDING_TOP = heightPercentageToDP((37 / 720) * 100);
+const HEADER_IPHONE_X_PADDING_TOP = heightPercentageToDP((17 / 720) * 100);
+export const ICON_SIZE = heightPercentageToDP((23 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -49,9 +50,9 @@ const styles = StyleSheet.create({
     paddingTop: isIPhoneX ? HEADER_IPHONE_X_PADDING_TOP : HEADER_PADDING_TOP,
   },
   textTitle: {
-    fontSize: fontSize.huge,
     textAlign: 'center',
-    color: '#000',
+    color: '#015cd0',
+    fontSize: fontSize.bigger,
   },
   icon: {
     paddingLeft: 20,

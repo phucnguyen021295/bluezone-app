@@ -33,6 +33,7 @@ const PADDING_TOP_INPUT = heightPercentageToDP((23 / 720) * 100);
 const PADDING_BOTTOM_INPUT = heightPercentageToDP((35 / 720) * 100);
 const BOTTOM_PHONE = heightPercentageToDP((38 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
+const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 
 const styles = StyleSheet.create({
   title: {
@@ -85,12 +86,12 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    height: 40,
+    height: INPUT_HEIGHT,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#e8e8e8',
     paddingLeft: 16,
-    fontSize: 15,
+    fontSize: normal,
     color: '#000000',
   },
 

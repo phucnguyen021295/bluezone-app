@@ -56,6 +56,7 @@ import {
 } from '../../const/api';
 import Service from './service';
 import {setTokenForDeclaration} from '../storage';
+import {internalVersion} from '../version';
 
 const _defaultFunc = () => {};
 
@@ -476,11 +477,17 @@ const _uploadHistory = (
 
   const _success = response => {
     log.info(tmpl(msg.UPLOAD_SUCCESS, UploadConfig.LogText), filePath);
+    if (internalVersion) {
+      log.info(`FindGUID: ${OtpOrFindGuid}`);
+    }
     const data = response?.body?.Object ? response.body.Object : {};
     success(data);
   };
   const _failure = e => {
     log.info(tmpl(msg.UPLOAD_FAILURE, UploadConfig.LogText, numberRetry), e);
+    if (internalVersion) {
+      log.info(`FindGUID: ${OtpOrFindGuid}`);
+    }
     failure(e);
   };
 

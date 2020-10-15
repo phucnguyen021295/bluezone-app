@@ -39,7 +39,7 @@ import {injectIntl, intlShape} from 'react-intl';
 // Data
 import radar from './data/radar';
 import radarOutline from './data/radarOutline';
-import {radarBackgroundAnimate,} from './data/radarBackground';
+import {radarBackgroundAnimate} from './data/radarBackground';
 
 import {weakDots, normalDots, strongDots} from './data/dot';
 import {
@@ -104,6 +104,7 @@ class Index extends React.Component {
     this.blueZoners = {};
     this.objectRadar = {};
     this.levelRadar = 1;
+    this.radarColorReverse = false;
   }
 
   componentDidMount() {
@@ -165,19 +166,34 @@ class Index extends React.Component {
 
   changeLevelRadar = countBluezoner => {
     if (this.levelRadar !== this.getLevelRadar(countBluezoner)) {
-      this.animateLevelRadar(this.getLevelRadar(countBluezoner))
-      // this.setState({levelRadar: this.getLevelRadar(countBluezoner)});
+      this.animateLevelRadar(this.getLevelRadar(countBluezoner));
     }
   };
 
-  animateLevelRadar = (newLevel) => {
-    let t1;
-    let t2;
-    t1 = (this.levelRadar - 1) * 20;
-    t2 = (newLevel - 1) * 20;
-    this.radarBackgroundAnimate.play(t1, t2);
+  animateLevelRadar = newLevel => {
+    let frame1;
+    let frame2;
+    frame1 = (this.levelRadar - 1) * 20;
+    frame2 = (newLevel - 1) * 20;
+
+    // TODO: Cần phải gọi play để đảo chiều chuyển động của hoạt ảnh
+    //  Lỗi do thư viện sử dụng tính toán chiều chuyển động chưa chính xác.
+    if (frame1 < frame2 && this.radarColorReverse === true) {
+      this.radarBackgroundAnimate.play(frame2, frame1);
+      this.radarColorReverse = false;
+    }
+
+    if (frame1 > frame2 && this.radarColorReverse === true) {
+      this.radarBackgroundAnimate.play(frame1, frame2);
+    }
+
+    if (frame1 > frame2) {
+      this.radarColorReverse = true;
+    }
+
+    this.radarBackgroundAnimate.play(frame1, frame2);
     this.levelRadar = newLevel;
-  }
+  };
 
   getLevelRadar = count => {
     let i = 0;
@@ -408,28 +424,7 @@ class Index extends React.Component {
       this.props.navigation.navigate('WatchScan', {
         logs: logBlueZone,
       });
-
-    // if (this.levelRadar === 4) {
-    //   this.animateLevelRadar(1)
-    // } else {
-    //   this.animateLevelRadar(this.levelRadar + 1);
-    // }
   };
-
-  // getSourceBackgroundRadar = levelRadar => {
-  //   if (levelRadar === 1) {
-  //     return radarBackground1;
-  //   }
-  //   if (levelRadar === 2) {
-  //     return radarBackground2;
-  //   }
-  //   if (levelRadar === 3) {
-  //     return radarBackground3;
-  //   }
-  //   if (levelRadar === 4) {
-  //     return radarBackground4;
-  //   }
-  // };
 
   render() {
     const {Language} = configuration;
@@ -453,10 +448,10 @@ class Index extends React.Component {
           renderMode="HARDWARE"
         />
         <LottieView
-            loop={false}
-            source={radarBackgroundAnimate}
-            ref={ref => this.radarBackgroundAnimate = ref}
-            renderMode="HARDWARE"
+          loop={false}
+          source={radarBackgroundAnimate}
+          ref={ref => (this.radarBackgroundAnimate = ref)}
+          renderMode="HARDWARE"
         />
         <LottieView
           ref={this.setRadarRef}

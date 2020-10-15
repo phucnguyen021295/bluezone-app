@@ -137,5 +137,5 @@ export {
   ReportHistoryConfirmContact,
   DeclareInformation,
   PushInfoApp,
-  RegisterInfomation
+  RegisterInfomation,
 };

@@ -50,6 +50,7 @@
   "bluezone.notify.notification": "Thông báo",
   "bluezone.notify.yesterday": "Hôm qua",
   "bluezone.notify.declare": "Đăng ký số điện thoại",
+  "bluezone.notify.declarePersonalInformation": "Khai báo thông tin bổ sung",
   "bluezone.notify.registeredPhone": "Số điện thoại đã đăng ký",
   "bluezone.notify.noList": "Danh sách trống",
 
@@ -94,17 +95,17 @@
   "bluezone.register.redo": "Vui lòng thao tác lại để sử dụng dịch vụ",
   "bluezone.register.errorTitle": "Thông báo",
   "bluezone.register.textBtnTryAgain": "Nhập lại",
-  "bluezone.register.textCheckbox1": "Xác nhận thông tin bạn điền vào là chính xác. Bạn đã đọc, đồng ý với ",
+  "bluezone.register.textCheckbox1": "Xác nhận thông tin bạn cung cấp là chính xác. Bạn đã đọc, đồng ý với ",
   "bluezone.register.textCheckbox2": "Điều khoản sử dụng ",
-  "bluezone.register.textCheckbox3": "và đồng ý chia sẻ với cơ quan y tế khi bạn được xác định bị nhiễm hoặc nghi nhiễm Covid-19.",
+  "bluezone.register.textCheckbox3": "và đồng ý chia sẻ thông tin của bạn với cơ quan y tế khi bạn được xác định nhiễm hoặc nghi nhiễm Covid-19.",
 
 
   "bluezone.verifyOTP.title": "Xác thực số điện thoại",
   "bluezone.verifyOTP.titleSendHistory": "Nhập mã xác thực",
-  "bluezone.verifyOTP.enterPin": "Chúng tôi đang gửi Mã xác thực đến số điện thoại của bạn",
+  "bluezone.verifyOTP.enterPin": "Chúng tôi đang gửi SMS đến số điện thoại của bạn",
   "bluezone.verifyOTP.changePhoneNumber": "Nếu số điện thoại chưa đúng, bấm để nhập lại",
   "bluezone.verifyOTP.pleaseEnterPin": "Vui lòng nhập mã OTP",
-  "bluezone.verifyOTP.validPin": "Gửi lại tin nhắn",
+  "bluezone.verifyOTP.validPin": "Gửi lại SMS",
   "bluezone.verifyOTP.confirm": "Kích hoạt",
   "bluezone.verifyOTP.confirmHistory": "Gửi",
   "bluezone.verifyOTP.receivedOTP": "Bạn chưa nhận được mã OTP hoặc mã đã hết hạn?",
@@ -198,7 +199,7 @@
   "bluezone.update.close": "Đóng",
   "bluezone.update.retry": "Thử lại",
 
-  "bluezone.intro.description": "Để bảo vệ cộng đồng trước đại dịch COVID-19, Bộ Thông tin và Truyền thông và Bộ Y tế triển khai \"Ứng dụng phát hiện tiếp xúc gần Bluezone\" trên các thiết bị di động thông minh.\n\nBluezone là ứng dụng cảnh báo nếu bạn đã ở gần người nhiễm COVID-19, giảm thiểu các nguy cơ lây lan trong cộng đồng, giúp cuộc sống trở lại bình thường.\n\nChúng ta cùng chung tay ngăn chặn sự lây lan của virus bằng sức mạnh của cả cộng đồng. \n",
+  "bluezone.intro.description": "Để bảo vệ cộng đồng trước đại dịch COVID-19, Bộ Thông tin và Truyền thông và Bộ Y tế triển khai \"Ứng dụng phát hiện tiếp xúc gần Bluezone\" trên các thiết bị di động thông minh.\n\nBluezone là ứng dụng cảnh báo nếu bạn đã ở gần người nhiễm COVID-19, giảm thiểu các nguy cơ lây lan trong cộng đồng, giúp cuộc sống trở lại bình thường.\n\nChúng ta cùng chung tay ngăn chặn sự lây lan của virus bằng sức mạnh của cả cộng đồng. \n",
   "bluezone.intro.title": "Việt Nam sẽ chiến thắng Covid-19 !",
   "bluezone.intro.button": "Tiếp tục",
 

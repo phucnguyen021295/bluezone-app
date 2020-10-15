@@ -23,10 +23,10 @@
 
 const RADIUS = 295;
 const RADIUS1B = RADIUS - 230;
-const RADIUS2A = RADIUS - 165;
-const RADIUS2B = RADIUS - 120;
-const RADIUS3A = RADIUS - 55;
-const RADIUS3B = RADIUS - 15;
+const RADIUS2A = RADIUS - 150;
+const RADIUS2B = RADIUS - 110;
+const RADIUS3A = RADIUS - 45;
+const RADIUS3B = RADIUS;
 const CENTER_X = 380;
 const CENTER_Y = 450;
 const TIME_LOOP = 60;

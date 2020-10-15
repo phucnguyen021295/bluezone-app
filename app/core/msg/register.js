@@ -79,7 +79,7 @@ export default defineMessages({
   textCheckbox1: {
     id: 'bluezone.register.textCheckbox1',
     defaultMessage:
-      'Xác nhận thông tin bạn điền vào là chính xác. Bạn đã đọc, đồng ý với ',
+      'Xác nhận thông tin bạn cung cấp là chính xác. Bạn đã đọc, đồng ý với ',
   },
   textCheckbox2: {
     id: 'bluezone.register.textCheckbox2',
@@ -88,6 +88,6 @@ export default defineMessages({
   textCheckbox3: {
     id: 'bluezone.register.textCheckbox3',
     defaultMessage:
-      'và đồng ý chia sẻ với cơ quan y tế khi bạn được xác định bị nhiễm hoặc nghi nhiễm Covid-19.',
+      'và đồng ý chia sẻ thông tin của bạn với cơ quan y tế khi bạn được xác định nhiễm hoặc nghi nhiễm Covid-19.',
   },
 });

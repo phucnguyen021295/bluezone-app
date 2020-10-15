@@ -49,6 +49,7 @@
     "bluezone.notify.announcement": "Announcement",
     "bluezone.notify.yesterday": "Yesterday",
     "bluezone.notify.declare": "Register phone number",
+    "bluezone.notify.declarePersonalInformation": "Declare additional information",
     "bluezone.notify.registeredPhone": "The phone number has been registered",
     "bluezone.notify.Notification": "Notification",
     "bluezone.notify.noList": "Empty list",
@@ -99,10 +100,10 @@
 
     "bluezone.verifyOTP.title": "Phone number authentication",
     "bluezone.verifyOTP.titleSendHistory": "Enter OTP Code",
-    "bluezone.verifyOTP.enterPin": "We are sending the verification code to your phone number",
+    "bluezone.verifyOTP.enterPin": "A SMS is being sent to your phone number",
     "bluezone.verifyOTP.changePhoneNumber": " If the number entered is incorrect, touch to enter the correct one",
     "bluezone.verifyOTP.pleaseEnterPin": "Please enter the OTP code",
-    "bluezone.verifyOTP.validPin": "Resend the message",
+    "bluezone.verifyOTP.validPin": "Resend SMS",
     "bluezone.verifyOTP.confirm": "Authentication",
     "bluezone.verifyOTP.confirmHistory": "Send",
     "bluezone.verifyOTP.receivedOTP": "You have not received OTP code or the code has expired?",
@@ -196,8 +197,8 @@
     "bluezone.update.close": "Close",
     "bluezone.update.retry": "Retry",
 
-    "bluezone.intro.description": "To protect our community against COVID-19 pandemic, the Ministry of Information and Communications, in collaboration with the Ministry of Health, have deployed \"Bluezone close contact application\" on smart mobile devices.\n\nBluezone is an application to notify quickly if you have exposed to people who have been infected by COVID-19, to contain the spread of the virus in the community and to help people to return to normal life.\n\nTogether, we can work to stop the spread of the virus with the strength of the community.\n",
-    "bluezone.intro.title": "Vietnam will win against Covid-19!",
+    "bluezone.intro.description": "To protect our community against COVID-19 pandemic, the Ministry of Information and Communications, in collaboration with the Ministry of Health, have deployed \"Bluezone close contact application\" on smart mobile devices.\n\nBluezone is an application to notify quickly if you have been exposed to people who have been infected by COVID-19, to contain the spread of the virus in the community and to help people to return to normal life.\n\nTogether, we can work to stop the spread of the virus with the strength of the community.\n",
+    "bluezone.intro.title": "Vietnam will win against Covid-19 !",
     "bluezone.intro.button": "Next",
 
     "bluezone.start.appRememberTitle": "Helps you keep track of ",

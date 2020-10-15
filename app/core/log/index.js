@@ -22,7 +22,7 @@
 'use strict';
 
 import RNFS from 'react-native-fs';
-
+import moment from 'moment';
 import {
   addDevLog,
   getPartialDevLog,
@@ -92,13 +92,13 @@ const setLastTimeClearLog = value => {
 const addLogDb = ({key, data}) => {
   const _data = dev ? data : undefined;
   broadcastEventListener({key, data});
-  const dateNow = new Date();
+  const dateNow = moment();
   getLastTimeClearLog().then(_lastTimeClearLog => {
     if (
-      dateNow.toLocaleDateString() !==
-      new Date(_lastTimeClearLog).toLocaleDateString()
+      dateNow.format('DD/MM/YYYY') !==
+      moment(_lastTimeClearLog).format('DD/MM/YYYY')
     ) {
-      setLastTimeClearLog(dateNow.getTime());
+      setLastTimeClearLog(dateNow.valueOf());
       clearDevLog(
         2000,
         () => {

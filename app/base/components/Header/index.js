@@ -30,7 +30,7 @@ import {withNavigation} from '@react-navigation/compat';
 import {MediumText} from '../Text';
 
 // Styles
-import styles from './styles/index.css';
+import styles, {ICON_SIZE} from './styles/index.css';
 import {blue_bluezone} from '../../../core/color';
 
 class Header extends React.Component {
@@ -70,7 +70,7 @@ class Header extends React.Component {
           <TouchableOpacity onPress={this.onGoBack} style={styles.btnBack}>
             <Ionicons
               name={'ios-arrow-back'}
-              size={23}
+              size={ICON_SIZE}
               style={styles.icon}
               color={colorIcon}
             />

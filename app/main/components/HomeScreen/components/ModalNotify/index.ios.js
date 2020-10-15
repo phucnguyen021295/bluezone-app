@@ -23,10 +23,11 @@
 
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import {View, AppState, Linking, Platform} from 'react-native';
 import {withNavigation} from '@react-navigation/compat';
+import {injectIntl, intlShape} from 'react-intl';
 
 // Components
-import {View, AppState, Linking, Platform} from 'react-native';
 import ModalBase from './ModalNotify';
 
 import {
@@ -41,7 +42,6 @@ import {
 } from '../../../../../core/bluetooth';
 
 // Language
-import {injectIntl, intlShape} from 'react-intl';
 import message from '../../../../../core/msg/home';
 
 class ModalNotify extends React.Component {
@@ -62,7 +62,6 @@ class ModalNotify extends React.Component {
     this.checkRequestNotifications = this.checkRequestNotifications.bind(this);
     this.setStatusBluetooth = this.setStatusBluetooth.bind(this);
 
-    this.isPermissionBluetooth = false;
     this.checkBLT = false;
     this.timer = null;
     this.vesionIOS = parseInt(Platform.Version, 10);
@@ -84,7 +83,10 @@ class ModalNotify extends React.Component {
 
   handleAppStateChange(appState) {
     if (appState === 'active') {
-      if (this.statusPermissionBluetooth === 'granted' || this.statusPermissionBluetooth === 'unavailable') {
+      if (
+        this.statusPermissionBluetooth === 'granted' ||
+        this.statusPermissionBluetooth === 'unavailable'
+      ) {
         this.checkBLT = false;
         this.onChangeBluetooth();
       }
@@ -104,10 +106,7 @@ class ModalNotify extends React.Component {
       this.statusPermissionBluetooth = permissionBluetooth;
       switch (permissionBluetooth) {
         case 'blocked':
-          if (!this.isPermissionBluetooth) {
-            this.setState({isVisiblePermissionBLE: true});
-            this.isPermissionBluetooth = true;
-          }
+          this.setState({isVisiblePermissionBLE: true});
           break;
         case 'unavailable':
           this.checkRequestNotifications();
@@ -232,12 +231,12 @@ class ModalNotify extends React.Component {
           onPress={this.onTurnOnPermissionBLE}
           btnText={formatMessage(message.openSettingPermissionBlueTooth)}
         />
-        <ModalBase
-          isVisible={isVisibleBLE}
-          content={_NOTIFI_BLE_IOS_TEXT}
-          onPress={this.onTurnOnBLE}
-          btnText={formatMessage(message.openSettingBluetooth)}
-        />
+        {/*<ModalBase*/}
+        {/*  isVisible={isVisibleBLE}*/}
+        {/*  content={_NOTIFI_BLE_IOS_TEXT}*/}
+        {/*  onPress={this.onTurnOnBLE}*/}
+        {/*  btnText={formatMessage(message.openSettingBluetooth)}*/}
+        {/*/>*/}
         <ModalBase
           isVisible={isVisiblePermissionNotify}
           content={_NOTIFI_PERMISSION_TEXT}

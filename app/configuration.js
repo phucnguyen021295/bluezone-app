@@ -36,6 +36,7 @@ import {
   setPhoneNumber as setPhoneNumberStorage,
   setStatusNotifyRegister as setStatusNotifyRegisterStorage,
   setTokenFirebase as setTokenFirebaseStorage,
+  setPersonalInformation as setPersonalInformationStorage,
   multiGet,
 } from './core/storage';
 import {getTokenFirebase} from './core/fcm';
@@ -48,6 +49,7 @@ import * as msg from './const/log';
 
 const configuration = {
   PhoneNumber: '',
+  PersonalInformation: '',
   LinkQRAndroid:
     'https://play.google.com/store/apps/details?id=com.mic.bluezone',
   LinkQRIOS: 'https://apps.apple.com/us/app/bluezone/id1508062685?ls=1',
@@ -251,6 +253,22 @@ const configuration = {
     bigText: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
     bigTextEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
   },
+  AndroidLocationPermissonVersion2: {
+    title: 'Bluezone đang không thể hoạt động chính xác !',
+    titleEn: 'Bluezone not working properly !',
+    bigText: 'Bluezone cần quyền truy cập vị trí để có thể cảnh báo tới bạn.',
+    bigTextEn: 'Bluezone cần quyền truy cập vị trí để có thể cảnh báo tới bạn.',
+    buttonText: 'Kiểm tra ngay',
+    buttonTextEn: 'Check now',
+  },
+  AndroidScanNotificationVersion2: {
+    title: 'Bluezone đang không thể hoạt động chính xác !',
+    titleEn: 'Bluezone not working properly !',
+    bigText: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth1</b><!bl>Vi trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    buttonText: 'Kiểm tra ngay',
+    buttonTextEn: 'Check now',
+  },
   iOSScanNotification: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
@@ -283,6 +301,7 @@ const mergeConfiguration = (
   FirstOTP,
   StatusNotifyRegister,
   PhoneNumber,
+  PersonalInformation,
 ) => {
   Object.assign(configuration, configObject, {
     TokenFirebase: TokenFirebase || '',
@@ -290,6 +309,7 @@ const mergeConfiguration = (
     FirstOTP: FirstOTP || null,
     StatusNotifyRegister: StatusNotifyRegister || null,
     PhoneNumber: PhoneNumber || '',
+    PersonalInformation: PersonalInformation || '',
   });
 };
 
@@ -301,6 +321,7 @@ const initConfiguration = async callBack => {
     'FirstOTP',
     'StatusNotifyRegister',
     'PhoneNumber',
+    'PersonalInformation',
   ]).then(results => {
     const {
       Configuration,
@@ -309,6 +330,7 @@ const initConfiguration = async callBack => {
       FirstOTP,
       StatusNotifyRegister,
       PhoneNumber,
+      PersonalInformation,
     } = results;
 
     console.log('TokenFirebase', TokenFirebase);
@@ -319,6 +341,7 @@ const initConfiguration = async callBack => {
       FirstOTP,
       StatusNotifyRegister,
       PhoneNumber,
+      PersonalInformation,
     );
 
     callBack(configuration);
@@ -335,6 +358,20 @@ const setPhoneNumber = PhoneNumber => {
   }
   Object.assign(configuration, {PhoneNumber});
   setPhoneNumberStorage(PhoneNumber);
+};
+
+/**
+ * Luu thong tin ca nhan
+ * @param PersonalInformation
+ */
+const setPersonalInformation = PersonalInformation => {
+  if (!PersonalInformation) {
+    throw new Error(
+      'setPersonalInformation::PersonalInformation is required !',
+    );
+  }
+  Object.assign(configuration, {PersonalInformation});
+  setPersonalInformationStorage(PersonalInformation);
 };
 
 /**
@@ -698,6 +735,7 @@ export {
   setLanguage,
   setStatusNotifyRegister,
   setPhoneNumber,
+  setPersonalInformation,
   setConfiguration,
   retryRegisterTokenFirebaseAgain,
   retryRegisterOrUpdateTokenFirebase,
