@@ -328,7 +328,7 @@ class RegisterScreen extends React.Component {
             <View style={[styles.layout1]}>
               <Text style={styles.text2}>{formatMessage(message.title)}</Text>
             </View>
-            <View style={[styles.phone]}>
+            <View style={styles.phone}>
               <TextInput
                 ref={this.setPhoneNumberInputRef}
                 autoFocus={true}

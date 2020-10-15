@@ -26,10 +26,10 @@ import {bigger, huge, large, normal, smaller} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
-const MARGIN_TOP_HEADER = heightPercentageToDP((37 / 720) * 100);
+const BTN_MARGIN_HORIZONTAL = heightPercentageToDP((43 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
-const MARGIN_TOP_LAYOUT = heightPercentageToDP((50 / 720) * 100);
-const PADDING_TOP_INPUT = heightPercentageToDP((23 / 720) * 100);
+const LAYOUT_PADDING_TOP = heightPercentageToDP((64 / 720) * 100);
+const PADDING_TOP_INPUT = heightPercentageToDP((51 / 720) * 100);
 const PADDING_BOTTOM_INPUT = heightPercentageToDP((35 / 720) * 100);
 const BOTTOM_PHONE = heightPercentageToDP((38 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
 
   layout1: {
-    marginTop: MARGIN_TOP_LAYOUT,
+    paddingTop: LAYOUT_PADDING_TOP,
     marginHorizontal: 30,
   },
 
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   },
 
   btnNext: {
-    marginHorizontal: 30,
+    marginHorizontal: BTN_MARGIN_HORIZONTAL,
     height: BTN_HEIGHT,
   },
 

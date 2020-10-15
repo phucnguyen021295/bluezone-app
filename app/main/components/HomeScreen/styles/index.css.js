@@ -151,17 +151,17 @@ const styles = StyleSheet.create({
 
   textHeader: {
     textAlign: 'center',
-    fontSize: fontSize.larger,
+    fontSize: fontSize.fontSize16,
     color: '#ffffff',
     marginBottom: TEXT_HEADER_MARGIN_BOTTOM,
     letterSpacing: Platform.OS === 'ios' ? 0 : 0.8,
-    fontWeight: '700',
+    fontWeight: 'bold',
   },
 
   texthea: {
-    // fontFamily: 'OpenSans',
     color: '#ffffff',
-    fontSize: fontSize.small,
+    fontSize: fontSize.smaller,
+    lineHeight: parseInt((fontSize.smaller * 1.38).toFixed(0)),
   },
 
   button: {
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 53,
     paddingTop: TEXTF_PADDING_TOP,
     color: '#015cd0',
-    lineHeight: 18.5
+    lineHeight: 18.5,
   },
 
   textHoi: {

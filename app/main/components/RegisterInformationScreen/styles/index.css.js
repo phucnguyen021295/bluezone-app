@@ -35,6 +35,7 @@ const MARGIN_BOTTOM_PHONE = heightPercentageToDP((35 / 720) * 100);
 const PADDING_HORIZONTAL_TITLE = heightPercentageToDP((86 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
+const BTN_MARGIN_HORIZONTAL = heightPercentageToDP((43 / 720) * 100);
 
 const styles = StyleSheet.create({
   layout1: {
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   },
 
   btnNext: {
-    marginHorizontal: 30,
+    marginHorizontal: BTN_MARGIN_HORIZONTAL,
     height: BTN_HEIGHT,
   },
 

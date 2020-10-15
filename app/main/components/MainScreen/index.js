@@ -30,7 +30,7 @@ import HomeScreen from '../HomeScreen';
 import NotifyScreen from '../NotifyScreen';
 import InfoScreen from '../InfoScreen';
 import FAQScreen from '../FAQScreen';
-import UtilityScreen from '../UtilityScreen';
+// import UtilityScreen from '../UtilityScreen';
 import CountNotifications, {
   broadcastForcusChange,
 } from './components/CountNotification';

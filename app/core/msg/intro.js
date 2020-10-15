@@ -31,7 +31,17 @@ export default defineMessages({
   description: {
     id: 'bluezone.intro.description',
     defaultMessage:
-      'Để bảo vệ cộng đồng trước đại dịch COVID-19, Bộ Thông tin và Truyền thông và Bộ Y tế triển khai "Ứng dụng phát hiện tiếp xúc gần Bluezone" trên các thiết bị di động thông minh.\n\nBluezone là ứng dụng cảnh báo nếu bạn đã ở gần người nhiễm COVID-19, giảm thiểu các nguy cơ lây lan trong cộng đồng, giúp cuộc sống trở lại bình thường.\nChúng ta cùng chung tay ngăn chặn sự lây lan của virus bằng sức mạnh của cả cộng đồng. \n',
+      'Để bảo vệ cộng đồng trước đại dịch COVID-19, Bộ Thông tin và Truyền thông và Bộ Y tế triển khai "Ứng dụng phát hiện tiếp xúc gần Bluezone" trên các thiết bị di động thông minh.',
+  },
+  description1: {
+    id: 'bluezone.intro.description1',
+    defaultMessage:
+      'Bluezone là ứng dụng cảnh báo nếu bạn đã ở gần người nhiễm COVID-19, giảm thiểu các nguy cơ lây lan trong cộ̂ng đồ̂̀ng, giúp cuộc song trở lại bình thường',
+  },
+  description2: {
+    id: 'bluezone.intro.description2',
+    defaultMessage:
+      'Chúng ta cùng chung tay ngăn chặn sự lây lan của virus bằng sức mạnh của cả cộng đồng.',
   },
   button: {
     id: 'bluezone.intro.button',

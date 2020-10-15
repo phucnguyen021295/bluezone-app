@@ -24,13 +24,16 @@
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
 
-const HEADER_BẠCKGROUND_LOGO = heightPercentageToDP((160 / 720) * 100);
+const HEADER_BẠCKGROUND_LOGO = heightPercentageToDP((171 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((70 / 720) * 100);
-const TITLE_PADDINGTOP = heightPercentageToDP((25 / 720) * 100);
+const BODY_PADDING_HORIZONTAL = widthPercentageToDP((20 / 360) * 100);
 const DATE_PADDINGBOTTOM = heightPercentageToDP((25 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
+const TITLE_PADDING_VERTICAL = heightPercentageToDP((25 / 720) * 100);
+const BTN_MARGIN_HORIZONTAL = heightPercentageToDP((23 / 720) * 100);
+const ICON_SIZE = heightPercentageToDP((15 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -49,8 +52,7 @@ const styles = StyleSheet.create({
 
   body: {
     flex: 1,
-    // paddingVertical: TITLE_PADDINGTOP,
-    paddingHorizontal: 30,
+    paddingHorizontal: BODY_PADDING_HORIZONTAL,
     backgroundColor: '#ffffff',
     justifyContent: 'space-between',
   },
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.larger,
     color: '#000000',
+    paddingVertical: TITLE_PADDING_VERTICAL,
   },
 
   viewDep: {
@@ -113,23 +116,21 @@ const styles = StyleSheet.create({
   },
   buttonSend: {
     height: BTN_HEIGHT,
-    // width: '100%',
     backgroundColor: '#119a01',
-    marginTop: 20,
-    // marginBottom: 5,
-    marginHorizontal: 12,
+    marginHorizontal: BTN_MARGIN_HORIZONTAL,
   },
   buttonIcon: {
-    width: 15,
-    height: 15,
+    width: ICON_SIZE,
+    height: ICON_SIZE,
     marginRight: 7,
   },
   note: {
     fontSize: fontSize.fontSize14,
     color: '#AAAAAA',
     textAlign: 'center',
-    marginBottom: 12,
-    paddingTop: 15,
+    marginHorizontal: BTN_MARGIN_HORIZONTAL,
+    marginBottom: 28,
+    paddingTop: 14,
   },
 });
 

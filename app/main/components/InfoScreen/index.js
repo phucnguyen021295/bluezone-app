@@ -152,12 +152,9 @@ class InfoScreen extends React.Component {
             <IconBYT height={LOGO_HEIGHT} width={LOGO_HEIGHT} />
           </View>
           <View style={styles.body}>
-            <View />
-            <View style={{marginTop: 10}}>
-              <MediumText style={styles.title}>
-                {formatMessage(message.title)} {version}
-              </MediumText>
-            </View>
+            <MediumText style={styles.title}>
+              {formatMessage(message.title)} {version}
+            </MediumText>
             <ButtonIconText
               onPress={this.onSendHistory}
               text={formatMessage(warning.uploadText)}

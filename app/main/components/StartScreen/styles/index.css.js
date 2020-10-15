@@ -34,6 +34,7 @@ const MARGIN_BOTTON_FOTTER = heightPercentageToDP((40 / 720) * 100);
 const TEXT_LINE_HEIGHT = heightPercentageToDP((25 / 720) * 100);
 const BUTTON_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
 const PADDING_HOZITAL = widthPercentageToDP((23 / 360) * 100);
+const DESCRIPTION_PADDING_BOTTOM = widthPercentageToDP((21 / 360) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -68,9 +69,10 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: fontSize.normal,
-    lineHeight: 25,
+    lineHeight: parseInt(fontSize.normal * 1.67),
     color: '#363636',
-    textAlign: 'left'
+    textAlign: 'left',
+    paddingBottom: DESCRIPTION_PADDING_BOTTOM
   },
 
   borderLogo: {

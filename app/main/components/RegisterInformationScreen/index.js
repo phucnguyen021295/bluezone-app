@@ -361,6 +361,7 @@ class RegisterInformationScreen extends React.Component {
             </View>
             <View style={[styles.phone]}>
               <TextInput
+                autoFocus={true}
                 ref={this.setFullnameRef}
                 style={[styles.textInput]}
                 placeholderTextColor={'#b5b5b5'}

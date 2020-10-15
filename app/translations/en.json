@@ -197,7 +197,9 @@
     "bluezone.update.close": "Close",
     "bluezone.update.retry": "Retry",
 
-    "bluezone.intro.description": "To protect our community against COVID-19 pandemic, the Ministry of Information and Communications, in collaboration with the Ministry of Health, have deployed \"Bluezone close contact application\" on smart mobile devices.\n\nBluezone is an application to notify quickly if you have been exposed to people who have been infected by COVID-19, to contain the spread of the virus in the community and to help people to return to normal life.\n\nTogether, we can work to stop the spread of the virus with the strength of the community.\n",
+    "bluezone.intro.description": "To protect our community against COVID-19 pandemic, the Ministry of Information and Communications, in collaboration with the Ministry of Health, have deployed \"Bluezone close contact application\" on smart mobile devices.",
+    "bluezone.intro.description1": "Bluezone is an application to notify quickly if you have been exposed to people who have been infected by COVID-19, to contain the spread of the virus in the community and to help people to return to normal life.",
+    "bluezone.intro.description2": "Together, we can work to stop the spread of the virus with the strength of the community.",
     "bluezone.intro.title": "Vietnam will win against Covid-19 !",
     "bluezone.intro.button": "Next",
 

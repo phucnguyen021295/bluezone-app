@@ -68,19 +68,16 @@ class StartScreen extends React.Component {
                 </MediumText>
                 {formatMessage(message.appRememberDescription)}
               </Text>
-              <Text style={styles.description} />
               <Text style={styles.description}>
                 <MediumText>{formatMessage(message.warningTitle)}</MediumText>
                 {formatMessage(message.warningDescription)}
               </Text>
-              <Text style={styles.description} />
               <Text style={styles.description}>
                 <MediumText>
                   {formatMessage(message.dataSecurityTitle)}
                 </MediumText>
                 {formatMessage(message.dataSecurityDescription)}
               </Text>
-              <Text style={styles.description} />
               <Text style={styles.description}>
                 {formatMessage(message.saveHistory)}
                 <MediumText style={styles.dataSecurityTitle}>
@@ -88,7 +85,6 @@ class StartScreen extends React.Component {
                 </MediumText>
                 {formatMessage(message.saveHistoryDescription)}
               </Text>
-              <Text style={styles.description} />
               <Text style={styles.description}>
                 <MediumText>
                   {formatMessage(message.startBluetoothTitle)}

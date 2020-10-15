@@ -72,6 +72,12 @@ class IntroductionScreen extends React.Component {
               <Text style={styles.description}>
                 {formatMessage(message.description)}
               </Text>
+              <Text style={styles.description}>
+                {formatMessage(message.description1)}
+              </Text>
+              <Text style={styles.description}>
+                {formatMessage(message.description2)}
+              </Text>
               <MediumText style={styles.title}>
                 {formatMessage(message.title)}
               </MediumText>

@@ -199,7 +199,9 @@
   "bluezone.update.close": "Đóng",
   "bluezone.update.retry": "Thử lại",
 
-  "bluezone.intro.description": "Để bảo vệ cộng đồng trước đại dịch COVID-19, Bộ Thông tin và Truyền thông và Bộ Y tế triển khai \"Ứng dụng phát hiện tiếp xúc gần Bluezone\" trên các thiết bị di động thông minh.\n\nBluezone là ứng dụng cảnh báo nếu bạn đã ở gần người nhiễm COVID-19, giảm thiểu các nguy cơ lây lan trong cộng đồng, giúp cuộc sống trở lại bình thường.\n\nChúng ta cùng chung tay ngăn chặn sự lây lan của virus bằng sức mạnh của cả cộng đồng. \n",
+  "bluezone.intro.description": "Để bảo vệ cộng đồng trước đại dịch COVID-19, Bộ Thông tin và Truyền thông và Bộ Y tế triển khai \"Ứng dụng phát hiện tiếp xúc gần Bluezone\" trên các thiết bị di động thông minh.",
+  "bluezone.intro.description1": "Bluezone là ứng dụng cảnh báo nếu bạn đã ở gần người nhiễm COVID-19, giảm thiểu các nguy cơ lây lan trong cộng đồng, giúp cuộc sống trở lại bình thường.",
+  "bluezone.intro.description2": "Chúng ta cùng chung tay ngăn chặn sự lây lan của virus bằng sức mạnh của cả cộng đồng.",
   "bluezone.intro.title": "Việt Nam sẽ chiến thắng Covid-19 !",
   "bluezone.intro.button": "Tiếp tục",
 

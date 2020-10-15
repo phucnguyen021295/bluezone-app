@@ -61,7 +61,8 @@ export default defineMessages({
   },
   note: {
     id: 'bluezone.info.note',
-    defaultMessage: 'bluezone.info.note',
+    defaultMessage:
+      '*Chỉ dùng chức năng này khi có yêu cầu của Cơ quan Y tế có thẩm quyền.',
   },
   infoDetail1: {
     id: 'bluezone.info.infoDetail1',
