@@ -29,7 +29,7 @@ import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/
 const MARGINTOP_HEADER = heightPercentageToDP((37 / 720) * 100);
 const TITLE_HEIGHT = heightPercentageToDP((33 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
-const HEADER_MARGIN_BOTTOM = heightPercentageToDP((28 / 720) * 100);
+const BODY_PADDING_TOP = heightPercentageToDP((28 / 720) * 100);
 const MARGIN_BOTTON_FOTTER = heightPercentageToDP((40 / 720) * 100);
 const TEXT_LINE_HEIGHT = heightPercentageToDP((25 / 720) * 100);
 const BUTTON_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     marginTop: MARGINTOP_HEADER,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: HEADER_MARGIN_BOTTOM,
   },
 
   title: {
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: PADDING_HOZITAL,
     backgroundColor: '#ffffff',
+    paddingTop: BODY_PADDING_TOP
   },
 
   viewDep: {

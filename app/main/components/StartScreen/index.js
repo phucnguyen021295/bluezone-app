@@ -24,10 +24,11 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import {injectIntl, intlShape} from 'react-intl';
+import {SafeAreaView, StatusBar, View, ScrollView} from 'react-native';
 
 // Components
-import {SafeAreaView, StatusBar, View, ScrollView} from 'react-native';
 import Text, {MediumText} from '../../../base/components/Text';
+import AppHeader from '../../../base/components/Header';
 
 // Styles
 import styles from './styles/index.css';
@@ -58,9 +59,7 @@ class StartScreen extends React.Component {
       <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
         <ScrollView>
-          <View style={styles.containerLogo}>
-            <MediumText style={styles.title}>Bluezone</MediumText>
-          </View>
+          <AppHeader showBack={false} title={'Bluezone'} />
           <View style={styles.body}>
             <View style={styles.viewDep}>
               <Text style={styles.description}>

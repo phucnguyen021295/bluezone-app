@@ -115,7 +115,7 @@ export default defineMessages({
   otpdate: {
     id: 'bluezone.verifyOTP.otpdate',
     defaultMessage:
-      'Mã OTP đã hết hạn. Bạn vui lòng click “Gửi lại” để lấy 1 mã OTP khác.',
+      'Mã OTP đã hết hạn. Bạn vui lòng click “Gửi lại token” để lấy 1 mã OTP khác.',
   },
   btnTryAgain: {
     id: 'bluezone.verifyOTP.textBtnTryAgain',
@@ -132,7 +132,7 @@ export default defineMessages({
   },
   agree: {
     id: 'bluezone.verifyOTP.agree',
-    defaultMessage: 'Đồng ý',
+    defaultMessage: 'Nhập lại',
   },
   errorTitle: {
     id: 'bluezone.verifyOTP.errorTitle',

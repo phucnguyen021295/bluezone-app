@@ -78,8 +78,7 @@ class PageViewScreen extends Component {
         <StatusBar hidden={true} />
         <Header
           colorIcon={'#000000'}
-          styleHeader={{marginTop: 20}}
-          styleTitle={{paddingHorizontal: 50}}
+          styleTitle={{paddingHorizontal: 50, color: '#000000'}}
           title={item.title}
         />
         <WebView

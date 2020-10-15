@@ -77,7 +77,7 @@ class Header extends React.Component {
           </TouchableOpacity>
         )}
         <View style={styles.title}>
-          <MediumText style={[styles.textTitle, styleTitle]}>
+          <MediumText style={[styles.textTitle, styleTitle]} numberOfLines={1}>
             {title}
           </MediumText>
         </View>

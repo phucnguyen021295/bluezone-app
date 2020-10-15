@@ -208,17 +208,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
 
-  titleHeader: {
-    color: '#015CD0',
-    fontSize: bigger,
-  },
-
-  header: {
-    alignItems: 'center',
-    marginTop: isIPhoneX ? 0 : heightPercentageToDP((20 / 720) * 100),
-    height: heightPercentageToDP((50 / 720) * 100),
-  },
-
   iconEmpty: {
     width: 44,
     height: 64,

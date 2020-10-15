@@ -50,7 +50,7 @@ export default defineMessages({
   },
   try: {
     id: 'bluezone.register.try',
-    defaultMessage: 'Thử lại',
+    defaultMessage: 'Đồng ý',
   },
   error: {
     id: 'bluezone.register.error',
@@ -58,11 +58,11 @@ export default defineMessages({
   },
   redo: {
     id: 'bluezone.register.redo',
-    defaultMessage: 'Vui lòng thao tác lại để sử dụng dịch vụ',
+    defaultMessage: 'Có lỗi xảy ra khi thực hiện đăng ký số điện thoại. Xin lỗi bạn vì sự bất tiện này, vui lòng thực hiện lại sau.',
   },
   phoneEnterNotValid: {
     id: 'bluezone.register.phoneEnterNotValid',
-    defaultMessage: 'Số điện thoại bạn nhập không hợp lệ',
+    defaultMessage: 'Số điện thoại không đúng, vui lòng nhập lại.',
   },
   summary: {
     id: 'bluezone.register.summary',

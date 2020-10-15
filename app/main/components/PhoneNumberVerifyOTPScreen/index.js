@@ -49,7 +49,6 @@ import configuration, {
   setPhoneNumber,
   syncTokenFirebase,
 } from '../../../configuration';
-import {blue_bluezone} from '../../../core/color';
 import {createPhoneNumberReminder} from '../../../core/announcement';
 import {messageNotifyOTPSuccess} from '../../../core/data';
 import message from '../../../core/msg/verifyOtp';
@@ -423,14 +422,7 @@ class VerifyOTPScreen extends React.Component {
     const phoneNumber = route.params.phoneNumber;
     return (
       <SafeAreaView style={styles.container}>
-        <Header
-          onBack={this.onGoBack}
-          title={formatMessage(message.title)}
-          styleTitle={{
-            color: blue_bluezone,
-            fontSize: fontSize.bigger,
-          }}
-        />
+        <Header onBack={this.onGoBack} title={formatMessage(message.title)} />
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>

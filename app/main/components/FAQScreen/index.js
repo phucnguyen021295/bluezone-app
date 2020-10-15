@@ -36,10 +36,6 @@ import {injectIntl, intlShape} from 'react-intl';
 import FAQItem from './components/FAQItem';
 import Header from '../../../base/components/Header';
 
-// Styles
-import styles from './styles/index.css';
-import * as fontSize from '../../../core/fontSize';
-
 import message from '../../../core/msg/tab';
 
 import configuration from '../../../configuration';

@@ -43,7 +43,6 @@ import CheckBox from '@react-native-community/checkbox';
 import ButtonIconText from '../../../base/components/ButtonIconText';
 import {
   ButtonConfirm,
-  ButtonClose,
 } from '../../../base/components/ButtonText/ButtonModal';
 import Text from '../../../base/components/Text';
 import ButtonText from '../../../base/components/ButtonText';
@@ -60,7 +59,6 @@ import * as fontSize from '../../../core/fontSize';
 import message from '../../../core/msg/register';
 import configuration from '../../../configuration';
 import {creatScheduleRegisterNotification} from '../../../core/notifyScheduler';
-import {blue_bluezone} from '../../../core/color';
 
 const TIMEOUT_LOADING = 800;
 const PHONE_NUMBER_REGEX = /^[\+]?[0-9]{9,15}\b/;
@@ -284,13 +282,9 @@ class RegisterScreen extends React.Component {
           title={`${formatMessage(message.error)}`}
           description={`${formatMessage(message.redo)}[${codeString}]`}>
           <View style={styles.modalFooter}>
-            <ButtonClose
-              text={formatMessage(message.skip)}
-              onPress={this.onCloseModal}
-            />
             <ButtonConfirm
               text={formatMessage(message.try)}
-              onPress={this.onRegisterPress}
+              onPress={this.onCloseModal}
             />
           </View>
         </ModalBase>
@@ -313,7 +307,7 @@ class RegisterScreen extends React.Component {
 
   render() {
     const {intl} = this.props;
-    const {numberPhone, isSelected, isShowKeyboard} = this.state;
+    const {numberPhone, isSelected} = this.state;
     const {formatMessage} = intl;
     const disabled = numberPhone.length === 0;
     return (
@@ -323,15 +317,7 @@ class RegisterScreen extends React.Component {
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <Header
-            title={formatMessage(message.titleHeader)}
-            colorIcon={blue_bluezone}
-            styleTitle={{
-              color: blue_bluezone,
-              fontSize: fontSize.bigger,
-            }}
-            showBack={false}
-          />
+          <Header title={formatMessage(message.titleHeader)} showBack={false} />
           <ScrollView
             ref={ref => {
               this.scrollView = ref;

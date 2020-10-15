@@ -381,11 +381,7 @@ class WatchScanScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <Header
-          styleTitle={styles.titleHeader}
-          styleHeader={styles.header}
-          title={formatMessage(message.header)}
-        />
+        <Header title={formatMessage(message.header)} />
         <ScrollView>
           <View style={styles.infoContainer}>
             <View style={styles.infoItem}>

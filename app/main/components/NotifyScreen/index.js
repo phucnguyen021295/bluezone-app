@@ -24,11 +24,12 @@
 import React from 'react';
 import {View, SafeAreaView, Dimensions} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
+import FastImage from 'react-native-fast-image';
 
 // Components
-import FastImage from 'react-native-fast-image';
-import Text, {MediumText} from '../../../base/components/Text';
+import Text from '../../../base/components/Text';
 import NotifySession from './NotifySession';
+import AppHeader from '../../../base/components/Header';
 
 // Styles
 import styles from './styles/index.css';
@@ -247,11 +248,10 @@ class NotifyScreen extends React.Component {
 
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <MediumText style={styles.textHeader}>
-            {formatMessage(message.announcement)}
-          </MediumText>
-        </View>
+        <AppHeader
+          showBack={false}
+          title={formatMessage(message.announcement)}
+        />
         {notifications.length > 0 ? (
           <View style={styles.wrapper}>
             <NotifySession

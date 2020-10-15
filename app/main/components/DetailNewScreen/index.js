@@ -79,8 +79,7 @@ class DetailNewScreen extends React.Component {
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <Header
           colorIcon={'#000000'}
-          styleHeader={{marginTop: 20}}
-          styleTitle={{paddingHorizontal: 50}}
+          styleTitle={{paddingHorizontal: 50, color: '#000000'}}
           title={title}
         />
         <ScrollView>
