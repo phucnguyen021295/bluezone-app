@@ -103,6 +103,7 @@ class RegisterInformationScreen extends React.Component {
     this.onLinkingRules = this.onLinkingRules.bind(this);
     this.keyboardDidShow = this.keyboardDidShow.bind(this);
     this.keyboardDidHide = this.keyboardDidHide.bind(this);
+    this.onCloseAlertWrongAddressPress = this.onCloseAlertWrongAddressPress.bind(this);
   }
 
   componentDidMount() {

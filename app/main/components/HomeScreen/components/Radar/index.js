@@ -22,7 +22,7 @@
 'use strict';
 
 import React from 'react';
-import {Platform, TouchableOpacity} from 'react-native';
+import {Platform, TouchableOpacity, Dimensions} from 'react-native';
 import * as PropTypes from 'prop-types';
 import LottieView from 'lottie-react-native';
 
@@ -55,16 +55,18 @@ import {
   SCANNING_EN_HEIGHT,
   SCANNING_VI_HEIGHT,
   BOTTOM_IPHONEX_HEIGHT,
+  IPHONE_5_HEIGHT
 } from '../../styles/index.css';
 
 // Const
 const TIMEOUT = 30000;
 const RADAR_LEVELS = [2, 6, 10];
 export let logBlueZone = [];
+const {height} = Dimensions.get('window');
 const RADAR_HEIGHT_VI = isIPhoneX
   ? SCANNING_VI_HEIGHT - BOTTOM_IPHONEX_HEIGHT
   : SCANNING_VI_HEIGHT;
-const RADAR_HEIGHT_EN = isIPhoneX
+const RADAR_HEIGHT_EN = Platform.OS === 'ios' && height === 568 ? SCANNING_EN_HEIGHT - IPHONE_5_HEIGHT : isIPhoneX
   ? SCANNING_EN_HEIGHT - BOTTOM_IPHONEX_HEIGHT
   : SCANNING_EN_HEIGHT;
 

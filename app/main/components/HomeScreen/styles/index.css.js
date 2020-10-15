@@ -35,6 +35,7 @@ const HEADER_BACKGROUND_HEIGHT = heightPercentageToDP((152.3 / 720) * 100);
 const BTN_MARGIN_BOTTOM = heightPercentageToDP((14 / 720) * 100);
 const SCANNING_VI_HEIGHT = heightPercentageToDP((176 / 720) * 100);
 const SCANNING_EN_HEIGHT = heightPercentageToDP((180 / 720) * 100);
+const IPHONE_5_HEIGHT = heightPercentageToDP((20 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 const TEXT_HEADER_MARGIN_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const LOGO_PADDING_BOTTOM = heightPercentageToDP((13.7 / 720) * 100);
@@ -351,6 +352,7 @@ export {
   SCANNING_VI_HEIGHT,
   SCANNING_EN_HEIGHT,
   BOTTOM_IPHONEX_HEIGHT,
+  IPHONE_5_HEIGHT
 };
 
 export default styles;
