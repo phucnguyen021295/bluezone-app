@@ -58,6 +58,7 @@ import message from '../../../core/msg/registerInformation';
 import Modal from 'react-native-modal';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import ModalBase from '../../../base/components/ModalBase';
+import {clearScheduleAddInfoNotification} from '../../../core/notifyScheduler';
 
 const visibleModal = {
   isProcessing: false,
@@ -172,6 +173,8 @@ class RegisterInformationScreen extends React.Component {
       fullName,
       address,
     });
+
+    clearScheduleAddInfoNotification();
 
     this.onResetModal(this.doFinishedWorks);
   }
