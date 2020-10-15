@@ -230,6 +230,81 @@ const configuration = {
     bigText: 'Bạn hãy vào ứng dụng và cập nhật số điện thoại nhé.',
     bigTextEn: 'Please open Bluezone and add your mobile number.',
   },
+  ScheduleAddInfoNotification: {
+    itemRepeat: [
+      {
+        id: '125',
+        dayStartTime: 28800000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '126',
+        dayStartTime: 32400000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '127',
+        dayStartTime: 36000000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '128',
+        dayStartTime: 39600000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '129',
+        dayStartTime: 43200000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '130',
+        dayStartTime: 46800000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '131',
+        dayStartTime: 50400000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '132',
+        dayStartTime: 54000000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '133',
+        dayStartTime: 57600000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '134',
+        dayStartTime: 61200000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '135',
+        dayStartTime: 64800000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '136',
+        dayStartTime: 72000000,
+        repeatTime: 86400000,
+      },
+      {
+        id: '137',
+        dayStartTime: 75600000,
+        repeatTime: 86400000,
+      },
+    ],
+    title: 'Cập nhật thông tin bổ sung.',
+    titleEn: 'Declare your phone number.',
+    message: 'Bạn hãy vào ứng dụng và cập nhật Thông tin bổ sung nhé.',
+    messageEn: 'Please open Bluezone and add your information.',
+    bigText: 'Bạn hãy vào ứng dụng và cập nhật Thông tin bổ sung nhé.',
+    bigTextEn: 'Please open Bluezone and add your information.',
+  },
   ScheduleUpdateAppNotification: {
     itemRepeat: [
       {
@@ -245,14 +320,14 @@ const configuration = {
     bigText: 'Đã có phiên bản mới. Bạn hãy truy cập ứng dụng để cập nhật.',
     bigTextEn: 'New version is available. Please open Bluezone to get the update.',
   },
-  AndroidScanNotification: {
-    title: 'Bluezone đang không thể hoạt động chính xác !',
-    titleEn: 'Bluezone not working properly !',
-    message: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    messageEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
-    bigText: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
-  },
+  // AndroidScanNotification: {
+  //   title: 'Bluezone đang không thể hoạt động chính xác !',
+  //   titleEn: 'Bluezone not working properly !',
+  //   message: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
+  //   messageEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
+  //   bigText: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
+  //   bigTextEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
+  // },
   AndroidLocationPermissonVersion2: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
@@ -265,18 +340,34 @@ const configuration = {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
     bigText: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: '<b>Bluetooth1</b><!bl>Vi trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
     buttonText: 'Kiểm tra ngay',
     buttonTextEn: 'Check now',
   },
-  iOSScanNotification: {
+  iOSLocationPermissonVersion2: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
-    message: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    messageEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
-    bigText: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
+    bigText: 'Bluezone cần quyền truy cập vị trí để có thể cảnh báo tới bạn.',
+    bigTextEn: 'Bluezone cần quyền truy cập vị trí để có thể cảnh báo tới bạn.',
+    buttonText: 'Kiểm tra ngay',
+    buttonTextEn: 'Check now',
   },
+  iOSScanNotificationVersion2: {
+    title: 'Bluezone đang không thể hoạt động chính xác !',
+    titleEn: 'Bluezone not working properly !',
+    bigText: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    buttonText: 'Kiểm tra ngay',
+    buttonTextEn: 'Check now',
+  },
+  // iOSScanNotification: {
+  //   title: 'Bluezone đang không thể hoạt động chính xác !',
+  //   titleEn: 'Bluezone not working properly !',
+  //   message: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
+  //   messageEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
+  //   bigText: 'Bluetooth cần được bật để Bluezone có thể cảnh báo tới bạn.',
+  //   bigTextEn: 'Bluetooth needs to be turned on for Bluezone to send you the alerts.',
+  // },
   AndroidEnableBluetoothNotification: {
     title: 'Bluezone đang không thể hoạt động chính xác.',
     titleEn: 'Bluezone not working properly.',

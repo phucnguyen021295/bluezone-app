@@ -56,7 +56,10 @@ import message from '../../../core/msg/verifyOtp';
 // Api
 import {CreateAndSendOTPCode, VerifyOTPCode} from '../../../core/apis/bluezone';
 import {ConfirmOTPCodeErrorCode} from '../../../core/apis/errorCode';
-import {clearScheduleRegisterNotification} from '../../../core/notifyScheduler';
+import {
+  clearScheduleRegisterNotification,
+  creatScheduleAddInfoNotification,
+} from '../../../core/notifyScheduler';
 
 // Styles
 import styles from './styles/index.css';
@@ -219,6 +222,8 @@ class VerifyOTPScreen extends React.Component {
 
     // Clear cac notification lien quan den viec nhac khai bao so dien thoai
     clearScheduleRegisterNotification();
+    // Tạo notify định kì nhắc cập nhật thông tin bổ sung
+    creatScheduleAddInfoNotification();
 
     this.stopLoading(() =>
       setTimeout(() => {

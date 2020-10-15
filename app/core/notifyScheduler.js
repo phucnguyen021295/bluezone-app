@@ -231,12 +231,12 @@ const clearScheduleRegisterNotification = () => {
 };
 
 const scheduleRegisterNotification_ChangeLanguage = () => {
-  const {ScheduleRegisterNotification, PhoneNumber} = configuration;
+  const {PhoneNumber} = configuration;
   if (PhoneNumber) {
     return;
   }
-  clearScheduleRegisterNotification(ScheduleRegisterNotification);
-  creatScheduleRegisterNotification(ScheduleRegisterNotification);
+  clearScheduleRegisterNotification();
+  creatScheduleRegisterNotification();
 };
 
 const scheduleRegisterNotification_SetConfig = (oldConfig, newConfig) => {
@@ -267,7 +267,6 @@ const clearScheduleUpdateAppNotification = () => {
 };
 
 const scheduleUpdateAppNotification_ChangeLanguage = () => {
-  // TODO xem cach viet storage moi thi doan code duoi con chay khong
   getLatestVersionApp().then(latestVersion => {
     if (latestVersion === CurrentVersionValue) {
       return;
@@ -290,6 +289,44 @@ const scheduleUpdateAppNotification_SetConfig = (oldConfig, newConfig) => {
     const {ScheduleUpdateAppNotification: oldSchedule} = newConfig;
     scheduleScanNotificationsChange(oldSchedule, newSchedule, Language, true);
   });
+};
+
+const creatScheduleAddInfoNotification = () => {
+  const {
+    ScheduleAddInfoNotification,
+    PhoneNumber,
+    PersonalInformation,
+    Language,
+  } = configuration;
+  if (!PhoneNumber || PersonalInformation) {
+    return;
+  }
+  createScheduleNotifications(ScheduleAddInfoNotification, Language);
+};
+
+const clearScheduleAddInfoNotification = () => {
+  const {ScheduleAddInfoNotification} = configuration;
+  clearScheduleNotifications(ScheduleAddInfoNotification);
+};
+
+const scheduleAddInfoNotification_ChangeLanguage = () => {
+  const {PhoneNumber, PersonalInformation} = configuration;
+  if (!PhoneNumber || PersonalInformation) {
+    return;
+  }
+
+  clearScheduleAddInfoNotification();
+  creatScheduleAddInfoNotification();
+};
+
+const scheduleAddInfoNotification_SetConfig = (oldConfig, newConfig) => {
+  const {PhoneNumber, PersonalInformation, Language} = configuration;
+  if (!PhoneNumber || PersonalInformation) {
+    return;
+  }
+  const {ScheduleAddInfoNotification: oldSchedule} = oldConfig;
+  const {ScheduleAddInfoNotification: newSchedule} = newConfig;
+  scheduleScanNotificationsChange(oldSchedule, newSchedule, Language, true);
 };
 // -------------------------------------------------------------------------------------
 const _createNotification = (id, n, language) => {
@@ -434,6 +471,7 @@ const checkRegisterNotificationOfDay = () => {
 const scheduleNotificationChangeLanguageListener = Language => {
   scheduleRegisterNotification_ChangeLanguage(Language);
   scheduleUpdateAppNotification_ChangeLanguage(Language);
+  scheduleAddInfoNotification_ChangeLanguage(Language);
   scanNotification_ChangeLanguage(Language);
   scheduleScanNotification_ChangeLanguage(Language);
 };
@@ -445,6 +483,7 @@ const scheduleNotificationChangeLanguageListener = Language => {
 const scheduleNotificationSetConfigurationListener = oldConfig => {
   scheduleRegisterNotification_SetConfig(oldConfig, configuration);
   scheduleUpdateAppNotification_SetConfig(oldConfig, configuration);
+  scheduleAddInfoNotification_SetConfig(oldConfig, configuration);
   scanNotification_SetConfiguration(oldConfig, configuration);
   scheduleScanNotification_SetConfiguration(oldConfig, configuration);
 };
@@ -474,6 +513,8 @@ export {
   // scheduleUpdateAppNotification_ChangeLanguage,
   // scheduleUpdateAppNotification_SetConfig,
   // ---
+  creatScheduleAddInfoNotification,
+  clearScheduleAddInfoNotification,
   checkRegisterNotificationOfDay,
   scheduleNotificationChangeLanguageListener,
   scheduleNotificationSetConfigurationListener,
