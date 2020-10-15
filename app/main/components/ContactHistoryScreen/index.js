@@ -22,7 +22,7 @@
 'use strict';
 
 import React from 'react';
-import {SafeAreaView, View, ScrollView, FlatList} from 'react-native';
+import {SafeAreaView, View, FlatList} from 'react-native';
 import 'moment/locale/vi';
 import {injectIntl, intlShape} from 'react-intl';
 
@@ -140,7 +140,6 @@ class ContactHistoryScreen extends React.Component {
         <Header
           styleTitle={styles.titleHeader}
           title={formatMessage(message.header)}
-          styleHeader={styles.header}
         />
         <View style={styles.contact}>
           <Text

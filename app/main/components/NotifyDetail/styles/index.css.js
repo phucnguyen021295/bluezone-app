@@ -30,10 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  header: {
-    backgroundColor: '#ffffff',
-    marginTop: isIPhoneX ? 0 : 20,
-  },
   textTitleWar: {
     color: '#f16600',
     fontSize: fontSize.normal,

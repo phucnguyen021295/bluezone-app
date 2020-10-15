@@ -35,11 +35,6 @@ const BOTTOM_PHONE = heightPercentageToDP((38 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: '#ffffff',
-    marginTop: MARGIN_TOP_HEADER,
-  },
-
   title: {
     textAlign: 'center',
     fontSize: bigger,

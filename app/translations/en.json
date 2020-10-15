@@ -97,7 +97,7 @@
     "bluezone.register.textCheckbox2": "Terms and Conditions ",
     "bluezone.register.textCheckbox3": "and for your data to be shared with health authority if you are infected or suspected to COVID-19.",
 
-    "bluezone.verifyOTP.title": "Authentication",
+    "bluezone.verifyOTP.title": "Phone number authentication",
     "bluezone.verifyOTP.titleSendHistory": "Enter OTP Code",
     "bluezone.verifyOTP.enterPin": "We are sending the verification code to your phone number",
     "bluezone.verifyOTP.changePhoneNumber": " If the number entered is incorrect, touch to enter the correct one",

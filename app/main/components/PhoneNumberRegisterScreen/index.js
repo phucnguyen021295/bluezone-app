@@ -325,7 +325,6 @@ class RegisterScreen extends React.Component {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <Header
             title={formatMessage(message.titleHeader)}
-            styleHeader={styles.header}
             colorIcon={blue_bluezone}
             styleTitle={{
               color: blue_bluezone,

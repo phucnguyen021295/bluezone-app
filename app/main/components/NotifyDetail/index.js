@@ -95,7 +95,6 @@ class NotifyScreen extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <Header
-          styleHeader={styles.header}
           styleTitle={styles.textHeader}
           title={formatMessage(msg.announcement)}
         />

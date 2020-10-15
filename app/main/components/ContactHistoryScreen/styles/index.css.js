@@ -24,11 +24,13 @@
 import {StyleSheet} from 'react-native';
 import {bigger, normal, fontSize19} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
 
 const PADDING_TOP_CONTACT = heightPercentageToDP((26 / 720) * 100);
 const HEIGHT_CONTACT = heightPercentageToDP((44 / 720) * 100);
+const TEXT_CONTACT_PADDING_TOP = heightPercentageToDP((10 / 720) * 100);
+const TEXT_CONTACT_PADDING_BOTTOM = heightPercentageToDP((16 / 720) * 100);
+// const TEXT_CONTACT_PADDING_BOTTOM = heightPercentageToDP((16 / 720) * 100);
 
 const styles = StyleSheet.create({
   flex: {
@@ -37,9 +39,6 @@ const styles = StyleSheet.create({
   warper: {
     flex: 1,
     backgroundColor: '#FFF',
-  },
-  header: {
-    marginTop: isIPhoneX ? 0 : 20,
   },
   titleHeader: {
     color: '#015cd0',
@@ -52,9 +51,9 @@ const styles = StyleSheet.create({
 
   textContact: {
     color: blue_bluezone,
-    fontStyle: 'italic',
-    paddingTop: 10,
-    paddingBottom: 16,
+    fontFamily: 'OpenSans-Italic',
+    paddingTop: TEXT_CONTACT_PADDING_TOP,
+    paddingBottom: TEXT_CONTACT_PADDING_BOTTOM,
   },
 
   detailHeader: {

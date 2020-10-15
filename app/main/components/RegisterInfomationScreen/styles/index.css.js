@@ -37,10 +37,6 @@ const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: '#ffffff',
-    marginTop: isIPhoneX ? 0 : MARGIN_TOP_HEADER,
-  },
   layout1: {
     marginVertical: MARGIN_TOP_LAYOUT,
   },

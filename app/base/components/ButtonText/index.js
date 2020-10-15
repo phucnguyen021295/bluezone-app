@@ -31,19 +31,24 @@ import Text from '../Text';
 import styles from './styles/index.css';
 
 function ButtonText(props) {
-  const {disabled, text, onPress, styleBtn, styleText} = props;
+  const {disabled, text, onPress, componentTitle, styleBtn, styleText} = props;
   return (
     <TouchableOpacity
       onPress={onPress}
       disabled={disabled}
       style={[styles.container, styleBtn]}>
-      <Text style={[styles.text, styleText]}>{text}</Text>
+      {componentTitle ? (
+        componentTitle
+      ) : (
+        <Text style={[styles.text, styleText]}>{text}</Text>
+      )}
     </TouchableOpacity>
   );
 }
 
 ButtonText.defaultProps = {
   disabled: false,
+  text: '',
 };
 
 export default ButtonText;

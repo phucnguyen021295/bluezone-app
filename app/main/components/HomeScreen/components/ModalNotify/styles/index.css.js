@@ -23,6 +23,12 @@
 
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../../../core/fontSize';
+import {heightPercentageToDP} from '../../../../../../core/utils/dimension';
+
+const TEXT_CONTENT_LINEHEIGHT = heightPercentageToDP((22 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((45.5 / 720) * 100);
+const TEXT_DES_MARGIN_TOP = heightPercentageToDP((32 / 720) * 100);
+const TEXT_DES_MARGIN_BOTTOM = heightPercentageToDP((36 / 720) * 100);
 
 const styles = StyleSheet.create({
   modalBase: {
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
 
   textDiv: {
     paddingHorizontal: 16,
-    paddingVertical: 16
+    paddingVertical: 16,
   },
 
   container: {
@@ -85,6 +91,8 @@ const styles = StyleSheet.create({
   buttonConfirm: {
     borderTopWidth: 0.65,
     borderTopColor: '#c6c6c8',
+    height: BTN_HEIGHT,
+    borderRadius: 0,
   },
 
   textButtonConfirm: {
@@ -94,8 +102,20 @@ const styles = StyleSheet.create({
   },
 
   textContent: {
-    fontSize: fontSize.larger,
+    fontSize: fontSize.fontSize14,
     textAlign: 'left',
+    lineHeight: TEXT_CONTENT_LINEHEIGHT,
+    color: '#313131',
+    marginTop: TEXT_DES_MARGIN_TOP,
+    marginBottom: TEXT_DES_MARGIN_BOTTOM,
+  },
+
+  textBtn: {
+    fontSize: fontSize.fontSize16,
+    textAlign: 'center',
+    paddingHorizontal: 12,
+    color: '#015cd0',
+    lineHeight: 20,
   },
 });
 

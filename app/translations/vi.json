@@ -99,7 +99,7 @@
   "bluezone.register.textCheckbox3": "và đồng ý chia sẻ với cơ quan y tế khi bạn được xác định bị nhiễm hoặc nghi nhiễm Covid-19.",
 
 
-  "bluezone.verifyOTP.title": "Xác thực mã OTP",
+  "bluezone.verifyOTP.title": "Xác thực số điện thoại",
   "bluezone.verifyOTP.titleSendHistory": "Nhập mã xác thực",
   "bluezone.verifyOTP.enterPin": "Chúng tôi đang gửi Mã xác thực đến số điện thoại của bạn",
   "bluezone.verifyOTP.changePhoneNumber": "Nếu số điện thoại chưa đúng, bấm để nhập lại",

@@ -70,7 +70,7 @@ class Header extends React.Component {
           <TouchableOpacity onPress={this.onGoBack} style={styles.btnBack}>
             <Ionicons
               name={'ios-arrow-back'}
-              size={28}
+              size={23}
               style={styles.icon}
               color={colorIcon}
             />

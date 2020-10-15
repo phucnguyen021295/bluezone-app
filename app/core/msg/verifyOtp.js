@@ -26,7 +26,7 @@ import {defineMessages} from 'react-intl';
 export default defineMessages({
   title: {
     id: 'bluezone.verifyOTP.title',
-    defaultMessage: 'Xác thực mã OTP',
+    defaultMessage: 'Xác thực số điện thoại',
   },
   enterPin: {
     id: 'bluezone.verifyOTP.enterPin',

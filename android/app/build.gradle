@@ -135,8 +135,8 @@ android {
              applicationIdSuffix ".mic.bluezone"
              versionNameSuffix ""
              resValue "string", "app_name", "Bluezone"
-             versionCode 52
-             versionName "3.0.4"
+             versionCode 65
+             versionName "3.0.5"
         }
         developer {
              dimension "version"
@@ -144,7 +144,7 @@ android {
              versionNameSuffix ""
              resValue "string", "app_name", "Bluezone"
              versionCode 1
-             versionName "3.0.4-deploygate.dev"
+             versionName "3.0.5-deploygate.dev"
         }
     }
 

@@ -24,16 +24,16 @@
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
 
 const MARGINTOP_HEADER = heightPercentageToDP((37 / 720) * 100);
-const MARGINTOP_TITLE = heightPercentageToDP((16 / 720) * 100);
+const TITLE_HEIGHT = heightPercentageToDP((33 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
-const MARGINTOP_BODY = heightPercentageToDP((28 / 720) * 100);
-const MARGINTOP_FOTTER = heightPercentageToDP((20 / 720) * 100);
+const HEADER_MARGIN_BOTTOM = heightPercentageToDP((28 / 720) * 100);
 const MARGIN_BOTTON_FOTTER = heightPercentageToDP((40 / 720) * 100);
 const TEXT_LINE_HEIGHT = heightPercentageToDP((25 / 720) * 100);
 const BUTTON_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
+const PADDING_HOZITAL = widthPercentageToDP((23 / 360) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -43,24 +43,23 @@ const styles = StyleSheet.create({
 
   containerLogo: {
     marginTop: MARGINTOP_HEADER,
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 69.2,
     justifyContent: 'center',
-    flexDirection: 'column',
     alignItems: 'center',
+    marginBottom: HEADER_MARGIN_BOTTOM,
   },
 
   title: {
     color: blue_bluezone,
     fontSize: fontSize.bigger,
-    fontWeight: '600',
+    // fontWeight: '600',
+    // lineHeight: fontSize.bigger * 1.96,
+    height: TITLE_HEIGHT
   },
 
   body: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: PADDING_HOZITAL,
     backgroundColor: '#ffffff',
-    marginTop: MARGINTOP_BODY,
   },
 
   viewDep: {
@@ -69,7 +68,9 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: fontSize.normal,
-    lineHeight: TEXT_LINE_HEIGHT,
+    lineHeight: 25,
+    color: '#363636',
+    textAlign: 'left'
   },
 
   borderLogo: {

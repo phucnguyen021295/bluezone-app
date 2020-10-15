@@ -23,10 +23,14 @@
 
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
+import {widthPercentageToDP} from '../../../../core/utils/dimension';
+
+const CONTAINER_MARGIN = widthPercentageToDP((28 / 360) * 100);
+const BODY_PADDING_HORIZONTAL = widthPercentageToDP((18 / 360) * 100);
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
+    margin: CONTAINER_MARGIN,
     justifyContent: 'center',
   },
 
@@ -36,21 +40,22 @@ const styles = StyleSheet.create({
   },
 
   body: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 16,
+    paddingHorizontal: BODY_PADDING_HORIZONTAL,
   },
 
   title: {
     fontSize: fontSize.larger,
     textAlign: 'center',
     fontWeight: 'bold',
+    paddingVertical: 12,
   },
 
   description: {
     fontSize: fontSize.fontSize16,
     textAlign: 'center',
     marginTop: 10,
+    marginBottom: 16,
+
   },
 
   bottomHalfModal: {
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
   },
 
   contentStyle: {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   },
 });
 

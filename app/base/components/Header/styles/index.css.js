@@ -24,10 +24,16 @@
 import {StyleSheet, Platform} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
+
+const HEADER_HEIGHT = heightPercentageToDP((70 / 720) * 100);
+const HEADER_IPHONE_X_HEIGHT = heightPercentageToDP((50 / 720) * 100);
+const HEADER_PADDING_TOP = heightPercentageToDP((37 / 720) * 100);
+const HEADER_IPHONE_X_PADDING_TOP = heightPercentageToDP((37 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
-    height: heightPercentageToDP((50 / 720) * 100),
+    height: isIPhoneX ? HEADER_IPHONE_X_HEIGHT : HEADER_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
@@ -37,9 +43,10 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     bottom: 0,
-    height: heightPercentageToDP((50 / 720) * 100),
+    height: isIPhoneX ? HEADER_IPHONE_X_HEIGHT : HEADER_HEIGHT,
     justifyContent: 'center',
     zIndex: 99,
+    paddingTop: isIPhoneX ? HEADER_IPHONE_X_PADDING_TOP : HEADER_PADDING_TOP,
   },
   textTitle: {
     fontSize: fontSize.huge,
@@ -59,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: isIPhoneX ? HEADER_IPHONE_X_PADDING_TOP : HEADER_PADDING_TOP,
   },
 });
 

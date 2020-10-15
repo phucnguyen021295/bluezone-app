@@ -426,7 +426,6 @@ class VerifyOTPScreen extends React.Component {
         <Header
           onBack={this.onGoBack}
           title={formatMessage(message.title)}
-          styleHeader={styles.header}
           styleTitle={{
             color: blue_bluezone,
             fontSize: fontSize.bigger,
