@@ -49,6 +49,7 @@
     "bluezone.notify.announcement": "Announcement",
     "bluezone.notify.yesterday": "Yesterday",
     "bluezone.notify.declare": "Register phone number",
+    "bluezone.notify.declarePersonalInformation": "Declare additional information",
     "bluezone.notify.registeredPhone": "The phone number has been registered",
     "bluezone.notify.Notification": "Notification",
     "bluezone.notify.noList": "Empty list",

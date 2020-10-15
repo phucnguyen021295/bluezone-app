@@ -52,7 +52,7 @@ import {RegisterInfomation} from '../../../core/apis/errorCode';
 import styles from './styles/index.css';
 import * as fontSize from '../../../core/fontSize';
 import {blue_bluezone} from '../../../core/color';
-import configuration from '../../../configuration';
+import configuration, {setPersonalInformation} from '../../../configuration';
 
 import message from '../../../core/msg/registerInformation';
 import Modal from 'react-native-modal';
@@ -167,6 +167,12 @@ class RegisterInformationScreen extends React.Component {
   }
 
   onAddDeclareInfoSuccess() {
+    const {fullName, address} = this.state;
+    setPersonalInformation({
+      fullName,
+      address,
+    });
+
     this.onResetModal(this.doFinishedWorks);
   }
 

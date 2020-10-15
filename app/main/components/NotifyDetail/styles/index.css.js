@@ -113,10 +113,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   declare: {
-    paddingVertical: 20,
-    paddingHorizontal: 60,
+    alignItems: 'center',
   },
   button: {
+    marginVertical: 20,
+    paddingHorizontal: 25,
     backgroundColor: '#015cd0',
     paddingVertical: 10,
     alignItems: 'center',

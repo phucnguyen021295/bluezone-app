@@ -50,7 +50,7 @@ import {blue_bluezone} from '../../../core/color';
 import {initDatabase} from '../../../core/db/SqliteDb';
 import {getIsFirstLoading} from '../../../core/storage';
 
-const PROCESS_WORK_TIMEOUT = 5000;
+const PROCESS_WORK_TIMEOUT = 10000;
 
 // TODO Can thuc hien doi text theo trang thai goi API that trong components nay. VD: Dang khoi tao cau hinh, Dang khoi tao resource....
 class LoadingScreen extends React.Component {

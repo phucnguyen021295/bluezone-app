@@ -22,12 +22,7 @@
 'use strict';
 
 import React from 'react';
-import {
-  View,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {View, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native';
 import moment from 'moment';
 import {injectIntl, intlShape} from 'react-intl';
 import FastImage from 'react-native-fast-image';
@@ -53,13 +48,21 @@ class NotifyScreen extends React.Component {
     };
   }
 
-  onPress = () => {
+  onRegisterScreen = () => {
     const {PhoneNumber} = configuration;
     if (PhoneNumber) {
       this.setState({isVisiblePhoneRegistered: true});
       return;
     }
     this.props.navigation.replace('PhoneNumberRegisterScreen');
+  };
+
+  onDeclarePersonal = () => {
+    const {PersonalInformation} = configuration;
+    if (PersonalInformation) {
+      return;
+    }
+    this.props.navigation.replace('RegisterInformation');
   };
 
   formatNumberPhone = numberPhone => {
@@ -75,7 +78,7 @@ class NotifyScreen extends React.Component {
     const {route, intl} = this.props;
     const item = (route && route.params.item) || {};
     const {formatMessage} = intl;
-    const {Language, PhoneNumber} = configuration;
+    const {Language, PhoneNumber, PersonalInformation} = configuration;
 
     const uri =
       item.largeIcon && item.largeIcon.length > 0
@@ -125,13 +128,26 @@ class NotifyScreen extends React.Component {
               </Text>
             ) : (
               <View style={styles.declare}>
-                <TouchableOpacity onPress={this.onPress} style={styles.button}>
+                <TouchableOpacity
+                  onPress={this.onRegisterScreen}
+                  style={styles.button}>
                   <Text style={styles.textButton}>
                     {formatMessage(msg.declare)}
                   </Text>
                 </TouchableOpacity>
               </View>
             )
+          ) : null}
+          {item._group === 'MOBILE' && PhoneNumber && !PersonalInformation ? (
+            <View style={styles.declare}>
+              <TouchableOpacity
+                onPress={this.onDeclarePersonal}
+                style={styles.button}>
+                <Text style={styles.textButton}>
+                  {formatMessage(msg.declarePersonalInformation)}
+                </Text>
+              </TouchableOpacity>
+            </View>
           ) : null}
         </ScrollView>
         <ModalBase

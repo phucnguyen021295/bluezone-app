@@ -41,7 +41,7 @@ import ViewLog from './app/main/components/ViewLog';
 import DownloadLatestVersionScreen from './app/main/components/DownloadLatestVersionScreen';
 import Introduction from './app/main/components/IntroductionScreen';
 import StartUse from './app/main/components/StartScreen';
-import RegisterInfomation from './app/main/components/RegisterInfomationScreen';
+import RegisterInformation from './app/main/components/RegisterInformationScreen';
 import ContactHistory from './app/main/components/ContactHistoryScreen';
 // import ScanScreen from './app/main/components/ScanScreen';
 import FAQScreen from './app/main/components/FAQScreen';
@@ -83,7 +83,7 @@ const LOADING_SCREEN_NAME = 'LoadingScreen';
 const INTRODUTION_WIZARD_NAME = 'IntrodutionWizard';
 const PHONE_NUMBER_REGISTER_WIZARD_NAME = 'PhoneNumberRegisterWizard';
 const PHONE_NUMBER_VERITY_OTP_WIZARD_NAME = 'PhoneNumberVerifyOTPWizard';
-const REGISTER_INFOMATION_WIZARD_NAME = 'RegisterInfomationWizard';
+const REGISTER_INFORMATION_WIZARD_NAME = 'RegisterInformationWizard';
 const START_USE_WIZARD_NAME = 'StartUseWizard';
 const WELCOME_WIZARD_NAME = 'WelcomeWizard';
 
@@ -97,7 +97,7 @@ let wizard = [
   INTRODUTION_WIZARD_NAME,
   PHONE_NUMBER_REGISTER_WIZARD_NAME,
   PHONE_NUMBER_VERITY_OTP_WIZARD_NAME,
-  REGISTER_INFOMATION_WIZARD_NAME,
+  REGISTER_INFORMATION_WIZARD_NAME,
   START_USE_WIZARD_NAME,
 ];
 const LOADING_INITIAL_ROUTE = LOADING_SCREEN_NAME;
@@ -164,9 +164,9 @@ class App extends React.Component {
       />
     );
 
-    this.RegisterInfomationProps = propsComponent => (
-      <RegisterInfomation
-        name={REGISTER_INFOMATION_WIZARD_NAME}
+    this.RegisterInformationProps = propsComponent => (
+      <RegisterInformation
+        name={REGISTER_INFORMATION_WIZARD_NAME}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
@@ -377,8 +377,8 @@ class App extends React.Component {
                   component={this.PhoneNumberVerifyOTPProps}
                 />
                 <Stack.Screen
-                  name={REGISTER_INFOMATION_WIZARD_NAME}
-                  component={this.RegisterInfomationProps}
+                  name={REGISTER_INFORMATION_WIZARD_NAME}
+                  component={this.RegisterInformationProps}
                 />
                 <Stack.Screen
                   name={START_USE_WIZARD_NAME}
@@ -449,8 +449,8 @@ class App extends React.Component {
                   component={PhoneNumberVerifyOTPScreen}
                 />
                 <Stack.Screen
-                  name="RegisterInfomation"
-                  component={RegisterInfomation}
+                  name="RegisterInformation"
+                  component={RegisterInformation}
                 />
                 <Stack.Screen name="PageView" component={PageView} />
                 <Stack.Screen name="DetailNew" component={DetailNew} />

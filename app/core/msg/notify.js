@@ -40,6 +40,10 @@ export default defineMessages({
     id: 'bluezone.notify.declare',
     defaultMessage: 'Đăng ký số điện thoại',
   },
+  declarePersonalInformation: {
+    id: 'bluezone.notify.declarePersonalInformation',
+    defaultMessage: 'Khai báo thông tin bổ sung',
+  },
   registeredPhone: {
     id: 'bluezone.notify.registeredPhone',
     defaultMessage: 'Số điện thoại đã đăng ký',
