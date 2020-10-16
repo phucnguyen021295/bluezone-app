@@ -55,8 +55,9 @@ import {
   SCANNING_EN_HEIGHT,
   SCANNING_VI_HEIGHT,
   BOTTOM_IPHONEX_HEIGHT,
-  IPHONE_5_HEIGHT
+  IPHONE_5_HEIGHT,
 } from '../../styles/index.css';
+import {internalVersion} from '../../../../../core/version';
 
 // Const
 const TIMEOUT = 30000;
@@ -422,10 +423,11 @@ class Index extends React.Component {
   }
 
   onOpenScanScreen = () => {
-    dev &&
+    if (internalVersion || dev) {
       this.props.navigation.navigate('WatchScan', {
         logs: logBlueZone,
       });
+    }
   };
 
   render() {
