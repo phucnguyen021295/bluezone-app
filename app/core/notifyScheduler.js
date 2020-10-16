@@ -24,7 +24,7 @@
 import {DeviceEventEmitter, Platform} from 'react-native';
 import firebase from 'react-native-firebase';
 import RNSettings from 'react-native-settings';
-// import SystemSetting from 'react-native-system-setting';
+import SystemSetting from 'react-native-system-setting';
 
 import configuration from '../configuration';
 import {cancelNotify, pushNotify, removeNotify} from './notify';
@@ -348,6 +348,10 @@ const createSchedulingNotification = (notification, time) => {
 };
 
 let locationEnable = null;
+
+SystemSetting.isLocationEnabled().then(enable => {
+  locationEnable = enable;
+});
 
 /**
  * Xu ly su kien trang thai bluetooth thay doi

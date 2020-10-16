@@ -54,7 +54,7 @@ import styles, {
   HEIGHT_HEADER,
   HEIGHT_IMG,
   HEIGHT_DEFAULT,
-  HEIGHT_SCAN_HEADER
+  HEIGHT_SCAN_HEADER,
 } from './styles/index.css';
 import {injectIntl, intlShape} from 'react-intl';
 import {Images, dataVi, dataEn, dayVi, dayEn, monthEn} from './styles/images';
@@ -304,30 +304,40 @@ class WelcomeScreen extends React.Component {
               top: 0,
             }}
           />
-          <TouchableOpacity activeOpacity={1} onPress={this.onChange}>
-            {display === 'fit' && bars > 0.15 ? (
-              <Header
-                styleImg={{
-                  width: width,
-                  height: HEIGHT_HEADER - setHeight,
-                  zIndex: 100,
-                }}
-                uri={images.uri}
-                onLoad={this.onLoad}
-              />
-            ) : (
-              <HeaderFull
-                styleImg={{
-                  width: width,
-                  height: HEIGHT_HEADER - setHeight,
-                  zIndex: 100,
-                  backgroundColor: 'rgba(0,0,0,0.34)',
-                }}
-                uri={images.uri}
-                onLoad={this.onLoad}
-              />
-            )}
-          </TouchableOpacity>
+          {/*<TouchableOpacity activeOpacity={1} onPress={this.onChange}>*/}
+          {/*  {display === 'fit' && bars > 0.15 ? (*/}
+          {/*    <Header*/}
+          {/*      styleImg={{*/}
+          {/*        width: width,*/}
+          {/*        height: HEIGHT_HEADER - setHeight,*/}
+          {/*        zIndex: 100,*/}
+          {/*      }}*/}
+          {/*      uri={images.uri}*/}
+          {/*      onLoad={this.onLoad}*/}
+          {/*    />*/}
+          {/*  ) : (*/}
+          {/*    <HeaderFull*/}
+          {/*      styleImg={{*/}
+          {/*        width: width,*/}
+          {/*        height: HEIGHT_HEADER - setHeight,*/}
+          {/*        zIndex: 100,*/}
+          {/*        backgroundColor: 'rgba(0,0,0,0.34)',*/}
+          {/*      }}*/}
+          {/*      uri={images.uri}*/}
+          {/*      onLoad={this.onLoad}*/}
+          {/*    />*/}
+          {/*  )}*/}
+          {/*</TouchableOpacity>*/}
+          <HeaderFull
+            styleImg={{
+              width: width,
+              height: HEIGHT_HEADER - setHeight,
+              zIndex: 100,
+              backgroundColor: 'rgba(0,0,0,0.34)',
+            }}
+            uri={images.uri}
+            onLoad={this.onLoad}
+          />
           <LightText
             style={[
               styles.titleImg,

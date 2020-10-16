@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.fontSize11,
     zIndex: 999,
     left: PADDING_HOR,
-    marginRight: MARGIN_QR,
+    right: PADDING_HOR,
   },
   containerLogo: {
     // height: HEADER_BẠCKGROUND_LOGO,
