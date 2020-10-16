@@ -150,6 +150,10 @@ class VerifyOTPScreen extends React.Component {
     }).start();
   }
 
+  setCountDownRef = ref => {
+    this.countDownRef = ref;
+  };
+
   doFinishedWorks(gotoMainScreen = false, goBack = false) {
     const {onFinished, name, route} = this.props;
 
@@ -314,6 +318,9 @@ class VerifyOTPScreen extends React.Component {
   }
 
   createAndSendOTPCodeSuccess() {
+    if (this.countDownRef && !this.state.visibleSendOTPBtn) {
+      this.countDownRef.reset();
+    }
     this.setState({isProcessing: false, visibleSendOTPBtn: false});
   }
 
@@ -475,7 +482,10 @@ class VerifyOTPScreen extends React.Component {
                   <Text style={styles.text3}>
                     {formatMessage(message.validPin)}{' '}
                   </Text>
-                  <CountDown onVisibleResetOTP={this.onVisibleResetOTP} />
+                  <CountDown
+                    ref={this.setCountDownRef}
+                    onVisibleResetOTP={this.onVisibleResetOTP}
+                  />
                 </>
               ) : (
                 <Text onPress={this.onReGetOTP} style={styles.textSendOTP}>
