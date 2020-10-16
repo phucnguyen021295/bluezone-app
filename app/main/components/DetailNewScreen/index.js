@@ -22,7 +22,7 @@
 'use strict';
 
 import React from 'react';
-import {ScrollView, SafeAreaView, Dimensions} from 'react-native';
+import {ScrollView, SafeAreaView, Dimensions, Linking} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import HTML from 'react-native-render-html';
 import 'moment/locale/vi'; // without this line it didn't work
@@ -37,7 +37,7 @@ import Header from '../../../base/components/Header';
 import {CUSTOM_STYLES} from './styles/index.css';
 import configuration from '../../../configuration';
 
-class DetailNewScreen extends React.Component {
+class DetailNewScreen extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,6 +63,14 @@ class DetailNewScreen extends React.Component {
 
   getNewFail(repponse) {}
 
+  onLinkPress = (e, url) => {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        return Linking.openURL(url);
+      }
+    });
+  };
+
   render() {
     const {news} = this.state;
     const {route} = this.props;
@@ -83,6 +91,7 @@ class DetailNewScreen extends React.Component {
         />
         <ScrollView>
           <HTML
+            onLinkPress={this.onLinkPress}
             html={news?.data?.content}
             tagsStyles={CUSTOM_STYLES}
             imagesMaxWidth={Dimensions.get('window').width}

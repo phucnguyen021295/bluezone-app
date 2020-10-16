@@ -107,28 +107,17 @@ const scheduleScanNotificationsChange = (
 };
 
 // Xử lý thông báo hẹn giờ khi app thiếu chức năng để scan -------------------
-const createScheduleScanNotification = () => {
-  if (Platform.OS === 'android') {
-    return;
-  }
-
+const createScheduleScanNotification = (bluetooth, location) => {
   const {iOSScheduleScanNotification, Language} = configuration;
   createScheduleNotifications(iOSScheduleScanNotification, Language);
 };
 
 const clearScheduleScanNotification = () => {
-  if (Platform.OS === 'android') {
-    return;
-  }
-
   const {iOSScheduleScanNotification} = configuration;
   clearScheduleNotifications(iOSScheduleScanNotification);
 };
 
 const scheduleScanNotification_ChangeLanguage = async language => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   const isEnable = await getBluetoothState();
   if (!isEnable) {
     const {iOSScheduleScanNotification} = configuration;
@@ -141,10 +130,6 @@ const scheduleScanNotification_SetConfiguration = async (
   oldConfig = {},
   newConfig = {},
 ) => {
-  if (Platform.OS === 'android') {
-    return;
-  }
-
   if (!(await bluetoothGranted())) {
     return;
   }
@@ -163,9 +148,6 @@ const scheduleScanNotification_SetConfiguration = async (
 
 // Xử lý thông báo ngay lập tức khi app thiếu chức năng để scan -------------------
 const createScanNotification = iOSScanNotification => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   if (!iOSScanNotification) {
     return;
   }
@@ -187,16 +169,10 @@ const createScanNotification = iOSScanNotification => {
 };
 
 const clearScanNotification = iOSScanNotification => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   iOSScanNotification && removeNotify('scanNotification');
 };
 
 const scanNotification_ChangeLanguage = async () => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   const isEnable = await getBluetoothState();
   if (!isEnable) {
     createScanNotification();
@@ -204,10 +180,6 @@ const scanNotification_ChangeLanguage = async () => {
 };
 
 const scanNotification_SetConfiguration = async () => {
-  if (Platform.OS === 'android') {
-    return;
-  }
-
   if (!(await bluetoothGranted())) {
     return;
   }
@@ -382,7 +354,6 @@ let locationEnable = null;
  * @param isEnable
  */
 const bluetoothChangeListener = isEnable => {
-  const {iOSScheduleScanNotification, iOSScanNotification} = configuration;
   scanServiceChange(isEnable, locationEnable);
 };
 
@@ -396,9 +367,6 @@ const locationChangeListener = async e => {
 };
 
 const scanServiceChange = (bluetooth, location) => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   const {iOSScanNotificationVersion2} = configuration;
   if (bluetooth && location) {
     clearScheduleScanNotification();
@@ -407,15 +375,12 @@ const scanServiceChange = (bluetooth, location) => {
     clearScheduleScanNotification();
     clearScanNotificationVersion2(iOSScanNotificationVersion2);
     // ----------------------------------------------------------------
-    createScheduleScanNotification();
-    createScanNotificationVersion2(iOSScanNotificationVersion2);
+    createScheduleScanNotification(bluetooth, location);
+    createScanNotificationVersion2(bluetooth, location);
   }
 };
 
 const clearScanNotificationVersion2 = iOSScanNotificationVersion2 => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   iOSScanNotificationVersion2 && removeNotify('scanNotificationVersion2');
 };
 
@@ -442,9 +407,6 @@ const getText = (text, conditions) => {
 };
 
 const createScanNotificationVersion2 = (bluetooth, location) => {
-  if (Platform.OS === 'android') {
-    return;
-  }
   const {iOSScanNotificationVersion2} = configuration;
   if (!iOSScanNotificationVersion2) {
     return;
@@ -563,8 +525,10 @@ const scheduleNotificationChangeLanguageListener = Language => {
   scheduleRegisterNotification_ChangeLanguage(Language);
   scheduleUpdateAppNotification_ChangeLanguage(Language);
   scheduleAddInfoNotification_ChangeLanguage(Language);
-  scanNotification_ChangeLanguage(Language);
-  scheduleScanNotification_ChangeLanguage(Language);
+  if (Platform.OS === 'ios') {
+    // scanNotification_ChangeLanguage(Language).then();
+    scheduleScanNotification_ChangeLanguage(Language).then();
+  }
 };
 
 /**
@@ -575,8 +539,10 @@ const scheduleNotificationSetConfigurationListener = oldConfig => {
   scheduleRegisterNotification_SetConfig(oldConfig, configuration);
   scheduleUpdateAppNotification_SetConfig(oldConfig, configuration);
   scheduleAddInfoNotification_SetConfig(oldConfig, configuration);
-  scanNotification_SetConfiguration(oldConfig, configuration).then();
-  scheduleScanNotification_SetConfiguration(oldConfig, configuration).then();
+  if (Platform.OS === 'ios') {
+    // scanNotification_SetConfiguration(oldConfig, configuration).then();
+    scheduleScanNotification_SetConfiguration(oldConfig, configuration).then();
+  }
 };
 
 if (Platform.OS === 'ios') {
@@ -589,28 +555,10 @@ if (Platform.OS === 'ios') {
 }
 
 export {
-  // createScheduleScanNotificationListener,
-  // --------------------------------
-  // createScanNotification,
-  // clearScanNotification,
-  // scanNotification_ChangeLanguage,
-  // scanNotification_SetConfiguration,
-  // ------------------------------
-  // createScheduleScanNotification,
-  // clearScheduleScanNotification,
-  // scheduleScanNotification_ChangeLanguage,
-  // scheduleScanNotification_SetConfiguration,
-  // ------
   creatScheduleRegisterNotification,
   clearScheduleRegisterNotification,
-  // scheduleRegisterNotification_ChangeLanguage,
-  // scheduleRegisterNotification_SetConfig,
-  // ---
   creatScheduleUpdateAppNotification,
   clearScheduleUpdateAppNotification,
-  // scheduleUpdateAppNotification_ChangeLanguage,
-  // scheduleUpdateAppNotification_SetConfig,
-  // ---
   creatScheduleAddInfoNotification,
   clearScheduleAddInfoNotification,
   checkRegisterNotificationOfDay,
