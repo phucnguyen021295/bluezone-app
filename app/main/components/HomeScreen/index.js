@@ -95,7 +95,6 @@ class HomeTab extends React.Component {
     if (appState === 'active') {
       const {stepSelected} = this.state;
       // if (stepSelected === 'updateVersion') {
-      //   debugger;
       //   this.setModalStatus({isPermission: true});
       // }
     }

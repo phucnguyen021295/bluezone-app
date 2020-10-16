@@ -21,8 +21,10 @@
 
 'use strict';
 
-import {Platform} from 'react-native';
+import {DeviceEventEmitter, Platform} from 'react-native';
 import firebase from 'react-native-firebase';
+import RNSettings from 'react-native-settings';
+// import SystemSetting from 'react-native-system-setting';
 
 import configuration from '../configuration';
 import {cancelNotify, pushNotify, removeNotify} from './notify';
@@ -30,11 +32,16 @@ import {createNotification, scheduleNotification} from './fcm';
 import {FCM_CHANNEL_ID, SMALL_ICON} from '../const/fcm';
 import {getLatestVersionApp} from './storage';
 import {CurrentVersionValue} from './version';
-import {getBluetoothState} from './bluetooth';
+import {getBluetoothState, registerBluetoothStateListener} from './bluetooth';
 import {PERMISSIONS, RESULTS, check} from 'react-native-permissions';
 
 const bluetoothGranted = async () => {
   const v = check(PERMISSIONS.IOS.BLUETOOTH_PERIPHERAL);
+  return v === RESULTS.GRANTED;
+};
+
+const locationGranted = async () => {
+  const v = check(PERMISSIONS.IOS.LOCATION_ALWAYS);
   return v === RESULTS.GRANTED;
 };
 
@@ -341,6 +348,9 @@ const _createNotification = (id, n, language) => {
     .setNotificationId(id)
     .setTitle(title)
     .setBody(big)
+    .setData({
+      ...n.data,
+    })
     .setSubtitle(sub)
     .android.setBigText(text)
     .android.setChannelId(FCM_CHANNEL_ID)
@@ -366,11 +376,6 @@ const createSchedulingNotification = (notification, time) => {
 };
 
 /**
- * Khoi tao trang thai bluetooth
- */
-const initNotifyScheduler = () => {};
-
-/**
  * Xu ly su kien trang thai bluetooth thay doi
  * @param isEnable
  */
@@ -391,6 +396,106 @@ const bluetoothChangeListener = isEnable => {
     createScheduleScanNotification(iOSScheduleScanNotification);
     createScanNotification(iOSScanNotification);
   }
+};
+
+let locationEnable = null;
+
+const locationChangeListener = async e => {
+  const enable = e[RNSettings.LOCATION_SETTING] === RNSettings.ENABLED;
+  if (enable !== locationEnable) {
+    locationEnable = enable;
+    const bluetoothEnable = await getBluetoothState();
+    scanServiceChange(locationEnable, bluetoothEnable);
+  }
+};
+
+const scanServiceChange = (bluetooth, location) => {
+  if (Platform.OS === 'android') {
+    return;
+  }
+  const {iOSScanNotificationVersion2} = configuration;
+  if (bluetooth && location) {
+    // clearScheduleScanNotification();
+    clearScanNotificationVersion2(iOSScanNotificationVersion2);
+  } else {
+    // clearScheduleScanNotification();
+    clearScanNotificationVersion2(iOSScanNotificationVersion2);
+    // ----------------------------------------------------------------
+    // createScheduleScanNotification();
+    createScanNotificationVersion2(iOSScanNotificationVersion2);
+  }
+};
+
+const clearScanNotificationVersion2 = iOSScanNotificationVersion2 => {
+  if (Platform.OS === 'android') {
+    return;
+  }
+  iOSScanNotificationVersion2 && removeNotify('scanNotificationVersion2');
+};
+
+const getText = (text, conditions) => {
+  if (!text) {
+    return text;
+  }
+  const regExs = [
+    /<b>(.*)<\/b>/,
+    /<!b>(.*)<\/!b>/,
+    /<l>(.*)<\/l>/,
+    /<!l>(.*)<\/!l>/,
+    /<bl>(.*)<\/bl>/,
+    /<!bl>(.*)<\/!bl>/,
+    /<b!l>(.*)<\/b!l>/,
+    /<!(bl)>(.*)<\/!(bl)>/,
+  ];
+  let textResult = text;
+  for (let i = 0; i < regExs.length; i++) {
+    const replacement = conditions[i] ? '$1' : '';
+    textResult = textResult.replace(regExs[i], replacement);
+  }
+  return textResult;
+};
+
+const createScanNotificationVersion2 = (bluetooth, location) => {
+  if (Platform.OS === 'android') {
+    return;
+  }
+  const {iOSScanNotificationVersion2} = configuration;
+  if (!iOSScanNotificationVersion2) {
+    return;
+  }
+
+  const {Language} = configuration;
+
+  const inBluetooth = !bluetooth;
+  const inLocation = !location;
+  const conditions = [
+    inBluetooth,
+    !inBluetooth,
+    inLocation,
+    !inLocation,
+    inBluetooth && inLocation,
+    !inBluetooth && inLocation,
+    inBluetooth && !inLocation,
+    !inBluetooth && !inLocation,
+  ];
+
+  pushNotify(
+    {
+      data: {
+        ...iOSScanNotificationVersion2,
+        ...{
+          title: getText(iOSScanNotificationVersion2.title, conditions),
+          titleEn: getText(iOSScanNotificationVersion2.titleEn, conditions),
+          bigText: getText(iOSScanNotificationVersion2.bigText, conditions),
+          bigTextEn: getText(iOSScanNotificationVersion2.bigTextEn, conditions),
+          text: getText(iOSScanNotificationVersion2.message, conditions),
+          textEn: getText(iOSScanNotificationVersion2.messageEn, conditions),
+          notifyId: 'scanNotificationVersion2',
+        },
+      },
+    },
+    Language,
+  );
 };
 
 /**
@@ -484,13 +589,20 @@ const scheduleNotificationSetConfigurationListener = oldConfig => {
   scheduleRegisterNotification_SetConfig(oldConfig, configuration);
   scheduleUpdateAppNotification_SetConfig(oldConfig, configuration);
   scheduleAddInfoNotification_SetConfig(oldConfig, configuration);
-  scanNotification_SetConfiguration(oldConfig, configuration);
-  scheduleScanNotification_SetConfiguration(oldConfig, configuration);
+  scanNotification_SetConfiguration(oldConfig, configuration).then();
+  scheduleScanNotification_SetConfiguration(oldConfig, configuration).then();
 };
 
+if (Platform.OS === 'ios') {
+  registerBluetoothStateListener(bluetoothChangeListener);
+
+  DeviceEventEmitter.addListener(
+    RNSettings.GPS_PROVIDER_EVENT,
+    locationChangeListener,
+  );
+}
+
 export {
-  initNotifyScheduler,
-  bluetoothChangeListener,
   // createScheduleScanNotificationListener,
   // --------------------------------
   // createScanNotification,

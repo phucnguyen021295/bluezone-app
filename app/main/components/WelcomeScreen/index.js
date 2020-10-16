@@ -291,7 +291,6 @@ class WelcomeScreen extends React.Component {
     const dayOfWeek = dow[moment().weekday()];
     const heightNatural = (width * images.height) / images.width;
     const bars = (HEIGHT_HEADER - setHeight - heightNatural) / HEIGHT_HEADER;
-    debugger;
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />

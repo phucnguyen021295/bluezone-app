@@ -66,10 +66,6 @@ function decorateMainAppStart(AppStack) {
       // jobs
       this.processWorkToDo();
 
-      // notify scheduler
-      scheduler.initNotifyScheduler();
-      registerBluetoothStateListener(scheduler.bluetoothChangeListener);
-
       // analytics
       analytic.reportBluetoothState();
       registerBluetoothStateListener(analytic.bluetoothChangeListener);

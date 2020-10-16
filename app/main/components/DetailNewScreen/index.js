@@ -74,7 +74,6 @@ class DetailNewScreen extends React.Component {
       item.title ||
       item.titleEn;
 
-    debugger;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <Header

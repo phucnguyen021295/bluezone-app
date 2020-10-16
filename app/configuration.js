@@ -229,6 +229,9 @@ const configuration = {
     messageEn: 'Please open Bluezone and add your mobile number.',
     bigText: 'Bạn hãy vào ứng dụng và cập nhật số điện thoại nhé.',
     bigTextEn: 'Please open Bluezone and add your mobile number.',
+    data: {
+      _group: 'MOBILE',
+    },
   },
   ScheduleAddInfoNotification: {
     itemRepeat: [
@@ -304,6 +307,9 @@ const configuration = {
     messageEn: 'Please open Bluezone and add your information.',
     bigText: 'Bạn hãy vào ứng dụng và cập nhật Thông tin bổ sung nhé.',
     bigTextEn: 'Please open Bluezone and add your information.',
+    data: {
+      _group: 'ADD_INFO',
+    },
   },
   ScheduleUpdateAppNotification: {
     itemRepeat: [
@@ -339,8 +345,8 @@ const configuration = {
   AndroidScanNotificationVersion2: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
-    bigText: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigText: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
     buttonText: 'Kiểm tra ngay',
     buttonTextEn: 'Check now',
   },
@@ -355,8 +361,8 @@ const configuration = {
   iOSScanNotificationVersion2: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
-    bigText: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: '<b>Bluetooth1</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigText: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl>, vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
     buttonText: 'Kiểm tra ngay',
     buttonTextEn: 'Check now',
   },

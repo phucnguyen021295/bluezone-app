@@ -311,6 +311,12 @@ class App extends React.Component {
       } else {
         navigate('PhoneNumberRegisterScreen');
       }
+    } else if (obj && obj.data._group === 'ADD_INFO') {
+      if (loading) {
+        navigate(REGISTER_INFORMATION_WIZARD_NAME);
+      } else {
+        navigate('RegisterInformation');
+      }
     } else if (
       obj &&
       (obj.data._group === NOTIFICATION_TYPE.SEND_URL_NEW ||
