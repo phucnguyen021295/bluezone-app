@@ -375,37 +375,23 @@ const createSchedulingNotification = (notification, time) => {
   });
 };
 
+let locationEnable = null;
+
 /**
  * Xu ly su kien trang thai bluetooth thay doi
  * @param isEnable
  */
 const bluetoothChangeListener = isEnable => {
-  if (Platform.OS === 'android') {
-    return;
-  }
-
   const {iOSScheduleScanNotification, iOSScanNotification} = configuration;
-  if (isEnable) {
-    // Clear notification
-    clearScheduleScanNotification(iOSScheduleScanNotification);
-    clearScanNotification(iOSScanNotification);
-  } else {
-    // Create notification
-    clearScheduleScanNotification(iOSScheduleScanNotification);
-    clearScanNotification(iOSScanNotification);
-    createScheduleScanNotification(iOSScheduleScanNotification);
-    createScanNotification(iOSScanNotification);
-  }
+  scanServiceChange(isEnable, locationEnable);
 };
-
-let locationEnable = null;
 
 const locationChangeListener = async e => {
   const enable = e[RNSettings.LOCATION_SETTING] === RNSettings.ENABLED;
   if (enable !== locationEnable) {
     locationEnable = enable;
     const bluetoothEnable = await getBluetoothState();
-    scanServiceChange(locationEnable, bluetoothEnable);
+    scanServiceChange(bluetoothEnable, locationEnable);
   }
 };
 
@@ -415,13 +401,13 @@ const scanServiceChange = (bluetooth, location) => {
   }
   const {iOSScanNotificationVersion2} = configuration;
   if (bluetooth && location) {
-    // clearScheduleScanNotification();
+    clearScheduleScanNotification();
     clearScanNotificationVersion2(iOSScanNotificationVersion2);
   } else {
-    // clearScheduleScanNotification();
+    clearScheduleScanNotification();
     clearScanNotificationVersion2(iOSScanNotificationVersion2);
     // ----------------------------------------------------------------
-    // createScheduleScanNotification();
+    createScheduleScanNotification();
     createScanNotificationVersion2(iOSScanNotificationVersion2);
   }
 };

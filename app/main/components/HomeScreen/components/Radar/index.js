@@ -397,6 +397,14 @@ class Index extends React.Component {
       }
     }
 
+    // const dotTypes = Object.keys(this.realDots);
+    // for (let j = 0; j < dotTypes.length; j++) {
+    //   const type = dotTypes[j];
+    //   for (let i = 0; i < this.dotRefArr[type].length; i++) {
+    //     this.dotRefArr[type][i].play();
+    //   }
+    // }
+
     // Play radar
     this.radarRef.play();
     this.objectRadar.timeStart = new Date().getTime();
@@ -428,6 +436,10 @@ class Index extends React.Component {
         logs: logBlueZone,
       });
     }
+    // this.realDots['normal'].push({
+    //   dot: 47,
+    //   id: '2342342',
+    // });
   };
 
   render() {
