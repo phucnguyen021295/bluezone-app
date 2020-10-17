@@ -163,8 +163,11 @@ class Index extends React.Component {
   };
 
   removeRealDotInRadar = (type, id) => {
-    const indexDot = this.realDots[type].findIndex(d => d.id === id);
-    this.realDots[type].splice(indexDot, 1);
+    // this.realDots[type] = this.realDots[type].filter(d => d.id !== id);
+    let i;
+    while ((i = this.realDots[type].findIndex(d => d.id === id)) !== -1) {
+      this.realDots[type].splice(i, 1);
+    }
   };
 
   changeLevelRadar = countBluezoner => {
@@ -241,9 +244,11 @@ class Index extends React.Component {
     for (let j = 0; j < dotTypes.length; j++) {
       const type = dotTypes[j];
       if (this.fakeDots[type].length > 0) {
-        this.fakeDots[type].pop();
-        k--;
-        if (k === 0) {
+        const length = this.fakeDots[type].length;
+        const h = length > k ? k : this.fakeDots[type].length;
+        this.fakeDots[type].splice(length - h, h);
+        k = k - h;
+        if (k <= 0) {
           return;
         }
       }
