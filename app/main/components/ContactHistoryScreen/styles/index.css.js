@@ -24,7 +24,10 @@
 import {StyleSheet} from 'react-native';
 import {bigger, normal, fontSize19} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../core/utils/dimension';
 
 const PADDING_TOP_CONTACT = heightPercentageToDP((26 / 720) * 100);
 const HEIGHT_CONTACT = heightPercentageToDP((44 / 720) * 100);
@@ -60,14 +63,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#E5EEF9',
+    backgroundColor: '#F0F5FD',
     height: HEIGHT_CONTACT,
     paddingHorizontal: 20,
   },
 
   textHeader: {
     fontSize: normal,
-    color: blue_bluezone
+    color: blue_bluezone,
   },
 
   contentContainerStyle: {
@@ -79,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginLeft: 20,
-    paddingVertical: 14,
+    paddingVertical: 10.5,
     borderBottomColor: '#EEEEEE',
     borderBottomWidth: 0.65,
   },
@@ -91,8 +94,8 @@ const styles = StyleSheet.create({
   numberContact: {
     fontSize: fontSize19,
     color: blue_bluezone,
-    paddingRight: 20
-  }
+    paddingRight: 20,
+  },
 });
 
 export default styles;
