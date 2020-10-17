@@ -41,33 +41,35 @@ const styles = StyleSheet.create({
 
   btnLanguage: {
     flexDirection: 'row',
-    borderRadius: 15,
+    borderRadius: 10,
     alignItems: 'center',
     borderColor: '#ffffff',
-    borderWidth: 0.3,
+    borderWidth: 0.1,
+    // opacity: 0.31,
   },
 
   btnLanguageActive: {
     backgroundColor: '#ffffff',
-    borderRadius: 15,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 1,
+    paddingVertical: 0,
     paddingHorizontal: 8,
   },
 
   textBtnLanguageActive: {
     fontSize: fontSize.smallest,
+    fontFamily: 'OpenSans-SemiBold',
     color: '#0166de',
     alignItems: 'center',
-    paddingVertical: 1,
-    paddingHorizontal: 2,
+    paddingVertical: 0.15,
+    paddingHorizontal: 2.2,
     // fontWeight: '600',
   },
 
   textBtnLanguage: {
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 3,
     fontSize: fontSize.smallest,
     color: '#ffffff',
   },

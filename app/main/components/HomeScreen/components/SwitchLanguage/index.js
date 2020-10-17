@@ -70,7 +70,7 @@ class Index extends React.Component {
               style={styles.btnLanguage}>
               <View
                 style={[
-                  {marginLeft: 2},
+                  {marginLeft: 3},
                   language === 'vi' ? styles.btnLanguageActive : {},
                 ]}>
                 <Text
@@ -84,7 +84,7 @@ class Index extends React.Component {
               </View>
               <View
                 style={[
-                  {marginRight: 2},
+                  {marginRight: 3},
                   language === 'en' ? styles.btnLanguageActive : {},
                 ]}>
                 <Text

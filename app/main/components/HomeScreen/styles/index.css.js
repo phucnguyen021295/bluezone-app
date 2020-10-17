@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderRightColor: '#b5b5b5',
     height: 24,
+    opacity: 0.19,
   },
 
   iconLogoBluezone: {
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: isIPhoneX ? 34 : 6,
+    paddingTop: isIPhoneX ? 34 : 12,
     zIndex: 99,
     paddingBottom: LOGO_PADDING_BOTTOM,
   },
