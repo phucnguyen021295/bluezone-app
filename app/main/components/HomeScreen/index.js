@@ -183,7 +183,7 @@ class HomeTab extends React.Component {
           <View style={{backgroundColor: '#015cd0'}}>
             <View style={style.switchLanguage}>
               <View style={style.logo}>
-                <LogoBluezone width={28.8} height={34.6} />
+                <LogoBluezone width={23.9} height={28.7} />
                 <View
                   style={{
                     flexDirection: 'column',
@@ -194,9 +194,9 @@ class HomeTab extends React.Component {
                     style={{
                       textAlign: 'right',
                       color: '#ffffff',
-                      fontSize: fontSize.normal,
-                      lineHeight: fontSize.normal * 0.4,
-                      paddingTop: fontSize.normal * 0.6,
+                      fontSize: fontSize.smaller,
+                      lineHeight: fontSize.smaller * 0.4,
+                      paddingTop: fontSize.smaller * 0.6,
                     }}>
                     Bluezone{'\n'}
                     <ThinText
@@ -210,12 +210,12 @@ class HomeTab extends React.Component {
                   </MediumText>
                 </View>
                 <View style={style.borderLogo} />
-                <View style={{marginHorizontal: 14.6}}>
-                  <IconBTT width={30} height={30} />
+                <View style={{marginHorizontal: 14.5}}>
+                  <IconBTT width={25} height={25} />
                 </View>
                 <View style={style.borderLogo} />
-                <View style={{marginLeft: 14.6}}>
-                  <IconBYT width={30} height={30} />
+                <View style={{marginLeft: 14.5}}>
+                  <IconBYT width={25} height={25} />
                 </View>
               </View>
               <SwitchLanguage />
