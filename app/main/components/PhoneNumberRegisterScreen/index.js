@@ -41,9 +41,7 @@ import CheckBox from '@react-native-community/checkbox';
 
 // Components
 import ButtonIconText from '../../../base/components/ButtonIconText';
-import {
-  ButtonConfirm,
-} from '../../../base/components/ButtonText/ButtonModal';
+import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import Text from '../../../base/components/Text';
 import ButtonText from '../../../base/components/ButtonText';
 import ModalBase from '../../../base/components/ModalBase';

@@ -24,26 +24,18 @@
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
-import {large} from '../../../../core/fontSize';
-import {heightPercentageToDP} from "../../../../core/utils/dimension";
+import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
 const MARGIN_TOP_CONTENT = heightPercentageToDP((62 / 720) * 100);
-const MARGIN_BOTTOM_CONTENT = heightPercentageToDP((64 / 720) * 100);
+const MARGIN_BOTTOM_CONTENT = heightPercentageToDP((89 / 720) * 100);
 const MARGIN_TOP_PHONE = heightPercentageToDP((38 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
+const MARGIN_TOP_35 = heightPercentageToDP((35 / 720) * 100);
 
 const styles = StyleSheet.create({
-  layout1: {
-    marginHorizontal: 15,
-    paddingHorizontal: 15,
-    paddingVertical: 24,
-    borderRadius: 8,
-  },
-
   content: {
-    paddingHorizontal: 50,
+    paddingHorizontal: 70,
     justifyContent: 'center',
     marginTop: MARGIN_TOP_CONTENT,
     marginBottom: MARGIN_BOTTOM_CONTENT,
@@ -54,28 +46,25 @@ const styles = StyleSheet.create({
     fontSize: fontSize.normal,
     lineHeight: 25,
   },
-  text2: {
-    fontStyle: 'normal',
+
+  textPhoneNumber: {
     fontWeight: 'bold',
-    fontSize: 19,
-    lineHeight: 20,
-    color: blue_bluezone,
+    marginTop: MARGIN_TOP_35,
+    fontSize: fontSize.larger,
     textAlign: 'center',
-    marginTop: 40,
   },
 
-  layout2: {flexDirection: 'row', alignSelf: 'center', marginTop: 10},
+  layoutCountdown: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+  },
+
   text3: {
-    fontSize: fontSize.normal,
+    fontSize: fontSize.small,
     lineHeight: 25,
     color: blue_bluezone,
   },
-  layout3: {
-    marginHorizontal: 15,
-    paddingHorizontal: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
+
   text4: {
     fontWeight: 'normal',
     fontSize: fontSize.larger,
@@ -84,13 +73,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 50,
     lineHeight: 30,
     color: blue_bluezone,
-  },
-  btnActive: {
-    borderColor: blue_bluezone,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 28,
   },
 
   btn: {
@@ -102,29 +84,11 @@ const styles = StyleSheet.create({
   },
 
   textSendOTP: {
-    fontSize: fontSize.normal,
+    fontSize: fontSize.small,
     lineHeight: 25,
     color: blue_bluezone,
   },
 
-  modalCont: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-  },
-
-  titleModal: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    fontWeight: '500',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-  },
-  detailModal: {
-    fontSize: 13,
-    lineHeight: 16,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
   lBtnModal: {
     borderTopWidth: 0.5,
     borderTopColor: 'rgba(60, 60, 67, 0.29)',
@@ -137,36 +101,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
-  textBtn: {
-    fontSize: fontSize.larger,
-    color: blue_bluezone,
-    fontWeight: '500',
-  },
-  textTimer: {
-    fontSize: fontSize.normal,
-    lineHeight: 25,
-    color: blue_bluezone,
-  },
+
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
   },
-  header: {
-    backgroundColor: '#ffffff',
-    marginTop: isIPhoneX ? 0 : 20,
-  },
-  scroll: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
-  textPhoneNumber: {
-    fontWeight: 'bold',
-    marginTop: 40,
-    lineHeight: 25,
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    marginBottom: 8,
-  },
+
   buttonConfirm: {
     zIndex: 999,
     marginHorizontal: 43,
@@ -186,23 +126,7 @@ const styles = StyleSheet.create({
     width: 18,
     height: 18,
   },
-  iconButtonRefresh: {
-    width: 24,
-    height: 24,
-  },
-  modalConfirm: {
-    margin: 40,
-    justifyContent: 'center',
-  },
-  inputOTPMin: {
-    borderRadius: 8,
-    width: 45,
-    marginRight: 0,
-    textAlign: 'center',
-    backgroundColor: '#e8e8e8',
-    height: 50,
-    fontSize: fontSize.larger,
-  },
+
   inputOTPMax: {
     height: INPUT_HEIGHT,
     borderRadius: 8,
@@ -217,17 +141,6 @@ const styles = StyleSheet.create({
     paddingBottom: 9,
     color: '#000000',
   },
-  inputContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    marginTop: 30,
-    marginHorizontal: 15,
-  },
-
-  textNumber: {
-    textAlign: 'center',
-    color: '#f18b25',
-  },
 
   buttonInvite: {
     position: 'absolute',
@@ -241,24 +154,6 @@ const styles = StyleSheet.create({
     color: blue_bluezone,
     paddingHorizontal: 20,
     paddingVertical: 20,
-  },
-
-  textBtnSkip: {
-    color: blue_bluezone,
-    fontSize: fontSize.huge,
-    fontWeight: '600',
-  },
-
-  buttonContinued: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    height: 45,
-  },
-
-  textButtonSkip: {
-    fontSize: large,
-    color: blue_bluezone,
   },
 });
 

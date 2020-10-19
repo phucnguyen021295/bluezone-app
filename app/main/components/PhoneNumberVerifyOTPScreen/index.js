@@ -476,7 +476,7 @@ class VerifyOTPScreen extends React.Component {
                 styleIcon={styles.iconButtonConfirm}
               />
             </View>
-            <View style={styles.layout2}>
+            <View style={styles.layoutCountdown}>
               {!visibleSendOTPBtn ? (
                 <>
                   <Text style={styles.text3}>
