@@ -31,7 +31,7 @@ const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
 const LAYOUT_PADDING_TOP = heightPercentageToDP((64 / 720) * 100);
 const PADDING_TOP_INPUT = heightPercentageToDP((51 / 720) * 100);
 const PADDING_BOTTOM_INPUT = heightPercentageToDP((35 / 720) * 100);
-const BOTTOM_PHONE = heightPercentageToDP((38 / 720) * 100);
+const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 
@@ -190,18 +190,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
 
-  buttonInvite: {
+  containerStyle: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: BOTTOM_PHONE,
+    alignItems: 'center',
   },
+
+  buttonInvite: {},
 
   textInvite: {
     fontSize: normal,
     color: blue_bluezone,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
   },
 
   btnNext: {

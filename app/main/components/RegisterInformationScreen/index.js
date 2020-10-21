@@ -41,7 +41,7 @@ import CheckBox from '@react-native-community/checkbox';
 // Components
 import ButtonIconText from '../../../base/components/ButtonIconText';
 import Text from '../../../base/components/Text';
-import ButtonText from '../../../base/components/ButtonText';
+import ButtonBase from '../../../base/components/ButtonBase';
 import Header from '../../../base/components/Header';
 
 // Apis
@@ -418,11 +418,11 @@ class RegisterInformationScreen extends React.Component {
             />
           </ScrollView>
         </KeyboardAvoidingView>
-        <ButtonText
-          text={`${formatMessage(message.skip)}`}
+        <ButtonBase
+          title={`${formatMessage(message.skip)}`}
           onPress={this.onChangeNavigate}
-          styleText={styles.textInvite}
-          styleBtn={styles.buttonInvite}
+          containerStyle={styles.containerStyle}
+          titleStyle={styles.textInvite}
         />
         {this.renderModal()}
       </SafeAreaView>

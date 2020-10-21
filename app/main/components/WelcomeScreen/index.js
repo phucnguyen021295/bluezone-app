@@ -30,7 +30,6 @@ import {dev} from '../../../core/apis/server';
 
 // Components
 import {
-  SafeAreaView,
   StatusBar,
   View,
   Dimensions,
@@ -40,22 +39,15 @@ import {
   UIManager,
   AppState,
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
-import Header from './Header/Header';
 import HeaderFull from './Header/HeaderFull';
 import ImageBackgroundBase from './ImageBackgroundBase';
 
-import Text, {LightText, ItalicText} from '../../../base/components/Text';
-import ButtonText from '../../../base/components/ButtonText';
+import Text, {LightText} from '../../../base/components/Text';
+import ButtonBase from '../../../base/components/ButtonBase';
 import ButtonIconText from '../../../base/components/ButtonIconText';
 
 // Styles
-import styles, {
-  HEIGHT_HEADER,
-  HEIGHT_IMG,
-  HEIGHT_DEFAULT,
-  HEIGHT_SCAN_HEADER,
-} from './styles/index.css';
+import styles, {HEIGHT_HEADER, HEIGHT_DEFAULT} from './styles/index.css';
 import {injectIntl, intlShape} from 'react-intl';
 import {Images, dataVi, dataEn, dayVi, dayEn, monthEn} from './styles/images';
 import * as fontSize from '../../../core/fontSize';
@@ -64,11 +56,8 @@ import * as fontSize from '../../../core/fontSize';
 import configuration from '../../../configuration';
 import getLunarDate from './utils/amlich-hnd';
 import {can, canEn, chi, chiEn} from './utils/ConvertToCanchi';
-import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
-import ModalBase from '../../../base/components/ModalBase';
 import message from '../../../core/msg/welcome';
 import {
-  getDateOfWelcome,
   setDateOfWelcome,
   getDisplayOriginalImg,
   setDisplayOriginalImg,
@@ -386,11 +375,11 @@ class WelcomeScreen extends React.Component {
             <Text style={styles.titleAlert}>{textF}</Text>
           </View>
           <View style={styles.closeButtonContainer}>
-            <ButtonText
+            <ButtonBase
+              title={formatMessage(message.close)}
               onPress={this.onGoBack}
-              text={formatMessage(message.close)}
-              styleBtn={styles.closeButton}
-              styleText={{fontSize: fontSize.smaller, color: '#ffffff'}}
+              buttonStyle={styles.closeButton}
+              titleStyle={{fontSize: fontSize.smaller, color: '#ffffff'}}
             />
           </View>
         </View>

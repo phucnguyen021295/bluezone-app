@@ -22,47 +22,33 @@
 'use strict';
 
 import {StyleSheet} from 'react-native';
-import * as fontSize from '../../../../core/fontSize';
-import {large} from '../../../../core/fontSize';
-import {blue_bluezone} from '../../../../core/color';
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from '../../../../core/utils/dimension';
+
+const BUTTON_PADDING_LEFT = widthPercentageToDP((20 / 360) * 100);
+const BUTTON_PADDING_RIGHT = widthPercentageToDP((20 / 360) * 100);
+const BUTTON_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
+const BUTTON_PADDING_BOTTOM = heightPercentageToDP((8 / 720) * 100);
 
 const styles = StyleSheet.create({
-  container: {
-    height: 44,
-    justifyContent: 'center',
-    borderRadius: 8,
+  containerStyle: {
+    flexDirection: 'column',
   },
 
-  text: {
-    fontSize: fontSize.larger,
-    textAlign: 'center',
-    color: '#FFFFFF',
-    paddingHorizontal: 12,
-  },
-
-  btnConfirm: {
-    flex: 1,
+  buttonStyle: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 45
+    paddingLeft: BUTTON_PADDING_LEFT,
+    paddingRight: BUTTON_PADDING_RIGHT,
+    paddingTop: BUTTON_PADDING_TOP,
+    paddingBottom: BUTTON_PADDING_BOTTOM,
   },
 
-  textConfirm: {
-    fontWeight: '500',
-    fontSize: large,
-    color: blue_bluezone,
-  },
-
-  btnClose: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 45,
-  },
-
-  textClose: {
-    fontSize: large,
-    color: '#5F5F5F',
+  titleStyle: {
+    color: '#000000',
   },
 });
 

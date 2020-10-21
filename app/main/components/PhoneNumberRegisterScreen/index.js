@@ -45,7 +45,7 @@ import {
   ButtonConfirm,
 } from '../../../base/components/ButtonText/ButtonModal';
 import Text from '../../../base/components/Text';
-import ButtonText from '../../../base/components/ButtonText';
+import ButtonBase from '../../../base/components/ButtonBase';
 import ModalBase from '../../../base/components/ModalBase';
 import Header from '../../../base/components/Header';
 
@@ -377,11 +377,11 @@ class RegisterScreen extends React.Component {
             />
           </ScrollView>
         </KeyboardAvoidingView>
-        <ButtonText
-          text={`${formatMessage(message.skip)}`}
+        <ButtonBase
+          title={`${formatMessage(message.skip)}`}
           onPress={this.onCloseScreenPress}
-          styleBtn={[styles.buttonInvite]}
-          styleText={styles.textInvite}
+          containerStyle={styles.containerStyle}
+          titleStyle={styles.textInvite}
         />
         {this.renderModal()}
       </SafeAreaView>

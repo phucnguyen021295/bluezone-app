@@ -25,12 +25,10 @@ import {Platform, StyleSheet} from 'react-native';
 import {large, normal, smaller} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
-import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
-const MARGIN_TOP_HEADER = heightPercentageToDP((37 / 720) * 100);
 const MARGIN_TOP_LAYOUT = heightPercentageToDP((58 / 720) * 100);
-const MARGIN_TOP_PHONE = heightPercentageToDP((38 / 720) * 100);
+const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 const MARGIN_BOTTOM_PHONE = heightPercentageToDP((35 / 720) * 100);
 const PADDING_HORIZONTAL_TITLE = heightPercentageToDP((86 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
@@ -149,19 +147,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
 
-  buttonInvite: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  containerStyle: {
     position: 'absolute',
-    bottom: MARGIN_TOP_PHONE,
-    width: '100%',
+    left: 0,
+    right: 0,
+    bottom: BOTTOM_PHONE,
+    alignItems: 'center',
   },
 
   textInvite: {
     fontSize: normal,
     color: blue_bluezone,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
   },
 
   btnNext: {
