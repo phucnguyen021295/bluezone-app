@@ -22,7 +22,7 @@
 'use strict';
 
 import {StyleSheet, Platform} from 'react-native';
-import {bigger, huge, large, normal, smaller} from '../../../../core/fontSize';
+import {bigger, huge, large, normal, small} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
   textInput: {
     height: INPUT_HEIGHT,
-    borderRadius: 8,
+    borderRadius: 3,
     borderWidth: 1,
     borderColor: '#e8e8e8',
     paddingLeft: 16,
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
 
   textCheckBox: {
     flex: 1,
-    fontSize: smaller,
+    fontSize: small,
     lineHeight: 24,
     color: '#000000',
     ...Platform.select({

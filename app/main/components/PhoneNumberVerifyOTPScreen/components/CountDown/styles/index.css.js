@@ -27,7 +27,7 @@ import {blue_bluezone} from '../../../../../../core/color';
 
 const styles = StyleSheet.create({
   textTimer: {
-    fontSize: fontSize.normal,
+    fontSize: fontSize.small,
     lineHeight: 25,
     color: blue_bluezone,
   },
