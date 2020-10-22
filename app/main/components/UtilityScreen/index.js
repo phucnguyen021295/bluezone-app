@@ -44,15 +44,15 @@ const UtilityScreen = props => {
   const {formatMessage} = intl;
 
   const open1 = () => {
-    navigation.navigate('DeclareDaily');
+    navigation.navigate('DomesticDeclaration');
   };
 
   const open2 = () => {
-    navigation.navigate('DeclareDaily');
+    navigation.navigate('EntryDeclaration');
   };
 
   const open3 = () => {
-    navigation.navigate('DeclareDaily');
+    navigation.navigate('DailyDeclaration');
   };
 
   return (
@@ -66,21 +66,21 @@ const UtilityScreen = props => {
               style={styles.itemImage}
               source={require('./images/anh.jpeg')}
             />
-            <Text style={styles.itemText}>Khai bao y te</Text>
+            <Text style={styles.itemText}>Khai bao y te nội địa</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.item} onPress={open2}>
             <Image
               style={styles.itemImage}
               source={require('./images/anh.jpeg')}
             />
-            <Text style={styles.itemText}>Theo doi suc khoe</Text>
+            <Text style={styles.itemText}>Che do nhap canh</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.item} onPress={open3}>
             <Image
               style={styles.itemImage}
               source={require('./images/anh.jpeg')}
             />
-            <Text style={styles.itemText}>Che do nhap canh</Text>
+            <Text style={styles.itemText}>Khai bao y te nhập cảnh</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
     color: '#AAAAAA',
     fontSize: 12,
     paddingVertical: 5,
+    textAlign: 'center',
   },
 });
 

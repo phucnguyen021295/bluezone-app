@@ -102,7 +102,7 @@
 
   "bluezone.verifyOTP.title": "Xác thực số điện thoại",
   "bluezone.verifyOTP.titleSendHistory": "Nhập mã xác thực",
-  "bluezone.verifyOTP.enterPin": "Chúng tôi đang gửi SMS đến số điện thoại của bạn",
+  "bluezone.verifyOTP.enterPin": "Chúng tôi đã gửi SMS đến số điện thoại của bạn",
   "bluezone.verifyOTP.changePhoneNumber": "Nếu số điện thoại chưa đúng, bấm để nhập lại",
   "bluezone.verifyOTP.pleaseEnterPin": "Vui lòng nhập mã OTP",
   "bluezone.verifyOTP.validPin": "Gửi lại SMS",

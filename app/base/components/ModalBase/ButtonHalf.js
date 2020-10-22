@@ -42,6 +42,10 @@ function BottomHalfModal(props) {
       testID={'modal'}
       isVisible={isVisible}
       style={[styles.bottomHalfModal, containerStyle]}
+      animationInTiming={300}
+      animationOutTiming={300}
+      backdropTransitionInTiming={0}
+      backdropTransitionOutTiming={0}
       {...otherProps}>
       <View style={[styles.contentStyle, contentStyle]}>{children}</View>
     </Modal>

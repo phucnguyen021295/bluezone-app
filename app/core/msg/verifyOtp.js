@@ -30,7 +30,7 @@ export default defineMessages({
   },
   enterPin: {
     id: 'bluezone.verifyOTP.enterPin',
-    defaultMessage: 'Chúng tôi đang gửi SMS đến số điện thoại của bạn',
+    defaultMessage: 'Chúng tôi đã gửi SMS đến số điện thoại của bạn',
   },
   pleaseEnterPin: {
     id: 'bluezone.verifyOTP.pleaseEnterPin',
