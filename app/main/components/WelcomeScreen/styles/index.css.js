@@ -206,6 +206,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#015cd0',
     borderRadius: 17,
     width: WID_BTN,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 
   buttonIcon: {

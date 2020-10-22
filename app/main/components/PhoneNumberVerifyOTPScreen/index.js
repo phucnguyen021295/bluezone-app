@@ -41,7 +41,7 @@ import Header from '../../../base/components/Header';
 import ButtonIconText from '../../../base/components/ButtonIconText';
 import CountDown from './components/CountDown';
 import Text from '../../../base/components/Text';
-import ButtonText from '../../../base/components/ButtonText';
+import ButtonBase from '../../../base/components/ButtonBase';
 import ModalBase from '../../../base/components/ModalBase';
 
 // Utils
@@ -407,7 +407,7 @@ class VerifyOTPScreen extends React.Component {
           isVisibleModal={isVisibleVerifySuccess}
           title={formatMessage(message.otpsuccess)}>
           <View style={styles.lBtnModal}>
-            <ButtonConfirm text={'OK'} onPress={this.onOTPSuccessModalPress} />
+            <ButtonConfirm text={formatMessage(message.btnAgree)} onPress={this.onOTPSuccessModalPress} />
           </View>
         </ModalBase>
 
@@ -495,11 +495,11 @@ class VerifyOTPScreen extends React.Component {
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
-        <ButtonText
-          text={`${formatMessage(message.skip)}`}
+        <ButtonBase
+          title={`${formatMessage(message.skip)}`}
           onPress={this.onCloseScreenPress}
-          styleBtn={styles.buttonInvite}
-          styleText={styles.textInvite}
+          containerStyle={styles.containerStyle}
+          titleStyle={styles.textInvite}
         />
         {this.renderModal()}
       </SafeAreaView>

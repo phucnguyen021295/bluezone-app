@@ -40,6 +40,7 @@ import message from '../../../core/msg/tab';
 
 import configuration from '../../../configuration';
 import dataFAQ, {syncQuestionFAQ} from './data/dataFAQ';
+import styles from './styles/index.css';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -166,11 +167,11 @@ class FAQScreen extends React.Component {
     }
 
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
+      <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
         <Header title={formatMessage(message.faq)} showBack={showBack} />
         <FlatList
-          style={{flex: 1}}
+          style={styles.flatList}
           ref={this.setRef}
           data={itemIds}
           keyExtractor={item => item}

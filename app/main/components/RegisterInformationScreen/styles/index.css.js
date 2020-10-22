@@ -24,18 +24,23 @@
 import {Platform, StyleSheet} from 'react-native';
 import {large, normal, smaller} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
-import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../core/utils/dimension';
 
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
-const MARGIN_TOP_HEADER = heightPercentageToDP((37 / 720) * 100);
 const MARGIN_TOP_LAYOUT = heightPercentageToDP((58 / 720) * 100);
-const MARGIN_TOP_PHONE = heightPercentageToDP((38 / 720) * 100);
+const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 const MARGIN_BOTTOM_PHONE = heightPercentageToDP((35 / 720) * 100);
 const PADDING_HORIZONTAL_TITLE = heightPercentageToDP((86 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
 const BTN_MARGIN_HORIZONTAL = heightPercentageToDP((43 / 720) * 100);
+const CHECKBOX_IOS_MARGIN_TOP = heightPercentageToDP((17 / 720) * 100);
+const CHECKBOX_ANDROID_MARGIN_TOP = heightPercentageToDP((13 / 720) * 100);
+const TEXT_INPUT_MARGIN_HORIZONTAL = widthPercentageToDP((30 / 360) * 100);
+const CHECKBOX_MARGIN_HORIZONTAL = widthPercentageToDP((23 / 360) * 100);
 
 const styles = StyleSheet.create({
   layout1: {
@@ -50,6 +55,7 @@ const styles = StyleSheet.create({
     fontSize: normal,
     color: '#000000',
     marginVertical: 5,
+    marginHorizontal: TEXT_INPUT_MARGIN_HORIZONTAL,
   },
 
   container: {
@@ -61,7 +67,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: normal,
     lineHeight: 25,
-    paddingHorizontal: PADDING_HORIZONTAL_TITLE
+    paddingHorizontal: PADDING_HORIZONTAL_TITLE,
   },
 
   keyBoardContainer: {
@@ -69,8 +75,6 @@ const styles = StyleSheet.create({
   },
 
   phone: {
-    // marginTop: MARGIN_TOP_PHONE,
-    marginHorizontal: 30,
     marginBottom: MARGIN_BOTTOM_PHONE,
   },
 
@@ -149,19 +153,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
   },
 
-  buttonInvite: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  containerStyle: {
     position: 'absolute',
-    bottom: MARGIN_TOP_PHONE,
-    width: '100%',
+    left: 0,
+    right: 0,
+    bottom: BOTTOM_PHONE,
+    alignItems: 'center',
   },
 
   textInvite: {
     fontSize: normal,
     color: blue_bluezone,
-    paddingVertical: 20,
-    paddingHorizontal: 20,
   },
 
   btnNext: {
@@ -171,7 +173,18 @@ const styles = StyleSheet.create({
 
   checkboxContainer: {
     flexDirection: 'row',
-    marginTop: 17,
+    marginTop:
+      Platform.OS === 'ios'
+        ? CHECKBOX_IOS_MARGIN_TOP
+        : CHECKBOX_ANDROID_MARGIN_TOP,
+    ...Platform.select({
+      ios: {
+        marginHorizontal: TEXT_INPUT_MARGIN_HORIZONTAL,
+      },
+      android: {
+        marginHorizontal: CHECKBOX_MARGIN_HORIZONTAL,
+      },
+    }),
   },
   textCheckBox: {
     flex: 1,
@@ -183,11 +196,15 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         marginTop: -4,
       },
+      android: {
+        paddingRight: 7,
+      },
     }),
   },
   textCheckbox2: {
     fontWeight: 'bold',
     color: blue_bluezone,
+    fontFamily: 'OpenSans-Semibold',
   },
 
   checkbox: {
@@ -197,6 +214,15 @@ const styles = StyleSheet.create({
         height: 15,
       },
     }),
+  },
+
+  lBtnModal: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'rgba(60, 60, 67, 0.29)',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 45,
   },
 });
 

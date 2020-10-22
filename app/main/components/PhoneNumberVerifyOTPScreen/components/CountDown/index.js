@@ -94,7 +94,7 @@ class Index extends React.Component {
   }
 
   render() {
-    return <Text style={styles.textTimer}>{this.convertTime(this.state.timeValue)}s</Text>;
+    return <Text style={styles.textTimer}>{this.convertTime(this.state.timeValue)}</Text>;
   }
 }
 

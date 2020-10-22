@@ -96,4 +96,12 @@ export default defineMessages({
     defaultMessage:
       'và đồng ý chia sẻ thông tin của bạn với cơ quan y tế khi bạn được xác định nhiễm hoặc nghi nhiễm Covid-19.',
   },
+  infoSuccess: {
+    id: 'bluezone.registerInformation.infoSuccess',
+    defaultMessage: 'Khai báo thông tin cá nhân thành công.',
+  },
+  btnAgree: {
+    id: 'bluezone.registerInformation.btnAgree',
+    defaultMessage: 'Đồng ý',
+  }
 });

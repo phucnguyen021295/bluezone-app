@@ -22,19 +22,33 @@
 'use strict';
 
 import {StyleSheet} from 'react-native';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {
+  widthPercentageToDP,
+  heightPercentageToDP,
+} from '../../../../core/utils/dimension';
 
-const FLATLIST_MARGIN_TOP = heightPercentageToDP((32 / 720) * 100);
+const BUTTON_PADDING_LEFT = widthPercentageToDP((20 / 360) * 100);
+const BUTTON_PADDING_RIGHT = widthPercentageToDP((20 / 360) * 100);
+const BUTTON_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
+const BUTTON_PADDING_BOTTOM = heightPercentageToDP((8 / 720) * 100);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
+  containerStyle: {
+    flexDirection: 'column',
   },
 
-  flatList: {
-    flex: 1,
-    marginTop: FLATLIST_MARGIN_TOP,
+  buttonStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: BUTTON_PADDING_LEFT,
+    paddingRight: BUTTON_PADDING_RIGHT,
+    paddingTop: BUTTON_PADDING_TOP,
+    paddingBottom: BUTTON_PADDING_BOTTOM,
+  },
+
+  titleStyle: {
+    color: '#000000',
   },
 });
 

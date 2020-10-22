@@ -29,20 +29,13 @@ import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
+const TITLE_PADDING_TOP = heightPercentageToDP((35 / 720) * 100);
+const TITLE_PADDING_BOTTOM = heightPercentageToDP((100 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
-  },
-  header: {
-    backgroundColor: '#ffffff',
-    marginTop: isIPhoneX ? 0 : 20,
-  },
-
-  title: {
-    color: blue_bluezone,
-    fontSize: fontSize.bigger,
   },
 
   scroll: {
@@ -72,7 +65,7 @@ const styles = StyleSheet.create({
     borderColor: '#e8e8e8',
     fontSize: fontSize.large,
     marginBottom: 51,
-    marginHorizontal: 43,
+    marginHorizontal: 30,
     textAlign: 'center',
     paddingTop: 9,
     paddingBottom: 9,
@@ -83,9 +76,10 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: fontSize.normal,
     textAlign: 'center',
-    paddingHorizontal: 30,
-    paddingTop: 30,
-    paddingBottom: 50,
+    paddingHorizontal: 20,
+    paddingTop: TITLE_PADDING_TOP,
+    paddingBottom: TITLE_PADDING_BOTTOM,
+    lineHeight: 25,
   },
 
   modalFooter: {

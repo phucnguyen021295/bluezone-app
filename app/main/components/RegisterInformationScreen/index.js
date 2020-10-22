@@ -37,12 +37,15 @@ import {
   UIManager,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import Modal from 'react-native-modal';
 
 // Components
 import ButtonIconText from '../../../base/components/ButtonIconText';
 import Text from '../../../base/components/Text';
-import ButtonText from '../../../base/components/ButtonText';
+import ButtonBase from '../../../base/components/ButtonBase';
 import Header from '../../../base/components/Header';
+import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
+import ModalBase from '../../../base/components/ModalBase';
 
 // Apis
 import {AddDeclareInformation} from '../../../core/apis/bluezone';
@@ -55,9 +58,6 @@ import {blue_bluezone} from '../../../core/color';
 import configuration, {setPersonalInformation} from '../../../configuration';
 
 import message from '../../../core/msg/registerInformation';
-import Modal from 'react-native-modal';
-import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
-import ModalBase from '../../../base/components/ModalBase';
 import {clearScheduleAddInfoNotification} from '../../../core/notifyScheduler';
 
 const visibleModal = {
@@ -65,6 +65,7 @@ const visibleModal = {
   isVisibleWrongFullName: false,
   isVisibleWrongAddress: false,
   isVisibleVerifyError: false,
+  isVisibleInfoSuccess: false,
 };
 
 if (Platform.OS === 'android') {
@@ -104,7 +105,10 @@ class RegisterInformationScreen extends React.Component {
     this.onLinkingRules = this.onLinkingRules.bind(this);
     this.keyboardDidShow = this.keyboardDidShow.bind(this);
     this.keyboardDidHide = this.keyboardDidHide.bind(this);
-    this.onCloseAlertWrongAddressPress = this.onCloseAlertWrongAddressPress.bind(this);
+    this.onCloseAlertWrongAddressPress = this.onCloseAlertWrongAddressPress.bind(
+      this,
+    );
+    this.onInfoSuccessModalPress = this.onInfoSuccessModalPress.bind(this);
   }
 
   componentDidMount() {
@@ -177,7 +181,7 @@ class RegisterInformationScreen extends React.Component {
 
     clearScheduleAddInfoNotification();
 
-    this.onResetModal(this.doFinishedWorks);
+    this.onResetModalTimeout(() => this.setState({isVisibleInfoSuccess: true}));
   }
 
   onAddDeclareInfoError(response) {
@@ -269,6 +273,10 @@ class RegisterInformationScreen extends React.Component {
     });
   }
 
+  onInfoSuccessModalPress() {
+    this.setState({isVisibleInfoSuccess: false}, this.doFinishedWorks);
+  }
+
   renderModal() {
     const {intl} = this.props;
     const {
@@ -277,6 +285,7 @@ class RegisterInformationScreen extends React.Component {
       isVisibleWrongFullName,
       isVisibleWrongAddress,
       isVisibleVerifyError,
+      isVisibleInfoSuccess,
     } = this.state;
     const {formatMessage} = intl;
 
@@ -286,7 +295,7 @@ class RegisterInformationScreen extends React.Component {
           <ActivityIndicator size="large" color={'#ffffff'} />
         </Modal>
 
-        {/* Fullname bạnnhập không hợp lệ*/}
+        {/* Fullname bạn nhập không hợp lệ */}
         <ModalBase
           isVisibleModal={isVisibleWrongFullName}
           title={formatMessage(message.errorTitle)}
@@ -321,6 +330,15 @@ class RegisterInformationScreen extends React.Component {
               text={formatMessage(message.close)}
               onPress={this.onCloseModal}
             />
+          </View>
+        </ModalBase>
+
+        {/* Gửi thông tin thành công */}
+        <ModalBase
+          isVisibleModal={isVisibleInfoSuccess}
+          title={formatMessage(message.infoSuccess)}>
+          <View style={styles.lBtnModal}>
+            <ButtonConfirm text={formatMessage(message.btnAgree)} onPress={this.onInfoSuccessModalPress} />
           </View>
         </ModalBase>
       </>
@@ -363,7 +381,7 @@ class RegisterInformationScreen extends React.Component {
                 {formatMessage(message.title)}
               </Text>
             </View>
-            <View style={[styles.phone]}>
+            <View style={styles.phone}>
               <TextInput
                 autoFocus={true}
                 ref={this.setFullnameRef}
@@ -418,11 +436,11 @@ class RegisterInformationScreen extends React.Component {
             />
           </ScrollView>
         </KeyboardAvoidingView>
-        <ButtonText
-          text={`${formatMessage(message.skip)}`}
+        <ButtonBase
+          title={`${formatMessage(message.skip)}`}
           onPress={this.onChangeNavigate}
-          styleText={styles.textInvite}
-          styleBtn={styles.buttonInvite}
+          containerStyle={styles.containerStyle}
+          titleStyle={styles.textInvite}
         />
         {this.renderModal()}
       </SafeAreaView>

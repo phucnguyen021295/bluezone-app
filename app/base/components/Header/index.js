@@ -23,14 +23,14 @@
 
 import React from 'react';
 import {BackHandler, TouchableOpacity, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {withNavigation} from '@react-navigation/compat';
 
 // Components
 import {MediumText} from '../Text';
+import IconBack from './styles/images/IconBack';
 
 // Styles
-import styles, {ICON_SIZE} from './styles/index.css';
+import styles, {ICON_WIDTH, ICON_HEIGHT} from './styles/index.css';
 import {blue_bluezone} from '../../../core/color';
 
 class Header extends React.Component {
@@ -68,12 +68,7 @@ class Header extends React.Component {
       <View style={[styles.container, styleHeader]}>
         {showBack && (
           <TouchableOpacity onPress={this.onGoBack} style={styles.btnBack}>
-            <Ionicons
-              name={'ios-arrow-back'}
-              size={ICON_SIZE}
-              style={styles.icon}
-              color={colorIcon}
-            />
+            <IconBack color={colorIcon} width={ICON_WIDTH} height={ICON_HEIGHT} />
           </TouchableOpacity>
         )}
         <View style={styles.title}>

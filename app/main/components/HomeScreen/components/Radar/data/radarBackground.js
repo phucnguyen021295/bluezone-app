@@ -1140,7 +1140,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             26.223
                                         ],
                                         [
-                                            -104.367,
+                                            -105.367,
                                             21.078
                                         ],
                                         [
@@ -1172,7 +1172,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             -15.651
                                         ],
                                         [
-                                            -104.413,
+                                            -105.413,
                                             -20.848
                                         ],
                                         [
@@ -1232,7 +1232,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             -82.989
                                         ],
                                         [
-                                            -64.104,
+                                            -64.105,
                                             -86.239
                                         ],
                                         [
@@ -1269,7 +1269,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             -21.079,
-                                            -104.367
+                                            -105.367
                                         ],
                                         [
                                             -15.883,
@@ -1301,7 +1301,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             20.849,
-                                            -104.413
+                                            -105.413
                                         ],
                                         [
                                             25.995,
@@ -1361,7 +1361,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             86.238,
-                                            -64.104
+                                            -64.105
                                         ],
                                         [
                                             89.28,
@@ -1396,7 +1396,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             -26.223
                                         ],
                                         [
-                                            104.367,
+                                            105.367,
                                             -21.078
                                         ],
                                         [
@@ -1428,7 +1428,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             15.651
                                         ],
                                         [
-                                            104.412,
+                                            105.412,
                                             20.848
                                         ],
                                         [
@@ -1525,7 +1525,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             21.078,
-                                            104.366
+                                            105.366
                                         ],
                                         [
                                             15.883,
@@ -1557,7 +1557,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             -20.849,
-                                            104.412
+                                            105.412
                                         ],
                                         [
                                             -25.996,
@@ -1617,7 +1617,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             -86.239,
-                                            64.104
+                                            64.105
                                         ],
                                         [
                                             -89.28,
@@ -2760,7 +2760,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                     "v": [
                                         [
                                             -176.264,
-                                            104.91
+                                            105.91
                                         ],
                                         [
                                             -181.248,
@@ -2848,7 +2848,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             -176.495,
-                                            -104.526
+                                            -105.526
                                         ],
                                         [
                                             -171.104,
@@ -2887,7 +2887,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             -170.855
                                         ],
                                         [
-                                            -104.91,
+                                            -105.91,
                                             -176.264
                                         ],
                                         [
@@ -2975,12 +2975,12 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             -181.46
                                         ],
                                         [
-                                            104.525,
+                                            105.525,
                                             -176.496
                                         ],
                                         [
                                             114.059,
-                                            -171.104
+                                            -171.105
                                         ],
                                         [
                                             122.317,
@@ -3016,7 +3016,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             176.264,
-                                            -104.911
+                                            -105.911
                                         ],
                                         [
                                             181.249,
@@ -3104,7 +3104,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         ],
                                         [
                                             176.495,
-                                            104.525
+                                            105.525
                                         ],
                                         [
                                             171.104,
@@ -3143,7 +3143,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             170.855
                                         ],
                                         [
-                                            104.911,
+                                            105.911,
                                             176.264
                                         ],
                                         [
@@ -3231,7 +3231,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                             181.461
                                         ],
                                         [
-                                            -104.525,
+                                            -105.525,
                                             176.496
                                         ],
                                         [
@@ -3511,7 +3511,7 @@ export const radarBackgroundAnimate = Object.assign({}, radarWrapper, {
                                         "t":0,
                                         "s":[
                                             0.004000000393,
-                                            0.851110419148,
+                                            0.851000019148,
                                             0.948999980852,
                                             1
                                         ]

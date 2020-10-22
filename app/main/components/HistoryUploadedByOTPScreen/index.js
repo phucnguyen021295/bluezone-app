@@ -22,7 +22,16 @@
 'use strict';
 
 import React from 'react';
-import {SafeAreaView, View, TextInput, Keyboard, Animated} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  TextInput,
+  Keyboard,
+  Animated,
+  KeyboardAvoidingView,
+  Platform,
+    ScrollView
+} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 
 import Header from '../../../base/components/Header';
@@ -302,49 +311,48 @@ class HistoryUploadedByOTPScreen extends React.Component {
     const {formatMessage} = intl;
     return (
       <SafeAreaView style={styles.container}>
-        <Header
-          title={formatMessage(message.titleSendHistory)}
-          styleHeader={styles.header}
-          styleTitle={styles.title}
-        />
-        <Animated.View
-          style={{
-            flex: 1,
-            // paddingBottom: this.keyboardHeight,
-          }}>
-          <Text style={styles.labelSendHistory}>
-            {formatMessage(message.labelOPTSendHistory)}
-          </Text>
-          <TextInput
-            ref={ref => (this.ref = ref)}
-            autoFocus={true}
-            style={styles.inputOTPMax}
-            maxLength={6}
-            allowFontScaling={false}
-            placeholder={formatMessage(message.pleaseEnterYourPhone)}
-            keyboardType={'number-pad'}
-            placeholderTextColor={'#b5b5b5'}
-            onChangeText={this.onChangeText}
-          />
-          <View style={styles.buttonConfirm}>
-            <ButtonIconText
-              disabled={statusUpload === 'waiting' || disabled}
-              onPress={this.onConfirmPress}
-              text={
-                statusUpload !== 'waiting'
-                  ? formatMessage(message.confirmHistory)
-                  : formatMessage(message.sendingHistory)
-              }
-              styleBtn={[
-                statusUpload === 'waiting' || disabled
-                  ? styles.btnConfim
-                  : styles.colorButtonConfirm,
-              ]}
-              styleText={{fontSize: fontSize.normal}}
-              styleIcon={styles.iconButtonConfirm}
+        <Header title={formatMessage(message.titleSendHistory)} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+          style={styles.container}>
+          <ScrollView
+            style={{
+              flex: 1,
+            }}>
+            <Text style={styles.labelSendHistory}>
+              {formatMessage(message.labelOPTSendHistory)}
+            </Text>
+            <TextInput
+              ref={ref => (this.ref = ref)}
+              autoFocus={true}
+              style={styles.inputOTPMax}
+              maxLength={6}
+              allowFontScaling={false}
+              placeholder={formatMessage(message.pleaseEnterYourPhone)}
+              keyboardType={'number-pad'}
+              placeholderTextColor={'#b5b5b5'}
+              onChangeText={this.onChangeText}
             />
-          </View>
-        </Animated.View>
+            <View style={styles.buttonConfirm}>
+              <ButtonIconText
+                disabled={statusUpload === 'waiting' || disabled}
+                onPress={this.onConfirmPress}
+                text={
+                  statusUpload !== 'waiting'
+                    ? formatMessage(message.confirmHistory)
+                    : formatMessage(message.sendingHistory)
+                }
+                styleBtn={[
+                  statusUpload === 'waiting' || disabled
+                    ? styles.btnConfim
+                    : styles.colorButtonConfirm,
+                ]}
+                styleText={{fontSize: fontSize.normal}}
+                styleIcon={styles.iconButtonConfirm}
+              />
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
         {this.renderModal()}
       </SafeAreaView>
     );

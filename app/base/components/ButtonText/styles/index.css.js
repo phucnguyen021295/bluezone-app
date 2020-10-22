@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 45,
+    height: 45
   },
 
   textConfirm: {

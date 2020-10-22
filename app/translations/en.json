@@ -128,6 +128,7 @@
     "bluezone.verifyOTP.otpIncorrect": "Incorrect OTP code. Please try again.",
     "bluezone.verifyOTP.otpExpired": "OTP code has expired. Please enter another OTP code again.",
     "bluezone.verifyOTP.retype": "Retype",
+    "bluezone.verifyOTP.btnAgree": "OK",
 
     "bluezone.info.title": "Bluezone version",
     "bluezone.info.dateRelease": "Release date:",
@@ -169,7 +170,7 @@
     "bluezone.warning.information": "Learn more: What should be done immediately",
     "bluezone.warning.safe": "Verified you are safe",
 
-    "bluezone.warning.lableF": "No Bluezone users you have contact with are reported as confirmed cases of COVID-19 !",
+    "bluezone.warning.lableF": "No Bluezone users you have contact with\nare reported as confirmed cases of COVID-19 !",
     "bluezone.warning.lableF0": "You are reported as a confirmed case of COVID-19",
     "bluezone.warning.lableF1": "You are reported to have close contact with Bluezone users who are confirmed cases of COVID-19",
     "bluezone.warning.lableF2": "You are reported to have close contact with Bluezone users who are suspected cases of COVID-19",
@@ -234,6 +235,8 @@
     "bluezone.registerInformation.textCheckbox3": "and for your data to be shared with health authority if you are infected or suspected to COVID-19.",
     "bluezone.registerInformation.fullNameEnterNotValid": "Your first and last name must be 3 characters or more.",
     "bluezone.registerInformation.addressEnterNotValid": "The address you entered is not valid",
+    "bluezone.registerInformation.infoSuccess": "Declaring personal information successfully",
+    "bluezone.registerInformation.btnAgree": "OK",
 
     "bluezone.contacthistory.header": "View history",
     "bluezone.contacthistory.contact": "What is exposure?",

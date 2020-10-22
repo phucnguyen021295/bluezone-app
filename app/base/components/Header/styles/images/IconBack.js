@@ -21,21 +21,30 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import * as React from 'react';
+import Svg, {G, Path} from 'react-native-svg';
+import {blue_bluezone} from '../../../../../core/color';
 
-const FLATLIST_MARGIN_TOP = heightPercentageToDP((32 / 720) * 100);
+function IconBack(props) {
+  const {color} = props;
+  return (
+    <Svg width="1em" height="1em" viewBox="0 0 8.779 15.041" {...props}>
+      <G data-name="Group 9261">
+        <Path
+          data-name="Path 16286"
+          d="M7.365 1.414L1.399 7.661l5.966 5.966"
+          fill="none"
+          stroke={color}
+          strokeLinecap="round"
+          strokeWidth={2}
+        />
+      </G>
+    </Svg>
+  );
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-  },
+IconBack.defaultProps = {
+  color: blue_bluezone,
+};
 
-  flatList: {
-    flex: 1,
-    marginTop: FLATLIST_MARGIN_TOP,
-  },
-});
-
-export default styles;
+export default IconBack;
