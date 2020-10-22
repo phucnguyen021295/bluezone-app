@@ -150,4 +150,8 @@ export default defineMessages({
     id: 'bluezone.verifyOTP.retype',
     defaultMessage: 'Nhập  lại',
   },
+  btnAgree: {
+    id: 'bluezone.verifyOTP.btnAgree',
+    defaultMessage: 'Đồng ý',
+  },
 });

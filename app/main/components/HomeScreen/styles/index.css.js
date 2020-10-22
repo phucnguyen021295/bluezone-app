@@ -44,7 +44,7 @@ const HEADER_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
 const TEXTF_PADDING_TOP = heightPercentageToDP((9 / 720) * 100);
 const TEXT_WHY_PADDING_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const TEXT_WHY_MARGIN_BOTTOM = heightPercentageToDP((8 / 720) * 100);
-const HEADER_PADDING_HORIZONTAL = widthPercentageToDP((15 / 360) * 100);
+const HEADER_PADDING_HORIZONTAL = widthPercentageToDP((10 / 360) * 100);
 
 const styles = StyleSheet.create({
   background: {
@@ -322,7 +322,6 @@ const styles = StyleSheet.create({
   textF: {
     fontSize: fontSize.small,
     textAlign: 'center',
-    paddingHorizontal: 53,
     paddingTop: TEXTF_PADDING_TOP,
     color: '#015cd0',
     lineHeight: 18.5,

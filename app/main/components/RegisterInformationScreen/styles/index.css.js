@@ -177,7 +177,14 @@ const styles = StyleSheet.create({
       Platform.OS === 'ios'
         ? CHECKBOX_IOS_MARGIN_TOP
         : CHECKBOX_ANDROID_MARGIN_TOP,
-    marginHorizontal: CHECKBOX_MARGIN_HORIZONTAL,
+    ...Platform.select({
+      ios: {
+        marginHorizontal: TEXT_INPUT_MARGIN_HORIZONTAL,
+      },
+      android: {
+        marginHorizontal: CHECKBOX_MARGIN_HORIZONTAL,
+      },
+    }),
   },
   textCheckBox: {
     flex: 1,
@@ -207,6 +214,15 @@ const styles = StyleSheet.create({
         height: 15,
       },
     }),
+  },
+
+  lBtnModal: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'rgba(60, 60, 67, 0.29)',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 45,
   },
 });
 

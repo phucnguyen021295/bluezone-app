@@ -219,7 +219,14 @@ const styles = StyleSheet.create({
       Platform.OS === 'ios'
         ? CHECKBOX_IOS_MARGIN_TOP
         : CHECKBOX_ANDROID_MARGIN_TOP,
-    marginHorizontal: CHECKBOX_MARGIN_HORIZONTAL,
+    ...Platform.select({
+      ios: {
+        marginHorizontal: TEXT_INPUT_MARGIN_HORIZONTAL,
+      },
+      android: {
+        marginHorizontal: CHECKBOX_MARGIN_HORIZONTAL,
+      },
+    }),
   },
 
   textCheckBox: {

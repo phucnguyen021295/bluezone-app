@@ -73,7 +73,7 @@ class ModalNotify extends React.Component {
 
     AppState.addEventListener('change', this.handleAppStateChange);
 
-    this.timer = setTimeout(this.checkRequestMultiple, 500);
+    this.timer = setTimeout(this.checkRequestMultiple, 1000);
   }
 
   componentWillUnmount() {
@@ -103,7 +103,8 @@ class ModalNotify extends React.Component {
         statuses[PERMISSIONS.IOS.BLUETOOTH_PERIPHERAL];
       // Check trang thai khi từ background sang foreground thì sẽ không hiển thi popup cài đặt nữa, chỉ cho hiển thị vào lúc lần đầu.
 
-      this.statusPermissionBluetooth = permissionBluetooth;
+      this.statusPermissionBluetoothr = permissionBluetooth;
+      console.log('checkRequestMultiple', permissionBluetooth);
       switch (permissionBluetooth) {
         case 'blocked':
           this.setState({isVisiblePermissionBLE: true});
@@ -140,7 +141,13 @@ class ModalNotify extends React.Component {
   }
 
   setStatusBluetooth(status) {
-    console.log('setStatusBluetooth', status);
+    if (
+      !this.statusPermissionBluetooth ||
+      this.statusPermissionBluetooth === 'blocked'
+    ) {
+      return;
+    }
+
     if (this.vesionIOS < 13 || (!this.checkBLT && this.vesionIOS > 12)) {
       this.setState({isVisibleBLE: !status});
     }

@@ -130,6 +130,7 @@
   "bluezone.verifyOTP.otpIncorrect": "Mã OTP không đúng. Bạn vui lòng thử lại.",
   "bluezone.verifyOTP.otpExpired": "Mã OTP đã hết hạn. Bạn vui lòng nhập lại 1 mã OTP khác.",
   "bluezone.verifyOTP.retype": "Nhập lại",
+  "bluezone.verifyOTP.btnAgree": "Đồng ý",
 
   "bluezone.info.title": "Bluezone phiên bản",
   "bluezone.info.dateRelease": "Ngày phát hành:",
@@ -171,7 +172,7 @@
   "bluezone.warning.information": "Tìm hiểu thêm: những việc cần làm ngay",
   "bluezone.warning.safe": "Đã xác minh bạn an toàn",
 
-  "bluezone.warning.lableF": "Chưa ghi nhận người dùng Bluezone nhiễm hoặc nghi nhiễm Covid-19 ở gần bạn !",
+  "bluezone.warning.lableF": "Chưa ghi nhận người dùng Bluezone nhiễm\nhoặc nghi nhiễm Covid-19 ở gần bạn !",
   "bluezone.warning.lableF0": "Đã ghi nhận nhiễm COVID-19 !",
   "bluezone.warning.lableF1": "Bạn đã tiếp xúc gần người dùng Bluezone là người nhiễm COVID-19 !",
   "bluezone.warning.lableF2": "Bạn đã tiếp xúc gần người dùng Bluezone là người có nguy cơ nhiễm COVID-19 !",
@@ -236,6 +237,8 @@
   "bluezone.registerInformation.textCheckbox3": "và đồng ý chia sẻ thông tin của bạn với cơ quan y tế khi bạn được xác định nhiễm hoặc nghi nhiễm Covid-19.",
   "bluezone.registerInformation.fullNameEnterNotValid": "Họ và tên bạn nhập phải từ 3 kí tự trở lên.",
   "bluezone.registerInformation.addressEnterNotValid": "Địa chỉ bạn nhập không hợp lệ",
+  "bluezone.registerInformation.infoSuccess": "Khai báo thông tin cá nhân thành công",
+  "bluezone.registerInformation.btnAgree": "Đồng ý",
 
   "bluezone.contacthistory.header": "Lịch sử tiếp xúc",
   "bluezone.contacthistory.contact": "Lượt tiếp xúc là gì?",
