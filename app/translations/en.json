@@ -100,7 +100,7 @@
 
     "bluezone.verifyOTP.title": "Phone number authentication",
     "bluezone.verifyOTP.titleSendHistory": "Enter OTP Code",
-    "bluezone.verifyOTP.enterPin": "A SMS is being sent to your phone number",
+    "bluezone.verifyOTP.enterPin": "A SMS has been sent to your phone number",
     "bluezone.verifyOTP.changePhoneNumber": " If the number entered is incorrect, touch to enter the correct one",
     "bluezone.verifyOTP.pleaseEnterPin": "Please enter the OTP code",
     "bluezone.verifyOTP.validPin": "Resend SMS",
@@ -248,5 +248,5 @@
     "bluezone.welcome.closeAlert": "Close",
     "bluezone.welcome.perpetualCalendar": "Perpetual Calendar",
     "bluezone.welcome.notify": "You are not in close contact with F0 yet!",
-    "bluezone.welcome.close": "Ok"
+    "bluezone.welcome.close": "OK"
 }

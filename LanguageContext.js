@@ -22,7 +22,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import configuration from './app/configuration';
-import {getLanguage} from "./app/core/storage";
+import {getLanguage} from './app/core/storage';
 
 export const LanguageContext = React.createContext();
 

@@ -21,32 +21,39 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
 
-export default defineMessages({
-  alert: {
-    id: 'bluezone.welcome.alert',
-    defaultMessage: 'Thông báo',
+import Text, {MediumText} from '../../../../../base/components/Text';
+import * as fontSize from '../../../../../core/fontSize';
+
+const TextInfo = ({star, text, style, styleContainer, ...otherProps}) => {
+  return (
+    <Text style={styleContainer}>
+      <MediumText
+        text={text}
+        style={[styles.itemTitle, style]}
+        {...otherProps}
+      />
+      {star && <Text text={' *'} style={styles.star} />}
+    </Text>
+  );
+};
+
+const styles = StyleSheet.create({
+  itemTitle: {
+    fontSize: fontSize.smaller,
   },
-  contentAlert: {
-    id: 'bluezone.welcome.contentAlert',
-    defaultMessage:
-      'Chức năng đang phát triển, sẽ cập nhật trong thời gian tới',
-  },
-  closeAlert: {
-    id: 'bluezone.welcome.closeAlert',
-    defaultMessage: 'Đóng',
-  },
-  perpetualCalendar: {
-    id: 'bluezone.welcome.perpetualCalendar',
-    defaultMessage: 'Lịch Vạn Niên',
-  },
-  notify: {
-    id: 'bluezone.welcome.notify',
-    defaultMessage: 'Bạn chưa tiếp xúc gần với F0 nào!',
-  },
-  close: {
-    id: 'bluezone.welcome.close',
-    defaultMessage: 'OK',
+
+  star: {
+    color: 'red',
   },
 });
+
+TextInfo.propTypes = {
+  text: PropTypes.string || PropTypes.number,
+  star: PropTypes.bool,
+};
+
+export default TextInfo;

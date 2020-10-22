@@ -25,8 +25,12 @@ import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 
 const styles = StyleSheet.create({
-  containerStyle: {
+  container: {
     paddingVertical: 10,
+  },
+
+  titleContainer: {
+    paddingBottom: 10,
   },
 
   titleStyle: {
@@ -41,6 +45,10 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 12,
     fontSize: fontSize.smaller,
+  },
+
+  star: {
+    color: 'red',
   },
 });
 

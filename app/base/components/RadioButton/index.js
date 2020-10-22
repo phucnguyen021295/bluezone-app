@@ -30,7 +30,10 @@ import styles from './styles/index.css';
 function RadioButton(props) {
   const {checked, onPress, radioStyle, checkedCircleStyle} = props;
   return (
-    <TouchableOpacity style={[styles.circle, radioStyle]} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={[styles.circle, radioStyle]}
+      onPress={onPress}>
       {checked ? (
         <View style={[styles.checkedCircle, checkedCircleStyle]} />
       ) : (

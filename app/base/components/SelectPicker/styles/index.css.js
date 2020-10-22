@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
   item: {
     paddingHorizontal: 20,
-    paddingVertical: 8,
+    paddingVertical: 10,
   },
 
   titlePicker: {

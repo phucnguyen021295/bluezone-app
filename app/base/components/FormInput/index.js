@@ -25,16 +25,26 @@ import React from 'react';
 import {TextInput, View} from 'react-native';
 
 // Components
-import {MediumText} from '../Text';
+import Text, {MediumText} from '../Text';
 
 // Styles
 import styles from './styles/index.css';
 
 function FormInput(props) {
-  const {title, containerStyle, textStyle, inputStyle, ...otherProps} = props;
+  const {
+    title,
+    star,
+    containerStyle,
+    textStyle,
+    inputStyle,
+    ...otherProps
+  } = props;
   return (
-    <View style={[styles.containerStyle, containerStyle]}>
-      <MediumText text={title} style={[styles.titleStyle, textStyle]} />
+    <View style={[styles.container, containerStyle]}>
+      <Text style={styles.titleContainer}>
+        <MediumText text={title} style={[styles.titleStyle, textStyle]} />
+        {star && <Text text={' *'} style={styles.star} />}
+      </Text>
       <TextInput style={[styles.inputStyle, inputStyle]} {...otherProps} />
     </View>
   );

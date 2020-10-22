@@ -1,7 +1,7 @@
 /*
  * @Project Bluezone
  * @Author Bluezone Global (contact@bluezone.ai)
- * @Createdate 04/26/2020, 16:36
+ * @Createdate 04/28/2020, 21:55
  *
  * This file is part of Bluezone (https://bluezone.ai)
  *
@@ -21,32 +21,30 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import React from 'react';
+import {TouchableOpacity, View} from 'react-native';
 
-export default defineMessages({
-  alert: {
-    id: 'bluezone.welcome.alert',
-    defaultMessage: 'Thông báo',
-  },
-  contentAlert: {
-    id: 'bluezone.welcome.contentAlert',
-    defaultMessage:
-      'Chức năng đang phát triển, sẽ cập nhật trong thời gian tới',
-  },
-  closeAlert: {
-    id: 'bluezone.welcome.closeAlert',
-    defaultMessage: 'Đóng',
-  },
-  perpetualCalendar: {
-    id: 'bluezone.welcome.perpetualCalendar',
-    defaultMessage: 'Lịch Vạn Niên',
-  },
-  notify: {
-    id: 'bluezone.welcome.notify',
-    defaultMessage: 'Bạn chưa tiếp xúc gần với F0 nào!',
-  },
-  close: {
-    id: 'bluezone.welcome.close',
-    defaultMessage: 'OK',
-  },
-});
+// Styles
+import styles from './styles/index.css';
+
+function RadioButton(props) {
+  const {checked, onPress, radioStyle, checkedCircleStyle} = props;
+  return (
+    <TouchableOpacity style={[styles.squares, radioStyle]} onPress={onPress}>
+      {checked ? (
+        <View style={[styles.checkedCircle, checkedCircleStyle]} />
+      ) : (
+        <View />
+      )}
+    </TouchableOpacity>
+  );
+}
+
+RadioButton.defaultProps = {
+  checked: false,
+  onPress: () => {},
+  radioStyle: {},
+  checkedCircleStyle: {},
+};
+
+export default RadioButton;

@@ -36,25 +36,46 @@ import styles from './styles/index.css';
 class SelectPicker extends React.Component {
   constructor(props) {
     super(props);
+
+    const {data, valueDefault} = this.props;
+
+    let itemSelected = {};
+    if (data && data.find && props.valueDefault) {
+      itemSelected = data.find(item => item.id === valueDefault) || {};
+    }
+
     this.state = {
       isVisible: false,
-      valueSelected: props.valueDefault || '',
+      id: itemSelected.id,
+      name: itemSelected.name,
     };
 
     this.renderModal = this.renderModal.bind(this);
-    this.onPress = this.onPress.bind(this);
     this.renderItem = this.renderItem.bind(this);
     this.onHideModal = this.onHideModal.bind(this);
   }
 
-  onPress() {
+  onShowSelect = () => {
     this.setState({isVisible: true});
-  }
+  };
+
+  onSelect = (id, name) => {
+    const {onSelect} = this.props;
+    this.setState({
+      id: id,
+      name: name,
+    });
+    onSelect && onSelect(id, name);
+    this.onHideModal();
+  };
 
   renderItem({item}) {
+    const {id, name} = item;
     return (
-      <TouchableOpacity style={styles.item}>
-        <Text text={item} style={styles.titlePicker} />
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => this.onSelect(id, name)}>
+        <Text text={name} style={styles.titlePicker} />
       </TouchableOpacity>
     );
   }
@@ -67,30 +88,33 @@ class SelectPicker extends React.Component {
     const {isVisible} = this.state;
     const {data} = this.props;
     return (
-      <ModalBase isVisible={isVisible} contentStyle={{maxHeight: 400}} onBackdropPress={this.onHideModal}>
+      <ModalBase
+        isVisible={isVisible}
+        // contentStyle={{paddingVertical: 15}}
+        onBackdropPress={this.onHideModal}>
         <FlatList
           data={data}
-          keyExtractor={item => item}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{padding: 15}}
+          keyExtractor={item => item.id}
           renderItem={this.renderItem}
+          initialNumToRender={30}
         />
       </ModalBase>
     );
   }
 
   render() {
-    const {valueSelected} = this.state;
+    const {id, name} = this.state;
     const {placeholder, containerStyle} = this.props;
     return (
       <>
         <TouchableOpacity
           style={[styles.containerStyle, containerStyle]}
-          onPress={this.onPress}>
+          onPress={this.onShowSelect}>
           <Text
-            text={valueSelected ? valueSelected : placeholder}
-            style={[
-              styles.title,
-              {color: valueSelected ? '#000000' : '#dddddd'},
-            ]}
+            text={name ? name : placeholder}
+            style={[styles.title, {color: name ? '#000000' : '#dddddd'}]}
           />
           <Entypo name={'chevron-thin-down'} size={20} />
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 /*
  * @Project Bluezone
  * @Author Bluezone Global (contact@bluezone.ai)
- * @Createdate 04/26/2020, 16:36
+ * @Createdate 04/28/2020, 21:55
  *
  * This file is part of Bluezone (https://bluezone.ai)
  *
@@ -21,32 +21,24 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import {StyleSheet} from 'react-native';
 
-export default defineMessages({
-  alert: {
-    id: 'bluezone.welcome.alert',
-    defaultMessage: 'Thông báo',
+const styles = StyleSheet.create({
+  squares: {
+    height: 20,
+    width: 20,
+    borderWidth: 1,
+    borderColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 10,
   },
-  contentAlert: {
-    id: 'bluezone.welcome.contentAlert',
-    defaultMessage:
-      'Chức năng đang phát triển, sẽ cập nhật trong thời gian tới',
-  },
-  closeAlert: {
-    id: 'bluezone.welcome.closeAlert',
-    defaultMessage: 'Đóng',
-  },
-  perpetualCalendar: {
-    id: 'bluezone.welcome.perpetualCalendar',
-    defaultMessage: 'Lịch Vạn Niên',
-  },
-  notify: {
-    id: 'bluezone.welcome.notify',
-    defaultMessage: 'Bạn chưa tiếp xúc gần với F0 nào!',
-  },
-  close: {
-    id: 'bluezone.welcome.close',
-    defaultMessage: 'OK',
+  checkedCircle: {
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    backgroundColor: '#131313',
   },
 });
+
+export default styles;
