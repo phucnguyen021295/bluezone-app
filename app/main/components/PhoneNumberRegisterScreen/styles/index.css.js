@@ -24,7 +24,7 @@
 import {StyleSheet, Platform} from 'react-native';
 import {bigger, huge, large, normal, small} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
 
 const BTN_MARGIN_HORIZONTAL = heightPercentageToDP((43 / 720) * 100);
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
@@ -34,6 +34,10 @@ const PADDING_BOTTOM_INPUT = heightPercentageToDP((35 / 720) * 100);
 const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
+const CHECKBOX_IOS_MARGIN_TOP = heightPercentageToDP((17 / 720) * 100);
+const CHECKBOX_ANDROID_MARGIN_TOP = heightPercentageToDP((13 / 720) * 100);
+const TEXT_INPUT_MARGIN_HORIZONTAL = widthPercentageToDP((30 / 360) * 100);
+const CHECKBOX_MARGIN_HORIZONTAL = widthPercentageToDP((23 / 360) * 100);
 
 const styles = StyleSheet.create({
   title: {
@@ -93,6 +97,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     fontSize: normal,
     color: '#000000',
+    marginHorizontal: TEXT_INPUT_MARGIN_HORIZONTAL,
   },
 
   container: {
@@ -111,7 +116,6 @@ const styles = StyleSheet.create({
 
   phone: {
     marginTop: PADDING_TOP_INPUT,
-    marginHorizontal: 30,
     marginBottom: PADDING_BOTTOM_INPUT,
   },
 
@@ -172,7 +176,6 @@ const styles = StyleSheet.create({
   },
 
   textButtonSkip: {
-    // fontWeight: 'bold',
     fontSize: large,
     color: blue_bluezone,
   },
@@ -212,7 +215,11 @@ const styles = StyleSheet.create({
 
   checkboxContainer: {
     flexDirection: 'row',
-    marginTop: 17,
+    marginTop:
+      Platform.OS === 'ios'
+        ? CHECKBOX_IOS_MARGIN_TOP
+        : CHECKBOX_ANDROID_MARGIN_TOP,
+    marginHorizontal: CHECKBOX_MARGIN_HORIZONTAL,
   },
 
   textCheckBox: {
@@ -225,12 +232,16 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         marginTop: -4,
       },
+      android: {
+        paddingRight: 7,
+      }
     }),
   },
 
   textCheckbox2: {
     fontWeight: 'bold',
     color: blue_bluezone,
+    fontFamily: 'OpenSans-Semibold',
   },
 
   checkbox: {

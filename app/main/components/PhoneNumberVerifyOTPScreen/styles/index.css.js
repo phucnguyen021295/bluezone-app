@@ -27,7 +27,7 @@ import {blue_bluezone} from '../../../../core/color';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
 const MARGIN_TOP_CONTENT = heightPercentageToDP((62 / 720) * 100);
-const MARGIN_BOTTOM_CONTENT = heightPercentageToDP((64 / 720) * 100);
+const MARGIN_BOTTOM_CONTENT = heightPercentageToDP((89 / 720) * 100);
 const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);
 const INPUT_HEIGHT = heightPercentageToDP((40 / 720) * 100);
@@ -61,8 +61,7 @@ const styles = StyleSheet.create({
 
   text3: {
     fontSize: fontSize.small,
-    lineHeight: 25,
-    color: blue_bluezone,
+    color: '#2b77d8',
   },
 
   text4: {
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
 
   textSendOTP: {
     fontSize: fontSize.small,
-    lineHeight: 25,
     color: blue_bluezone,
   },
 

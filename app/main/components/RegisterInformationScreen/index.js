@@ -363,7 +363,7 @@ class RegisterInformationScreen extends React.Component {
                 {formatMessage(message.title)}
               </Text>
             </View>
-            <View style={[styles.phone]}>
+            <View style={styles.phone}>
               <TextInput
                 autoFocus={true}
                 ref={this.setFullnameRef}

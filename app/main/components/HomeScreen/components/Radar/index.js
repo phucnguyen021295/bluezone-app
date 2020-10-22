@@ -319,10 +319,7 @@ class Index extends React.Component {
           logBlueZone[i].name === name &&
           logBlueZone[i].address === address
         ) {
-          this.removeRealDotInRadar(
-            getTypeDotByRSSI(logBlueZone[i].rssi),
-            keyMap,
-          );
+          this.removeRealDotInRadar(logBlueZone[i].typeRSSI, keyMap);
           logBlueZone.splice(i, 1);
           this.changeLevelRadar(logBlueZone.length);
         }

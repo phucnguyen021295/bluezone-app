@@ -23,14 +23,15 @@
 
 import {StyleSheet, Platform} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 
 const HEADER_HEIGHT = heightPercentageToDP((70 / 720) * 100);
 const HEADER_IPHONE_X_HEIGHT = heightPercentageToDP((50 / 720) * 100);
 const HEADER_PADDING_TOP = heightPercentageToDP((37 / 720) * 100);
 const HEADER_IPHONE_X_PADDING_TOP = heightPercentageToDP((17 / 720) * 100);
-export const ICON_SIZE = heightPercentageToDP((23 / 720) * 100);
+export const ICON_WIDTH = widthPercentageToDP((9 / 360) * 100);
+export const ICON_HEIGHT = heightPercentageToDP((20 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -47,21 +48,15 @@ const styles = StyleSheet.create({
     height: isIPhoneX ? HEADER_IPHONE_X_HEIGHT : HEADER_HEIGHT,
     justifyContent: 'center',
     zIndex: 99,
+    alignItems: 'center',
     paddingTop: isIPhoneX ? HEADER_IPHONE_X_PADDING_TOP : HEADER_PADDING_TOP,
+    paddingHorizontal: 20,
   },
   textTitle: {
     textAlign: 'center',
     color: '#015cd0',
     fontSize: fontSize.bigger,
-  },
-  icon: {
-    paddingLeft: 20,
-    paddingRight: 30,
-    ...Platform.select({
-      ios: {
-        paddingTop: 5,
-      },
-    }),
+    paddingHorizontal: 49,
   },
   title: {
     flex: 1,

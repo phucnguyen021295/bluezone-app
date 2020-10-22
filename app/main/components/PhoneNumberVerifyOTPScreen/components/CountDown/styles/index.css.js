@@ -28,8 +28,7 @@ import {blue_bluezone} from '../../../../../../core/color';
 const styles = StyleSheet.create({
   textTimer: {
     fontSize: fontSize.small,
-    lineHeight: 25,
-    color: blue_bluezone,
+    color: '#2b77d8',
   },
 });
 
