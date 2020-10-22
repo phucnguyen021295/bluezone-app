@@ -57,6 +57,7 @@ import * as fontSize from '../../../core/fontSize';
 import message from '../../../core/msg/register';
 import configuration from '../../../configuration';
 import {creatScheduleRegisterNotification} from '../../../core/notifyScheduler';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 const TIMEOUT_LOADING = 800;
 const PHONE_NUMBER_REGEX = /^[\+]?[0-9]{9,15}\b/;
@@ -107,6 +108,8 @@ class RegisterScreen extends React.Component {
   }
 
   componentDidMount() {
+    reportScreenAnalytics('RegisterScreen');
+
     this.keyboardWillShowSub = Keyboard.addListener(
       'keyboardDidShow',
       this.keyboardDidShow,

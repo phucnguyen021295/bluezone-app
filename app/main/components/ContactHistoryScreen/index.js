@@ -39,6 +39,7 @@ import configuration from '../../../configuration';
 
 // Style
 import styles from './styles/index.css';
+import {reportScreenAnalytics} from "../../../core/analytics";
 
 const CURRENT_TIME = new Date().setHours(0, 0, 0, 0);
 const NUMBER_DAY = 60;
@@ -66,6 +67,8 @@ class ContactHistoryScreen extends React.Component {
       this.getDataByDaysSuccess,
       this.getDataByDaysFail,
     );
+
+    reportScreenAnalytics('ContactHistoryScreen');
   }
 
   getDataByDaysSuccess(results) {

@@ -53,6 +53,7 @@ import styles from './styles/index.css';
 
 // Api
 import Service from '../../../core/apis/service';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 const currentVersion = Service.getVersion();
 const isDeploygateVersion = currentVersion.includes('deploygate');
@@ -79,6 +80,8 @@ class WatchScanScreen extends React.Component {
     const bzId = await Service.getBluezoneIdFirst6Char();
     this.onBluezoneIdChange(bzId);
     this.createTimeoutGetBluezoneId();
+
+    reportScreenAnalytics('WatchScan');
   }
 
   componentWillUnmount() {

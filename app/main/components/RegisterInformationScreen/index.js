@@ -52,13 +52,14 @@ import {AddDeclareInformation} from '../../../core/apis/bluezone';
 import {RegisterInfomation} from '../../../core/apis/errorCode';
 
 // Styles
-import styles from './styles/index.css';
+import styles, {TEXTINPUT_MARGIN_BOTTOM} from './styles/index.css';
 import * as fontSize from '../../../core/fontSize';
 import {blue_bluezone} from '../../../core/color';
 import configuration, {setPersonalInformation} from '../../../configuration';
 
 import message from '../../../core/msg/registerInformation';
 import {clearScheduleAddInfoNotification} from '../../../core/notifyScheduler';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 const visibleModal = {
   isProcessing: false,
@@ -112,6 +113,8 @@ class RegisterInformationScreen extends React.Component {
   }
 
   componentDidMount() {
+    reportScreenAnalytics('RegisterInformationScreen');
+
     Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
     Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
   }
@@ -338,7 +341,10 @@ class RegisterInformationScreen extends React.Component {
           isVisibleModal={isVisibleInfoSuccess}
           title={formatMessage(message.infoSuccess)}>
           <View style={styles.lBtnModal}>
-            <ButtonConfirm text={formatMessage(message.btnAgree)} onPress={this.onInfoSuccessModalPress} />
+            <ButtonConfirm
+              text={formatMessage(message.btnAgree)}
+              onPress={this.onInfoSuccessModalPress}
+            />
           </View>
         </ModalBase>
       </>
@@ -356,15 +362,7 @@ class RegisterInformationScreen extends React.Component {
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <Header
-            title={formatMessage(message.titleHeader)}
-            colorIcon={blue_bluezone}
-            styleTitle={{
-              color: blue_bluezone,
-              fontSize: fontSize.bigger,
-            }}
-            showBack={false}
-          />
+          <Header title={formatMessage(message.titleHeader)} showBack={false} />
           <ScrollView
             ref={ref => {
               this.scrollView = ref;
@@ -372,7 +370,7 @@ class RegisterInformationScreen extends React.Component {
             onLayout={() => {
               this.scrollView.scrollToEnd({animated: true});
             }}>
-            <View style={[styles.layout1]}>
+            <View style={styles.layout1}>
               <Text
                 style={[
                   styles.title,
@@ -385,7 +383,10 @@ class RegisterInformationScreen extends React.Component {
               <TextInput
                 autoFocus={true}
                 ref={this.setFullnameRef}
-                style={[styles.textInput]}
+                style={[
+                  styles.textInput,
+                  {marginBottom: TEXTINPUT_MARGIN_BOTTOM},
+                ]}
                 placeholderTextColor={'#b5b5b5'}
                 allowFontScaling={false}
                 placeholder={formatMessage(message.fullName)}

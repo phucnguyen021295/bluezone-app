@@ -39,6 +39,7 @@ import log from '../../../core/log';
 
 import Header from '../../../base/components/Header';
 import styles from './styles/index.css';
+import {reportScreenAnalytics} from "../../../core/analytics";
 
 class ViewLogScreen extends React.Component {
   constructor(props) {
@@ -54,6 +55,8 @@ class ViewLogScreen extends React.Component {
 
   componentDidMount() {
     this.onGet();
+
+    reportScreenAnalytics('ViewLog');
   }
 
   onGet = timestampGet => {

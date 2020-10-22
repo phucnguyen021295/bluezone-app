@@ -37,6 +37,7 @@ import * as fontSize from '../../../core/fontSize';
 
 // Styles
 import styles from './styles/index.css';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class Declaration extends React.Component {
   constructor(props) {
@@ -44,6 +45,10 @@ class Declaration extends React.Component {
     this.state = {
       status: 'infected',
     };
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('Declaration');
   }
 
   render() {

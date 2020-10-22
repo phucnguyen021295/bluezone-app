@@ -59,4 +59,13 @@ function reportPushAnalytics(key) {
   firebase.analytics().logEvent(`${eventName}_${key}`, {value: key});
 }
 
-export {reportBluetoothState, bluetoothChangeListener, reportPushAnalytics};
+function reportScreenAnalytics(screenName) {
+  firebase.analytics().setCurrentScreen(screenName);
+}
+
+export {
+  reportBluetoothState,
+  bluetoothChangeListener,
+  reportPushAnalytics,
+  reportScreenAnalytics,
+};

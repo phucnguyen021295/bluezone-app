@@ -39,6 +39,7 @@ import {countryList, cityList} from './data';
 
 // Styles
 import styles from './styles/index.css';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class Declaration extends React.Component {
   constructor(props) {
@@ -51,6 +52,10 @@ class Declaration extends React.Component {
 
     this.onChangName = this.onChangName.bind(this);
     this.onCheckedSex = this.onCheckedSex.bind(this);
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('Declaration');
   }
 
   onChangName(value) {
@@ -72,7 +77,6 @@ class Declaration extends React.Component {
           title={'Khai báo y tế tự nguyện'}
         />
         <InputScrollView style={{paddingHorizontal: 20, marginBottom: 34}}>
-
           <View style={styles.sexStyle}>
             <MediumText text={'Ảnh chân dung'} style={styles.titleSex} />
           </View>

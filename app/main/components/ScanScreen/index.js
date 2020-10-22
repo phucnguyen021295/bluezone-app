@@ -28,8 +28,13 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, TouchableOpacity, Linking} from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class ScanScreen extends Component {
+  componentDidMount() {
+    reportScreenAnalytics('ScanScreen');
+  }
+
   onSuccess(e) {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err),

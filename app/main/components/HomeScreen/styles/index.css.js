@@ -45,6 +45,9 @@ const TEXTF_PADDING_TOP = heightPercentageToDP((9 / 720) * 100);
 const TEXT_WHY_PADDING_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const TEXT_WHY_MARGIN_BOTTOM = heightPercentageToDP((8 / 720) * 100);
 const HEADER_PADDING_HORIZONTAL = widthPercentageToDP((10 / 360) * 100);
+const LANG_PADDING_HORIZONTAL = widthPercentageToDP((20 / 360) * 100);
+const LANG_IPHONE_X_PADDING_TOP = widthPercentageToDP((34 / 360) * 100);
+const LANG_PADDING_TOP = widthPercentageToDP((12 / 360) * 100);
 
 const styles = StyleSheet.create({
   background: {
@@ -308,8 +311,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: isIPhoneX ? 34 : 12,
+    paddingHorizontal: LANG_PADDING_HORIZONTAL,
+    paddingTop: isIPhoneX ? LANG_IPHONE_X_PADDING_TOP : LANG_PADDING_TOP,
     zIndex: 99,
     paddingBottom: LOGO_PADDING_BOTTOM,
   },
