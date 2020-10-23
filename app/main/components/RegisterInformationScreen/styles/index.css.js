@@ -22,7 +22,7 @@
 'use strict';
 
 import {Platform, StyleSheet} from 'react-native';
-import {large, normal, smaller} from '../../../../core/fontSize';
+import {large, normal, small} from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {
   heightPercentageToDP,
@@ -30,7 +30,8 @@ import {
 } from '../../../../core/utils/dimension';
 
 const LOGO_HEIGHT = heightPercentageToDP((124 / 720) * 100);
-const MARGIN_TOP_LAYOUT = heightPercentageToDP((58 / 720) * 100);
+const MARGIN_TOP_LAYOUT = heightPercentageToDP((60 / 720) * 100);
+const MARGIN_BOTTOM_LAYOUT = heightPercentageToDP((56 / 720) * 100);
 const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 const MARGIN_BOTTOM_PHONE = heightPercentageToDP((35 / 720) * 100);
 const PADDING_HORIZONTAL_TITLE = heightPercentageToDP((86 / 720) * 100);
@@ -41,20 +42,21 @@ const CHECKBOX_IOS_MARGIN_TOP = heightPercentageToDP((17 / 720) * 100);
 const CHECKBOX_ANDROID_MARGIN_TOP = heightPercentageToDP((13 / 720) * 100);
 const TEXT_INPUT_MARGIN_HORIZONTAL = widthPercentageToDP((30 / 360) * 100);
 const CHECKBOX_MARGIN_HORIZONTAL = widthPercentageToDP((23 / 360) * 100);
+export const TEXTINPUT_MARGIN_BOTTOM = widthPercentageToDP((9 / 720) * 100);
 
 const styles = StyleSheet.create({
   layout1: {
-    marginVertical: MARGIN_TOP_LAYOUT,
+    marginTop: MARGIN_TOP_LAYOUT,
+    marginBottom: MARGIN_BOTTOM_LAYOUT,
   },
   textInput: {
     height: INPUT_HEIGHT,
-    borderRadius: 8,
+    borderRadius: 3,
     borderWidth: 1,
     borderColor: '#e8e8e8',
     paddingLeft: 16,
     fontSize: normal,
     color: '#000000',
-    marginVertical: 5,
     marginHorizontal: TEXT_INPUT_MARGIN_HORIZONTAL,
   },
 
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
   },
   textCheckBox: {
     flex: 1,
-    fontSize: smaller,
+    fontSize: small,
     lineHeight: 24,
     color: '#000000',
     ...Platform.select({
@@ -197,7 +199,7 @@ const styles = StyleSheet.create({
         marginTop: -4,
       },
       android: {
-        paddingRight: 7,
+        paddingRight: 12,
       },
     }),
   },

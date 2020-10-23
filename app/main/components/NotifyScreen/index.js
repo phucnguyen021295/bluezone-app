@@ -47,6 +47,7 @@ import {
   NOTIFICATION_TYPE,
   RESULT_VERIFY_TYPE,
 } from '../../../const/notification';
+import {reportScreenAnalytics} from "../../../core/analytics";
 
 export const notifyScreenTool = {};
 
@@ -76,6 +77,8 @@ class NotifyScreen extends React.Component {
     //   }, 3000);
     // });
     notifyScreenTool.getList = this.getList;
+
+    reportScreenAnalytics('NotifyScreen');
   }
 
   componentWillUnmount() {

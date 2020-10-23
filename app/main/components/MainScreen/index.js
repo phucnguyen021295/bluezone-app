@@ -45,6 +45,7 @@ import message from '../../../core/msg/tab';
 import styles from './style/index.css';
 import {smallest} from '../../../core/fontSize';
 import {TAB_BAR_HEIGHT, TAB_BAR_IPHONEX_HEIGHT} from './style/index.css';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 // Consts
 const Tab = createMaterialTopTabNavigator();
@@ -73,6 +74,10 @@ class HomeTabScreen extends React.Component {
   constructor(props) {
     super(props);
     this.db = null;
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('HomeScreen');
   }
 
   render() {

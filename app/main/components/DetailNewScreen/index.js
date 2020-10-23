@@ -36,6 +36,7 @@ import Header from '../../../base/components/Header';
 // Styles
 import {CUSTOM_STYLES} from './styles/index.css';
 import configuration from '../../../configuration';
+import {reportScreenAnalytics} from "../../../core/analytics";
 
 class DetailNewScreen extends React.PureComponent {
   constructor(props) {
@@ -59,6 +60,8 @@ class DetailNewScreen extends React.PureComponent {
       },
       this.getNewFail,
     );
+
+    reportScreenAnalytics('DetailNewScreen');
   }
 
   getNewFail(repponse) {}

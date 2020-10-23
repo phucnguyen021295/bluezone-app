@@ -25,6 +25,7 @@ import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
 import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
+import {normal} from "../../../../core/fontSize";
 
 const MARGINTOP_HEADER = heightPercentageToDP((37 / 720) * 100);
 const TITLE_HEIGHT = heightPercentageToDP((33 / 720) * 100);
@@ -35,6 +36,7 @@ const TEXT_LINE_HEIGHT = heightPercentageToDP((25 / 720) * 100);
 const BUTTON_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
 const PADDING_HOZITAL = widthPercentageToDP((23 / 360) * 100);
 const DESCRIPTION_PADDING_BOTTOM = widthPercentageToDP((21 / 360) * 100);
+const BOTTOM_PHONE = heightPercentageToDP((50 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -95,6 +97,19 @@ const styles = StyleSheet.create({
     paddingVertical: BUTTON_PADDING_VERTICAL,
     paddingHorizontal: 10,
     lineHeight: TEXT_LINE_HEIGHT,
+  },
+
+  containerStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: BOTTOM_PHONE,
+    alignItems: 'center',
+  },
+
+  textInvite: {
+    fontSize: normal,
+    color: blue_bluezone,
   },
 });
 

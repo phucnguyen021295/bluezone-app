@@ -39,6 +39,7 @@ import styles from './styles/index.css';
 import msg from '../../../core/msg/notify';
 import configuration from '../../../configuration';
 import message from '../../../core/msg/verifyOtp';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class NotifyScreen extends React.Component {
   constructor(props) {
@@ -46,6 +47,10 @@ class NotifyScreen extends React.Component {
     this.state = {
       isVisiblePhoneRegistered: false,
     };
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('NotifyScreen');
   }
 
   onRegisterScreen = () => {

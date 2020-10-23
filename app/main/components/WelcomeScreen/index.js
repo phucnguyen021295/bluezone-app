@@ -41,10 +41,9 @@ import {
 } from 'react-native';
 import HeaderFull from './Header/HeaderFull';
 import ImageBackgroundBase from './ImageBackgroundBase';
-
-import Text, {LightText} from '../../../base/components/Text';
 import ButtonBase from '../../../base/components/ButtonBase';
 import ButtonIconText from '../../../base/components/ButtonIconText';
+import Text, {LightText} from '../../../base/components/Text';
 
 // Styles
 import styles, {HEIGHT_HEADER, HEIGHT_DEFAULT} from './styles/index.css';
@@ -63,6 +62,8 @@ import {
   setDisplayOriginalImg,
 } from '../../../core/storage';
 import messageWarning from '../../../core/msg/warning';
+
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -91,11 +92,13 @@ class WelcomeScreen extends React.Component {
     this.randomDisplay = this.randomDisplay.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.changeDisplay();
     this.randomDisplay();
     Dimensions.addEventListener('change', this.onDimensionsChange);
     AppState.addEventListener('change', this.handleAppStateChange);
+
+    reportScreenAnalytics('Welcome');
   }
 
   componentWillUnmount() {

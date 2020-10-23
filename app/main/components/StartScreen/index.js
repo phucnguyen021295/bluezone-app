@@ -29,16 +29,23 @@ import {SafeAreaView, StatusBar, View, ScrollView} from 'react-native';
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
 import AppHeader from '../../../base/components/Header';
+import ButtonBase from '../../../base/components/ButtonBase';
 
 // Styles
 import styles from './styles/index.css';
 import message from '../../../core/msg/start';
+
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class StartScreen extends React.Component {
   constructor(props) {
     super(props);
     this.doFinishedWorks = this.doFinishedWorks.bind(this);
     this.onStart = this.onStart.bind(this);
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('StartScreen');
   }
 
   doFinishedWorks(gotoMainScreen = false, goBack = false) {
@@ -94,11 +101,12 @@ class StartScreen extends React.Component {
             </View>
           </View>
         </ScrollView>
-        <View style={styles.boxButton}>
-          <Text style={styles.button} onPress={this.onStart}>
-            {formatMessage(message.button)}
-          </Text>
-        </View>
+        <ButtonBase
+          title={formatMessage(message.button)}
+          onPress={this.onStart}
+          containerStyle={styles.containerStyle}
+          titleStyle={styles.textInvite}
+        />
       </SafeAreaView>
     );
   }

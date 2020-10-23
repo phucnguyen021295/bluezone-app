@@ -69,6 +69,7 @@ import {
   ButtonConfirm,
 } from '../../../base/components/ButtonText/ButtonModal';
 import {removeDeliveredNotification} from '../../../core/fcm';
+import {reportScreenAnalytics} from "../../../core/analytics";
 
 const TIMEOUT_LOADING = 800;
 
@@ -126,6 +127,9 @@ class VerifyOTPScreen extends React.Component {
 
   componentDidMount() {
     this.ref.focus();
+
+    reportScreenAnalytics('VerifyOTPScreen');
+
     this.keyboardWillShowSub = Keyboard.addListener(
       'keyboardDidShow',
       this.keyboardDidShow,

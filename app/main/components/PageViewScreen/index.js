@@ -24,18 +24,22 @@ import React, {Component} from 'react';
 import {
   SafeAreaView,
   StatusBar,
-  BackHandler,
   ActivityIndicator,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {WebView} from 'react-native-webview';
 import Error from './Error';
 import Header from '../../../base/components/Header';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class PageViewScreen extends Component {
   constructor(props) {
     super(props);
     this.reload = this.reload.bind(this);
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('PageViewScreen');
   }
 
   setRef = ref => {

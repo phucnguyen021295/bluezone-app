@@ -39,6 +39,7 @@ import styles from './styles/index.css';
 import home from '../../../core/msg/home';
 import configuration from '../../../configuration';
 import bluezoneIcon from '../NotifyDetail/styles/images/corona.png';
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 class NotifyScreen extends React.Component {
   constructor(props) {
@@ -48,6 +49,10 @@ class NotifyScreen extends React.Component {
       status: route.params.status || 'doubt',
     };
     this.notifyId = route && route.params.data.notifyId;
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('NotifyScreen');
   }
 
   render() {

@@ -37,12 +37,17 @@ import message from '../../../core/msg/intro';
 // Logo
 import IconBYT from './styles/images/iconBoYTe';
 import IconBTT from '../HomeScreen/styles/images/IconBTT';
+import {reportScreenAnalytics} from "../../../core/analytics";
 
 class IntroductionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.doFinishedWorks = this.doFinishedWorks.bind(this);
     this.onContinue = this.onContinue.bind(this);
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics('IntroductionScreen');
   }
 
   doFinishedWorks(gotoMainScreen) {
