@@ -136,7 +136,7 @@ android {
              versionNameSuffix ""
              resValue "string", "app_name", "Bluezone"
              versionCode 68
-             versionName "3.0.5"
+             versionName "3.0.6"
         }
         developer {
              dimension "version"
@@ -144,7 +144,7 @@ android {
              versionNameSuffix ""
              resValue "string", "app_name", "Bluezone"
              versionCode 1
-             versionName "3.0.5-deploygate.dev"
+             versionName "3.0.6-deploygate.dev"
         }
     }
 

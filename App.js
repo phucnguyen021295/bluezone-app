@@ -218,6 +218,15 @@ class App extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.loading && !this.state.loading) {
+      if (this.screenOpenNotification && !this.openedScreenNotification) {
+        navigate(this.screenOpenNotification, this.paramsOpenNotification);
+        this.openedScreenNotification = true;
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.removeNotificationOpenedListener &&
       this.removeNotificationOpenedListener();
@@ -297,7 +306,17 @@ class App extends React.Component {
       (obj && obj.data._group === 'INFO') ||
       (obj && obj.data._group === NOTIFICATION_TYPE.SEND_SHORT_NEWS)
     ) {
-      navigate('NotifyDetail', {
+      // navigate('NotifyDetail', {
+      //   item: {
+      //     title: obj.title,
+      //     bigText: obj.body,
+      //     timestamp: obj.data.timestamp,
+      //     text: obj.data.text,
+      //     largeIcon: obj.data.largeIcon,
+      //   },
+      // });
+      this.screenOpenNotification = 'NotifyDetail';
+      this.paramsOpenNotification = {
         item: {
           title: obj.title,
           bigText: obj.body,
@@ -305,19 +324,21 @@ class App extends React.Component {
           text: obj.data.text,
           largeIcon: obj.data.largeIcon,
         },
-      });
+      };
     } else if (obj && obj.data._group === 'MOBILE') {
-      if (loading) {
-        navigate(PHONE_NUMBER_REGISTER_WIZARD_NAME);
-      } else {
-        navigate('PhoneNumberRegisterScreen');
-      }
+      // if (loading) {
+      //   navigate(PHONE_NUMBER_REGISTER_WIZARD_NAME);
+      // } else {
+      //   navigate('PhoneNumberRegisterScreen');
+      // }
+      this.screenOpenNotification = 'PhoneNumberRegisterScreen';
     } else if (obj && obj.data._group === 'ADD_INFO') {
-      if (loading) {
-        navigate(REGISTER_INFORMATION_WIZARD_NAME);
-      } else {
-        navigate('RegisterInformation');
-      }
+      // if (loading) {
+      //   navigate(REGISTER_INFORMATION_WIZARD_NAME);
+      // } else {
+      //   navigate('RegisterInformation');
+      // }
+      this.screenOpenNotification = 'RegisterInformation';
     } else if (
       obj &&
       (obj.data._group === NOTIFICATION_TYPE.SEND_URL_NEW ||
@@ -427,6 +448,14 @@ class App extends React.Component {
                 <Stack.Screen
                   name={PAGE_WEBVIEW_WELCOME_NAME}
                   component={PageView}
+                />
+                <Stack.Screen
+                  name="PhoneNumberRegisterScreen"
+                  component={PhoneNumberRegisterScreen}
+                />
+                <Stack.Screen
+                  name="RegisterInformation"
+                  component={RegisterInformation}
                 />
               </Stack.Navigator>
             ) : (

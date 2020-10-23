@@ -55,6 +55,10 @@ const styles = StyleSheet.create({
     color: 'red',
   },
 
+  checkbox: {
+    marginLeft: -7,
+  },
+
   date: {
     borderColor: '#dddddd',
     borderWidth: 1,

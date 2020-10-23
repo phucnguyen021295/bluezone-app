@@ -60,6 +60,8 @@ import {
 // Styles
 import styles from './styles/index.css';
 import * as fontSize from '../../../core/fontSize';
+import {setInfoDeclare} from '../../../core/storage';
+import configuration from '../../../configuration';
 
 class Declaration extends React.Component {
   constructor(props) {
@@ -94,13 +96,15 @@ class Declaration extends React.Component {
       startProvince: '',
       startProvinceID: null,
       country21Day: '',
-      province: '',
-      provinceID: null,
-      district: '',
-      districtID: null,
-      ward: '',
-      wardID: '',
-      addressVietNam: '',
+      endCountryID: 'Việt Nam',
+      endProvinceID: null,
+      vn_Province: '',
+      vn_ProvinceID: null,
+      vn_District: '',
+      vn_DistrictID: null,
+      vn_Ward: '',
+      vn_WardID: '',
+      vn_Address: '',
       numberPhone: '',
       email: '',
       symptom: {},
@@ -177,6 +181,10 @@ class Declaration extends React.Component {
     this.changeState('gender', '3');
   };
 
+  onSelectNationality = id => {
+    this.changeState('nationalityID', id);
+  };
+
   onCheckBoxChange_Planes = value => {
     this.changeState('vehicle_Planes', value);
   };
@@ -235,6 +243,22 @@ class Declaration extends React.Component {
     this.changeState('startProvinceID', id);
   };
 
+  onSelectEndProvince = id => {
+    this.changeState('endProvinceID', id);
+  };
+
+  onSelectVNProvince = id => {
+    this.changeState('vn_ProvinceID', id);
+  };
+
+  onSelectVNPDistrict = id => {
+    this.changeState('vn_DistrictID', id);
+  };
+
+  onSelectVNWard = id => {
+    this.changeState('vn_WardID', id);
+  };
+
   onSelectSymptom = (type, value) => {
     const {symptom} = this.state;
     symptom[type] = value;
@@ -255,38 +279,281 @@ class Declaration extends React.Component {
     this.changeState('testResult', value);
   };
 
-  hihi = () => {
-    this.setState(prev => {
-      return {
-        xxx: (prev.xxx || 0) + 1,
-      };
-    });
-  };
-  haha = () => {
-    this.setState(prev => {
-      return {
-        yyy: !prev.yyy,
-      };
-    });
+  onFullNameInputChange = text => {
+    this.changeState('fullName', text);
   };
 
-  render1() {
-    const b = [];
-    for (let i = 0; i < 50; i++) {
-      b.push(<Text>{i}</Text>);
+  onPassportInputChange = text => {
+    this.changeState('passport', text);
+  };
+
+  onOtherVehiclesInputChange = text => {
+    this.changeState('otherVehicles', text);
+  };
+
+  onVehicleNumberInputChange = text => {
+    this.changeState('vehicleNumber', text);
+  };
+
+  onVehicleSeatInputChange = text => {
+    this.changeState('vehicleSeat', text);
+  };
+
+  onStartProvinceInputChange = text => {
+    this.changeState('startProvince', text);
+  };
+
+  onCountry21DayInputChange = text => {
+    this.changeState('country21Day', text);
+  };
+
+  onVNAddressInputChange = text => {
+    this.changeState('vn_Address', text);
+  };
+
+  onNumberPhoneInputChange = text => {
+    this.changeState('numberPhone', text);
+  };
+
+  onEmailInputChange = text => {
+    this.changeState('email', text);
+  };
+
+  onVacXinInputChange = text => {
+    this.changeState('vacxin', text);
+  };
+
+  onSend = () => {
+    const {
+      portrait,
+      gateID,
+      gate,
+      fullName,
+      yearOfBirth,
+      gender,
+      nationalityID,
+      nationality,
+      passport,
+      vehicle_Planes,
+      vehicle_Boat,
+      vehicle_Car,
+      otherVehicles,
+      vehicleNumber,
+      vehicleSeat,
+      isPickerStartDateVisible,
+      startDateString,
+      startDate,
+      isPickerEndDateVisible,
+      endDateString,
+      endDate,
+      startCountryID,
+      startProvince,
+      startProvinceID,
+      endCountryID,
+      endProvinceID,
+      country21Day,
+      vn_Province,
+      vn_ProvinceID,
+      vn_District,
+      vn_DistrictID,
+      vn_Ward,
+      vn_WardID,
+      vn_Address,
+      numberPhone,
+      email,
+      symptom,
+      vacxin,
+      exposureHistory,
+      testResultImage,
+      testResult,
+    } = this.state;
+
+    if (!portrait) {
+      // ...
+      return;
     }
-    return (
-      <KeyboardAvoidingView behavior="padding">
-        <RadioButton checked={this.state.yyy} onPress={this.haha} />
-        <RadioButton checked={!this.state.yyy} />
-        <TouchableOpacity
-          style={{padding: 20, backgroundColor: 'red'}}
-          onPress={() => this.hihi()}>
-          <Text>{this.state.xxx}</Text>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
-    );
-  }
+
+    if (!fullName) {
+      // ...
+      return;
+    }
+
+    if (!yearOfBirth) {
+      // ...
+      return;
+    }
+
+    if (!gender) {
+      // ...
+      return;
+    }
+
+    if (!nationalityID) {
+      // ...
+      return;
+    }
+
+    if (!passport) {
+      // ...
+      return;
+    }
+
+    if (!vehicle_Planes && !vehicle_Boat && vehicle_Car) {
+      // ...
+      return;
+    }
+
+    if (!startDateString) {
+      // ...
+      return;
+    }
+
+    if (!endDateString) {
+      // ...
+      return;
+    }
+
+    if (!startCountryID) {
+      // ...
+      return;
+    }
+
+    if (!startProvince && !startProvinceID) {
+      // ...
+      return;
+    }
+
+    if (!endProvinceID) {
+      // ...
+      return;
+    }
+
+    if (!country21Day) {
+      // ...
+      return;
+    }
+
+    if (!vn_ProvinceID) {
+      // ...
+      return;
+    }
+
+    if (!vn_DistrictID) {
+      // ...
+      return;
+    }
+
+    if (!vn_WardID) {
+      // ...
+      return;
+    }
+
+    if (!numberPhone) {
+      // ...
+      return;
+    }
+
+    if (Object.keys(symptom).length < Object.keys(symptomData)) {
+      // Chưa chọn đủ thông tin triệu chứng
+      return;
+    }
+    if (
+      Object.keys(exposureHistory).length < Object.keys(exposureHistoryData)
+    ) {
+      // Chưa chọn đủ thông tin về lịch sử phơi nhiễm
+      return;
+    }
+
+    const symptomResult = [];
+    symptomData.forEach(item => {
+      symptomResult.push({
+        ID: item.id,
+        Text: item.name,
+        Value: symptom[item.id],
+      });
+    });
+
+    const exposureHistoryResult = [];
+    exposureHistoryData.forEach(item => {
+      exposureHistoryResult.push({
+        ID: item.id,
+        Value: symptom[item.id],
+      });
+    });
+
+    const {TokenFirebase, PhoneNumber} = configuration;
+    const data = {
+      TokenFirebase,
+      PhoneNumber,
+      AnhChanDungBase64: portrait,
+      MaCuaKhau: gateID,
+      HoTen: fullName,
+      NamSinh: yearOfBirth,
+      MaGioiTinh: gender,
+      MaQuocTich: nationalityID,
+      SoHoChieu: passport,
+      ThongTinDiLai: JSON.stringify([
+        {ID: 1, Text: 'Máy bay', Value: vehicle_Planes},
+        {ID: 1, Text: 'Tàu thuyền', Value: vehicle_Boat},
+        {ID: 1, Text: 'Ô tô', Value: vehicle_Car},
+      ]),
+      ThongTinDiLaiKhac: otherVehicles,
+      SoHieuPhuongTien: vehicleNumber,
+      SoGhe: vehicleNumber,
+      NgayKhoiHanh: startDateString,
+      NgayNhapCanh: endDateString,
+      DiaDiemKhoiHanh_MaQuocGia: startCountryID,
+      // Xem lại tỉnh của nơi đến khi là viết nam
+      DiaDiemKhoiHanh_MaTinh: startProvinceID,
+      DiaDiemNoiDen_MaQuocGia: endCountryID,
+      DiaDiemNoiDen_MaTinh: endProvinceID,
+      QuocGiaDenTrong21NgayQua: country21Day,
+      DiaChiLienLac_VN_MaTinh: vn_ProvinceID,
+      DiaChiLienLac_VN_MaHuyen: vn_DistrictID,
+      DiaChiLienLac_VN_MaPhuongXa: vn_WardID,
+      DiaChiLienLac_VN_ChiTiet: vn_Address,
+      SoDienThoai: numberPhone,
+      Email: email,
+      TrieuChungBenh: JSON.stringify(symptomResult),
+      VacXinSuDung: vacxin,
+      LichSuPhoiNhiem: JSON.stringify(exposureHistoryResult),
+      KetQuaXetNghiem: testResult,
+      FileKetQuaXetNghiemBase64: testResultImage,
+    };
+  };
+
+  // hihi = () => {
+  //   this.setState(prev => {
+  //     return {
+  //       xxx: (prev.xxx || 0) + 1,
+  //     };
+  //   });
+  // };
+  // haha = () => {
+  //   this.setState(prev => {
+  //     return {
+  //       yyy: !prev.yyy,
+  //     };
+  //   });
+  // };
+  //
+  // render1() {
+  //   const b = [];
+  //   for (let i = 0; i < 50; i++) {
+  //     b.push(<Text>{i}</Text>);
+  //   }
+  //   return (
+  //     <KeyboardAvoidingView behavior="padding">
+  //       <RadioButton checked={this.state.yyy} onPress={this.haha} />
+  //       <RadioButton checked={!this.state.yyy} />
+  //       <TouchableOpacity
+  //         style={{padding: 20, backgroundColor: 'red'}}
+  //         onPress={() => this.hihi()}>
+  //         <Text>{this.state.xxx}</Text>
+  //       </TouchableOpacity>
+  //     </KeyboardAvoidingView>
+  //   );
+  // }
 
   render() {
     const {
@@ -302,6 +569,7 @@ class Declaration extends React.Component {
       vehicle_Planes,
       vehicle_Boat,
       vehicle_Car,
+      otherVehicles,
       vehicleNumber,
       vehicleSeat,
       isPickerStartDateVisible,
@@ -313,14 +581,15 @@ class Declaration extends React.Component {
       startCountryID,
       startProvince,
       startProvinceID,
+      endProvinceID,
       country21Day,
-      province,
-      provinceID,
-      district,
-      districtID,
-      ward,
-      wardID,
-      addressVietNam,
+      vn_Province,
+      vn_ProvinceID,
+      vn_District,
+      vn_DistrictID,
+      vn_Ward,
+      vn_WardID,
+      vn_Address,
       numberPhone,
       email,
       symptom,
@@ -329,6 +598,11 @@ class Declaration extends React.Component {
       testResultImage,
       testResult,
     } = this.state;
+
+    console.log('render');
+
+    const startVN = startCountryID === 'Việt Nam';
+
     const {intl} = this.props;
     const {formatMessage} = intl;
 
@@ -372,12 +646,18 @@ class Declaration extends React.Component {
                 text={'Cửa khẩu'}
                 star
               />
-              <SelectPicker data={gates} placeholder={'Chọn cửa khẩu'} />
+              <SelectPicker
+                data={gates}
+                placeholder={'Chọn cửa khẩu'}
+                onSelect={this.onSelectGate}
+              />
             </View>
             <FormInput
               title={'Họ và tên:'}
               star={true}
               placeholder={'Nhập họ và tên:'}
+              onChangeText={this.onFullNameInputChange}
+              value={fullName}
             />
 
             <View style={styles.itemContainer}>
@@ -389,6 +669,7 @@ class Declaration extends React.Component {
               <SelectPicker
                 data={yearBirth}
                 valueDefault={'2020'}
+                onSelect={this.onSelectYearOfBirth}
                 placeholder={'Chọn năm sinh'}
               />
             </View>
@@ -440,8 +721,9 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={countries}
-                valueDefault={'Viet Nam'}
+                valueDefault={'Việt Nam'}
                 placeholder={'Quốc tịch'}
+                onSelect={this.onSelectNationality}
               />
             </View>
 
@@ -450,7 +732,8 @@ class Declaration extends React.Component {
               star={true}
               placeholder={'Nhập số CMT/CCCD/Hộ chiếu'}
               keyboardType={'phone-pad'}
-              onChangeText={this.onChangName}
+              onChangeText={this.onPassportInputChange}
+              value={passport}
             />
 
             <View style={styles.itemContainer}>
@@ -466,7 +749,7 @@ class Declaration extends React.Component {
                   <CheckBox
                     value={vehicle_Planes}
                     onValueChange={this.onCheckBoxChange_Planes}
-                    style={{marginLeft: -7}}
+                    style={styles.checkbox}
                   />
                   <Text style={styles.vehicleItemText} text={'Máy bay'} />
                 </TouchableOpacity>
@@ -476,7 +759,7 @@ class Declaration extends React.Component {
                   <CheckBox
                     value={vehicle_Boat}
                     onValueChange={this.onCheckBoxChange_Boat}
-                    style={{marginLeft: -7}}
+                    style={styles.checkbox}
                   />
                   <Text style={styles.vehicleItemText} text={'Tàu thuyền'} />
                 </TouchableOpacity>
@@ -486,24 +769,30 @@ class Declaration extends React.Component {
                   <CheckBox
                     value={vehicle_Car}
                     onValueChange={this.onCheckBoxChange_Car}
-                    style={{marginLeft: -7}}
+                    style={styles.checkbox}
                   />
                   <Text style={styles.vehicleItemText} text={'Ô tô'} />
                 </TouchableOpacity>
               </View>
               <Text>Khác (Ghi rõ)</Text>
-              <TextInput style={styles.textInput} />
+              <TextInput
+                style={styles.textInput}
+                onChangeText={this.onOtherVehiclesInputChange}
+                value={otherVehicles}
+              />
             </View>
             <View style={{flexDirection: 'row'}}>
               <FormInput
                 containerStyle={{flex: 1, marginRight: 10}}
                 title={'Số hiệu phương tiện'}
-                onChangeText={this.onChangName}
+                onChangeText={this.onVehicleNumberInputChange}
+                value={vehicleNumber}
               />
               <FormInput
                 containerStyle={{flex: 1, marginLeft: 10}}
                 title={'Số ghế'}
-                onChangeText={this.onChangName}
+                onChangeText={this.onVehicleSeatInputChange}
+                value={vehicleSeat}
               />
             </View>
 
@@ -554,15 +843,27 @@ class Declaration extends React.Component {
                 text={'Quốc gia/ Vùng lãnh thổ'}
                 star
               />
-              <SelectPicker data={countries} valueDefault={'Viet Nam'} />
+              <SelectPicker
+                data={countries}
+                valueDefault={'Viet Nam'}
+                onSelect={this.onSelectStartCountry}
+              />
             </View>
 
             <View style={styles.itemContainer}>
               <TextInfo styleContainer={styles.itemTitle} text={'Tỉnh'} star />
-              {2 > 1 ? (
-                <SelectPicker data={countries} valueDefault={'Viet Nam'} />
+              {startVN ? (
+                <SelectPicker
+                  data={countries}
+                  valueDefault={'Viet Nam'}
+                  onSelect={this.onSelectStartProvince}
+                />
               ) : (
-                <TextInput style={styles.textInput} />
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={this.onStartProvinceInputChange}
+                  value={startProvince}
+                />
               )}
             </View>
 
@@ -594,14 +895,19 @@ class Declaration extends React.Component {
 
             <View style={styles.itemContainer}>
               <TextInfo styleContainer={styles.itemTitle} text={'Tỉnh'} star />
-              <SelectPicker data={provinces} placeholder={'Chọn tỉnh'} />
+              <SelectPicker
+                data={provinces}
+                placeholder={'Chọn tỉnh'}
+                onSelect={this.onSelectEndProvince}
+              />
             </View>
 
             <FormInput
               title={
                 'Trong vòng 21 ngày qua, anh/chị đã đến quốc gia/vùng lãnh thổ nào ?'
               }
-              onChangeText={this.onChangName}
+              onChangeText={this.onCountry21DayInputChange}
+              value={country21Day}
               star
             />
 
@@ -616,7 +922,10 @@ class Declaration extends React.Component {
                 text={'Tỉnh thành'}
                 star
               />
-              <SelectPicker data={countries} valueDefault={'Viet Nam'} />
+              <SelectPicker
+                data={provinces}
+                onSelect={this.onSelectVNProvince}
+              />
             </View>
 
             <View style={styles.itemContainer}>
@@ -625,7 +934,10 @@ class Declaration extends React.Component {
                 text={'Quận / Huyện'}
                 star
               />
-              <SelectPicker data={countries} valueDefault={'Viet Nam'} />
+              <SelectPicker
+                data={provinces}
+                onSelect={this.onSelectVNPDistrict}
+              />
             </View>
 
             <View style={styles.itemContainer}>
@@ -634,22 +946,28 @@ class Declaration extends React.Component {
                 text={'Phường / Xã'}
                 star
               />
-              <SelectPicker data={countries} valueDefault={'Viet Nam'} />
+              <SelectPicker data={provinces} onSelect={this.onSelectVNWard} />
             </View>
 
             <FormInput
               title={'Địa chỉ nơi ở tại Việt Nam'}
-              onChangeText={this.onChangName}
+              onChangeText={this.onVNAddressInputChange}
+              value={vn_Address}
               star
             />
 
             <FormInput
-              title={'Địa thoại'}
-              onChangeText={this.onChangName}
+              title={'Địên thoại'}
+              onChangeText={this.onNumberPhoneInputChange}
               star
+              value={numberPhone}
             />
 
-            <FormInput title={'Email'} onChangeText={this.onChangName} />
+            <FormInput
+              title={'Email'}
+              onChangeText={this.onEmailInputChange}
+              value={email}
+            />
 
             <View style={styles.itemContainer}>
               <TextInfo
@@ -704,7 +1022,8 @@ class Declaration extends React.Component {
             </View>
             <FormInput
               title={'Danh sách vắc-xin hoặc sinh phẩm được sử dụng'}
-              onChangeText={this.onChangName}
+              onChangeText={this.onVacXinInputChange}
+              value={vacxin}
             />
 
             <View style={styles.itemContainer}>
@@ -809,7 +1128,7 @@ class Declaration extends React.Component {
             </Text>
 
             <View style={styles.btnSendContainer}>
-              <TouchableOpacity style={styles.btnSend}>
+              <TouchableOpacity style={styles.btnSend} onPress={this.onSend}>
                 <Text style={styles.btnSendContent}>Gửi tờ khai</Text>
               </TouchableOpacity>
             </View>
