@@ -69,7 +69,7 @@ import {
   ButtonConfirm,
 } from '../../../base/components/ButtonText/ButtonModal';
 import {removeDeliveredNotification} from '../../../core/fcm';
-import {reportScreenAnalytics} from "../../../core/analytics";
+import {reportScreenAnalytics} from '../../../core/analytics';
 
 const TIMEOUT_LOADING = 800;
 

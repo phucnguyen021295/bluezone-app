@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
 
+  bigText: {
+    fontSize: fontSize.normal,
+  },
+
+  bigTextContainer: {
+    paddingTop: 8,
+    paddingBottom: 0,
+  },
+
   inputNumberHome: {
     borderColor: '#dddddd',
     borderWidth: 1,
@@ -93,7 +102,6 @@ const styles = StyleSheet.create({
 
   btnSendContent: {
     color: '#FFF',
-    // textAlign: 'center',
   },
 
   vehicleItemContainer: {

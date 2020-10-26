@@ -56,6 +56,10 @@ class SelectPicker extends React.Component {
   }
 
   onShowSelect = () => {
+    const {shouldVisible} = this.props;
+    if (shouldVisible && !shouldVisible()) {
+      return;
+    }
     this.setState({isVisible: true});
   };
 
@@ -96,9 +100,9 @@ class SelectPicker extends React.Component {
           data={data}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{padding: 15}}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           renderItem={this.renderItem}
-          initialNumToRender={30}
+          initialNumToRender={60}
         />
       </ModalBase>
     );
@@ -116,7 +120,7 @@ class SelectPicker extends React.Component {
             text={name ? name : placeholder}
             style={[styles.title, {color: name ? '#000000' : '#dddddd'}]}
           />
-          <Entypo name={'chevron-thin-down'} size={20} />
+          <Entypo name={'chevron-thin-down'} size={15} />
         </TouchableOpacity>
         {this.renderModal()}
       </>

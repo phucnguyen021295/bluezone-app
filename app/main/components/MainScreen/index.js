@@ -160,30 +160,30 @@ class HomeTabScreen extends React.Component {
             },
           })}
         />
-        {/*<Tab.Screen*/}
-        {/*  name="Utilities"*/}
-        {/*  component={UtilityScreen}*/}
-        {/*  options={{*/}
-        {/*    tabBarLabel: ({focused}) => (*/}
-        {/*      <Text*/}
-        {/*        text={'Tiện ích'}*/}
-        {/*        style={[*/}
-        {/*          styles.labelStyle,*/}
-        {/*          {*/}
-        {/*            color: focused ? '#015cd0' : '#747474',*/}
-        {/*            paddingLeft: 3,*/}
-        {/*          },*/}
-        {/*        ]}*/}
-        {/*      />*/}
-        {/*    ),*/}
-        {/*    tabBarIcon: ({focused, color, size}) => (*/}
-        {/*      <FastImage*/}
-        {/*        source={focused ? iconActive.Faq : icon.Faq}*/}
-        {/*        style={styles.iconFaq}*/}
-        {/*      />*/}
-        {/*    ),*/}
-        {/*  }}*/}
-        {/*/>*/}
+        <Tab.Screen
+          name="Utilities"
+          component={UtilityScreen}
+          options={{
+            tabBarLabel: ({focused}) => (
+              <Text
+                text={'Tiện ích'}
+                style={[
+                  styles.labelStyle,
+                  {
+                    color: focused ? '#015cd0' : '#747474',
+                    paddingLeft: 3,
+                  },
+                ]}
+              />
+            ),
+            tabBarIcon: ({focused, color, size}) => (
+              <FastImage
+                source={focused ? iconActive.Faq : icon.Faq}
+                style={styles.iconFaq}
+              />
+            ),
+          }}
+        />
         <Tab.Screen
           name="FAQ"
           component={FAQScreen}

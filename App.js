@@ -306,39 +306,40 @@ class App extends React.Component {
       (obj && obj.data._group === 'INFO') ||
       (obj && obj.data._group === NOTIFICATION_TYPE.SEND_SHORT_NEWS)
     ) {
-      // navigate('NotifyDetail', {
-      //   item: {
-      //     title: obj.title,
-      //     bigText: obj.body,
-      //     timestamp: obj.data.timestamp,
-      //     text: obj.data.text,
-      //     largeIcon: obj.data.largeIcon,
-      //   },
-      // });
-      this.screenOpenNotification = 'NotifyDetail';
-      this.paramsOpenNotification = {
-        item: {
-          title: obj.title,
-          bigText: obj.body,
-          timestamp: obj.data.timestamp,
-          text: obj.data.text,
-          largeIcon: obj.data.largeIcon,
-        },
-      };
+      if (loading) {
+        this.screenOpenNotification = 'NotifyDetail';
+        this.paramsOpenNotification = {
+          item: {
+            title: obj.title,
+            bigText: obj.body,
+            timestamp: obj.data.timestamp,
+            text: obj.data.text,
+            largeIcon: obj.data.largeIcon,
+          },
+        };
+      } else {
+        navigate('NotifyDetail', {
+          item: {
+            title: obj.title,
+            bigText: obj.body,
+            timestamp: obj.data.timestamp,
+            text: obj.data.text,
+            largeIcon: obj.data.largeIcon,
+          },
+        });
+      }
     } else if (obj && obj.data._group === 'MOBILE') {
-      // if (loading) {
-      //   navigate(PHONE_NUMBER_REGISTER_WIZARD_NAME);
-      // } else {
-      //   navigate('PhoneNumberRegisterScreen');
-      // }
-      this.screenOpenNotification = 'PhoneNumberRegisterScreen';
+      if (loading) {
+        this.screenOpenNotification = 'PhoneNumberRegisterScreen';
+      } else {
+        navigate('PhoneNumberRegisterScreen');
+      }
     } else if (obj && obj.data._group === 'ADD_INFO') {
-      // if (loading) {
-      //   navigate(REGISTER_INFORMATION_WIZARD_NAME);
-      // } else {
-      //   navigate('RegisterInformation');
-      // }
-      this.screenOpenNotification = 'RegisterInformation';
+      if (loading) {
+        this.screenOpenNotification = 'RegisterInformation';
+      } else {
+        navigate('RegisterInformation');
+      }
     } else if (
       obj &&
       (obj.data._group === NOTIFICATION_TYPE.SEND_URL_NEW ||
