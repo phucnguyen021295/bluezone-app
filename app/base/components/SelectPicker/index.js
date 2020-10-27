@@ -29,6 +29,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 // Components
 import Text from '../Text';
 import ModalBase from '../ModalBase/ButtonHalf';
+import Header from '../Header';
 
 // Styles
 import styles from './styles/index.css';
@@ -75,6 +76,9 @@ class SelectPicker extends React.Component {
 
   renderItem({item}) {
     const {id, name} = item;
+    if (!name) {
+      return null;
+    }
     return (
       <TouchableOpacity
         style={styles.item}
@@ -90,12 +94,13 @@ class SelectPicker extends React.Component {
 
   renderModal() {
     const {isVisible} = this.state;
-    const {data} = this.props;
+    const {data, headerText} = this.props;
     return (
       <ModalBase
         isVisible={isVisible}
-        // contentStyle={{paddingVertical: 15}}
+        contentStyle={{flex: 1}}
         onBackdropPress={this.onHideModal}>
+        {headerText && <Header onBack={this.onHideModal} title={headerText} />}
         <FlatList
           data={data}
           showsVerticalScrollIndicator={false}

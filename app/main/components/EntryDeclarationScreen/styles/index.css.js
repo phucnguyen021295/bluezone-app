@@ -29,8 +29,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
+
+  flexOne: {
+    flex: 1,
+  },
+
+  scroll: {
+    paddingHorizontal: 20,
+  },
+
   textHeader: {
-    color: '#015cd0',
     fontSize: fontSize.huge,
   },
 
@@ -80,6 +88,10 @@ const styles = StyleSheet.create({
   },
 
   nameSymptom: {
+    flex: 1,
+  },
+
+  buttonSymptom: {
     textAlign: 'center',
     width: 50,
   },
@@ -110,6 +122,11 @@ const styles = StyleSheet.create({
   },
 
   vehicleItemText: {},
+
+  portraitContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
 
   portraitBtn: {
     width: 100,
@@ -156,6 +173,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 45,
   },
+
+  labelVietNam: {
+    borderColor: '#dddddd',
+    borderWidth: 1,
+    borderRadius: 6,
+    height: 40,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  labelRed: {
+    marginVertical: 10,
+    color: 'red',
+  },
+
+  flexRow: {
+    flexDirection: 'row',
+  },
+
+  vehicleNumber: {flex: 1, marginRight: 10},
+  vehicleSeat: {flex: 1, marginLeft: 10},
 });
 
 export default styles;

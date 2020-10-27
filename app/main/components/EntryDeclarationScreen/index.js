@@ -715,13 +715,13 @@ class Declaration extends React.Component {
     const {formatMessage} = intl;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={{flex: 1}}>
+      <KeyboardAvoidingView behavior="padding" style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           <Header
             styleTitle={styles.textHeader}
             title={'Khai báo y tế tự nguyện'}
           />
-          <ScrollView style={{paddingHorizontal: 20}}>
+          <ScrollView style={styles.scroll}>
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -729,17 +729,14 @@ class Declaration extends React.Component {
                 star
               />
 
-              <View style={{alignItems: 'center', padding: 10}}>
+              <View style={styles.portraitContainer}>
                 <TouchableOpacity
                   onPress={this.onSelectPortrait}
                   style={
                     !portrait ? styles.portraitBtn : styles.portraitImageBtn
                   }>
                   <Image
-                    style={{
-                      width: 100,
-                      height: 100,
-                    }}
+                    style={styles.portraitImage}
                     source={{
                       uri: `data:image/png;base64,${portrait}`,
                     }}
@@ -756,6 +753,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={gates}
+                headerText={'Chọn cửa khẩu'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectGate}
               />
@@ -777,8 +775,9 @@ class Declaration extends React.Component {
               <SelectPicker
                 data={yearBirth}
                 // valueDefault={'2020'}
-                onSelect={this.onSelectYearOfBirth}
+                headerText={'Chọn năm sinh'}
                 placeholder={'-Chọn-'}
+                onSelect={this.onSelectYearOfBirth}
               />
             </View>
 
@@ -788,9 +787,9 @@ class Declaration extends React.Component {
                 styleContainer={styles.itemTitle}
                 star
               />
-              <View style={{flexDirection: 'row'}}>
+              <View style={styles.flexRow}>
                 <TouchableOpacity
-                  style={{flexDirection: 'row'}}
+                  style={styles.flexRow}
                   onPress={this.selectGenderMale}>
                   <RadioButton
                     checked={gender === '1'}
@@ -800,7 +799,7 @@ class Declaration extends React.Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={{flexDirection: 'row'}}
+                  style={styles.flexRow}
                   onPress={this.selectGenderFemale}>
                   <RadioButton
                     checked={gender === '2'}
@@ -810,7 +809,7 @@ class Declaration extends React.Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={{flexDirection: 'row'}}
+                  style={styles.flexRow}
                   onPress={this.selectGenderOther}>
                   <RadioButton
                     checked={gender === '3'}
@@ -829,6 +828,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={countries}
+                headerText={'Chọn quốc tịch'}
                 valueDefault={'Việt Nam'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectNationality}
@@ -889,15 +889,15 @@ class Declaration extends React.Component {
                 value={otherVehicles}
               />
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={styles.flexRow}>
               <FormInput
-                containerStyle={{flex: 1, marginRight: 10}}
+                containerStyle={styles.vehicleNumber}
                 title={'Số hiệu phương tiện'}
                 onChangeText={this.onVehicleNumberInputChange}
                 value={vehicleNumber}
               />
               <FormInput
-                containerStyle={{flex: 1, marginLeft: 10}}
+                containerStyle={styles.vehicleSeat}
                 title={'Số ghế'}
                 onChangeText={this.onVehicleSeatInputChange}
                 value={vehicleSeat}
@@ -954,6 +954,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={countries}
+                headerText={'Chọn quốc gia'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectStartCountry}
               />
@@ -964,6 +965,7 @@ class Declaration extends React.Component {
               {startVN ? (
                 <SelectPicker
                   data={provinces}
+                  headerText={'Chọn tỉnh'}
                   placeholder={'-Chọn-'}
                   onSelect={this.onSelectStartProvince}
                 />
@@ -988,17 +990,7 @@ class Declaration extends React.Component {
                 text={'Quốc gia/ Vùng lãnh thổ'}
                 star
               />
-              <View
-                style={{
-                  borderColor: '#dddddd',
-                  borderWidth: 1,
-                  borderRadius: 6,
-                  height: 40,
-                  paddingHorizontal: 12,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.labelVietNam}>
                 <Text>Việt Nam</Text>
               </View>
             </View>
@@ -1007,6 +999,7 @@ class Declaration extends React.Component {
               <TextInfo styleContainer={styles.itemTitle} text={'Tỉnh'} star />
               <SelectPicker
                 data={provinces}
+                headerText={'Chọn tỉnh'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectEndProvince}
               />
@@ -1035,6 +1028,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={provinces}
+                headerText={'Chọn tỉnh/thành'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectVNProvince}
               />
@@ -1048,6 +1042,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={provinces}
+                headerText={'Chọn quận/huyện'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectVNPDistrict}
                 shouldVisible={this.shouldVisibleVNDistrict}
@@ -1062,6 +1057,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={provinces}
+                headerText={'Chọn phường xã'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectVNWard}
                 shouldVisible={this.shouldVisibleVNWard}
@@ -1098,14 +1094,14 @@ class Declaration extends React.Component {
               />
               <View>
                 <View style={styles.rowSymptom}>
-                  <Text style={{flex: 1}}>Triệu chứng</Text>
-                  <Text style={styles.nameSymptom}>Có</Text>
-                  <Text style={styles.nameSymptom}>Không</Text>
+                  <Text style={styles.nameSymptom}>Triệu chứng</Text>
+                  <Text style={styles.buttonSymptom}>Có</Text>
+                  <Text style={styles.buttonSymptom}>Không</Text>
                 </View>
 
                 {symptomData.map(symptomItem => (
                   <View key={symptomItem.id} style={styles.rowSymptom}>
-                    <Text style={{flex: 1}}>
+                    <Text style={styles.flexOne}>
                       {symptomItem.name}
                       <Text style={styles.star}> *</Text>
                     </Text>
@@ -1153,14 +1149,14 @@ class Declaration extends React.Component {
               />
               <View>
                 <View style={styles.rowSymptom}>
-                  <Text style={{flex: 1}} />
-                  <Text style={styles.nameSymptom}>Có</Text>
-                  <Text style={styles.nameSymptom}>Không</Text>
+                  <Text style={styles.nameSymptom} />
+                  <Text style={styles.buttonSymptom}>Có</Text>
+                  <Text style={styles.buttonSymptom}>Không</Text>
                 </View>
 
                 {exposureHistoryData.map(exposureItem => (
                   <View key={exposureItem.id} style={styles.rowSymptom}>
-                    <Text style={{flex: 1}}>
+                    <Text style={styles.flexOne}>
                       {exposureItem.name}
                       <Text style={styles.star}> *</Text>
                     </Text>
@@ -1200,7 +1196,7 @@ class Declaration extends React.Component {
                 styleContainer={styles.itemTitle}
                 text={'Phiếu kết quả xét nghiệm'}
               />
-              <View style={{flexDirection: 'row'}}>
+              <View style={styles.flexRow}>
                 <TouchableOpacity
                   onPress={this.onSelectTestResultImage}
                   style={
@@ -1231,7 +1227,7 @@ class Declaration extends React.Component {
                     onPress={() => this.selectTestResut(false)}>
                     <RadioButton
                       checked={testResult === false}
-                      onPress={() => this.selectTestResut(true)}
+                      onPress={() => this.selectTestResut(false)}
                     />
                     <Text>Dương tính</Text>
                   </TouchableOpacity>
@@ -1239,7 +1235,7 @@ class Declaration extends React.Component {
               </View>
             </View>
 
-            <Text style={{marginVertical: 10, color: 'red'}}>
+            <Text style={styles.labelRed}>
               Dữ liệu bạn cung cấp hoàn toàn bảo mật và chỉ phục vụ cho việc
               phòng chống dịch, thuộc quản lý của Ban chỉ đạo quốc gia về Phòng
               chống dịch Covid-19. Khi bạn nhấn nút "Gửi" là bạn đã hiểu và đồng
