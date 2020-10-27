@@ -39,7 +39,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 // Components
-import Text, {MediumText} from '../../../base/components/Text';
+import Text from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import InputScrollView from '../../../base/components/InputScrollView';
 import FormInput from '../../../base/components/FormInput';
@@ -59,7 +59,6 @@ import {
 
 // Styles
 import styles from './styles/index.css';
-import * as fontSize from '../../../core/fontSize';
 
 class Declaration extends React.Component {
   constructor(props) {

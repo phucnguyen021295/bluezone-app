@@ -411,12 +411,10 @@ const getText = (text, conditions) => {
 };
 
 const createScanNotificationVersion2 = (bluetooth, location) => {
-  const {iOSScanNotificationVersion2} = configuration;
-  if (!iOSScanNotificationVersion2) {
+  const {iOSScanNotificationVersion2, Language} = configuration;
+  if (!iOSScanNotificationVersion2 || !Language) {
     return;
   }
-
-  const {Language} = configuration;
 
   const inBluetooth = !bluetooth;
   const inLocation = !location;

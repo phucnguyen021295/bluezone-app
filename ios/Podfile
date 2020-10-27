@@ -66,8 +66,7 @@ target 'Bluezone' do
   pod 'Firebase/Core', '~> 6.3.0'
   pod 'Firebase/Messaging'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
-  # Point to the installed version
-  pod 'RNDateTimePicker', :path => '../node_modules/@react-native-community/datetimepicker/RNDateTimePicker.podspec'
+
 
   # firebase Analytics
   pod 'GoogleIDFASupport', '~> 3.14.0'

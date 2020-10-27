@@ -60,6 +60,8 @@
 	<string>Cho phép ứng dụng truy cập vị trí, để tìm vị trí gần nhất</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Cho phép ứng dụng truy cập vị trí, để tìm vị trí gần nhất.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Cho phép ứng dụng truy cập Photo Library để cập nhật mẫu Khai báo y tế</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
