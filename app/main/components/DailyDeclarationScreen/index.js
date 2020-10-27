@@ -39,6 +39,13 @@ import * as PropTypes from 'prop-types';
 import Header from '../../../base/components/Header';
 import * as fontSize from '../../../core/fontSize';
 
+// const historyData = [{
+//   date: '21/10/2020',
+//   symptoms: [
+//
+//   ]
+// }];
+
 const DeclareDaily = props => {
   const {intl, navigation} = props;
   const {formatMessage} = intl;
@@ -56,53 +63,66 @@ const DeclareDaily = props => {
     setItemsSelected([...itemsSelected]);
   };
 
+  const onSend = () => {};
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <StatusBar hidden={true} />
       <Header title={'Khai báo y tế hàng ngày'} />
-      <View style={styles.grid}>
-        <Text>Chọn thông tin sức khỏe của bạn</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}>
-          {items.map(item => {
-            const selected = itemsSelected.indexOf(item) !== -1;
-            return (
-              <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  backgroundColor: '#EEEEEE',
-                  padding: 5,
-                  margin: 5,
-                }}
-                onPress={() => {
-                  selectItem(item);
-                }}>
-                <Text style={{marginRight: 20}}>{item}</Text>
-                <View
+      <View style={styles.container}>
+        <View style={styles.grid}>
+          <Text>Chọn thông tin sức khỏe của bạn</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            }}>
+            {items.map(item => {
+              const selected = itemsSelected.indexOf(item) !== -1;
+              return (
+                <TouchableOpacity
                   style={{
-                    width: 20,
-                    height: 20,
-                    borderWidth: 1,
-                    borderColor: 'blue',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                    flexDirection: 'row',
+                    backgroundColor: '#EEEEEE',
+                    padding: 5,
+                    margin: 5,
+                  }}
+                  onPress={() => {
+                    selectItem(item);
                   }}>
-                  {selected && (
-                    <View
-                      style={{
-                        width: 10,
-                        height: 10,
-                        backgroundColor: 'black',
-                      }}
-                    />
-                  )}
-                </View>
-              </TouchableOpacity>
-            );
-          })}
+                  <Text style={{marginRight: 20}}>{item}</Text>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderWidth: 1,
+                      borderColor: 'blue',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    {selected && (
+                      <View
+                        style={{
+                          width: 10,
+                          height: 10,
+                          backgroundColor: 'black',
+                        }}
+                      />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+
+          <View style={styles.btnSendContainer}>
+            <TouchableOpacity style={styles.btnSend} onPress={onSend}>
+              <Text style={styles.btnSendContent}>Gửi tờ khai</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View>
+          <Text>Lich su theo doi suc khoe</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -118,6 +138,10 @@ DeclareDaily.contextTypes = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 15,
+  },
+
   grid: {},
 
   row: {
@@ -138,6 +162,21 @@ const styles = StyleSheet.create({
     color: '#AAAAAA',
     fontSize: 12,
     paddingVertical: 5,
+  },
+
+  btnSendContainer: {
+    alignItems: 'center',
+  },
+
+  btnSend: {
+    marginVertical: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: 'blue',
+  },
+
+  btnSendContent: {
+    color: '#FFF',
   },
 });
 

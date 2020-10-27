@@ -230,11 +230,11 @@ class HomeTab extends React.Component {
               <MediumText style={style.textHeader}>
                 {formatMessage(message.header)}
               </MediumText>
-              <Text style={style.texthea}>
-                {formatMessage(message.productLabel1)}
-              </Text>
-              <Text style={style.texthea}>
-                <Text>{formatMessage(message.productLabel2)}</Text>
+              <Text style={style.textHeaderTwo}>
+                <Text>
+                  {formatMessage(message.productLabel1) + ' '}
+                  {formatMessage(message.productLabel2)}
+                </Text>
                 <MediumText style={style.colorText}>
                   {formatMessage(message.productLabel3)}
                 </MediumText>

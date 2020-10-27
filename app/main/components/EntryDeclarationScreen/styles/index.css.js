@@ -147,6 +147,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: fontSize.smaller,
   },
+
+  lBtnModal: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'rgba(60, 60, 67, 0.29)',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 45,
+  },
 });
 
 export default styles;

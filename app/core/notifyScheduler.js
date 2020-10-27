@@ -247,7 +247,7 @@ const clearScheduleUpdateAppNotification = () => {
 
 const scheduleUpdateAppNotification_ChangeLanguage = () => {
   getLatestVersionApp().then(latestVersion => {
-    if (latestVersion === CurrentVersionValue) {
+    if (!latestVersion || latestVersion === CurrentVersionValue) {
       return;
     }
 
@@ -259,7 +259,7 @@ const scheduleUpdateAppNotification_ChangeLanguage = () => {
 
 const scheduleUpdateAppNotification_SetConfig = (oldConfig, newConfig) => {
   getLatestVersionApp().then(latestVersion => {
-    if (latestVersion === CurrentVersionValue) {
+    if (!latestVersion || latestVersion === CurrentVersionValue) {
       return;
     }
 

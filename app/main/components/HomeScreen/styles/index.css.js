@@ -163,7 +163,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  texthea: {
+  textHeaderTwo: {
+    textAlign: 'center',
     color: '#ffffff',
     fontSize: fontSize.smaller,
     lineHeight: parseInt((fontSize.smaller * 1.38).toFixed(0)),
