@@ -173,6 +173,7 @@ class HomeTab extends React.Component {
 
   render() {
     const {intl, navigation} = this.props;
+    const {language} = this.context;
     const {colorCircle, textF} = this.state;
     const {formatMessage} = intl;
 
@@ -230,15 +231,30 @@ class HomeTab extends React.Component {
               <MediumText style={style.textHeader}>
                 {formatMessage(message.header)}
               </MediumText>
-              <Text style={style.textHeaderTwo}>
-                <Text>
-                  {formatMessage(message.productLabel1) + ' '}
-                  {formatMessage(message.productLabel2)}
+
+              {language === 'en' ? (
+                <Text style={style.textHeaderTwo}>
+                  <Text>
+                    {formatMessage(message.productLabel1) + ' '}
+                    {formatMessage(message.productLabel2)}
+                  </Text>
+                  <MediumText style={style.colorText}>
+                    {formatMessage(message.productLabel3)}
+                  </MediumText>
                 </Text>
-                <MediumText style={style.colorText}>
-                  {formatMessage(message.productLabel3)}
-                </MediumText>
-              </Text>
+              ) : (
+                <>
+                  <Text style={style.textHeaderTwo}>
+                    {formatMessage(message.productLabel1)}
+                  </Text>
+                  <Text style={style.textHeaderTwo}>
+                    <Text>{formatMessage(message.productLabel2)}</Text>
+                    <MediumText style={style.colorText}>
+                      {formatMessage(message.productLabel3)}
+                    </MediumText>
+                  </Text>
+                </>
+              )}
             </View>
           </View>
           <Text style={[style.textF, {color: colorCircle}]} text={textF} />
