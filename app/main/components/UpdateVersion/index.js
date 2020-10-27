@@ -179,6 +179,7 @@ class UpdateVersion extends React.PureComponent {
         style={styles.modal}
         animationIn="zoomInDown"
         animationOut="zoomOutUp"
+        backdropOpacity={0.6}
         animationInTiming={400}
         animationOutTiming={400}
         backdropTransitionInTiming={0}
