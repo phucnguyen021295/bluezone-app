@@ -42,7 +42,7 @@ export default defineMessages({
   },
   next: {
     id: 'bluezone.register.next',
-    defaultMessage: 'Tiếp tục >>',
+    defaultMessage: 'Tiếp tục',
   },
   skip: {
     id: 'bluezone.register.skip',

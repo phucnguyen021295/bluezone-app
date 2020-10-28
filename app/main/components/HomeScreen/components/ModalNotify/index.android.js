@@ -96,12 +96,12 @@ class ModalNotify extends React.Component {
     this.timer = setTimeout(this.requestPermissionLocation, 500);
 
     // Để test
-    requestMultiple([
-      PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
-      PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
-    ]).then(() => {
-      console.log(1);
-    });
+    // requestMultiple([
+    //   PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+    //   PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+    // ]).then(() => {
+    //   console.log(1);
+    // });
   }
 
   componentWillUnmount() {

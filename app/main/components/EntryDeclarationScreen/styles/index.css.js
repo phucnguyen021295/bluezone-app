@@ -29,8 +29,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
+
+  flexOne: {
+    flex: 1,
+  },
+
+  scroll: {
+    paddingHorizontal: 20,
+  },
+
   textHeader: {
-    color: '#015cd0',
     fontSize: fontSize.huge,
   },
 
@@ -40,6 +48,15 @@ const styles = StyleSheet.create({
 
   itemTitle: {
     paddingBottom: 10,
+  },
+
+  bigText: {
+    fontSize: fontSize.normal,
+  },
+
+  bigTextContainer: {
+    paddingTop: 8,
+    paddingBottom: 0,
   },
 
   inputNumberHome: {
@@ -55,6 +72,10 @@ const styles = StyleSheet.create({
     color: 'red',
   },
 
+  checkbox: {
+    marginLeft: -7,
+  },
+
   date: {
     borderColor: '#dddddd',
     borderWidth: 1,
@@ -67,6 +88,10 @@ const styles = StyleSheet.create({
   },
 
   nameSymptom: {
+    flex: 1,
+  },
+
+  buttonSymptom: {
     textAlign: 'center',
     width: 50,
   },
@@ -89,7 +114,6 @@ const styles = StyleSheet.create({
 
   btnSendContent: {
     color: '#FFF',
-    // textAlign: 'center',
   },
 
   vehicleItemContainer: {
@@ -98,6 +122,11 @@ const styles = StyleSheet.create({
   },
 
   vehicleItemText: {},
+
+  portraitContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
 
   portraitBtn: {
     width: 100,
@@ -135,6 +164,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     fontSize: fontSize.smaller,
   },
+
+  lBtnModal: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'rgba(60, 60, 67, 0.29)',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 45,
+  },
+
+  labelVietNam: {
+    borderColor: '#dddddd',
+    borderWidth: 1,
+    borderRadius: 6,
+    height: 40,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  labelRed: {
+    marginVertical: 10,
+    color: 'red',
+  },
+
+  flexRow: {
+    flexDirection: 'row',
+  },
+
+  vehicleNumber: {flex: 1, marginRight: 10},
+  vehicleSeat: {flex: 1, marginLeft: 10},
 });
 
 export default styles;

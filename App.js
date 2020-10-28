@@ -47,7 +47,7 @@ import ContactHistory from './app/main/components/ContactHistoryScreen';
 import FAQScreen from './app/main/components/FAQScreen';
 import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
 import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
-// import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
+import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
 
 import ContextProvider from './LanguageContext';
 import LanguageProvider from './app/base/LanguageProvider';
@@ -484,10 +484,10 @@ class App extends React.Component {
                   name="DomesticDeclaration"
                   component={DomesticDeclaration}
                 />
-                {/*<Stack.ScreeSn*/}
-                {/*  name="EntryDeclaration"*/}
-                {/*  component={EntryDeclaration}*/}
-                {/*/>*/}
+                <Stack.Screen
+                  name="EntryDeclaration"
+                  component={EntryDeclaration}
+                />
                 <Stack.Screen name="FAQScreen">
                   {props => <FAQScreen {...props} showBack={true} />}
                 </Stack.Screen>

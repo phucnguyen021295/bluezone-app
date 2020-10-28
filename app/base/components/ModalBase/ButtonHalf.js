@@ -42,6 +42,7 @@ function BottomHalfModal(props) {
       testID={'modal'}
       isVisible={isVisible}
       style={[styles.bottomHalfModal, containerStyle]}
+      backdropOpacity={0.65}
       animationInTiming={300}
       animationOutTiming={300}
       backdropTransitionInTiming={0}

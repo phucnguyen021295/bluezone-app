@@ -37,7 +37,6 @@ import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 
 import Header from '../../../base/components/Header';
-import * as fontSize from '../../../core/fontSize';
 
 const DeclareDaily = props => {
   const {intl, navigation} = props;

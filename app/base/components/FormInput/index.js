@@ -30,6 +30,31 @@ import Text, {MediumText} from '../Text';
 // Styles
 import styles from './styles/index.css';
 
+// const FormInput = React.forwardRef((props, ref) => {
+//   const {
+//     title,
+//     star,
+//     containerStyle,
+//     textStyle,
+//     inputStyle,
+//     ...otherProps
+//   } = props;
+//
+//   return (
+//     <View style={[styles.container, containerStyle]}>
+//       <Text style={styles.titleContainer}>
+//         <MediumText text={title} style={[styles.titleStyle, textStyle]} />
+//         {star && <Text text={' *'} style={styles.star} />}
+//       </Text>
+//       <TextInput
+//         style={[styles.inputStyle, inputStyle]}
+//         {...otherProps}
+//         ref={ref}
+//       />
+//     </View>
+//   );
+// });
+
 function FormInput(props) {
   const {
     title,

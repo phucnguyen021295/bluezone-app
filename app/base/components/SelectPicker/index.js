@@ -29,6 +29,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 // Components
 import Text from '../Text';
 import ModalBase from '../ModalBase/ButtonHalf';
+import Header from '../Header';
 
 // Styles
 import styles from './styles/index.css';
@@ -56,6 +57,10 @@ class SelectPicker extends React.Component {
   }
 
   onShowSelect = () => {
+    const {shouldVisible} = this.props;
+    if (shouldVisible && !shouldVisible()) {
+      return;
+    }
     this.setState({isVisible: true});
   };
 
@@ -71,6 +76,9 @@ class SelectPicker extends React.Component {
 
   renderItem({item}) {
     const {id, name} = item;
+    if (!name) {
+      return null;
+    }
     return (
       <TouchableOpacity
         style={styles.item}
@@ -86,19 +94,20 @@ class SelectPicker extends React.Component {
 
   renderModal() {
     const {isVisible} = this.state;
-    const {data} = this.props;
+    const {data, headerText} = this.props;
     return (
       <ModalBase
         isVisible={isVisible}
-        // contentStyle={{paddingVertical: 15}}
+        contentStyle={{flex: 1}}
         onBackdropPress={this.onHideModal}>
+        {headerText && <Header onBack={this.onHideModal} title={headerText} />}
         <FlatList
           data={data}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{padding: 15}}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           renderItem={this.renderItem}
-          initialNumToRender={30}
+          initialNumToRender={60}
         />
       </ModalBase>
     );
@@ -116,7 +125,7 @@ class SelectPicker extends React.Component {
             text={name ? name : placeholder}
             style={[styles.title, {color: name ? '#000000' : '#dddddd'}]}
           />
-          <Entypo name={'chevron-thin-down'} size={20} />
+          <Entypo name={'chevron-thin-down'} size={15} />
         </TouchableOpacity>
         {this.renderModal()}
       </>

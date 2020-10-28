@@ -1252,6 +1252,32 @@ const uploadLogFile = (
     .catch(createErrorFn(_failure));
 };
 
+const entryDeclaration = (
+  data,
+  success = _defaultFunc,
+  failure = _defaultFunc,
+) => {
+  const {TokenFirebase, PhoneNumber} = configuration;
+  Object.assign(data, {TokenFirebase, PhoneNumber});
+
+  const options = {
+    method: 'POST',
+    data: {
+      InforEntry: data,
+    },
+    url: `${DOMAIN}/api/AppInforEntry/InsertOrUpdate`,
+    timeout: 10000,
+  };
+
+  axios(options).then(response => {
+    if (response.status === 200 && response.data.isOk === true) {
+      success(response.data);
+    } else {
+      failure(response);
+    }
+  }, createErrorFn(failure));
+};
+
 export {
   // Token firebase
   registerTokenFirebase,
@@ -1280,4 +1306,5 @@ export {
   getResourceLanguage,
   getAnswerMessage,
   getQuestionFAQ,
+  entryDeclaration,
 };

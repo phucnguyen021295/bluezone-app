@@ -48,7 +48,7 @@ function ModalBase(props) {
       style={styles.container}
       animationIn="zoomInDown"
       animationOut="zoomOutUp"
-      backdropOpacity={0.8}
+      backdropOpacity={0.65}
       animationInTiming={600}
       animationOutTiming={600}
       backdropTransitionInTiming={0}

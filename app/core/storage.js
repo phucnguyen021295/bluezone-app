@@ -46,6 +46,7 @@ import {
   DisplayOriginalImg,
   QuestionFAQ,
   PersonalInformation,
+  EntryObjectGUID,
 } from '../const/storage';
 
 // TODO Can sua de moi du lieu ghi vao storage deu dung JSON.stringify, va lay ra deu dung JSON.parse. Dam bao tuong tich ban cu. thay vi ben ngoai phan tu convert nhu gio.
@@ -300,6 +301,16 @@ const setPersonalInformation = (personalInformation = '') => {
   AsyncStorage.setItem(PersonalInformation, _resource);
 };
 
+const getEntryObjectGUIDInformation = async () => {
+  const result = await AsyncStorage.getItem(EntryObjectGUID);
+  return _processOutput(result);
+};
+
+const setEntryObjectGUIDInformation = (guid = '') => {
+  const _resource = _processInput(guid);
+  AsyncStorage.setItem(EntryObjectGUID, _resource);
+};
+
 export {
   getResourceLanguage,
   setResourceLanguage,
@@ -346,4 +357,6 @@ export {
   setQuestionFAQ,
   getPersonalInformation,
   setPersonalInformation,
+  getEntryObjectGUIDInformation,
+  setEntryObjectGUIDInformation,
 };
