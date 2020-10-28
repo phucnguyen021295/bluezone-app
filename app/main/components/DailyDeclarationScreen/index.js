@@ -21,9 +21,7 @@
 
 'use strict';
 
-'use strict';
-
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -31,88 +29,97 @@ import {
   StatusBar,
   SafeAreaView,
   View,
-  Image,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 
 import Header from '../../../base/components/Header';
 
-const DeclareDaily = props => {
-  const {intl, navigation} = props;
-  const {formatMessage} = intl;
+const items = ['Sốt', 'Ho', 'Khó thở', 'Đau người, mệt mỏi', 'Khỏe mạnh'];
 
-  const items = ['Sốt', 'Ho', 'Khó thở', 'Đau người, mệt mỏi', 'Khỏe mạnh'];
+class DailyDeclaration extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemsSelected: [],
+    };
+  }
 
-  const [itemsSelected, setItemsSelected] = useState([]);
-  const selectItem = item => {
+  selectItem = item => {
+    const {itemsSelected} = this.state;
     const i = itemsSelected.indexOf(item);
     if (i !== -1) {
       itemsSelected.splice(i, 1);
     } else {
       itemsSelected.push(item);
     }
-    setItemsSelected([...itemsSelected]);
+    this.setState({itemsSelected: itemsSelected});
   };
 
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <StatusBar hidden={true} />
-      <Header title={'Khai báo y tế hàng ngày'} />
-      <View style={styles.grid}>
-        <Text>Chọn thông tin sức khỏe của bạn</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}>
-          {items.map(item => {
-            const selected = itemsSelected.indexOf(item) !== -1;
-            return (
-              <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  backgroundColor: '#EEEEEE',
-                  padding: 5,
-                  margin: 5,
-                }}
-                onPress={() => {
-                  selectItem(item);
-                }}>
-                <Text style={{marginRight: 20}}>{item}</Text>
-                <View
-                  style={{
-                    width: 20,
-                    height: 20,
-                    borderWidth: 1,
-                    borderColor: 'blue',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  {selected && (
-                    <View
-                      style={{
-                        width: 10,
-                        height: 10,
-                        backgroundColor: 'black',
-                      }}
-                    />
-                  )}
-                </View>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-};
+  render() {
+    const {itemsSelected} = this.state;
+    const {intl, navigation} = this.props;
+    const {formatMessage} = intl;
 
-DeclareDaily.propTypes = {
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
+        <StatusBar hidden={true} />
+        <Header title={'Khai báo Y tế hàng ngày'} />
+        <View style={styles.grid}>
+          <Text>Chọn thông tin sức khỏe của bạn</Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            }}>
+            {items.map(item => {
+              const selected = itemsSelected.indexOf(item) !== -1;
+              return (
+                <TouchableOpacity
+                  style={{
+                    flexDirection: 'row',
+                    backgroundColor: '#EEEEEE',
+                    padding: 5,
+                    margin: 5,
+                  }}
+                  onPress={() => {
+                    this.selectItem(item);
+                  }}>
+                  <Text style={{marginRight: 20}}>{item}</Text>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderWidth: 1,
+                      borderColor: 'blue',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    {selected && (
+                      <View
+                        style={{
+                          width: 10,
+                          height: 10,
+                          backgroundColor: 'black',
+                        }}
+                      />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
+
+DailyDeclaration.propTypes = {
   intl: intlShape.isRequired,
 };
 
-DeclareDaily.contextTypes = {
+DailyDeclaration.contextTypes = {
   language: PropTypes.string,
 };
 
@@ -140,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default injectIntl(DeclareDaily);
+export default injectIntl(DailyDeclaration);
