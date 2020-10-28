@@ -26,7 +26,6 @@
 import React, {Component, useState} from 'react';
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
@@ -35,6 +34,8 @@ import {
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
+
+import Text, {MediumText} from '../../../base/components/Text';
 
 import Header from '../../../base/components/Header';
 import * as fontSize from '../../../core/fontSize';
@@ -46,11 +47,17 @@ import * as fontSize from '../../../core/fontSize';
 //   ]
 // }];
 
+const items = [
+  {id: 'sot', name: 'Sốt'},
+  {id: 'ho', name: 'Ho'},
+  {id: 'khotho', name: 'Khó thở'},
+  {id: 'daunguoi_metmoi', name: 'Đau người, mệt mỏi'},
+  {id: 'khoemanh', name: 'Khỏe mạnh'},
+];
+
 const DeclareDaily = props => {
   const {intl, navigation} = props;
   const {formatMessage} = intl;
-
-  const items = ['Sốt', 'Ho', 'Khó thở', 'Đau người, mệt mỏi', 'Khỏe mạnh'];
 
   const [itemsSelected, setItemsSelected] = useState([]);
   const selectItem = item => {
@@ -63,23 +70,30 @@ const DeclareDaily = props => {
     setItemsSelected([...itemsSelected]);
   };
 
-  const onSend = () => {};
+  const onSend = () => {
+    // const data = JSON.stringify(itemsSelected);
+  };
+
+  debugger;
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
       <Header title={'Khai báo y tế hàng ngày'} />
       <View style={styles.container}>
         <View style={styles.grid}>
-          <Text>Chọn thông tin sức khỏe của bạn</Text>
+          <MediumText style={styles.title}>
+            Chọn thông tin sức khỏe của bạn
+          </MediumText>
           <View
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
             }}>
             {items.map(item => {
-              const selected = itemsSelected.indexOf(item) !== -1;
+              const selected = itemsSelected.find(i => i.id === item.id);
               return (
                 <TouchableOpacity
+                  key={item.id}
                   style={{
                     flexDirection: 'row',
                     backgroundColor: '#EEEEEE',
@@ -89,7 +103,7 @@ const DeclareDaily = props => {
                   onPress={() => {
                     selectItem(item);
                   }}>
-                  <Text style={{marginRight: 20}}>{item}</Text>
+                  <Text style={{marginRight: 20}}>{item.name}</Text>
                   <View
                     style={{
                       width: 20,
@@ -140,6 +154,10 @@ DeclareDaily.contextTypes = {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
+  },
+
+  title: {
+    fontSize: fontSize.fontSize19,
   },
 
   grid: {},

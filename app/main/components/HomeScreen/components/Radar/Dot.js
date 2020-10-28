@@ -84,7 +84,7 @@ class Dot extends React.Component {
   }
 
   render() {
-    const {dot, key, dotIndex, ref, ...other} = this.props;
+    const {dot, dotIndex, ...other} = this.props;
     return (
       <LottieView
         ref={this.setRef}
