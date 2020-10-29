@@ -47,7 +47,8 @@ import {
   NOTIFICATION_TYPE,
   RESULT_VERIFY_TYPE,
 } from '../../../const/notification';
-import {reportScreenAnalytics} from "../../../core/analytics";
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 export const notifyScreenTool = {};
 
@@ -199,7 +200,7 @@ class NotifyScreen extends React.Component {
       case 'SERVICE':
       case 'PERMISSION':
       case 'MOBILE':
-        this.props.navigation.navigate('NotifyDetail', {item});
+        this.props.navigation.navigate(SCREEN.NOTIFY_DETAIL, {item});
         // this.props.navigation.navigate('NotifyWarning', {
         //   status: 'contact',
         //   data: {

@@ -1278,6 +1278,67 @@ const entryDeclaration = (
   }, createErrorFn(failure));
 };
 
+const configRegionApi = {
+  timeout: 10000,
+};
+
+const getAllCountryApi = (success = _defaultFunc, failure = _defaultFunc) => {
+  axios
+    .get(`${DOMAIN}/api/Region/GetAllCountry`, configRegionApi)
+    .then(response => {
+      if (response.status === 200 && response.data.isOk === true) {
+        success(response.data);
+      } else {
+        failure(response);
+      }
+    }, failure);
+};
+
+const getAllAirPortApi = (success = _defaultFunc, failure = _defaultFunc) => {
+  axios
+    .get(`${DOMAIN}/api/Region/GetAllAirPortVN`, configRegionApi)
+    .then(response => {
+      if (response.status === 200 && response.data.isOk === true) {
+        success(response.data);
+      } else {
+        failure(response);
+      }
+    }, failure);
+};
+
+const getAllProvinceApi = (success = _defaultFunc, failure = _defaultFunc) => {
+  axios
+    .get(`${DOMAIN}/api/Region/GetProvinceVN`, configRegionApi)
+    .then(response => {
+      if (response.status === 200 && response.data.isOk === true) {
+        success(response.data);
+      } else {
+        failure(response);
+      }
+    }, failure);
+};
+
+const getRegionByParentID = (
+  parentID,
+  success = _defaultFunc,
+  failure = _defaultFunc,
+) => {
+  axios
+    .get(`${DOMAIN}/api/Region/GetRegionByID`, {
+      params: {
+        ParentID: parentID,
+      },
+      ...configRegionApi,
+    })
+    .then(response => {
+      if (response.status === 200 && response.data.isOk === true) {
+        success(response.data);
+      } else {
+        failure(response);
+      }
+    }, failure);
+};
+
 export {
   // Token firebase
   registerTokenFirebase,
@@ -1307,4 +1368,8 @@ export {
   getAnswerMessage,
   getQuestionFAQ,
   entryDeclaration,
+  getAllCountryApi,
+  getAllAirPortApi,
+  getAllProvinceApi,
+  getRegionByParentID,
 };

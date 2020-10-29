@@ -24,18 +24,32 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
   View,
+  ScrollView,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
+import {CheckBox} from 'react-native-elements';
 
+// Components
+import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 
-const items = ['Sốt', 'Ho', 'Khó thở', 'Đau người, mệt mỏi', 'Khỏe mạnh'];
+// Styles
+import styles from './styles/index.css';
+import message from '../../../core/msg/register';
+import ButtonBase from '../../../base/components/ButtonBase';
+
+const items = [
+  {id: 'sot', name: 'Sốt'},
+  {id: 'ho', name: 'Ho'},
+  {id: 'khotho', name: 'Khó thở'},
+  {id: 'daunguoi_metmoi', name: 'Đau người, mệt mỏi'},
+  {id: 'khoemanh', name: 'Khỏe mạnh'},
+];
 
 class DailyDeclaration extends React.Component {
   constructor(props) {
@@ -60,56 +74,223 @@ class DailyDeclaration extends React.Component {
     const {itemsSelected} = this.state;
     const {intl, navigation} = this.props;
     const {formatMessage} = intl;
-
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
+      <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
         <Header title={'Khai báo Y tế hàng ngày'} />
-        <View style={styles.grid}>
-          <Text>Chọn thông tin sức khỏe của bạn</Text>
+        <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+          <MediumText style={styles.title}>
+            Chọn thông tin sức khỏe hiện tại của bạn
+          </MediumText>
           <View
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
+              justifyContent: 'space-between',
             }}>
             {items.map(item => {
-              const selected = itemsSelected.indexOf(item) !== -1;
+              const selected = itemsSelected.find(i => i.id === item.id);
               return (
-                <TouchableOpacity
-                  style={{
-                    flexDirection: 'row',
-                    backgroundColor: '#EEEEEE',
-                    padding: 5,
-                    margin: 5,
+                <CheckBox
+                  iconType={'ionicon'}
+                  center
+                  title={item.name}
+                  checkedIcon="ios-checkbox-outline"
+                  uncheckedIcon="ios-square-outline"
+                  checked={selected}
+                  onPress={() => this.selectItem(item)}
+                  containerStyle={{
+                    marginLeft: 0,
+                    marginRight: 0,
+                    margin: 0,
+                    backgroundColor: '#ffffff',
+                    borderWidth: 0,
                   }}
-                  onPress={() => {
-                    this.selectItem(item);
-                  }}>
-                  <Text style={{marginRight: 20}}>{item}</Text>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderWidth: 1,
-                      borderColor: 'blue',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    {selected && (
-                      <View
-                        style={{
-                          width: 10,
-                          height: 10,
-                          backgroundColor: 'black',
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
+                  textStyle={{marginRight: 5, marginLeft: 5}}
+                />
               );
             })}
           </View>
-        </View>
+
+          <ButtonBase
+            title={'Gửi thông tin'}
+            onPress={this.onCloseScreenPress}
+            containerStyle={styles.containerStyle}
+            titleStyle={styles.textInvite}
+          />
+
+          <MediumText style={styles.title}>
+            Lịch sử theo dõi sức khỏe
+          </MediumText>
+
+          <View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: '#015cd0',
+                  zIndex: 99,
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 16.5,
+                  borderLeftColor: '#707070',
+                  borderLeftWidth: 1,
+                  marginLeft: 5,
+                }}
+              />
+              <View style={{flex: 1}}>
+                <MediumText>30/09/2020</MediumText>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#b2b2b2',
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 9,
+                    marginBottom: 47,
+                    marginTop: 7,
+                  }}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingBottom: 13,
+                    }}>
+                    <ButtonBase
+                      title={'Nguy cơ nhiễm bệnh'}
+                      onPress={this.onCloseScreenPress}
+                      containerStyle={styles.containerStyleNCNB}
+                      titleStyle={styles.textInviteNCNB}
+                    />
+                    <Text>10:10</Text>
+                  </View>
+                  <Text>
+                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: '#015cd0',
+                  zIndex: 99,
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 16.5,
+                  borderLeftColor: '#707070',
+                  borderLeftWidth: 1,
+                  marginLeft: 5,
+                }}
+              />
+              <View style={{flex: 1}}>
+                <MediumText>30/09/2020</MediumText>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#b2b2b2',
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 9,
+                    marginBottom: 47,
+                    marginTop: 7,
+                  }}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingBottom: 13,
+                    }}>
+                    <ButtonBase
+                      title={'Nguy cơ nhiễm bệnh'}
+                      onPress={this.onCloseScreenPress}
+                      containerStyle={styles.containerStyleNCNB}
+                      titleStyle={styles.textInviteNCNB}
+                    />
+                    <Text>10:10</Text>
+                  </View>
+                  <Text>
+                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: '#015cd0',
+                  zIndex: 99,
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 16.5,
+                  borderLeftColor: '#707070',
+                  borderLeftWidth: 1,
+                  marginLeft: 5,
+                }}
+              />
+              <View style={{flex: 1}}>
+                <MediumText>30/09/2020</MediumText>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#b2b2b2',
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 9,
+                    marginBottom: 47,
+                    marginTop: 7,
+                  }}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingBottom: 13,
+                    }}>
+                    <ButtonBase
+                      title={'Nguy cơ nhiễm bệnh'}
+                      onPress={this.onCloseScreenPress}
+                      containerStyle={styles.containerStyleNCNB}
+                      titleStyle={styles.textInviteNCNB}
+                    />
+                    <Text>10:10</Text>
+                  </View>
+                  <Text>
+                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -122,29 +303,5 @@ DailyDeclaration.propTypes = {
 DailyDeclaration.contextTypes = {
   language: PropTypes.string,
 };
-
-const styles = StyleSheet.create({
-  grid: {},
-
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 15,
-  },
-  item: {
-    alignItems: 'center',
-    width: '33%',
-  },
-  itemImage: {
-    width: 60,
-    height: 60,
-  },
-
-  itemText: {
-    color: '#AAAAAA',
-    fontSize: 12,
-    paddingVertical: 5,
-  },
-});
 
 export default injectIntl(DailyDeclaration);

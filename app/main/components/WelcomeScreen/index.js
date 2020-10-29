@@ -268,12 +268,9 @@ class WelcomeScreen extends React.Component {
   render() {
     const {
       width,
-      isVisible,
       images,
       info,
       setHeight,
-      heightImg,
-      display,
       textF,
     } = this.state;
     const {intl} = this.props;
