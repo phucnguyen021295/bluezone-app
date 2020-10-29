@@ -299,14 +299,6 @@ extension ScannerManager: CLLocationManagerDelegate {
 
     public func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         print("did didRangeBeacons")
-    }
-
-    public func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print("did monitoring failed \(error.localizedDescription)")
-    }
-
-    public func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        print("did enter region")
         // Tạo thiết bị mới, check nếu gọi thành công thì sẽ start việc tìm kiếm
         if mBlePeripheral == nil {
             startAdvertising()
@@ -316,6 +308,15 @@ extension ScannerManager: CLLocationManagerDelegate {
         if self.mBleCentral == nil {
             scanPeripheral()
         }
+    }
+
+    public func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("did monitoring failed \(error.localizedDescription)")
+    }
+
+    public func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        print("did enter region")
+        
     }
 
     public func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {

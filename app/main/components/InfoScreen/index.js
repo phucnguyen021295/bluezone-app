@@ -44,6 +44,7 @@ import IconBTT from '../HomeScreen/styles/images/IconBTT';
 import warning from '../../../core/msg/warning';
 import * as fontSize from '../../../core/fontSize';
 import configuration from '../../../configuration';
+import SCREEN from '../../nameScreen';
 
 class InfoScreen extends React.Component {
   constructor(props) {
@@ -79,7 +80,7 @@ class InfoScreen extends React.Component {
   };
 
   onSendHistory() {
-    this.props.navigation.navigate('HistoryUploadedByOTP');
+    this.props.navigation.navigate(SCREEN.HISTORY_UPLOAD_OTP);
   }
 
   onClickLinkDetail() {
@@ -132,7 +133,7 @@ class InfoScreen extends React.Component {
       this.timeoutLog = null;
     }, 1000);
     if (this.countLog === 7) {
-      this.props.navigation.navigate('ViewLog');
+      this.props.navigation.navigate(SCREEN.VIEW_LOG);
       this.countLog = 0;
     }
   }

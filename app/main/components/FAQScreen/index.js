@@ -41,6 +41,8 @@ import message from '../../../core/msg/tab';
 import configuration from '../../../configuration';
 import dataFAQ, {syncQuestionFAQ} from './data/dataFAQ';
 import styles from './styles/index.css';
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -69,6 +71,8 @@ class FAQScreen extends React.Component {
     this.setState({
       render: true,
     });
+
+    reportScreenAnalytics(SCREEN.FAQ);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -100,16 +104,6 @@ class FAQScreen extends React.Component {
   };
 
   openAnswer = (id, index) => {
-    // LayoutAnimation.configureNext({
-    //   duration: 100,
-    //   create: {
-    //     type: LayoutAnimation.Types.linear,
-    //     property: LayoutAnimation.Properties.opacity,
-    //   },
-    //   update: {
-    //     type: LayoutAnimation.Types.linear,
-    //   },
-    // });
     if (id === this.state.idFAQSelected) {
       this.setState({
         idFAQSelected: null,

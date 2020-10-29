@@ -40,9 +40,9 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 
 // Components
-import Text, {MediumText} from '../../../base/components/Text';
+import Text from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
-import InputScrollView from '../../../base/components/InputScrollView';
+// import InputScrollView from '../../../base/components/InputScrollView';
 import FormInput from '../../../base/components/FormInput';
 import RadioButton from '../../../base/components/RadioButton';
 import SelectPicker from '../../../base/components/SelectPicker';
@@ -70,6 +70,8 @@ import {yearBirth, symptomData, exposureHistoryData} from './data';
 
 // Styles
 import styles from './styles/index.css';
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const VIETNAM_ID = 234;
 
@@ -130,6 +132,10 @@ class Declaration extends React.Component {
     };
     this.lastProvinceIDCallApi = null;
     this.lastDistrictIDCallApi = null;
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
   }
 
   changeState = (key, value, fn) => {

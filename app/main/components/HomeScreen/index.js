@@ -52,7 +52,7 @@ import {checkRegisterNotificationOfDay} from '../../../core/notifyScheduler';
 import {setStatusNotifyRegister} from '../../../configuration';
 import {createNews} from '../../../core/announcement';
 import {messageNotifyOTP} from '../../../core/data';
-// import Home from "../MainScreen";
+import SCREEN from '../../nameScreen';
 
 const modalStatusDefault = {
   stepSelected: 'updateVersion',
@@ -143,11 +143,11 @@ class HomeTab extends React.Component {
   }
 
   onChangeNavigateIntroduce() {
-    this.props.navigation.navigate('Welcome');
+    this.props.navigation.navigate(SCREEN.WELCOME);
   }
 
   onWatchHistory() {
-    this.props.navigation.navigate('ContactHistory');
+    this.props.navigation.navigate(SCREEN.CONTACT_HISTORY);
   }
 
   renderReminderModal() {

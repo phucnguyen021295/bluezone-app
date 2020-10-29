@@ -48,6 +48,7 @@ import {CurrentVersionValue} from '../../../core/version';
 // Styles
 import styles from './styles/index.css';
 import message from '../../../core/msg/home';
+import SCREEN from '../../nameScreen';
 
 const Config = {
   TYPE_APP: 'store',
@@ -72,7 +73,7 @@ class UpdateVersion extends React.PureComponent {
     this.setState({isModalUpdate: false}, () => {
       if (Config.TYPE_APP === 'web' && Platform.OS === 'android') {
         this.urlUpdate &&
-          navigation.navigate('DownloadLatestVersionScreen', {
+          navigation.navigate(SCREEN.DOWNLOAD_LATEST_VERSION, {
             url: this.urlUpdate,
           });
       } else {

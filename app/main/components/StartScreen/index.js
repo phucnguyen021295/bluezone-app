@@ -36,6 +36,7 @@ import styles from './styles/index.css';
 import message from '../../../core/msg/start';
 
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 class StartScreen extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class StartScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('StartScreen');
+    reportScreenAnalytics(SCREEN.START_USE_WIZARD);
   }
 
   doFinishedWorks(gotoMainScreen = false, goBack = false) {

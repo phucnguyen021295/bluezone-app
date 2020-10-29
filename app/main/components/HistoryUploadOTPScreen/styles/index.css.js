@@ -24,7 +24,6 @@
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {blue_bluezone} from '../../../../core/color';
-import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
 const BTN_HEIGHT = heightPercentageToDP((46 / 720) * 100);

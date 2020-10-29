@@ -38,6 +38,7 @@ import message from '../../../core/msg/intro';
 import IconBYT from './styles/images/iconBoYTe';
 import IconBTT from '../HomeScreen/styles/images/IconBTT';
 import {reportScreenAnalytics} from "../../../core/analytics";
+import SCREEN from '../../nameScreen';
 
 class IntroductionScreen extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ class IntroductionScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('IntroductionScreen');
+    reportScreenAnalytics(SCREEN.INTRODUTION_WIZARD);
   }
 
   doFinishedWorks(gotoMainScreen) {

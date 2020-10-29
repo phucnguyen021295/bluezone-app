@@ -30,7 +30,7 @@ import {
   Animated,
   KeyboardAvoidingView,
   Platform,
-    ScrollView
+  ScrollView,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 
@@ -54,6 +54,8 @@ import {ReportHistoryConfirmDeclareErrorCode} from '../../../core/apis/errorCode
 import styles from './styles/index.css';
 import * as fontSize from '../../../core/fontSize';
 import {syncTokenFirebase} from '../../../configuration';
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const visibleModal = {
   isVisibleHistorySuccess: false,
@@ -104,6 +106,8 @@ class HistoryUploadedByOTPScreen extends React.Component {
       'keyboardDidHide',
       this.keyboardDidHide,
     );
+
+    reportScreenAnalytics(SCREEN.HISTORY_UPLOAD_OTP);
   }
 
   componentWillUnmount() {

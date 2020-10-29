@@ -21,7 +21,7 @@
 
 'use strict';
 
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import * as fontSize from '../../../../../../core/fontSize';
 import {isIPhoneX} from '../../../../../../core/utils/isIPhoneX';
 import {heightPercentageToDP} from '../../../../../../core/utils/dimension';
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     borderColor: '#ffffff',
-    borderWidth: 0.1,
+    borderWidth: Platform.OS === 'android' ? 0.1 : 0.3,
     // opacity: 0.31,
   },
 

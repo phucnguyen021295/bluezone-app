@@ -50,13 +50,14 @@ const styles = StyleSheet.create({
     zIndex: 99,
     alignItems: 'center',
     paddingTop: isIPhoneX ? HEADER_IPHONE_X_PADDING_TOP : HEADER_PADDING_TOP,
-    paddingHorizontal: 20,
+    paddingLeft: 20,
+    paddingRight: 10,
   },
   textTitle: {
     textAlign: 'center',
     color: '#015cd0',
     fontSize: fontSize.bigger,
-    paddingHorizontal: 49,
+    paddingHorizontal: 39,
   },
   title: {
     flex: 1,

@@ -39,7 +39,8 @@ import configuration from '../../../configuration';
 
 // Style
 import styles from './styles/index.css';
-import {reportScreenAnalytics} from "../../../core/analytics";
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const CURRENT_TIME = new Date().setHours(0, 0, 0, 0);
 const NUMBER_DAY = 60;
@@ -68,7 +69,7 @@ class ContactHistoryScreen extends React.Component {
       this.getDataByDaysFail,
     );
 
-    reportScreenAnalytics('ContactHistoryScreen');
+    reportScreenAnalytics(SCREEN.CONTACT_HISTORY);
   }
 
   getDataByDaysSuccess(results) {
@@ -114,7 +115,7 @@ class ContactHistoryScreen extends React.Component {
   onChangeFAQ() {
     const {TurnContact, Language} = configuration;
     const params = TurnContact[Language];
-    this.props.navigation.navigate('FAQScreen', {
+    this.props.navigation.navigate(SCREEN.FAQ, {
       idFAQSelected: params.id,
       indexFAQSelected: params.index,
     });

@@ -58,6 +58,7 @@ import {
   IPHONE_5_HEIGHT,
 } from '../../styles/index.css';
 import {internalVersion} from '../../../../../core/version';
+import SCREEN from '../../../../nameScreen';
 
 // Const
 const TIMEOUT = 30000;
@@ -434,14 +435,10 @@ class Index extends React.Component {
 
   onOpenScanScreen = () => {
     if (internalVersion || dev) {
-      this.props.navigation.navigate('WatchScan', {
+      this.props.navigation.navigate(SCREEN.WATCH_SCAN, {
         logs: logBlueZone,
       });
     }
-    // this.realDots['normal'].push({
-    //   dot: 47,
-    //   id: '2342342',
-    // });
   };
 
   render() {

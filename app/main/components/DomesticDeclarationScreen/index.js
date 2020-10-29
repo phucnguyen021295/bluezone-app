@@ -37,9 +37,11 @@ import SelectPicker from '../../../base/components/SelectPicker';
 // Data
 import {countryList, cityList} from './data';
 
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
+
 // Styles
 import styles from './styles/index.css';
-import {reportScreenAnalytics} from '../../../core/analytics';
 
 class Declaration extends React.Component {
   constructor(props) {
@@ -55,7 +57,7 @@ class Declaration extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('Declaration');
+    reportScreenAnalytics(SCREEN.DOMESTIC_DECLARATION);
   }
 
   onChangName(value) {

@@ -21,31 +21,29 @@
 
 'use strict';
 
-'use strict';
-
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
   View,
-  Image,
+  ScrollView,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
+import {CheckBox} from 'react-native-elements';
 
+// Components
 import Text, {MediumText} from '../../../base/components/Text';
-
 import Header from '../../../base/components/Header';
-import * as fontSize from '../../../core/fontSize';
+import ButtonBase from '../../../base/components/ButtonBase';
 
-// const historyData = [{
-//   date: '21/10/2020',
-//   symptoms: [
-//
-//   ]
-// }];
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
+
+// Styles
+import styles from './styles/index.css';
 
 const items = [
   {id: 'sot', name: 'Sốt'},
@@ -55,147 +53,261 @@ const items = [
   {id: 'khoemanh', name: 'Khỏe mạnh'},
 ];
 
-const DeclareDaily = props => {
-  const {intl, navigation} = props;
-  const {formatMessage} = intl;
+class DailyDeclaration extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemsSelected: [],
+    };
+  }
 
-  const [itemsSelected, setItemsSelected] = useState([]);
-  const selectItem = item => {
+  componentDidMount() {
+    reportScreenAnalytics(SCREEN.DAILY_DECLARATION);
+  }
+
+  selectItem = item => {
+    const {itemsSelected} = this.state;
     const i = itemsSelected.indexOf(item);
     if (i !== -1) {
       itemsSelected.splice(i, 1);
     } else {
       itemsSelected.push(item);
     }
-    setItemsSelected([...itemsSelected]);
+    this.setState({itemsSelected: itemsSelected});
   };
 
-  const onSend = () => {
-    // const data = JSON.stringify(itemsSelected);
-  };
-
-  debugger;
-
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <Header title={'Khai báo y tế hàng ngày'} />
-      <View style={styles.container}>
-        <View style={styles.grid}>
+  render() {
+    const {itemsSelected} = this.state;
+    const {intl, navigation} = this.props;
+    const {formatMessage} = intl;
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar hidden={true} />
+        <Header title={'Khai báo Y tế hàng ngày'} />
+        <ScrollView contentContainerStyle={styles.contentContainerStyle}>
           <MediumText style={styles.title}>
-            Chọn thông tin sức khỏe của bạn
+            Chọn thông tin sức khỏe hiện tại của bạn
           </MediumText>
           <View
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
+              justifyContent: 'space-between',
             }}>
             {items.map(item => {
               const selected = itemsSelected.find(i => i.id === item.id);
               return (
-                <TouchableOpacity
-                  key={item.id}
-                  style={{
-                    flexDirection: 'row',
-                    backgroundColor: '#EEEEEE',
-                    padding: 5,
-                    margin: 5,
+                <CheckBox
+                  iconType={'ionicon'}
+                  center
+                  title={item.name}
+                  checkedIcon="ios-checkbox-outline"
+                  uncheckedIcon="ios-square-outline"
+                  checked={selected}
+                  onPress={() => this.selectItem(item)}
+                  containerStyle={{
+                    marginLeft: 0,
+                    marginRight: 0,
+                    margin: 0,
+                    backgroundColor: '#ffffff',
+                    borderWidth: 0,
                   }}
-                  onPress={() => {
-                    selectItem(item);
-                  }}>
-                  <Text style={{marginRight: 20}}>{item.name}</Text>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderWidth: 1,
-                      borderColor: 'blue',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    {selected && (
-                      <View
-                        style={{
-                          width: 10,
-                          height: 10,
-                          backgroundColor: 'black',
-                        }}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
+                  textStyle={{marginRight: 5, marginLeft: 5}}
+                />
               );
             })}
           </View>
 
-          <View style={styles.btnSendContainer}>
-            <TouchableOpacity style={styles.btnSend} onPress={onSend}>
-              <Text style={styles.btnSendContent}>Gửi tờ khai</Text>
-            </TouchableOpacity>
+          <ButtonBase
+            title={'Gửi thông tin'}
+            onPress={this.onCloseScreenPress}
+            containerStyle={styles.containerStyle}
+            titleStyle={styles.textInvite}
+          />
+
+          <MediumText style={styles.title}>
+            Lịch sử theo dõi sức khỏe
+          </MediumText>
+
+          <View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: '#015cd0',
+                  zIndex: 99,
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 16.5,
+                  borderLeftColor: '#707070',
+                  borderLeftWidth: 1,
+                  marginLeft: 5,
+                }}
+              />
+              <View style={{flex: 1}}>
+                <MediumText>30/09/2020</MediumText>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#b2b2b2',
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 9,
+                    marginBottom: 47,
+                    marginTop: 7,
+                  }}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingBottom: 13,
+                    }}>
+                    <ButtonBase
+                      title={'Nguy cơ nhiễm bệnh'}
+                      onPress={this.onCloseScreenPress}
+                      containerStyle={styles.containerStyleNCNB}
+                      titleStyle={styles.textInviteNCNB}
+                    />
+                    <Text>10:10</Text>
+                  </View>
+                  <Text>
+                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: '#015cd0',
+                  zIndex: 99,
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 16.5,
+                  borderLeftColor: '#707070',
+                  borderLeftWidth: 1,
+                  marginLeft: 5,
+                }}
+              />
+              <View style={{flex: 1}}>
+                <MediumText>30/09/2020</MediumText>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#b2b2b2',
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 9,
+                    marginBottom: 47,
+                    marginTop: 7,
+                  }}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingBottom: 13,
+                    }}>
+                    <ButtonBase
+                      title={'Nguy cơ nhiễm bệnh'}
+                      onPress={this.onCloseScreenPress}
+                      containerStyle={styles.containerStyleNCNB}
+                      titleStyle={styles.textInviteNCNB}
+                    />
+                    <Text>10:10</Text>
+                  </View>
+                  <Text>
+                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: 10,
+                  height: 10,
+                  borderRadius: 5,
+                  backgroundColor: '#015cd0',
+                  zIndex: 99,
+                }}
+              />
+              <View
+                style={{
+                  marginRight: 16.5,
+                  borderLeftColor: '#707070',
+                  borderLeftWidth: 1,
+                  marginLeft: 5,
+                }}
+              />
+              <View style={{flex: 1}}>
+                <MediumText>30/09/2020</MediumText>
+                <View
+                  style={{
+                    borderWidth: 1,
+                    borderColor: '#b2b2b2',
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 9,
+                    marginBottom: 47,
+                    marginTop: 7,
+                  }}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      paddingBottom: 13,
+                    }}>
+                    <ButtonBase
+                      title={'Nguy cơ nhiễm bệnh'}
+                      onPress={this.onCloseScreenPress}
+                      containerStyle={styles.containerStyleNCNB}
+                      titleStyle={styles.textInviteNCNB}
+                    />
+                    <Text>10:10</Text>
+                  </View>
+                  <Text>
+                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
-        </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+}
 
-        <View>
-          <Text>Lich su theo doi suc khoe</Text>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-};
-
-DeclareDaily.propTypes = {
+DailyDeclaration.propTypes = {
   intl: intlShape.isRequired,
 };
 
-DeclareDaily.contextTypes = {
+DailyDeclaration.contextTypes = {
   language: PropTypes.string,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 15,
-  },
-
-  title: {
-    fontSize: fontSize.fontSize19,
-  },
-
-  grid: {},
-
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 15,
-  },
-  item: {
-    alignItems: 'center',
-    width: '33%',
-  },
-  itemImage: {
-    width: 60,
-    height: 60,
-  },
-
-  itemText: {
-    color: '#AAAAAA',
-    fontSize: 12,
-    paddingVertical: 5,
-  },
-
-  btnSendContainer: {
-    alignItems: 'center',
-  },
-
-  btnSend: {
-    marginVertical: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: 'blue',
-  },
-
-  btnSendContent: {
-    color: '#FFF',
-  },
-});
-
-export default injectIntl(DeclareDaily);
+export default injectIntl(DailyDeclaration);

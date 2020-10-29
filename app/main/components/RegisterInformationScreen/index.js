@@ -54,12 +54,12 @@ import {RegisterInfomation} from '../../../core/apis/errorCode';
 // Styles
 import styles, {TEXTINPUT_MARGIN_BOTTOM} from './styles/index.css';
 import * as fontSize from '../../../core/fontSize';
-import {blue_bluezone} from '../../../core/color';
 import configuration, {setPersonalInformation} from '../../../configuration';
 
 import message from '../../../core/msg/registerInformation';
 import {clearScheduleAddInfoNotification} from '../../../core/notifyScheduler';
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const visibleModal = {
   isProcessing: false,
@@ -113,7 +113,7 @@ class RegisterInformationScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('RegisterInformationScreen');
+    reportScreenAnalytics(SCREEN.REGISTER_INFORMATION);
 
     Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
     Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);

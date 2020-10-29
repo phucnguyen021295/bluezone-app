@@ -70,6 +70,7 @@ import {
 } from '../../../base/components/ButtonText/ButtonModal';
 import {removeDeliveredNotification} from '../../../core/fcm';
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const TIMEOUT_LOADING = 800;
 
@@ -128,7 +129,7 @@ class VerifyOTPScreen extends React.Component {
   componentDidMount() {
     this.ref.focus();
 
-    reportScreenAnalytics('VerifyOTPScreen');
+    reportScreenAnalytics(SCREEN.PHONE_NUMBER_VERITY_OTP);
 
     this.keyboardWillShowSub = Keyboard.addListener(
       'keyboardDidShow',
@@ -177,7 +178,7 @@ class VerifyOTPScreen extends React.Component {
 
     if (!gotoMainScreen && !goBack) {
       setTimeout(() => {
-        this.props.navigation.replace('RegisterInformation', {
+        this.props.navigation.replace(SCREEN.REGISTER_INFORMATION, {
           phoneNumber: this.PhoneNumber,
         });
       }, 900);
@@ -189,7 +190,7 @@ class VerifyOTPScreen extends React.Component {
       return true;
     }
 
-    this.props.navigation.replace('PhoneNumberRegisterScreen', {
+    this.props.navigation.replace(SCREEN.PHONE_NUMBER_REGISTER, {
       phoneNumber: route.params.phoneNumber,
     });
   }

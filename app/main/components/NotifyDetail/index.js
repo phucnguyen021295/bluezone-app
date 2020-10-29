@@ -40,6 +40,7 @@ import msg from '../../../core/msg/notify';
 import configuration from '../../../configuration';
 import message from '../../../core/msg/verifyOtp';
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 class NotifyScreen extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ class NotifyScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('NotifyScreen');
+    reportScreenAnalytics(SCREEN.NOTIFY_DETAIL);
   }
 
   onRegisterScreen = () => {
@@ -59,7 +60,7 @@ class NotifyScreen extends React.Component {
       this.setState({isVisiblePhoneRegistered: true});
       return;
     }
-    this.props.navigation.replace('PhoneNumberRegisterScreen');
+    this.props.navigation.replace(SCREEN.PHONE_NUMBER_REGISTER);
   };
 
   onDeclarePersonal = () => {
@@ -67,7 +68,7 @@ class NotifyScreen extends React.Component {
     if (PersonalInformation) {
       return;
     }
-    this.props.navigation.replace('RegisterInformation');
+    this.props.navigation.replace(SCREEN.REGISTER_INFORMATION);
   };
 
   formatNumberPhone = numberPhone => {

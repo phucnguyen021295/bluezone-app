@@ -31,20 +31,19 @@ import Welcome from './app/main/components/WelcomeScreen';
 import WatchScan from './app/main/components/WatchScanScreen';
 import HistoryScan from './app/main/components/HistoryScanScreen';
 import NotifyDetail from './app/main/components/NotifyDetail';
-import Invite from './app/main/components/InviteScreen';
-import PhoneNumberRegisterScreen from './app/main/components/PhoneNumberRegisterScreen';
-import PhoneNumberVerifyOTPScreen from './app/main/components/PhoneNumberVerifyOTPScreen';
-import HistoryUploadedByOTPScreen from './app/main/components/HistoryUploadedByOTPScreen';
+import PhoneNumberRegister from './app/main/components/PhoneNumberRegisterScreen';
+import PhoneNumberVerifyOTP from './app/main/components/PhoneNumberVerifyOTPScreen';
+import HistoryUploadOTP from './app/main/components/HistoryUploadOTPScreen';
 import PageView from './app/main/components/PageViewScreen';
 import DetailNew from './app/main/components/DetailNewScreen';
 import ViewLog from './app/main/components/ViewLog';
-import DownloadLatestVersionScreen from './app/main/components/DownloadLatestVersionScreen';
+import DownloadLatestVersion from './app/main/components/DownloadLatestVersionScreen';
 import Introduction from './app/main/components/IntroductionScreen';
 import StartUse from './app/main/components/StartScreen';
 import RegisterInformation from './app/main/components/RegisterInformationScreen';
 import ContactHistory from './app/main/components/ContactHistoryScreen';
 // import ScanScreen from './app/main/components/ScanScreen';
-import FAQScreen from './app/main/components/FAQScreen';
+import FAQ from './app/main/components/FAQScreen';
 import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
 import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
 import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
@@ -80,30 +79,19 @@ const prevStepName = name => {
 
 // Const
 import {NOTIFICATION_TYPE} from './app/const/notification';
-const LOADING_SCREEN_NAME = 'LoadingScreen';
-const INTRODUTION_WIZARD_NAME = 'IntrodutionWizard';
-const PHONE_NUMBER_REGISTER_WIZARD_NAME = 'PhoneNumberRegisterWizard';
-const PHONE_NUMBER_VERITY_OTP_WIZARD_NAME = 'PhoneNumberVerifyOTPWizard';
-const REGISTER_INFORMATION_WIZARD_NAME = 'RegisterInformationWizard';
-const START_USE_WIZARD_NAME = 'StartUseWizard';
-const WELCOME_WIZARD_NAME = 'WelcomeWizard';
-
-const PAGE_WEBVIEW_LOADING_NAME = 'PageViewLoading';
-const DETAIL_NEW_LOADING_NAME = 'DetailNewLoading';
-const PAGE_WEBVIEW_WELCOME_NAME = 'PageViewWelcome';
-const DETAIL_NEW_WELCOME_NAME = 'DetailNewWelcome';
+import SCREEN from './app/main/nameScreen';
 
 let wizard = [
-  LOADING_SCREEN_NAME,
-  INTRODUTION_WIZARD_NAME,
-  PHONE_NUMBER_REGISTER_WIZARD_NAME,
-  PHONE_NUMBER_VERITY_OTP_WIZARD_NAME,
-  REGISTER_INFORMATION_WIZARD_NAME,
-  START_USE_WIZARD_NAME,
+  SCREEN.LOADING,
+  SCREEN.INTRODUTION_WIZARD,
+  SCREEN.PHONE_NUMBER_REGISTER_WIZARD,
+  SCREEN.PHONE_NUMBER_VERITY_OTP_WIZARD,
+  SCREEN.REGISTER_INFORMATION_WIZARD,
+  SCREEN.START_USE_WIZARD,
 ];
-const LOADING_INITIAL_ROUTE = LOADING_SCREEN_NAME;
-const MAIN_INITIAL_ROUTE = 'Home';
-const WELCOME_INITIAL_ROUTE = WELCOME_WIZARD_NAME;
+const LOADING_INITIAL_ROUTE = SCREEN.LOADING;
+const MAIN_INITIAL_ROUTE = SCREEN.HOME;
+const WELCOME_INITIAL_ROUTE = SCREEN.WELCOME_WIZARD;
 
 import {
   registerNotificationOpened,
@@ -135,7 +123,7 @@ class App extends React.Component {
 
     this.LoadingProps = propsComponent => (
       <LoadingScreen
-        name={LOADING_SCREEN_NAME}
+        name={SCREEN.LOADING}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
@@ -143,23 +131,23 @@ class App extends React.Component {
 
     this.IntroducationProps = propsComponent => (
       <Introduction
-        name={INTRODUTION_WIZARD_NAME}
+        name={SCREEN.INTRODUTION_WIZARD}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
     );
 
     this.PhoneNumberRegisterProps = propsComponent => (
-      <PhoneNumberRegisterScreen
-        name={PHONE_NUMBER_REGISTER_WIZARD_NAME}
+      <PhoneNumberRegister
+        name={SCREEN.PHONE_NUMBER_REGISTER_WIZARD}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
     );
 
     this.PhoneNumberVerifyOTPProps = propsComponent => (
-      <PhoneNumberVerifyOTPScreen
-        name={PHONE_NUMBER_VERITY_OTP_WIZARD_NAME}
+      <PhoneNumberVerifyOTP
+        name={SCREEN.PHONE_NUMBER_VERITY_OTP_WIZARD}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
@@ -167,7 +155,7 @@ class App extends React.Component {
 
     this.RegisterInformationProps = propsComponent => (
       <RegisterInformation
-        name={REGISTER_INFORMATION_WIZARD_NAME}
+        name={SCREEN.REGISTER_INFORMATION_WIZARD}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
@@ -175,7 +163,7 @@ class App extends React.Component {
 
     this.StartUseProps = propsComponent => (
       <StartUse
-        name={START_USE_WIZARD_NAME}
+        name={SCREEN.START_USE_WIZARD}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
@@ -183,7 +171,7 @@ class App extends React.Component {
 
     this.WelcomeProps = propsComponent => (
       <Welcome
-        name={WELCOME_WIZARD_NAME}
+        name={SCREEN.WELCOME_WIZARD}
         onFinished={this.onChangeStackHome}
         {...propsComponent}
       />
@@ -271,14 +259,12 @@ class App extends React.Component {
     // Trường hợp lấy TokenFirebase === null thì check wizard còn 3 màn hình.
     if (gotoMainScreen) {
       wizard = [
-        LOADING_SCREEN_NAME,
-        INTRODUTION_WIZARD_NAME,
-        START_USE_WIZARD_NAME,
+        SCREEN.LOADING,
+        SCREEN.INTRODUTION_WIZARD,
+        SCREEN.START_USE_WIZARD,
       ];
       name =
-        name !== LOADING_SCREEN_NAME
-          ? INTRODUTION_WIZARD_NAME
-          : LOADING_SCREEN_NAME;
+        name !== SCREEN.LOADING ? SCREEN.INTRODUTION_WIZARD : SCREEN.LOADING;
     }
 
     navigate(nextStepName(name), result);
@@ -307,7 +293,7 @@ class App extends React.Component {
       (obj && obj.data._group === NOTIFICATION_TYPE.SEND_SHORT_NEWS)
     ) {
       if (loading) {
-        this.screenOpenNotification = 'NotifyDetail';
+        this.screenOpenNotification = SCREEN.NOTIFY_DETAIL;
         this.paramsOpenNotification = {
           item: {
             title: obj.title,
@@ -318,7 +304,7 @@ class App extends React.Component {
           },
         };
       } else {
-        navigate('NotifyDetail', {
+        navigate(SCREEN.NOTIFY_DETAIL, {
           item: {
             title: obj.title,
             bigText: obj.body,
@@ -330,15 +316,15 @@ class App extends React.Component {
       }
     } else if (obj && obj.data._group === 'MOBILE') {
       if (loading) {
-        this.screenOpenNotification = 'PhoneNumberRegisterScreen';
+        this.screenOpenNotification = SCREEN.PHONE_NUMBER_REGISTER;
       } else {
-        navigate('PhoneNumberRegisterScreen');
+        navigate(SCREEN.PHONE_NUMBER_REGISTER);
       }
     } else if (obj && obj.data._group === 'ADD_INFO') {
       if (loading) {
-        this.screenOpenNotification = 'RegisterInformation';
+        this.screenOpenNotification = SCREEN.REGISTER_INFORMATION;
       } else {
-        navigate('RegisterInformation');
+        navigate(SCREEN.REGISTER_INFORMATION);
       }
     } else if (
       obj &&
@@ -353,19 +339,19 @@ class App extends React.Component {
       };
       if (obj.data._group === NOTIFICATION_TYPE.SEND_HTML_NEWS) {
         if (loading) {
-          navigate(DETAIL_NEW_LOADING_NAME, params);
+          this.screenOpenNotification = SCREEN.DETAIL_NEW_WELCOME;
         } else if (isHome) {
-          navigate('DetailNew', params);
+          navigate(SCREEN.DETAIL_NEW, params);
         } else {
-          navigate(DETAIL_NEW_WELCOME_NAME, params);
+          navigate(SCREEN.DETAIL_NEW_WELCOME, params);
         }
       } else {
         if (loading) {
-          navigate(PAGE_WEBVIEW_LOADING_NAME, params);
+          this.screenOpenNotification = SCREEN.PAGE_WEBVIEW_WELCOME;
         } else if (isHome) {
-          navigate('PageView', params);
+          navigate(SCREEN.PAGE_WEBVIEW, params);
         } else {
-          navigate(PAGE_WEBVIEW_WELCOME_NAME, params);
+          navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
       }
     }
@@ -394,37 +380,24 @@ class App extends React.Component {
                   component={this.LoadingProps}
                 />
                 <Stack.Screen
-                  name={INTRODUTION_WIZARD_NAME}
+                  name={SCREEN.INTRODUTION_WIZARD}
                   component={this.IntroducationProps}
                 />
                 <Stack.Screen
-                  name={PHONE_NUMBER_REGISTER_WIZARD_NAME}
+                  name={SCREEN.PHONE_NUMBER_REGISTER_WIZARD}
                   component={this.PhoneNumberRegisterProps}
                 />
                 <Stack.Screen
-                  name={PHONE_NUMBER_VERITY_OTP_WIZARD_NAME}
+                  name={SCREEN.PHONE_NUMBER_VERITY_OTP_WIZARD}
                   component={this.PhoneNumberVerifyOTPProps}
                 />
                 <Stack.Screen
-                  name={REGISTER_INFORMATION_WIZARD_NAME}
+                  name={SCREEN.REGISTER_INFORMATION_WIZARD}
                   component={this.RegisterInformationProps}
                 />
                 <Stack.Screen
-                  name={START_USE_WIZARD_NAME}
+                  name={SCREEN.START_USE_WIZARD}
                   component={this.StartUseProps}
-                />
-                <Stack.Screen
-                  path="NotifyDetail"
-                  name="NotifyDetail"
-                  component={NotifyDetail}
-                />
-                <Stack.Screen
-                  name={DETAIL_NEW_LOADING_NAME}
-                  component={DetailNew}
-                />
-                <Stack.Screen
-                  name={PAGE_WEBVIEW_LOADING_NAME}
-                  component={PageView}
                 />
               </Stack.Navigator>
             ) : !isHome ? (
@@ -438,24 +411,23 @@ class App extends React.Component {
                   component={this.WelcomeProps}
                 />
                 <Stack.Screen
-                  path="NotifyDetail"
-                  name="NotifyDetail"
+                  name={SCREEN.NOTIFY_DETAIL_WELCOME}
                   component={NotifyDetail}
                 />
                 <Stack.Screen
-                  name={DETAIL_NEW_WELCOME_NAME}
+                  name={SCREEN.DETAIL_NEW_WELCOME}
                   component={DetailNew}
                 />
                 <Stack.Screen
-                  name={PAGE_WEBVIEW_WELCOME_NAME}
+                  name={SCREEN.PAGE_WEBVIEW_WELCOME}
                   component={PageView}
                 />
                 <Stack.Screen
-                  name="PhoneNumberRegisterScreen"
-                  component={PhoneNumberRegisterScreen}
+                  name={SCREEN.PHONE_NUMBER_REGISTER}
+                  component={PhoneNumberRegister}
                 />
                 <Stack.Screen
-                  name="RegisterInformation"
+                  name={SCREEN.REGISTER_INFORMATION}
                   component={RegisterInformation}
                 />
               </Stack.Navigator>
@@ -469,57 +441,57 @@ class App extends React.Component {
                   name={MAIN_INITIAL_ROUTE}
                   component={this.HomeProps}
                 />
-                <Stack.Screen name="WatchScan" component={WatchScan} />
-                <Stack.Screen name="HistoryScan" component={HistoryScan} />
+                <Stack.Screen name={SCREEN.WATCH_SCAN} component={WatchScan} />
                 <Stack.Screen
-                  name="NotifyDetail"
+                  name={SCREEN.HISTORY_SCAN}
+                  component={HistoryScan}
+                />
+                <Stack.Screen
+                  name={SCREEN.NOTIFY_DETAIL}
                   component={NotifyDetail}
-                  path="NotifyDetail"
-                />
-                <Stack.Screen name="Invite" component={Invite} />
-                <Stack.Screen
-                  name="PhoneNumberRegisterScreen"
-                  component={PhoneNumberRegisterScreen}
                 />
                 <Stack.Screen
-                  name="PhoneNumberVerifyOTPScreen"
-                  component={PhoneNumberVerifyOTPScreen}
+                  name={SCREEN.PHONE_NUMBER_REGISTER}
+                  component={PhoneNumberRegister}
                 />
                 <Stack.Screen
-                  name="RegisterInformation"
+                  name={SCREEN.PHONE_NUMBER_VERITY_OTP}
+                  component={PhoneNumberVerifyOTP}
+                />
+                <Stack.Screen
+                  name={SCREEN.REGISTER_INFORMATION}
                   component={RegisterInformation}
                 />
-                <Stack.Screen name="PageView" component={PageView} />
-                <Stack.Screen name="DetailNew" component={DetailNew} />
+                <Stack.Screen name={SCREEN.PAGE_WEBVIEW} component={PageView} />
+                <Stack.Screen name={SCREEN.DETAIL_NEW} component={DetailNew} />
                 <Stack.Screen
-                  name="HistoryUploadedByOTP"
-                  component={HistoryUploadedByOTPScreen}
+                  name={SCREEN.HISTORY_UPLOAD_OTP}
+                  component={HistoryUploadOTP}
                 />
-                <Stack.Screen name="ViewLog" component={ViewLog} />
+                <Stack.Screen name={SCREEN.VIEW_LOG} component={ViewLog} />
                 <Stack.Screen
-                  name="DownloadLatestVersionScreen"
-                  component={DownloadLatestVersionScreen}
+                  name={SCREEN.DOWNLOAD_LATEST_VERSION}
+                  component={DownloadLatestVersion}
                 />
                 <Stack.Screen
-                  name="ContactHistory"
+                  name={SCREEN.CONTACT_HISTORY}
                   component={ContactHistory}
                 />
-                {/*<Stack.Screen name="ScanScreen" component={ScanScreen} />*/}
-                <Stack.Screen name="Welcome" component={Welcome} />
+                <Stack.Screen name={SCREEN.WELCOME} component={Welcome} />
                 <Stack.Screen
-                  name="DailyDeclaration"
+                  name={SCREEN.DAILY_DECLARATION}
                   component={DailyDeclaration}
                 />
                 <Stack.Screen
-                  name="DomesticDeclaration"
+                  name={SCREEN.DOMESTIC_DECLARATION}
                   component={DomesticDeclaration}
                 />
                 <Stack.Screen
-                  name="EntryDeclaration"
+                  name={SCREEN.ENTRY_DECLARATION}
                   component={EntryDeclaration}
                 />
-                <Stack.Screen name="FAQScreen">
-                  {props => <FAQScreen {...props} showBack={true} />}
+                <Stack.Screen name={SCREEN.FAQ}>
+                  {props => <FAQ {...props} showBack={true} />}
                 </Stack.Screen>
               </Stack.Navigator>
             )}

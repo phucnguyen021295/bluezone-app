@@ -37,6 +37,9 @@ import Text from '../../../base/components/Text';
 import iconBluezone from './images/icon_bluezone.png';
 import updateMessage from '../../../core/msg/update';
 
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
+
 const fileName = 'lastVersion.apk';
 
 class DownloadLatestVersion extends React.PureComponent {
@@ -52,6 +55,9 @@ class DownloadLatestVersion extends React.PureComponent {
 
   componentDidMount() {
     this.onDownload();
+
+    reportScreenAnalytics(SCREEN.DOWNLOAD_LATEST_VERSION);
+
     BackHandler.addEventListener('hardwareBackPress', this.onGoBack);
   }
 

@@ -58,6 +58,7 @@ import message from '../../../core/msg/register';
 import configuration from '../../../configuration';
 import {creatScheduleRegisterNotification} from '../../../core/notifyScheduler';
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const TIMEOUT_LOADING = 800;
 const PHONE_NUMBER_REGEX = /^[\+]?[0-9]{9,15}\b/;
@@ -108,7 +109,7 @@ class RegisterScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('RegisterScreen');
+    reportScreenAnalytics(SCREEN.PHONE_NUMBER_REGISTER);
 
     this.keyboardWillShowSub = Keyboard.addListener(
       'keyboardDidShow',
@@ -148,7 +149,7 @@ class RegisterScreen extends React.Component {
       return true;
     }
 
-    this.props.navigation.replace('PhoneNumberVerifyOTPScreen', {
+    this.props.navigation.replace(SCREEN.PHONE_NUMBER_VERITY_OTP, {
       phoneNumber: numberPhone,
     });
   }

@@ -56,6 +56,8 @@ import {open} from '../../../core/db/SqliteDb';
 import styles from './styles/index.css';
 import * as fontSize from '../../../core/fontSize';
 import {getHistoryDays} from '../../../core/storage';
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const ONE_DAY = 86400000;
 
@@ -106,6 +108,8 @@ class HistoryScanScreen extends React.Component {
     this.setState({
       fontScale,
     });
+
+    reportScreenAnalytics(SCREEN.HISTORY_SCAN);
   }
 
   componentWillUnmount() {
@@ -258,7 +262,7 @@ class HistoryScanScreen extends React.Component {
   };
 
   onSendHistory = () => {
-    this.props.navigation.navigate('HistoryUploadedByOTP');
+    this.props.navigation.navigate(SCREEN.HISTORY_UPLOAD_OTP);
   };
 
   render() {
