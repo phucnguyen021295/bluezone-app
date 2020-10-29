@@ -33,13 +33,17 @@ import {
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 
+// Components
 import Text from '../../../base/components/Text';
-
-import log from '../../../core/log';
-
 import Header from '../../../base/components/Header';
+
+// Log
+import log from '../../../core/log';
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
+
+// Styles
 import styles from './styles/index.css';
-import {reportScreenAnalytics} from "../../../core/analytics";
 
 class ViewLogScreen extends React.Component {
   constructor(props) {
@@ -56,7 +60,7 @@ class ViewLogScreen extends React.Component {
   componentDidMount() {
     this.onGet();
 
-    reportScreenAnalytics('ViewLog');
+    reportScreenAnalytics(SCREEN.VIEW_LOG);
   }
 
   onGet = timestampGet => {

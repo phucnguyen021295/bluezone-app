@@ -129,7 +129,7 @@ class VerifyOTPScreen extends React.Component {
   componentDidMount() {
     this.ref.focus();
 
-    reportScreenAnalytics('VerifyOTPScreen');
+    reportScreenAnalytics(SCREEN.PHONE_NUMBER_VERITY_OTP);
 
     this.keyboardWillShowSub = Keyboard.addListener(
       'keyboardDidShow',

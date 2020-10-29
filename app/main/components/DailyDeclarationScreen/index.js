@@ -37,11 +37,13 @@ import {CheckBox} from 'react-native-elements';
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
+import ButtonBase from '../../../base/components/ButtonBase';
+
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 // Styles
 import styles from './styles/index.css';
-import message from '../../../core/msg/register';
-import ButtonBase from '../../../base/components/ButtonBase';
 
 const items = [
   {id: 'sot', name: 'Sốt'},
@@ -57,6 +59,10 @@ class DailyDeclaration extends React.Component {
     this.state = {
       itemsSelected: [],
     };
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics(SCREEN.DAILY_DECLARATION);
   }
 
   selectItem = item => {

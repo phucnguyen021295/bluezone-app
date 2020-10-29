@@ -109,7 +109,7 @@ class RegisterScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('RegisterScreen');
+    reportScreenAnalytics(SCREEN.PHONE_NUMBER_REGISTER);
 
     this.keyboardWillShowSub = Keyboard.addListener(
       'keyboardDidShow',

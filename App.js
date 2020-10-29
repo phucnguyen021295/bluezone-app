@@ -33,17 +33,17 @@ import HistoryScan from './app/main/components/HistoryScanScreen';
 import NotifyDetail from './app/main/components/NotifyDetail';
 import PhoneNumberRegister from './app/main/components/PhoneNumberRegisterScreen';
 import PhoneNumberVerifyOTP from './app/main/components/PhoneNumberVerifyOTPScreen';
-import HistoryUploadedByOTPScreen from './app/main/components/HistoryUploadedByOTPScreen';
+import HistoryUploadOTP from './app/main/components/HistoryUploadOTPScreen';
 import PageView from './app/main/components/PageViewScreen';
 import DetailNew from './app/main/components/DetailNewScreen';
 import ViewLog from './app/main/components/ViewLog';
-import DownloadLatestVersionScreen from './app/main/components/DownloadLatestVersionScreen';
+import DownloadLatestVersion from './app/main/components/DownloadLatestVersionScreen';
 import Introduction from './app/main/components/IntroductionScreen';
 import StartUse from './app/main/components/StartScreen';
 import RegisterInformation from './app/main/components/RegisterInformationScreen';
 import ContactHistory from './app/main/components/ContactHistoryScreen';
 // import ScanScreen from './app/main/components/ScanScreen';
-import FAQScreen from './app/main/components/FAQScreen';
+import FAQ from './app/main/components/FAQScreen';
 import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
 import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
 import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
@@ -206,6 +206,15 @@ class App extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.loading && !this.state.loading) {
+      if (this.screenOpenNotification && !this.openedScreenNotification) {
+        navigate(this.screenOpenNotification, this.paramsOpenNotification);
+        this.openedScreenNotification = true;
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.removeNotificationOpenedListener &&
       this.removeNotificationOpenedListener();
@@ -283,24 +292,37 @@ class App extends React.Component {
       (obj && obj.data._group === 'INFO') ||
       (obj && obj.data._group === NOTIFICATION_TYPE.SEND_SHORT_NEWS)
     ) {
-      navigate('SCREEN.NOTIFY_DETAIL', {
-        item: {
-          title: obj.title,
-          bigText: obj.body,
-          timestamp: obj.data.timestamp,
-          text: obj.data.text,
-          largeIcon: obj.data.largeIcon,
-        },
-      });
+      if (loading) {
+        this.screenOpenNotification = SCREEN.NOTIFY_DETAIL;
+        this.paramsOpenNotification = {
+          item: {
+            title: obj.title,
+            bigText: obj.body,
+            timestamp: obj.data.timestamp,
+            text: obj.data.text,
+            largeIcon: obj.data.largeIcon,
+          },
+        };
+      } else {
+        navigate(SCREEN.NOTIFY_DETAIL, {
+          item: {
+            title: obj.title,
+            bigText: obj.body,
+            timestamp: obj.data.timestamp,
+            text: obj.data.text,
+            largeIcon: obj.data.largeIcon,
+          },
+        });
+      }
     } else if (obj && obj.data._group === 'MOBILE') {
       if (loading) {
-        navigate(SCREEN.PHONE_NUMBER_REGISTER_WIZARD);
+        this.screenOpenNotification = SCREEN.PHONE_NUMBER_REGISTER;
       } else {
         navigate(SCREEN.PHONE_NUMBER_REGISTER);
       }
     } else if (obj && obj.data._group === 'ADD_INFO') {
       if (loading) {
-        navigate(SCREEN.REGISTER_INFORMATION_WIZARD);
+        this.screenOpenNotification = SCREEN.REGISTER_INFORMATION;
       } else {
         navigate(SCREEN.REGISTER_INFORMATION);
       }
@@ -317,17 +339,17 @@ class App extends React.Component {
       };
       if (obj.data._group === NOTIFICATION_TYPE.SEND_HTML_NEWS) {
         if (loading) {
-          navigate(SCREEN.DETAIL_NEW_LOADING, params);
+          this.screenOpenNotification = SCREEN.DETAIL_NEW_WELCOME;
         } else if (isHome) {
-          navigate('DetailNew', params);
+          navigate(SCREEN.DETAIL_NEW, params);
         } else {
           navigate(SCREEN.DETAIL_NEW_WELCOME, params);
         }
       } else {
         if (loading) {
-          navigate(SCREEN.PAGE_WEBVIEW_LOADING, params);
+          this.screenOpenNotification = SCREEN.PAGE_WEBVIEW_WELCOME;
         } else if (isHome) {
-          navigate('PageView', params);
+          navigate(SCREEN.PAGE_WEBVIEW, params);
         } else {
           navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
@@ -389,7 +411,6 @@ class App extends React.Component {
                   component={this.WelcomeProps}
                 />
                 <Stack.Screen
-                  path="NotifyDetail"
                   name={SCREEN.NOTIFY_DETAIL_WELCOME}
                   component={NotifyDetail}
                 />
@@ -400,6 +421,14 @@ class App extends React.Component {
                 <Stack.Screen
                   name={SCREEN.PAGE_WEBVIEW_WELCOME}
                   component={PageView}
+                />
+                <Stack.Screen
+                  name={SCREEN.PHONE_NUMBER_REGISTER}
+                  component={PhoneNumberRegister}
+                />
+                <Stack.Screen
+                  name={SCREEN.REGISTER_INFORMATION}
+                  component={RegisterInformation}
                 />
               </Stack.Navigator>
             ) : (
@@ -420,7 +449,6 @@ class App extends React.Component {
                 <Stack.Screen
                   name={SCREEN.NOTIFY_DETAIL}
                   component={NotifyDetail}
-                  path="NotifyDetail"
                 />
                 <Stack.Screen
                   name={SCREEN.PHONE_NUMBER_REGISTER}
@@ -434,37 +462,36 @@ class App extends React.Component {
                   name={SCREEN.REGISTER_INFORMATION}
                   component={RegisterInformation}
                 />
-                <Stack.Screen name="PageView" component={PageView} />
-                <Stack.Screen name="DetailNew" component={DetailNew} />
+                <Stack.Screen name={SCREEN.PAGE_WEBVIEW} component={PageView} />
+                <Stack.Screen name={SCREEN.DETAIL_NEW} component={DetailNew} />
                 <Stack.Screen
-                  name="HistoryUploadedByOTP"
-                  component={HistoryUploadedByOTPScreen}
+                  name={SCREEN.HISTORY_UPLOAD_OTP}
+                  component={HistoryUploadOTP}
                 />
-                <Stack.Screen name="ViewLog" component={ViewLog} />
+                <Stack.Screen name={SCREEN.VIEW_LOG} component={ViewLog} />
                 <Stack.Screen
-                  name="DownloadLatestVersionScreen"
-                  component={DownloadLatestVersionScreen}
+                  name={SCREEN.DOWNLOAD_LATEST_VERSION}
+                  component={DownloadLatestVersion}
                 />
                 <Stack.Screen
-                  name="ContactHistory"
+                  name={SCREEN.CONTACT_HISTORY}
                   component={ContactHistory}
                 />
-                {/*<Stack.Screen name="ScanScreen" component={ScanScreen} />*/}
-                <Stack.Screen name="Welcome" component={Welcome} />
+                <Stack.Screen name={SCREEN.WELCOME} component={Welcome} />
                 <Stack.Screen
-                  name="DailyDeclaration"
+                  name={SCREEN.DAILY_DECLARATION}
                   component={DailyDeclaration}
                 />
                 <Stack.Screen
-                  name="DomesticDeclaration"
+                  name={SCREEN.DOMESTIC_DECLARATION}
                   component={DomesticDeclaration}
                 />
                 <Stack.Screen
-                  name="EntryDeclaration"
+                  name={SCREEN.ENTRY_DECLARATION}
                   component={EntryDeclaration}
                 />
-                <Stack.Screen name="FAQScreen">
-                  {props => <FAQScreen {...props} showBack={true} />}
+                <Stack.Screen name={SCREEN.FAQ}>
+                  {props => <FAQ {...props} showBack={true} />}
                 </Stack.Screen>
               </Stack.Navigator>
             )}

@@ -69,13 +69,10 @@ import {
 
 // Styles
 import styles from './styles/index.css';
-import * as fontSize from '../../../core/fontSize';
 import ModalBase from '../../../base/components/ModalBase';
-import message from '../../../core/msg/verifyOtp';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
-import {removeDeliveredNotification} from '../../../core/fcm';
-import {messageNotifyOTPSuccess} from '../../../core/data';
-import {createPhoneNumberReminder} from '../../../core/announcement';
+import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 const VIETNAM_ID = 234;
 
@@ -129,6 +126,10 @@ class Declaration extends React.Component {
       testResultImage: '',
       testResult: {},
     };
+  }
+
+  componentDidMount() {
+    reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
   }
 
   changeState = (key, value, fn) => {

@@ -21,8 +21,6 @@
 
 'use strict';
 
-'use strict';
-
 import React, {Component} from 'react';
 import {
   StyleSheet,
@@ -37,22 +35,23 @@ import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 
 import Header from '../../../base/components/Header';
-import * as fontSize from '../../../core/fontSize';
+
+import SCREEN from '../../nameScreen';
 
 const UtilityScreen = props => {
   const {intl, navigation} = props;
   const {formatMessage} = intl;
 
   const open1 = () => {
-    navigation.navigate('DomesticDeclaration');
+    navigation.navigate(SCREEN.DOMESTIC_DECLARATION);
   };
 
   const open2 = () => {
-    navigation.navigate('EntryDeclaration');
+    navigation.navigate(SCREEN.ENTRY_DECLARATION);
   };
 
   const open3 = () => {
-    navigation.navigate('DailyDeclaration');
+    navigation.navigate(SCREEN.DAILY_DECLARATION);
   };
 
   return (

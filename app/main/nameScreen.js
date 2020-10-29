@@ -23,37 +23,33 @@
 
 const SCREEN = {
   LOADING: 'Loading',
-
-  INTRODUTION_WIZARD: 'IntrodutionWizard',
-
+  INTRODUTION_WIZARD: 'Introdution',
   PHONE_NUMBER_REGISTER: 'PhoneNumberRegister',
   PHONE_NUMBER_REGISTER_WIZARD: 'PhoneNumberRegisterWizard',
-
   PHONE_NUMBER_VERITY_OTP: 'PhoneNumberVerifyOTP',
   PHONE_NUMBER_VERITY_OTP_WIZARD: 'PhoneNumberVerifyOTPWizard',
-
   REGISTER_INFORMATION: 'RegisterInformation',
   REGISTER_INFORMATION_WIZARD: 'RegisterInformationWizard',
-
-  START_USE_WIZARD: 'StartUseWizard',
-
+  START_USE_WIZARD: 'StartUse',
+  WELCOME: 'Welcome',
   WELCOME_WIZARD: 'WelcomeWizard',
-
-  PAGE_WEBVIEW_LOADING: 'PageViewLoading',
+  PAGE_WEBVIEW: 'PageView',
   PAGE_WEBVIEW_WELCOME: 'PageViewWelcome',
-
-  DETAIL_NEW_LOADING: 'DetailNewLoading',
-
+  DETAIL_NEW: 'DetailNew',
   DETAIL_NEW_WELCOME: 'DetailNewWelcome',
-
   HOME: 'Home',
-
   NOTIFY_DETAIL_WELCOME: 'NotifyDetailWelcome',
   NOTIFY_DETAIL: 'NotifyDetail',
-
   WATCH_SCAN: 'WatchScan',
-
   HISTORY_SCAN: 'HistoryScan',
+  HISTORY_UPLOAD_OTP: 'HistoryUploadedByOTP',
+  VIEW_LOG: 'ViewLog',
+  DOWNLOAD_LATEST_VERSION: 'DownloadLatestVersion',
+  CONTACT_HISTORY: 'ContactHistory',
+  DAILY_DECLARATION: 'DailyDeclaration',
+  DOMESTIC_DECLARATION: 'DomesticDeclaration',
+  ENTRY_DECLARATION: 'EntryDeclaration',
+  FAQ: 'FAQ',
 };
 
 export default SCREEN;

@@ -212,7 +212,7 @@ class NotifyScreen extends React.Component {
 
         break;
       case NOTIFICATION_TYPE.SEND_HTML_NEWS:
-        this.props.navigation.navigate('DetailNew', {
+        this.props.navigation.navigate(SCREEN.DETAIL_NEW, {
           item: {
             title: item.title,
             data: JSON.parse(item.data || {}),
@@ -220,7 +220,7 @@ class NotifyScreen extends React.Component {
         });
         break;
       case NOTIFICATION_TYPE.SEND_URL_NEW:
-        this.props.navigation.navigate('PageView', {
+        this.props.navigation.navigate(SCREEN.PAGE_WEBVIEW, {
           item: {
             title: item.title,
             data: JSON.parse(item.data || {}),

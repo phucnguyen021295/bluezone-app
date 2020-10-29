@@ -262,7 +262,7 @@ class HistoryScanScreen extends React.Component {
   };
 
   onSendHistory = () => {
-    this.props.navigation.navigate('HistoryUploadedByOTP');
+    this.props.navigation.navigate(SCREEN.HISTORY_UPLOAD_OTP);
   };
 
   render() {

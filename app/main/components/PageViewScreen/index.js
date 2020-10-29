@@ -31,6 +31,7 @@ import {WebView} from 'react-native-webview';
 import Error from './Error';
 import Header from '../../../base/components/Header';
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 class PageViewScreen extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class PageViewScreen extends Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('PageViewScreen');
+    reportScreenAnalytics(SCREEN.PAGE_WEBVIEW);
   }
 
   setRef = ref => {

@@ -64,6 +64,7 @@ import {
 import messageWarning from '../../../core/msg/warning';
 
 import {reportScreenAnalytics} from '../../../core/analytics';
+import SCREEN from '../../nameScreen';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -98,7 +99,7 @@ class WelcomeScreen extends React.Component {
     Dimensions.addEventListener('change', this.onDimensionsChange);
     AppState.addEventListener('change', this.handleAppStateChange);
 
-    reportScreenAnalytics('Welcome');
+    reportScreenAnalytics(SCREEN.WELCOME);
   }
 
   componentWillUnmount() {

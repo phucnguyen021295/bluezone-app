@@ -51,7 +51,7 @@ class NotifyScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics('NotifyScreen');
+    reportScreenAnalytics(SCREEN.NOTIFY_DETAIL);
   }
 
   onRegisterScreen = () => {
