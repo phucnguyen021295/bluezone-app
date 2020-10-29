@@ -1287,7 +1287,7 @@ const getAllCountryApi = (success = _defaultFunc, failure = _defaultFunc) => {
     .get(`${DOMAIN}/api/Region/GetAllCountry`, configRegionApi)
     .then(response => {
       if (response.status === 200 && response.data.isOk === true) {
-        success(response.data);
+        success(response.data.Object);
       } else {
         failure(response);
       }
@@ -1299,7 +1299,7 @@ const getAllAirPortApi = (success = _defaultFunc, failure = _defaultFunc) => {
     .get(`${DOMAIN}/api/Region/GetAllAirPortVN`, configRegionApi)
     .then(response => {
       if (response.status === 200 && response.data.isOk === true) {
-        success(response.data);
+        success(response.data.Object);
       } else {
         failure(response);
       }
@@ -1311,7 +1311,7 @@ const getAllProvinceApi = (success = _defaultFunc, failure = _defaultFunc) => {
     .get(`${DOMAIN}/api/Region/GetProvinceVN`, configRegionApi)
     .then(response => {
       if (response.status === 200 && response.data.isOk === true) {
-        success(response.data);
+        success(response.data.Object);
       } else {
         failure(response);
       }
@@ -1332,7 +1332,7 @@ const getRegionByParentID = (
     })
     .then(response => {
       if (response.status === 200 && response.data.isOk === true) {
-        success(response.data);
+        success(response.data.Object);
       } else {
         failure(response);
       }

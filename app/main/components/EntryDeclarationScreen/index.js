@@ -47,9 +47,17 @@ import FormInput from '../../../base/components/FormInput';
 import RadioButton from '../../../base/components/RadioButton';
 import SelectPicker from '../../../base/components/SelectPicker';
 import TextInfo from './components/TextInfo';
+import ModalBase from '../../../base/components/ModalBase';
+import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 
 // Api
-import {entryDeclaration} from '../../../core/apis/bluezone';
+import {
+  entryDeclaration,
+  getAllCountryApi,
+  getAllAirPortApi,
+  getAllProvinceApi,
+  getRegionByParentID,
+} from '../../../core/apis/bluezone';
 
 // Storage
 import {
@@ -58,24 +66,10 @@ import {
 } from '../../../core/storage';
 
 // Data
-import {
-  gates,
-  countries,
-  provinces,
-  yearBirth,
-  symptomData,
-  exposureHistoryData,
-} from './data';
+import {yearBirth, symptomData, exposureHistoryData} from './data';
 
 // Styles
 import styles from './styles/index.css';
-import * as fontSize from '../../../core/fontSize';
-import ModalBase from '../../../base/components/ModalBase';
-import message from '../../../core/msg/verifyOtp';
-import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
-import {removeDeliveredNotification} from '../../../core/fcm';
-import {messageNotifyOTPSuccess} from '../../../core/data';
-import {createPhoneNumberReminder} from '../../../core/announcement';
 
 const VIETNAM_ID = 234;
 
@@ -128,7 +122,14 @@ class Declaration extends React.Component {
       exposureHistory: {},
       testResultImage: '',
       testResult: {},
+      gates: null,
+      countries: null,
+      provinces: null,
+      districts: null,
+      wards: null,
     };
+    this.lastProvinceIDCallApi = null;
+    this.lastDistrictIDCallApi = null;
   }
 
   changeState = (key, value, fn) => {
@@ -267,11 +268,31 @@ class Declaration extends React.Component {
   };
 
   onSelectVNProvince = id => {
-    this.changeState('vn_ProvinceID', id);
+    const {vn_ProvinceID} = this.state;
+    if (vn_ProvinceID === id) {
+      return;
+    }
+
+    this.setState({
+      vn_ProvinceID: id,
+      districts: null,
+      vn_DistrictID: null,
+      wards: null,
+      vn_WardID: null,
+    });
   };
 
   onSelectVNPDistrict = id => {
-    this.changeState('vn_DistrictID', id);
+    const {vn_DistrictID} = this.state;
+    if (vn_DistrictID === id) {
+      return;
+    }
+
+    this.setState({
+      vn_DistrictID: id,
+      wards: null,
+      vn_WardID: null,
+    });
   };
 
   onSelectVNWard = id => {
@@ -632,6 +653,102 @@ class Declaration extends React.Component {
     );
   };
 
+  onVisiblePickerGate = () => {
+    const {gates} = this.state;
+    if (!gates) {
+      getAllAirPortApi(
+        data => {
+          const _data = data.map(({AirPortID, AirPortName}) => ({
+            id: AirPortID,
+            name: AirPortName,
+          }));
+          this.setState({gates: _data});
+        },
+        () => {},
+      );
+    }
+  };
+
+  onVisiblePickerCountry = () => {
+    const {countries} = this.state;
+    if (!countries) {
+      getAllCountryApi(
+        data => {
+          const _data = data.map(({RegionID, RegionName}) => ({
+            id: RegionID,
+            name: RegionName,
+          }));
+          this.setState({countries: _data});
+        },
+        () => {},
+      );
+    }
+  };
+
+  onVisiblePickerProvince = () => {
+    const {provinces} = this.state;
+    if (!provinces) {
+      getAllProvinceApi(
+        data => {
+          const _data = data.map(({RegionID, RegionName}) => ({
+            id: RegionID,
+            name: RegionName,
+          }));
+          this.setState({provinces: _data});
+        },
+        () => {},
+      );
+    }
+  };
+
+  onVisiblePickerDistrict = () => {
+    const {vn_ProvinceID} = this.state;
+    if (!vn_ProvinceID) {
+      return;
+    }
+
+    if (vn_ProvinceID === this.lastProvinceIDCallApi) {
+      return;
+    }
+
+    this.lastProvinceIDCallApi = vn_ProvinceID;
+    getRegionByParentID(
+      vn_ProvinceID,
+      data => {
+        const _data = data.map(({RegionID, RegionName}) => ({
+          id: RegionID,
+          name: RegionName,
+        }));
+        this.setState({districts: _data});
+      },
+      () => {},
+    );
+  };
+
+  onVisiblePickerWard = () => {
+    const {vn_DistrictID} = this.state;
+    if (!vn_DistrictID) {
+      return;
+    }
+
+    if (vn_DistrictID === this.lastDistrictIDCallApi) {
+      return;
+    }
+
+    this.lastDistrictIDCallApi = vn_DistrictID;
+    getRegionByParentID(
+      vn_DistrictID,
+      data => {
+        const _data = data.map(({RegionID, RegionName}) => ({
+          id: RegionID,
+          name: RegionName,
+        }));
+        this.setState({wards: _data});
+      },
+      () => {},
+    );
+  };
+
   // hihi = () => {
   //   this.setState(prev => {
   //     return {
@@ -707,6 +824,11 @@ class Declaration extends React.Component {
       exposureHistory,
       testResultImage,
       testResult,
+      gates,
+      countries,
+      provinces,
+      districts,
+      wards,
     } = this.state;
 
     const startVN = this.isIDVietNam(startCountryID);
@@ -714,14 +836,25 @@ class Declaration extends React.Component {
     const {intl} = this.props;
     const {formatMessage} = intl;
 
+    console.log(symptom);
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           <Header
             styleTitle={styles.textHeader}
-            title={'Khai báo y tế tự nguyện'}
+            title={'Tờ khai Y tế đối với người nhập cảnh'}
           />
           <ScrollView style={styles.scroll}>
+            <Text style={styles.label1}>
+              Đây là tài liệu quan trọng, thông tin của Anh/Chị sẽ giúp cơ quan
+              y tế liên lạc khi cần thiết để phòng trống dịch bệnh truyền nhiễm
+            </Text>
+            <Text style={styles.labelRed}>
+              Khuyến cáo: Khai báo thông tin sai là vi phạm pháp luật Việt Nam
+              và có thể xử lý hình sự
+            </Text>
+
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -753,8 +886,11 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={gates}
+                loading={!gates}
+                value={gateID}
                 headerText={'Chọn cửa khẩu'}
                 placeholder={'-Chọn-'}
+                onVisible={this.onVisiblePickerGate}
                 onSelect={this.onSelectGate}
               />
             </View>
@@ -774,6 +910,7 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={yearBirth}
+                value={yearOfBirth}
                 // valueDefault={'2020'}
                 headerText={'Chọn năm sinh'}
                 placeholder={'-Chọn-'}
@@ -789,33 +926,33 @@ class Declaration extends React.Component {
               />
               <View style={styles.flexRow}>
                 <TouchableOpacity
-                  style={styles.flexRow}
+                  style={styles.genderFirstItemContainer}
                   onPress={this.selectGenderMale}>
                   <RadioButton
                     checked={gender === '1'}
                     onPress={this.selectGenderMale}
                   />
-                  <Text text={'Nam'} />
+                  <MediumText style={styles.gender} text={'Nam'} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={styles.flexRow}
+                  style={styles.genderItemContainer}
                   onPress={this.selectGenderFemale}>
                   <RadioButton
                     checked={gender === '2'}
                     onPress={this.selectGenderFemale}
                   />
-                  <Text text={'Nữ'} />
+                  <MediumText style={styles.gender} text={'Nữ'} />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={styles.flexRow}
+                  style={styles.genderItemContainer}
                   onPress={this.selectGenderOther}>
                   <RadioButton
                     checked={gender === '3'}
                     onPress={this.selectGenderOther}
                   />
-                  <Text text={'Khác'} />
+                  <MediumText style={styles.gender} text={'Khác'} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -828,9 +965,12 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={countries}
+                loading={!countries}
+                value={nationalityID}
                 headerText={'Chọn quốc tịch'}
                 valueDefault={'Việt Nam'}
                 placeholder={'-Chọn-'}
+                onVisible={this.onVisiblePickerCountry}
                 onSelect={this.onSelectNationality}
               />
             </View>
@@ -954,8 +1094,11 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={countries}
+                loading={!countries}
+                value={startCountryID}
                 headerText={'Chọn quốc gia'}
                 placeholder={'-Chọn-'}
+                onVisible={this.onVisiblePickerCountry}
                 onSelect={this.onSelectStartCountry}
               />
             </View>
@@ -965,8 +1108,11 @@ class Declaration extends React.Component {
               {startVN ? (
                 <SelectPicker
                   data={provinces}
+                  loading={!provinces}
+                  value={startProvinceID}
                   headerText={'Chọn tỉnh'}
                   placeholder={'-Chọn-'}
+                  onVisible={this.onVisiblePickerProvince}
                   onSelect={this.onSelectStartProvince}
                 />
               ) : (
@@ -999,8 +1145,11 @@ class Declaration extends React.Component {
               <TextInfo styleContainer={styles.itemTitle} text={'Tỉnh'} star />
               <SelectPicker
                 data={provinces}
+                loading={!provinces}
+                value={endProvinceID}
                 headerText={'Chọn tỉnh'}
                 placeholder={'-Chọn-'}
+                onVisible={this.onVisiblePickerProvince}
                 onSelect={this.onSelectEndProvince}
               />
             </View>
@@ -1028,8 +1177,11 @@ class Declaration extends React.Component {
               />
               <SelectPicker
                 data={provinces}
+                loading={!provinces}
+                value={vn_ProvinceID}
                 headerText={'Chọn tỉnh/thành'}
                 placeholder={'-Chọn-'}
+                onVisible={this.onVisiblePickerProvince}
                 onSelect={this.onSelectVNProvince}
               />
             </View>
@@ -1041,10 +1193,13 @@ class Declaration extends React.Component {
                 star
               />
               <SelectPicker
-                data={provinces}
+                data={districts}
+                loading={!districts}
+                value={vn_DistrictID}
                 headerText={'Chọn quận/huyện'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectVNPDistrict}
+                onVisible={this.onVisiblePickerDistrict}
                 shouldVisible={this.shouldVisibleVNDistrict}
               />
             </View>
@@ -1056,10 +1211,13 @@ class Declaration extends React.Component {
                 star
               />
               <SelectPicker
-                data={provinces}
+                data={wards}
+                loading={!wards}
+                value={vn_WardID}
                 headerText={'Chọn phường xã'}
                 placeholder={'-Chọn-'}
                 onSelect={this.onSelectVNWard}
+                onVisible={this.onVisiblePickerWard}
                 shouldVisible={this.shouldVisibleVNWard}
               />
             </View>

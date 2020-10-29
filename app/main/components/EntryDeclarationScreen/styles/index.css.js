@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 
   textHeader: {
-    fontSize: fontSize.huge,
+    fontSize: fontSize.large,
   },
 
   itemContainer: {
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 
   star: {
     color: 'red',
+    fontSize: fontSize.fontSize16,
   },
 
   checkbox: {
@@ -125,21 +126,24 @@ const styles = StyleSheet.create({
 
   portraitContainer: {
     alignItems: 'center',
-    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
 
   portraitBtn: {
-    width: 100,
-    height: 100,
-    borderWidth: 1,
-    borderColor: '#000',
+    width: 126,
+    height: 126,
+    // borderWidth: 1,
+    // borderColor: '#000',
+    borderRadius: 73,
+    backgroundColor: '#949494',
   },
 
   portraitImageBtn: {},
 
   portraitImage: {
-    width: 100,
-    height: 100,
+    width: 126,
+    height: 126,
   },
 
   testResultBtn: {
@@ -188,14 +192,41 @@ const styles = StyleSheet.create({
   labelRed: {
     marginVertical: 10,
     color: 'red',
+    fontSize: fontSize.smaller,
+  },
+
+  label1: {
+    marginVertical: 7,
+    fontSize: fontSize.normal,
   },
 
   flexRow: {
     flexDirection: 'row',
   },
 
-  vehicleNumber: {flex: 1, marginRight: 10},
-  vehicleSeat: {flex: 1, marginLeft: 10},
+  vehicleNumber: {
+    flex: 1,
+    marginRight: 10,
+  },
+  vehicleSeat: {
+    flex: 1,
+    marginLeft: 10,
+  },
+
+  genderItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  genderFirstItemContainer: {
+    marginLeft: -10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  gender: {
+    fontSize: fontSize.small,
+  },
 });
 
 export default styles;

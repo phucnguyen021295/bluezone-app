@@ -43,11 +43,12 @@ const TextInfo = ({star, text, style, styleContainer, ...otherProps}) => {
 
 const styles = StyleSheet.create({
   itemTitle: {
-    fontSize: fontSize.smaller,
+    fontSize: fontSize.fontSize16,
   },
 
   star: {
     color: 'red',
+    fontSize: fontSize.fontSize16,
   },
 });
 

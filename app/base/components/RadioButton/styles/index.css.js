@@ -25,8 +25,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   circle: {
-    height: 20,
-    width: 20,
+    height: 16,
+    width: 16,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#ACACAC',
@@ -35,10 +35,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   checkedCircle: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    backgroundColor: '#131313',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#015CD0',
   },
 });
 
