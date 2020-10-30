@@ -21,15 +21,8 @@
 
 'use strict';
 
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-  SafeAreaView,
-  View,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import {StatusBar, SafeAreaView, View, ScrollView} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 import {CheckBox} from 'react-native-elements';
@@ -38,6 +31,7 @@ import {CheckBox} from 'react-native-elements';
 import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import ButtonBase from '../../../base/components/ButtonBase';
+import HealthMonitoringItem from './components/HealthMonitoringItem';
 
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
@@ -45,12 +39,31 @@ import SCREEN from '../../nameScreen';
 // Styles
 import styles from './styles/index.css';
 
-const items = [
-  {id: 'sot', name: 'Sốt'},
-  {id: 'ho', name: 'Ho'},
-  {id: 'khotho', name: 'Khó thở'},
-  {id: 'daunguoi_metmoi', name: 'Đau người, mệt mỏi'},
-  {id: 'khoemanh', name: 'Khỏe mạnh'},
+export const listSymptom = [
+  {StateID: 1, name: 'Sốt'},
+  {StateID: 2, name: 'Ho'},
+  {StateID: 3, name: 'Khó thở'},
+  {StateID: 4, name: 'Đau người, mệt mỏi'},
+  {StateID: 5, name: 'Khỏe mạnh'},
+];
+
+const data = [
+  {
+    TimeStamp: 1603962024359,
+    ListItem: [1, 2, 3, 4],
+  },
+  {
+    TimeStamp: 1603962024359,
+    ListItem: [5],
+  },
+  {
+    TimeStamp: 1603962024359,
+    ListItem: [1, 2, 3, 4],
+  },
+  {
+    TimeStamp: 1603962024359,
+    ListItem: [5],
+  },
 ];
 
 class DailyDeclaration extends React.Component {
@@ -58,6 +71,7 @@ class DailyDeclaration extends React.Component {
     super(props);
     this.state = {
       itemsSelected: [],
+      data: data,
     };
   }
 
@@ -77,9 +91,7 @@ class DailyDeclaration extends React.Component {
   };
 
   render() {
-    const {itemsSelected} = this.state;
-    const {intl, navigation} = this.props;
-    const {formatMessage} = intl;
+    const {itemsSelected, data} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
@@ -88,31 +100,23 @@ class DailyDeclaration extends React.Component {
           <MediumText style={styles.title}>
             Chọn thông tin sức khỏe hiện tại của bạn
           </MediumText>
-          <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-            }}>
-            {items.map(item => {
-              const selected = itemsSelected.find(i => i.id === item.id);
+          <View style={styles.listCheckbox}>
+            {listSymptom.map(item => {
+              const selected = itemsSelected.find(
+                i => i.StateID === item.StateID,
+              );
               return (
                 <CheckBox
                   iconType={'ionicon'}
-                  center
+                  iconRight
                   title={item.name}
+                  disabled={true}
                   checkedIcon="ios-checkbox-outline"
                   uncheckedIcon="ios-square-outline"
                   checked={selected}
                   onPress={() => this.selectItem(item)}
-                  containerStyle={{
-                    marginLeft: 0,
-                    marginRight: 0,
-                    margin: 0,
-                    backgroundColor: '#ffffff',
-                    borderWidth: 0,
-                  }}
-                  textStyle={{marginRight: 5, marginLeft: 5}}
+                  containerStyle={styles.containerStyleCheckbox}
+                  textStyle={{marginRight: 10, marginLeft: 0}}
                 />
               );
             })}
@@ -130,171 +134,9 @@ class DailyDeclaration extends React.Component {
           </MediumText>
 
           <View>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#015cd0',
-                  zIndex: 99,
-                }}
-              />
-              <View
-                style={{
-                  marginRight: 16.5,
-                  borderLeftColor: '#707070',
-                  borderLeftWidth: 1,
-                  marginLeft: 5,
-                }}
-              />
-              <View style={{flex: 1}}>
-                <MediumText>30/09/2020</MediumText>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#b2b2b2',
-                    flex: 1,
-                    padding: 10,
-                    borderRadius: 9,
-                    marginBottom: 47,
-                    marginTop: 7,
-                  }}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingBottom: 13,
-                    }}>
-                    <ButtonBase
-                      title={'Nguy cơ nhiễm bệnh'}
-                      onPress={this.onCloseScreenPress}
-                      containerStyle={styles.containerStyleNCNB}
-                      titleStyle={styles.textInviteNCNB}
-                    />
-                    <Text>10:10</Text>
-                  </View>
-                  <Text>
-                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#015cd0',
-                  zIndex: 99,
-                }}
-              />
-              <View
-                style={{
-                  marginRight: 16.5,
-                  borderLeftColor: '#707070',
-                  borderLeftWidth: 1,
-                  marginLeft: 5,
-                }}
-              />
-              <View style={{flex: 1}}>
-                <MediumText>30/09/2020</MediumText>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#b2b2b2',
-                    flex: 1,
-                    padding: 10,
-                    borderRadius: 9,
-                    marginBottom: 47,
-                    marginTop: 7,
-                  }}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingBottom: 13,
-                    }}>
-                    <ButtonBase
-                      title={'Nguy cơ nhiễm bệnh'}
-                      onPress={this.onCloseScreenPress}
-                      containerStyle={styles.containerStyleNCNB}
-                      titleStyle={styles.textInviteNCNB}
-                    />
-                    <Text>10:10</Text>
-                  </View>
-                  <Text>
-                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#015cd0',
-                  zIndex: 99,
-                }}
-              />
-              <View
-                style={{
-                  marginRight: 16.5,
-                  borderLeftColor: '#707070',
-                  borderLeftWidth: 1,
-                  marginLeft: 5,
-                }}
-              />
-              <View style={{flex: 1}}>
-                <MediumText>30/09/2020</MediumText>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#b2b2b2',
-                    flex: 1,
-                    padding: 10,
-                    borderRadius: 9,
-                    marginBottom: 47,
-                    marginTop: 7,
-                  }}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingBottom: 13,
-                    }}>
-                    <ButtonBase
-                      title={'Nguy cơ nhiễm bệnh'}
-                      onPress={this.onCloseScreenPress}
-                      containerStyle={styles.containerStyleNCNB}
-                      titleStyle={styles.textInviteNCNB}
-                    />
-                    <Text>10:10</Text>
-                  </View>
-                  <Text>
-                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
-                  </Text>
-                </View>
-              </View>
-            </View>
+            {data.map((item, index) => (
+              <HealthMonitoringItem item={item} key={index} />
+            ))}
           </View>
         </ScrollView>
       </SafeAreaView>
