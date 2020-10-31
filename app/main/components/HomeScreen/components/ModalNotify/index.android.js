@@ -39,6 +39,7 @@ import {
 
 // Components
 import ModalBase from './ModalNotify';
+import {LanguageContext} from '../../../../../../LanguageContext';
 
 // Language
 import message from '../../../../../core/msg/home';
@@ -354,8 +355,6 @@ ModalNotify.propTypes = {
   intl: intlShape.isRequired,
 };
 
-ModalNotify.contextTypes = {
-  language: PropTypes.string,
-};
+ModalNotify.contextType = LanguageContext;
 
 export default injectIntl(ModalNotify);

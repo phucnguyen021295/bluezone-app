@@ -393,8 +393,4 @@ WelcomeScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-WelcomeScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(WelcomeScreen);

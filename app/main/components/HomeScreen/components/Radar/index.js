@@ -520,8 +520,4 @@ Index.propTypes = {
 
 Index.defaultProps = {};
 
-Index.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(Index);

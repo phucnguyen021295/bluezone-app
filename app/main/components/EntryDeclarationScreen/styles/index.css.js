@@ -46,17 +46,21 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
+  item2Container: {
+    paddingBottom: 10,
+  },
+
   itemTitle: {
     paddingBottom: 10,
   },
 
-  bigText: {
-    fontSize: fontSize.normal,
+  headerTwo: {
+    fontSize: fontSize.small,
   },
 
-  bigTextContainer: {
-    paddingTop: 8,
-    paddingBottom: 0,
+  headerTwoContainer: {
+    paddingTop: 0,
+    paddingBottom: 10,
   },
 
   inputNumberHome: {
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
 
   star: {
     color: 'red',
-    fontSize: fontSize.fontSize16,
+    fontSize: fontSize.small,
   },
 
   checkbox: {
@@ -83,22 +87,39 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 
-  rowSymptom: {
+  rowSymptom0: {
     flexDirection: 'row',
     paddingVertical: 10,
+    backgroundColor: '#d9d9d9',
+  },
+
+  rowSymptom1: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+
+  rowSymptom2: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
   },
 
   nameSymptom: {
     flex: 1,
+    paddingLeft: 6,
+    fontSize: fontSize.small,
   },
 
   buttonSymptom: {
     textAlign: 'center',
-    width: 50,
+    width: 55,
+    fontSize: fontSize.small,
   },
 
   checkboxSymptom: {
-    width: 50,
+    width: 55,
     alignItems: 'center',
   },
 
@@ -108,21 +129,31 @@ const styles = StyleSheet.create({
 
   btnSend: {
     marginVertical: 30,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: 'blue',
+    paddingHorizontal: 99,
+    paddingVertical: 13,
+    backgroundColor: '#015cd0',
+    borderRadius: 13,
   },
 
   btnSendContent: {
     color: '#FFF',
+    fontSize: fontSize.normal,
   },
 
   vehicleItemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 35,
   },
 
-  vehicleItemText: {},
+  vehicleItemText: {
+    fontSize: fontSize.small,
+  },
+
+  vehicleFirstItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 
   portraitContainer: {
     alignItems: 'center',
@@ -147,17 +178,18 @@ const styles = StyleSheet.create({
   },
 
   testResultBtn: {
-    width: 120,
-    height: 120,
+    width: 131,
+    height: 97,
+    borderRadius: 18,
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#707070',
   },
 
   testResultImageBtn: {},
 
   testResultImage: {
-    width: 120,
-    height: 120,
+    width: 131,
+    height: 97,
   },
 
   textInput: {
@@ -205,17 +237,18 @@ const styles = StyleSheet.create({
   },
 
   vehicleNumber: {
-    flex: 1,
-    marginRight: 10,
+    // flex: 1,
+    // marginRight: 10,
   },
   vehicleSeat: {
-    flex: 1,
-    marginLeft: 10,
+    // flex: 1,
+    // marginLeft: 10,
   },
 
   genderItemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 15,
   },
 
   genderFirstItemContainer: {

@@ -19,39 +19,40 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-'use strict';
-
 import React from 'react';
 import * as PropTypes from 'prop-types';
+import configuration from '../../../../configuration';
+import {getLanguage} from '../../../../core/storage';
 
-// Components
-import FastImage from 'react-native-fast-image';
+export const EntryLanguageContext = React.createContext();
 
-// Styles
-import {injectIntl, intlShape} from 'react-intl';
-
-class HeaderFull extends React.Component {
+class LanguageContextComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    let language = configuration.EntryLanguage;
+    this.state = {
+      language: language,
+    };
   }
 
   render() {
-    const {styleImg, uri, onLoad} = this.props;
+    if (!this.state.language) {
+      return null;
+    }
     return (
-      <FastImage
-        style={styleImg}
-        source={uri}
-        cacheControl={FastImage.cacheControl.immutable}
-        onLoad={onLoad}
-        resizeMode={FastImage.resizeMode.cover}
-      />
+      <EntryLanguageContext.Provider
+        value={{
+          ...this.state,
+          updateLanguage: language => this.setState({language: language}),
+        }}>
+        {this.props.children}
+      </EntryLanguageContext.Provider>
     );
   }
 }
 
-HeaderFull.propTypes = {
-  intl: intlShape.isRequired,
+LanguageContextComponent.propTypes = {
+  language1: PropTypes.string,
 };
 
-export default injectIntl(HeaderFull);
+export default LanguageContextComponent;

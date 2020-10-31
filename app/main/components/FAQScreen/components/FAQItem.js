@@ -30,6 +30,7 @@ import HTML from 'react-native-render-html';
 
 // Components
 import Text, {MediumText} from '../../../../base/components/Text';
+import {LanguageContext} from '../../../../../LanguageContext';
 
 // Styles
 import * as fontSize from '../../../../core/fontSize';
@@ -118,8 +119,6 @@ FAQItem.propTypes = {
   intl: intlShape.isRequired,
 };
 
-FAQItem.contextTypes = {
-  language: PropTypes.string,
-};
+FAQItem.contextType = LanguageContext;
 
 export default injectIntl(FAQItem);

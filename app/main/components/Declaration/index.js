@@ -99,8 +99,4 @@ Declaration.propTypes = {
 
 Declaration.defaultProps = {};
 
-Declaration.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(Declaration);

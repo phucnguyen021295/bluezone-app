@@ -26,7 +26,7 @@ import {getLanguage} from './app/core/storage';
 
 export const LanguageContext = React.createContext();
 
-class LanguageProvider extends React.Component {
+class LanguageContextComponent extends React.Component {
   constructor(props) {
     super(props);
     // TODO can xem lai logic code cho nay
@@ -38,22 +38,13 @@ class LanguageProvider extends React.Component {
 
   async componentDidMount() {
     const language = await getLanguage();
-    this.setState({
-      language: language || 'vi',
-    });
-  }
-
-  getChildContext = () => {
-    const {language} = this.state;
-    if (language && language !== 'vi') {
-      return {
-        language: 'en',
-      };
+    if (language !== this.state.language) {
+      // eslint-disable-next-line react/no-did-mount-set-state
+      this.setState({
+        language: language || 'vi',
+      });
     }
-    return {
-      language: this.state.language,
-    };
-  };
+  }
 
   render() {
     if (!this.state.language) {
@@ -62,7 +53,7 @@ class LanguageProvider extends React.Component {
     return (
       <LanguageContext.Provider
         value={{
-          state: this.state,
+          ...this.state,
           updateLanguage: language => this.setState({language: language}),
         }}>
         {this.props.children}
@@ -71,12 +62,12 @@ class LanguageProvider extends React.Component {
   }
 }
 
-LanguageProvider.childContextTypes = {
+LanguageContextComponent.childContextTypes = {
   language: PropTypes.string,
 };
 
-LanguageProvider.propTypes = {
+LanguageContextComponent.propTypes = {
   language: PropTypes.string,
 };
 
-export default LanguageProvider;
+export default LanguageContextComponent;

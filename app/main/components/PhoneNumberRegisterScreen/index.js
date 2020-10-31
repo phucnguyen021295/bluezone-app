@@ -396,8 +396,4 @@ RegisterScreen.propTypes = {
   onFinished: PropTypes.func,
 };
 
-RegisterScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(RegisterScreen);

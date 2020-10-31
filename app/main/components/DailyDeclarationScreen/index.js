@@ -38,6 +38,7 @@ import {CheckBox} from 'react-native-elements';
 import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import ButtonBase from '../../../base/components/ButtonBase';
+import {LanguageContext} from '../../../../LanguageContext';
 
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
@@ -306,8 +307,6 @@ DailyDeclaration.propTypes = {
   intl: intlShape.isRequired,
 };
 
-DailyDeclaration.contextTypes = {
-  language: PropTypes.string,
-};
+DailyDeclaration.contextType = LanguageContext;
 
 export default injectIntl(DailyDeclaration);

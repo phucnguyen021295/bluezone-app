@@ -146,8 +146,4 @@ NotifySafe.propTypes = {
 
 NotifySafe.defaultProps = {};
 
-NotifySafe.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(NotifySafe);

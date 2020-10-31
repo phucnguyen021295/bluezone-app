@@ -193,10 +193,6 @@ FAQScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-FAQScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 FAQScreen.defaultProps = {
   showBack: false,
 };

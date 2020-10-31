@@ -28,12 +28,14 @@ import {
   FlatList,
   View,
   SafeAreaView,
+  KeyboardAvoidingView,
+  TextInput,
 } from 'react-native';
 import * as PropTypes from 'prop-types';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 // Components
-import Text from '../Text';
+import Text, {MediumText} from '../Text';
 import ModalBase from '../ModalBase/ButtonHalf';
 import Header from '../Header';
 
@@ -65,7 +67,7 @@ class SelectPicker extends React.PureComponent {
     let index;
     if (data && data.find && props.valueDefault) {
       index = findIndex(valueDefault, data);
-      itemSelected = data[index];
+      itemSelected = data[index] || {};
     }
 
     this.state = {
@@ -73,6 +75,8 @@ class SelectPicker extends React.PureComponent {
       id: itemSelected.id,
       name: itemSelected.name,
       index: index,
+      searchKey: '',
+      _data: data,
     };
 
     this.renderModal = this.renderModal.bind(this);
@@ -108,7 +112,8 @@ class SelectPicker extends React.PureComponent {
   // };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const {value, data, headerText} = this.props;
+    const {value, data} = this.props;
+    const {searchKey} = this.state;
     if (prevProps.value !== value) {
       const _data = data || [];
       let index = findIndex(value, _data);
@@ -120,7 +125,41 @@ class SelectPicker extends React.PureComponent {
         index: index,
       });
     }
+    if (prevState.searchKey !== searchKey || prevProps.data !== data) {
+      const _data = !searchKey
+        ? data
+        : data.filter(({name}) =>
+            this.convertVietNamese(name).includes(
+              this.convertVietNamese(searchKey),
+            ),
+          );
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        _data,
+      });
+    }
   }
+
+  convertVietNamese = alias => {
+    if (!alias) {
+      return alias;
+    }
+    return (
+      alias
+        .toLowerCase()
+        .replace(/[àáạảãâầấậẩẫăằắặẳẵ]/g, 'a')
+        .replace(/[èéẹẻẽêềếệểễ]/g, 'e')
+        .replace(/[ìíịỉĩ]/g, 'i')
+        .replace(/[òóọỏõôồốộổỗơờớợởỡ]/g, 'o')
+        .replace(/[ùúụủũưừứựửữ]/g, 'u')
+        .replace(/[ỳýỵỷỹ]/g, 'y')
+        .replace(/đ/g, 'd')
+        .replace(/[!@%^*()+=<>?\/,.:;'"&#\[\]~$_`\-{}|\\]/g, ' ')
+        // .replace(/[!@%^*()+=<>?\/,.:;'"&#\[\]~$_`\-{}|\\]/g, ' ');
+        .replace(/ + /g, ' ')
+        .trim()
+    );
+  };
 
   onShowSelect = () => {
     const {shouldVisible, onVisible} = this.props;
@@ -143,7 +182,6 @@ class SelectPicker extends React.PureComponent {
   };
 
   renderItem({item, index}) {
-    console.log('renderItem');
     const {id, name} = item;
     if (!name) {
       return null;
@@ -166,9 +204,13 @@ class SelectPicker extends React.PureComponent {
     return {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index: index};
   };
 
+  onChangeSearchKey = value => {
+    this.setState({searchKey: value});
+  };
+
   renderModal() {
-    const {isVisible} = this.state;
-    const {data, loading, headerText} = this.props;
+    const {isVisible, searchKey, _data} = this.state;
+    const {loading, headerText, enableSearch} = this.props;
 
     return (
       <ModalBase
@@ -176,11 +218,20 @@ class SelectPicker extends React.PureComponent {
         contentStyle={{flex: 1}}
         onBackdropPress={this.onHideModal}>
         {headerText && <Header onBack={this.onHideModal} title={headerText} />}
+        {enableSearch && (
+          <TextInput
+            style={[styles.textInput]}
+            onChangeText={this.onChangeSearchKey}
+            value={searchKey}
+            placeholder={'Tìm kiếm'}
+          />
+        )}
         {!loading ? (
           <FlatList
-            data={data}
+            keyboardShouldPersistTaps={'handled'}
+            data={_data}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{padding: 15}}
+            contentContainerStyle={{paddingBottom: 15}}
             getItemLayout={this.getItemLayout}
             keyExtractor={item => item.id.toString()}
             renderItem={this.renderItem}

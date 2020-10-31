@@ -31,6 +31,7 @@ import {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import ButtonIconText from '../../../base/components/ButtonIconText';
 import IconBluezone from './styles/images/IconBluezone';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Language
 import message from '../../../core/msg/invite';
@@ -156,8 +157,6 @@ InviteScreen.propTypes = {
 
 InviteScreen.defaultProps = {};
 
-InviteScreen.contextTypes = {
-  language: PropTypes.string,
-};
+InviteScreen.contextType = LanguageContext;
 
 export default injectIntl(InviteScreen);

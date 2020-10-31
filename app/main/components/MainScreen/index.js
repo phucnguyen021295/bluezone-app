@@ -216,6 +216,7 @@ class HomeTabScreen extends React.Component {
             tabBarLabel: ({focused}) => (
               <Text
                 text={formatMessage(message.about)}
+                numberOfLines={1}
                 style={[
                   styles.labelStyle,
                   {

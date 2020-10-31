@@ -236,8 +236,4 @@ NotifyInfected.propTypes = {
 
 NotifyInfected.defaultProps = {};
 
-NotifyInfected.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(NotifyInfected);

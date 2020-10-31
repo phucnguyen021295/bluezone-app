@@ -463,24 +463,31 @@ export const yearBirth = [
 ];
 
 export const symptomData = [
-  {id: 'sot', name: 'Sốt'},
-  {id: 'ho', name: 'Ho'},
-  {id: 'kho_tho', name: 'Khó thở'},
-  {id: 'dau_hong', name: 'Đau họng'},
-  {id: 'non_buon_non', name: 'Nôn / Buồn nôn'},
-  {id: 'tieu_chay', name: 'Tiêu chảy'},
-  {id: 'xuat_huyet_ngoai_da', name: 'Xuất huyết ngoài da'},
-  {id: 'noi_ban_ngoai_da', name: 'Nôi ban ngoài da'},
+  {id: 'sot', name: 'Sốt', nameEn: 'Fever'},
+  {id: 'ho', name: 'Ho', nameEn: 'cough'},
+  {id: 'kho_tho', name: 'Khó thở', nameEn: 'shortness of breath'},
+  {id: 'dau_hong', name: 'Đau họng', nameEn: 'sore throat'},
+  {id: 'non_buon_non', name: 'Nôn / Buồn nôn', nameEn: 'Vomiting / Nausea'},
+  {id: 'tieu_chay', name: 'Tiêu chảy', nameEn: 'Diarrhea'},
+  {
+    id: 'xuat_huyet_ngoai_da',
+    name: 'Xuất huyết ngoài da',
+    nameEn: 'Skin bleeding',
+  },
+  {id: 'noi_ban_ngoai_da', name: 'Nổi ban ngoài da', nameEn: 'Skin rash'},
 ];
 
 export const exposureHistoryData = [
   {
     id: 'exposure1',
     name:
-      'Đến trang trại chăn nuôi / chợ buôn bán / động vật sống / cơ sở giết mổ động vật / tiếp xúc động vật',
+      'Đến trang trại chăn nuôi / chợ buôn bán động vật sống / cơ sở giết mổ động vật / tiếp xúc động vật',
+    nameEn:
+      'Đến trang trại chăn nuôi / chợ buôn bán động vật sống / cơ sở giết mổ động vật / tiếp xúc động vật',
   },
   {
     id: 'exposure2',
-    name: 'Tiếp xúc gần (< 2m) với người mắc bênh viêm đường hô hấp nCOV',
+    name: 'Tiếp xúc gần (< 2m) với người mắc bệnh viêm đường hô hấp do nCOV',
+    nameEn: 'Tiếp xúc gần (< 2m) với người mắc bệnh viêm đường hô hấp do nCOV',
   },
 ];

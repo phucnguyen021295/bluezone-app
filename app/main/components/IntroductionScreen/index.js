@@ -104,8 +104,4 @@ IntroductionScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-IntroductionScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(IntroductionScreen);

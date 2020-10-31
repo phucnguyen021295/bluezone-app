@@ -23,27 +23,23 @@
 
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import {LanguageContext} from '../../../../../../LanguageContext';
 import * as PropTypes from 'prop-types';
 
 // Components
 import Text from '../../../../../base/components/Text';
+import {LanguageContext} from '../../../../../../LanguageContext';
 
 // Styles
 import styles from './styles/index.css';
 import {setLanguage} from '../../../../../configuration';
 
-class Index extends React.Component {
+class SwitchLanguage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       disabled: false,
     };
     this.onChangeLanguage = this.onChangeLanguage.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({disabled: false});
   }
 
   onChangeLanguage(context) {
@@ -104,8 +100,6 @@ class Index extends React.Component {
   }
 }
 
-Index.contextTypes = {
-  language: PropTypes.string,
-};
+SwitchLanguage.contextType = LanguageContext;
 
-export default Index;
+export default SwitchLanguage;

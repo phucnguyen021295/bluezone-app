@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
 
   star: {
     color: 'red',
+    fontSize: fontSize.fontSize16,
   },
 });
 

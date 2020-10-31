@@ -31,7 +31,7 @@ import Header from '../../../base/components/Header';
 import Text, {MediumText} from '../../../base/components/Text';
 
 // Language
-import message from '../../../core/msg/contacthistory';
+import message from '../../../core/msg/contactHistory';
 
 // Sqlite db
 import {getCountBluezoneByDays} from '../../../core/db/SqliteDb';

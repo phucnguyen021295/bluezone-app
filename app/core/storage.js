@@ -47,6 +47,7 @@ import {
   QuestionFAQ,
   PersonalInformation,
   EntryObjectGUID,
+  EntryLanguage,
 } from '../const/storage';
 
 // TODO Can sua de moi du lieu ghi vao storage deu dung JSON.stringify, va lay ra deu dung JSON.parse. Dam bao tuong tich ban cu. thay vi ben ngoai phan tu convert nhu gio.
@@ -311,6 +312,16 @@ const setEntryObjectGUIDInformation = (guid = '') => {
   AsyncStorage.setItem(EntryObjectGUID, _resource);
 };
 
+const getEntryLanguage = async () => {
+  const result = await AsyncStorage.getItem(EntryLanguage);
+  return _processOutput(result);
+};
+
+const setEntryLanguage = language => {
+  const _resource = _processInput(language);
+  AsyncStorage.setItem(EntryLanguage, _resource);
+};
+
 export {
   getResourceLanguage,
   setResourceLanguage,
@@ -359,4 +370,6 @@ export {
   setPersonalInformation,
   getEntryObjectGUIDInformation,
   setEntryObjectGUIDInformation,
+  getEntryLanguage,
+  setEntryLanguage,
 };

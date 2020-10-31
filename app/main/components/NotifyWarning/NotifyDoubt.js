@@ -30,6 +30,7 @@ import {Dimensions} from 'react-native';
 import {View} from 'react-native';
 import Text, {MediumText} from '../../../base/components/Text';
 import ButtonIconText from '../../../base/components/ButtonIconText';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Language
 import message from '../../../core/msg/warning';
@@ -136,8 +137,6 @@ NotifyDoubt.propTypes = {
 
 NotifyDoubt.defaultProps = {};
 
-NotifyDoubt.contextTypes = {
-  language: PropTypes.string,
-};
+NotifyDoubt.contextType = LanguageContext;
 
 export default injectIntl(NotifyDoubt);

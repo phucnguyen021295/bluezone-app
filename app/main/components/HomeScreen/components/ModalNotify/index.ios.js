@@ -29,6 +29,7 @@ import {injectIntl, intlShape} from 'react-intl';
 
 // Components
 import ModalBase from './ModalNotify';
+import {LanguageContext} from '../../../../../../LanguageContext';
 
 import {
   PERMISSIONS,
@@ -259,8 +260,6 @@ ModalNotify.propTypes = {
   intl: intlShape.isRequired,
 };
 
-ModalNotify.contextTypes = {
-  language: PropTypes.string,
-};
+ModalNotify.contextType = LanguageContext;
 
 export default withNavigation(injectIntl(ModalNotify));

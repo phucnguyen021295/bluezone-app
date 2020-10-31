@@ -139,10 +139,6 @@ function decorateMainAppStart(AppStack) {
 
   MainApp.propTypes = {};
 
-  MainApp.contextTypes = {
-    language: PropTypes.string,
-  };
-
   return MainApp;
 }
 

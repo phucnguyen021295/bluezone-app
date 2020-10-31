@@ -38,6 +38,7 @@ import Radar from './components/Radar';
 import SwitchLanguage from './components/SwitchLanguage';
 import UpdateVersion from '../UpdateVersion';
 import ButtonIconText from '../../../base/components/ButtonIconText';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Styles
 import style, {HEADER_BACKGROUND_HEIGHT} from './styles/index.css';
@@ -292,8 +293,6 @@ HomeTab.propTypes = {
 
 HomeTab.defaultProps = {};
 
-HomeTab.contextTypes = {
-  language: PropTypes.string,
-};
+HomeTab.contextType = LanguageContext;
 
 export default injectIntl(HomeTab);

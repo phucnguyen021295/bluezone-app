@@ -220,8 +220,4 @@ UpdateVersion.propTypes = {
   navigation: PropTypes.object,
 };
 
-UpdateVersion.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(UpdateVersion);

@@ -157,8 +157,4 @@ ViewLogScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-ViewLogScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(ViewLogScreen);

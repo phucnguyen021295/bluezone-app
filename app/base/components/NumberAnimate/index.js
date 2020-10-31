@@ -28,6 +28,7 @@ import * as PropTypes from 'prop-types';
 import AnimateNumber from './AnimateNumber';
 import {MediumText} from '../../../base/components/Text';
 import Text from '../Text';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Styles
 import style from '../../../main/components/HomeScreen/styles/index.css';
@@ -80,8 +81,6 @@ class InviteScreen extends React.Component {
   }
 }
 
-InviteScreen.contextTypes = {
-  language: PropTypes.string,
-};
+InviteScreen.contextType = LanguageContext;
 
 export default InviteScreen;

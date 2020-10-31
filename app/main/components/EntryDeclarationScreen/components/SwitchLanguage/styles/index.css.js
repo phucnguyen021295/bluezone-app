@@ -21,37 +21,7 @@
 
 'use strict';
 
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import {StyleSheet, Platform} from 'react-native';
+const styles = StyleSheet.create({});
 
-// Components
-import FastImage from 'react-native-fast-image';
-
-// Styles
-import {injectIntl, intlShape} from 'react-intl';
-
-class HeaderFull extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const {styleImg, uri, onLoad} = this.props;
-    return (
-      <FastImage
-        style={styleImg}
-        source={uri}
-        cacheControl={FastImage.cacheControl.immutable}
-        onLoad={onLoad}
-        resizeMode={FastImage.resizeMode.cover}
-      />
-    );
-  }
-}
-
-HeaderFull.propTypes = {
-  intl: intlShape.isRequired,
-};
-
-export default injectIntl(HeaderFull);
+export default styles;

@@ -29,6 +29,7 @@ import {injectIntl, intlShape} from 'react-intl';
 import {Dimensions, View} from 'react-native';
 import Text, {MediumText} from '../../../base/components/Text';
 import ButtonIconText from '../../../base/components/ButtonIconText';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Language
 import message from '../../../core/msg/warning';
@@ -139,8 +140,6 @@ NotifyPending.propTypes = {
 
 NotifyPending.defaultProps = {};
 
-NotifyPending.contextTypes = {
-  language: PropTypes.string,
-};
+NotifyPending.contextType = LanguageContext;
 
 export default injectIntl(NotifyPending);

@@ -117,8 +117,4 @@ StartScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-StartScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 export default injectIntl(StartScreen);

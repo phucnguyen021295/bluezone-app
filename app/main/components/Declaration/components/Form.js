@@ -32,6 +32,7 @@ import Text from '../../../../base/components/Text';
 import ButtonIconText from '../../../../base/components/ButtonIconText';
 import configuration from '../../../../configuration';
 import {getInfoDeclare, setInfoDeclare} from '../../../../core/storage';
+import {LanguageContext} from '../../../../../LanguageContext';
 
 // Language
 import message from '../../../../core/msg/warning';
@@ -190,8 +191,6 @@ FormInput.propTypes = {
 
 FormInput.defaultProps = {};
 
-FormInput.contextTypes = {
-  language: PropTypes.string,
-};
+FormInput.contextType = LanguageContext;
 
 export default injectIntl(FormInput);

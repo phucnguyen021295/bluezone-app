@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     // paddingVertical: 10,
     height: 42,
     justifyContent: 'center',
@@ -49,6 +49,18 @@ const styles = StyleSheet.create({
 
   titlePicker: {
     fontSize: fontSize.normal,
+  },
+
+  textInput: {
+    borderColor: '#dddddd',
+    borderWidth: 1,
+    borderRadius: 6,
+    height: 45,
+    paddingHorizontal: 12,
+    fontSize: fontSize.fontSize16,
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 5,
   },
 });
 

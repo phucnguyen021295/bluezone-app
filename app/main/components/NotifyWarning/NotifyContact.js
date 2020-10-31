@@ -30,6 +30,7 @@ import FastImage from 'react-native-fast-image';
 import {View, TouchableOpacity, Linking, Dimensions} from 'react-native';
 import Text, {MediumText} from '../../../base/components/Text';
 import FormInput from '../Declaration/components/Form';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Api
 import {
@@ -522,8 +523,6 @@ NotifyContact.propTypes = {
 
 NotifyContact.defaultProps = {};
 
-NotifyContact.contextTypes = {
-  language: PropTypes.string,
-};
+NotifyContact.contextType = LanguageContext;
 
 export default injectIntl(NotifyContact);

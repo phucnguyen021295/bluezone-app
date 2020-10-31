@@ -37,6 +37,7 @@ import {
   setStatusNotifyRegister as setStatusNotifyRegisterStorage,
   setTokenFirebase as setTokenFirebaseStorage,
   setPersonalInformation as setPersonalInformationStorage,
+  setEntryLanguage as setEntryLanguageStorage,
   multiGet,
 } from './core/storage';
 import {getTokenFirebase} from './core/fcm';
@@ -128,6 +129,7 @@ const configuration = {
   PermissionNotificationsAndroid: [],
   PermissionNotificationsIos: [],
   Language: null,
+  EntryLanguage: null,
   ScheduleNotifyDay: 1,
   ScheduleNotifyHour: [8, 13, 20],
   TimeCountDownOTP: 900,
@@ -395,6 +397,7 @@ const mergeConfiguration = (
   configObject,
   TokenFirebase,
   Language,
+  EntryLanguage,
   FirstOTP,
   StatusNotifyRegister,
   PhoneNumber,
@@ -403,6 +406,7 @@ const mergeConfiguration = (
   Object.assign(configuration, configObject, {
     TokenFirebase: TokenFirebase || '',
     Language: Language || 'vi',
+    EntryLanguage: EntryLanguage || 'vi',
     FirstOTP: FirstOTP || null,
     StatusNotifyRegister: StatusNotifyRegister || null,
     PhoneNumber: PhoneNumber || '',
@@ -415,6 +419,7 @@ const initConfiguration = async callBack => {
     'Configuration',
     'TokenFirebase',
     'Language',
+    'EntryLanguage',
     'FirstOTP',
     'StatusNotifyRegister',
     'PhoneNumber',
@@ -424,6 +429,7 @@ const initConfiguration = async callBack => {
       Configuration,
       TokenFirebase,
       Language,
+      EntryLanguage,
       FirstOTP,
       StatusNotifyRegister,
       PhoneNumber,
@@ -435,6 +441,7 @@ const initConfiguration = async callBack => {
       Configuration,
       TokenFirebase,
       Language,
+      EntryLanguage,
       FirstOTP,
       StatusNotifyRegister,
       PhoneNumber,
@@ -480,6 +487,15 @@ const setLanguage = Language => {
   setLanguageStorage(Language);
   Service.setLanguage(Language);
   scheduleNotificationChangeLanguageListener(Language);
+};
+
+/**
+ * Luu ngon ngu form nhap cảnh
+ * @param Language
+ */
+const setEntryLanguage = EntryLanguage => {
+  Object.assign(configuration, {EntryLanguage});
+  setEntryLanguageStorage(EntryLanguage);
 };
 
 // TODO xem xet bo ham nay di
@@ -830,6 +846,7 @@ export {
   initConfiguration,
   syncConfiguration,
   setLanguage,
+  setEntryLanguage,
   setStatusNotifyRegister,
   setPhoneNumber,
   setPersonalInformation,

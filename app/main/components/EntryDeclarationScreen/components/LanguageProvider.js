@@ -23,35 +23,39 @@
 
 import React from 'react';
 import * as PropTypes from 'prop-types';
+import {IntlProvider} from 'react-intl';
 
-// Components
-import FastImage from 'react-native-fast-image';
+import Text from '../../../../../app/base/components/Text';
+import {EntryLanguageContext} from './LanguageContext';
 
-// Styles
-import {injectIntl, intlShape} from 'react-intl';
-
-class HeaderFull extends React.Component {
+export class EntryLanguageProvider extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   render() {
-    const {styleImg, uri, onLoad} = this.props;
+    const {language} = this.context;
+    const _language = !language || language === 'vi' ? 'vi' : 'en';
+    const {messages, children} = this.props;
+
     return (
-      <FastImage
-        style={styleImg}
-        source={uri}
-        cacheControl={FastImage.cacheControl.immutable}
-        onLoad={onLoad}
-        resizeMode={FastImage.resizeMode.cover}
-      />
+      <IntlProvider
+        locale={_language}
+        key={_language}
+        messages={messages[_language]}
+        textComponent={Text}>
+        {React.Children.only(children)}
+      </IntlProvider>
     );
   }
 }
 
-HeaderFull.propTypes = {
-  intl: intlShape.isRequired,
+EntryLanguageProvider.propTypes = {
+  locale: PropTypes.string,
+  messages: PropTypes.object,
+  children: PropTypes.element.isRequired,
 };
 
-export default injectIntl(HeaderFull);
+EntryLanguageProvider.contextType = EntryLanguageContext;
+
+export default EntryLanguageProvider;

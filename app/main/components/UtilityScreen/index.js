@@ -114,10 +114,6 @@ UtilityScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-UtilityScreen.contextTypes = {
-  language: PropTypes.string,
-};
-
 const styles = StyleSheet.create({
   grid: {
     marginTop: 20,

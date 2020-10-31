@@ -26,6 +26,7 @@ import * as PropTypes from 'prop-types';
 import {IntlProvider} from 'react-intl';
 
 import Text from '../components/Text';
+import {LanguageContext} from '../../../LanguageContext';
 
 export class LanguageProvider extends React.Component {
   constructor(props) {
@@ -55,8 +56,6 @@ LanguageProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-LanguageProvider.contextTypes = {
-  language: PropTypes.string,
-};
+LanguageProvider.contextType = LanguageContext;
 
 export default LanguageProvider;

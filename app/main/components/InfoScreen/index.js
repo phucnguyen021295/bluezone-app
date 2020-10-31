@@ -29,6 +29,7 @@ import {SafeAreaView, StatusBar, View, Linking, ScrollView} from 'react-native';
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
 import ButtonIconText from '../../../base/components/ButtonIconText';
+import {LanguageContext} from '../../../../LanguageContext';
 
 // Api
 import Service from '../../../core/apis/service';
@@ -229,8 +230,6 @@ InfoScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-InfoScreen.contextTypes = {
-  language: PropTypes.string,
-};
+InfoScreen.contextType = LanguageContext;
 
 export default injectIntl(InfoScreen);

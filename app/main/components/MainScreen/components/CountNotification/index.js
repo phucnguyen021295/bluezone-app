@@ -164,8 +164,8 @@ class CountNotification extends React.Component {
 }
 
 CountNotification.propTypes = {
-  icon: PropTypes.object,
-  iconActive: PropTypes.object,
+  icon: PropTypes.number,
+  iconActive: PropTypes.number,
   focused: PropTypes.bool,
   count: PropTypes.number,
 };

@@ -31,32 +31,27 @@ import FastImage from 'react-native-fast-image';
 import {injectIntl, intlShape} from 'react-intl';
 
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    render() {
-        const {styleImg, uri, onLoad} = this.props;
-        return (
-            <FastImage
-                style={styleImg}
-                source={uri}
-                cacheControl={FastImage.cacheControl.immutable}
-                onLoad={onLoad}
-                resizeMode={FastImage.resizeMode.contain}
-            />
-        );
-    }
+  render() {
+    const {styleImg, uri, onLoad} = this.props;
+    return (
+      <FastImage
+        style={styleImg}
+        source={uri}
+        cacheControl={FastImage.cacheControl.immutable}
+        onLoad={onLoad}
+        resizeMode={FastImage.resizeMode.contain}
+      />
+    );
+  }
 }
 
 Header.propTypes = {
-    intl: intlShape.isRequired,
-};
-
-Header.contextTypes = {
-    language: PropTypes.string,
+  intl: intlShape.isRequired,
 };
 
 export default injectIntl(Header);
