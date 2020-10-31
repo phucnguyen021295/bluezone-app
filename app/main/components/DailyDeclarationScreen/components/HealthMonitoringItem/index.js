@@ -42,6 +42,7 @@ class DailyDeclaration extends React.Component {
     this.getInfo = this.getInfo.bind(this);
     this.formatDate = this.formatDate.bind(this);
     this.formatHour = this.formatHour.bind(this);
+    this.checkHealth = this.checkHealth.bind(this);
   }
 
   getInfo() {
@@ -58,21 +59,27 @@ class DailyDeclaration extends React.Component {
     return textInfo;
   }
 
-  formatDate(timeStamp) {
-    const date = new Date(timeStamp);
+  formatDate(CreateDate) {
+    const date = new Date(CreateDate);
     const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
     const month =
       date.getMonth() > 8 ? date.getMonth() + 1 : `0${date.getMonth()}`;
     return `${day}/${month}/${date.getFullYear()}`;
   }
 
-  formatHour(timeStamp) {
-    const date = new Date(timeStamp);
+  formatHour(CreateDate) {
+    const date = new Date(CreateDate);
     let hour = date.getHours();
     hour = hour > 9 ? hour : `0${hour}`;
     let minutes = date.getMinutes();
     minutes = minutes > 9 ? minutes : `0${minutes}`;
     return `${hour}:${minutes}`;
+  }
+
+  checkHealth() {
+    const {item} = this.props;
+    const {ListItem} = item;
+    return ListItem[0] === 5;
   }
 
   render() {
@@ -82,16 +89,19 @@ class DailyDeclaration extends React.Component {
         <View style={styles.dot} />
         <View style={styles.borderItem} />
         <View style={{flex: 1}}>
-          <MediumText>{this.formatDate(item.TimeStamp)}</MediumText>
+          <MediumText>{this.formatDate(item.CreateDate)}</MediumText>
           <View style={styles.body}>
             <View style={styles.row}>
               <ButtonBase
-                title={'Nguy cơ nhiễm bệnh'}
+                title={this.checkHealth() ? 'An toàn' : 'Nguy cơ nhiễm bệnh'}
                 onPress={this.onCloseScreenPress}
-                containerStyle={styles.containerStyleNCNB}
+                containerStyle={[
+                  styles.containerStyleNCNB,
+                  {backgroundColor: this.checkHealth() ? '#119a01' : '#f8b123'},
+                ]}
                 titleStyle={styles.textInviteNCNB}
               />
-              <Text>{this.formatHour(item.TimeStamp)}</Text>
+              <Text>{this.formatHour(item.CreateDate)}</Text>
             </View>
             <Text>
               <MediumText>Thông tin: </MediumText>

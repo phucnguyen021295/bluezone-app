@@ -1339,6 +1339,48 @@ const getRegionByParentID = (
     }, failure);
 };
 
+const InsertEntryPersonReport = (
+  data,
+  success = _defaultFunc,
+  failure = _defaultFunc,
+) => {
+  const options = {
+    method: 'POST',
+    data: data,
+    url: `${DOMAIN}/api/AppInforEntryPerson/InsertEntryPersonReport`,
+    timeout: 10000,
+  };
+
+  axios(options).then(response => {
+    if (response.status === 200 && response.data.isOk === true) {
+      success(response.data);
+    } else {
+      failure(response);
+    }
+  }, createErrorFn(failure));
+};
+
+const GetListDailyDeclaration = (
+  InforEntryPersonObjectGuid,
+  success = _defaultFunc,
+  failure = _defaultFunc,
+) => {
+  axios
+    .get(`${DOMAIN}/api/AppInforEntryPerson/GetListDailyDeclaration`, {
+      params: {
+        InforEntryPersonObjectGuid: InforEntryPersonObjectGuid,
+      },
+      ...configRegionApi,
+    })
+    .then(response => {
+      if (response.status === 200 && response.data.isOk === true) {
+        success(response.data);
+      } else {
+        failure(response);
+      }
+    }, failure);
+};
+
 export {
   // Token firebase
   registerTokenFirebase,
@@ -1372,4 +1414,6 @@ export {
   getAllAirPortApi,
   getAllProvinceApi,
   getRegionByParentID,
+  InsertEntryPersonReport,
+  GetListDailyDeclaration,
 };

@@ -55,6 +55,7 @@ import {entryDeclaration} from '../../../core/apis/bluezone';
 import {
   setInfoDeclare,
   setEntryObjectGUIDInformation,
+  setInforEntryPersonObjectGuid
 } from '../../../core/storage';
 
 // Data
@@ -605,6 +606,7 @@ class Declaration extends React.Component {
 
   declareSuccess = data => {
     setEntryObjectGUIDInformation(data.Object.ObjectGuid);
+    setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
     this.changeState('visibleModalSuccess', true);
   };
 

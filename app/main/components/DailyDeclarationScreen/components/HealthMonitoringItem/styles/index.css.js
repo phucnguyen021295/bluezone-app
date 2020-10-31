@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
 
   containerStyleNCNB: {
     height: 33,
-    backgroundColor: '#f8b123',
     borderRadius: 9,
     justifyContent: 'center',
   },

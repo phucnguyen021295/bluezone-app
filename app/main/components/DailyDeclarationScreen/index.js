@@ -33,11 +33,27 @@ import Header from '../../../base/components/Header';
 import ButtonBase from '../../../base/components/ButtonBase';
 import HealthMonitoringItem from './components/HealthMonitoringItem';
 
+// Apis
+import {
+  InsertEntryPersonReport,
+  GetListDailyDeclaration,
+} from '../../../core/apis/bluezone';
+
+// Core
+import {
+  getInforEntryPersonObjectGuid,
+  getEntryObjectGUIDInformation,
+  setHealthMonitoring,
+  getHealthMonitoring,
+} from '../../../core/storage';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 
 // Styles
 import styles from './styles/index.css';
+import message from '../../../core/msg/register';
+import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
+import ModalBase from '../../../base/components/ModalBase';
 
 export const listSymptom = [
   {StateID: 1, name: 'Sốt'},
@@ -47,22 +63,26 @@ export const listSymptom = [
   {StateID: 5, name: 'Khỏe mạnh'},
 ];
 
-const data = [
+let LtinforEntryPersonReportDetail = [
   {
-    TimeStamp: 1603962024359,
-    ListItem: [1, 2, 3, 4],
+    StateID: 1,
+    Value: false,
   },
   {
-    TimeStamp: 1603962024359,
-    ListItem: [5],
+    StateID: 2,
+    Value: false,
   },
   {
-    TimeStamp: 1603962024359,
-    ListItem: [1, 2, 3, 4],
+    StateID: 3,
+    Value: false,
   },
   {
-    TimeStamp: 1603962024359,
-    ListItem: [5],
+    StateID: 4,
+    Value: false,
+  },
+  {
+    StateID: 5,
+    Value: false,
   },
 ];
 
@@ -70,25 +90,166 @@ class DailyDeclaration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isVisibleError: false,
       itemsSelected: [],
-      data: data,
+      data: [],
     };
+
+    this.selectItem = this.selectItem.bind(this);
+    this.onSendInfo = this.onSendInfo.bind(this);
+    this.checkDisabledCheckbox = this.checkDisabledCheckbox.bind(this);
+    this.getLtinforEntryPersonReportDetail = this.getLtinforEntryPersonReportDetail.bind(
+      this,
+    );
+    this.InsertEntryPersonReportSuccess = this.InsertEntryPersonReportSuccess.bind(
+      this,
+    );
+    this.InsertEntryPersonReportError = this.InsertEntryPersonReportError.bind(
+      this,
+    );
+    this.getListHealthMonitoring = this.getListHealthMonitoring.bind(this);
+    this.renderModal = this.renderModal.bind(this);
   }
 
   componentDidMount() {
     reportScreenAnalytics(SCREEN.DAILY_DECLARATION);
+
+    this.getListHealthMonitoring();
   }
 
-  selectItem = item => {
+  async getListHealthMonitoring() {
+    const HealthMonitoring = await getHealthMonitoring();
+    if (!HealthMonitoring) {
+      const InforEntryPersonObjectGuid = await getInforEntryPersonObjectGuid();
+      GetListDailyDeclaration(InforEntryPersonObjectGuid, response => {
+        const Object = response.Object;
+        const data = Object.reverse().map(item => {
+          let ListItem = [];
+          item.LtinforEntryPersonReportDetail.map(
+            id => id.Value && ListItem.push(id.StateID),
+          );
+          return {
+            CreateDate: item.CreateDate,
+            ListItem: ListItem,
+          };
+        });
+
+        this.setState({data: data});
+      });
+    } else {
+      this.setState({data: HealthMonitoring});
+    }
+  }
+
+  selectItem(item) {
     const {itemsSelected} = this.state;
-    const i = itemsSelected.indexOf(item);
+    const i = itemsSelected.indexOf(item.StateID);
     if (i !== -1) {
       itemsSelected.splice(i, 1);
     } else {
-      itemsSelected.push(item);
+      itemsSelected.push(item.StateID);
     }
     this.setState({itemsSelected: itemsSelected});
-  };
+  }
+
+  getLtinforEntryPersonReportDetail(ListItem) {
+    LtinforEntryPersonReportDetail = LtinforEntryPersonReportDetail.map(item =>
+      ListItem.includes(item.StateID)
+        ? {
+            StateID: item.StateID,
+            Value: true,
+          }
+        : {
+            StateID: item.StateID,
+            Value: false,
+          },
+    );
+    return LtinforEntryPersonReportDetail;
+  }
+
+  async onSendInfo() {
+    let {itemsSelected} = this.state;
+    const ListItem = itemsSelected.length > 0 ? itemsSelected : [5];
+
+    const InforEntryObjectGuid = await getEntryObjectGUIDInformation();
+    const InforEntryPersonObjectGuid = await getInforEntryPersonObjectGuid();
+    const LtinforEntryPersonReportDetail = this.getLtinforEntryPersonReportDetail(
+      ListItem,
+    );
+
+    const body = {
+      InforEntryPersonReport: {
+        InforEntryObjectGuid: InforEntryObjectGuid,
+        InforEntryPersonObjectGuid: InforEntryPersonObjectGuid,
+        LtinforEntryPersonReportDetail: LtinforEntryPersonReportDetail,
+      },
+    };
+
+    InsertEntryPersonReport(
+      body,
+      this.InsertEntryPersonReportSuccess,
+      this.InsertEntryPersonReportError,
+    );
+  }
+
+  InsertEntryPersonReportSuccess(response) {
+    let {itemsSelected, data} = this.state;
+    const ListItem = itemsSelected.length > 0 ? itemsSelected : [5];
+    const object = {
+      CreateDate: response.Object.CreateDate,
+      ListItem: ListItem,
+    };
+    data.splice(0, 0, object);
+
+    this.setState({
+      data: data,
+      itemsSelected: [],
+    });
+
+    setHealthMonitoring(data);
+  }
+
+  InsertEntryPersonReportError(error) {
+    this.setState({isVisibleError: true});
+  }
+
+  checkDisabledCheckbox(StateID) {
+    const {itemsSelected} = this.state;
+    if (
+      (itemsSelected.length > 0 && itemsSelected[0] === 5 && StateID !== 5) ||
+      (itemsSelected.length > 0 && itemsSelected[0] !== 5 && StateID === 5)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  onCloseAlertError() {
+    this.setState({isVisibleError: false});
+  }
+
+  renderModal() {
+    const {
+      isProcessing,
+      isVisibleError,
+      codeString,
+    } = this.state;
+    return (
+      <>
+        <ModalBase
+          isVisibleModal={isVisibleError}
+          title={'Thông báo'}
+          description={`Gửi thông tin sức khỏe thất bại!`}>
+          <View style={styles.modalFooter}>
+            <ButtonConfirm
+              text={'Đóng'}
+              onPress={this.onCloseAlertError}
+            />
+          </View>
+        </ModalBase>
+      </>
+    );
+  }
 
   render() {
     const {itemsSelected, data} = this.state;
@@ -102,15 +263,13 @@ class DailyDeclaration extends React.Component {
           </MediumText>
           <View style={styles.listCheckbox}>
             {listSymptom.map(item => {
-              const selected = itemsSelected.find(
-                i => i.StateID === item.StateID,
-              );
+              const selected = itemsSelected.find(i => i === item.StateID);
               return (
                 <CheckBox
                   iconType={'ionicon'}
                   iconRight
                   title={item.name}
-                  disabled={true}
+                  disabled={this.checkDisabledCheckbox(item.StateID)}
                   checkedIcon="ios-checkbox-outline"
                   uncheckedIcon="ios-square-outline"
                   checked={selected}
@@ -124,7 +283,7 @@ class DailyDeclaration extends React.Component {
 
           <ButtonBase
             title={'Gửi thông tin'}
-            onPress={this.onCloseScreenPress}
+            onPress={this.onSendInfo}
             containerStyle={styles.containerStyle}
             titleStyle={styles.textInvite}
           />

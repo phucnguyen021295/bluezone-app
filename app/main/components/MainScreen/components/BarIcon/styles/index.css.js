@@ -21,27 +21,32 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import {StyleSheet} from 'react-native';
 
-export default defineMessages({
-  home: {
-    id: 'bluezone.tab.home',
-    defaultMessage: 'Trang chủ',
+const styles = StyleSheet.create({
+  iconSquare: {
+    height: 24,
+    width: 24,
   },
-  report: {
-    id: 'bluezone.tab.report',
-    defaultMessage: 'Thông báo',
+
+  iconRectangle: {
+    height: 24,
+    width: 28,
+    paddingRight: 4,
   },
-  about: {
-    id: 'bluezone.tab.about',
-    defaultMessage: 'Giới thiệu',
+
+  badge: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    zIndex: 99,
   },
-  faq: {
-    id: 'bluezone.tab.faq',
-    defaultMessage: 'Hỏi đáp',
-  },
-  utilities: {
-    id: 'bluezone.tab.utilities',
-    defaultMessage: 'Tiện ích',
+
+  iconFaq: {
+    height: 20,
+    width: 27,
+    marginTop: 1.5,
   },
 });
+
+export default styles;

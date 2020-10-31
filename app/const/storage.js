@@ -42,3 +42,5 @@ export const DisplayOriginalImg = 'DisplayOriginalImg';
 export const QuestionFAQ = 'QuestionFAQ';
 export const PersonalInformation = 'PersonalInformation';
 export const EntryObjectGUID = 'EntryObjectGUID';
+export const HealthMonitoring = 'HealthMonitoring';
+export const InforEntryPersonObjectGuid = 'InforEntryPersonObjectGuid';

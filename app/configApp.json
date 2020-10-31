@@ -234,5 +234,6 @@
     "subTextEn": "",
     "message": "Message Dang ky sdt",
     "messageEn": "Message Dang ky sdt"
-  }
+  },
+  "AppTabIds": ["Home", "Notify", "Faq", "Info"]
 }
