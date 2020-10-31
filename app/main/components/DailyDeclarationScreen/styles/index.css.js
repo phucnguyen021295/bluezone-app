@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.fontSize16,
     paddingTop: 28,
-    paddingBottom: 6
+    paddingBottom: 6,
   },
 
   contentContainerStyle: {
@@ -51,24 +51,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginHorizontal: 26,
     marginTop: 30,
-    marginBottom: 47
-  },
-
-  containerStyleNCNB: {
-    height: 33,
-    backgroundColor: '#f8b123',
-    borderRadius: 9,
-    justifyContent: 'center',
+    marginBottom: 47,
   },
 
   textInvite: {
     color: '#ffffff',
-    fontSize: fontSize.normal
+    fontSize: fontSize.normal,
   },
 
-  textInviteNCNB: {
-    color: '#ffffff',
-    fontSize: fontSize.small
+  listCheckbox: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+
+  containerStyleCheckbox: {
+    marginLeft: 0,
+    marginRight: 0,
+    margin: 0,
+    backgroundColor: '#ffffff',
+    borderWidth: 0,
   },
 
   row: {
@@ -89,6 +91,17 @@ const styles = StyleSheet.create({
     color: '#AAAAAA',
     fontSize: 12,
     paddingVertical: 5,
+  },
+
+  dot: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#015cd0',
+    zIndex: 99,
   },
 });
 

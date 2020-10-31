@@ -45,7 +45,7 @@ import styles from './styles/index.css';
 
 const handleForcusChangeList = [];
 
-const registerForcusTabbar = handleChange => {
+const registerFocusTabar = handleChange => {
   for (let i = 0; i < handleForcusChangeList.length; i++) {
     if (handleForcusChangeList[i] === handleChange) {
       return;
@@ -54,7 +54,7 @@ const registerForcusTabbar = handleChange => {
   handleForcusChangeList.push(handleChange);
 };
 
-export const broadcastForcusChange = () => {
+export const broadcastFocusChange = () => {
   for (let i = 0; i < handleForcusChangeList.length; i++) {
     handleForcusChangeList[i]();
   }
@@ -90,7 +90,7 @@ class CountNotification extends React.Component {
       this.onNotificationOpened,
     );
 
-    registerForcusTabbar(this.resetCount);
+    registerFocusTabar(this.resetCount);
   }
 
   componentWillUnmount() {
@@ -152,12 +152,11 @@ class CountNotification extends React.Component {
   render() {
     const {count} = this.state;
     const {icon, iconActive, focused} = this.props;
+
+    const Svg = focused ? iconActive : icon;
     return (
       <Badge count={count}>
-        <FastImage
-          source={focused ? iconActive : icon}
-          style={styles.iconSquare}
-        />
+        <Svg />
       </Badge>
     );
   }

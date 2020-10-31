@@ -48,6 +48,8 @@ import {
   PersonalInformation,
   EntryObjectGUID,
   EntryLanguage,
+  HealthMonitoring,
+  InforEntryPersonObjectGuid,
 } from '../const/storage';
 
 // TODO Can sua de moi du lieu ghi vao storage deu dung JSON.stringify, va lay ra deu dung JSON.parse. Dam bao tuong tich ban cu. thay vi ben ngoai phan tu convert nhu gio.
@@ -322,6 +324,26 @@ const setEntryLanguage = language => {
   AsyncStorage.setItem(EntryLanguage, _resource);
 };
 
+const getHealthMonitoring = async () => {
+  const result = await AsyncStorage.getItem(HealthMonitoring);
+  return _processOutput(result);
+};
+
+const setHealthMonitoring = (data = {}) => {
+  const _resource = _processInput(data);
+  AsyncStorage.setItem(HealthMonitoring, _resource);
+};
+
+const getInforEntryPersonObjectGuid = async () => {
+  const result = await AsyncStorage.getItem(InforEntryPersonObjectGuid);
+  return _processOutput(result);
+};
+
+const setInforEntryPersonObjectGuid = (_InforEntryPersonObjectGuid = '') => {
+  const _resource = _processInput(_InforEntryPersonObjectGuid);
+  AsyncStorage.setItem(InforEntryPersonObjectGuid, _resource);
+};
+
 export {
   getResourceLanguage,
   setResourceLanguage,
@@ -372,4 +394,8 @@ export {
   setEntryObjectGUIDInformation,
   getEntryLanguage,
   setEntryLanguage,
+  getHealthMonitoring,
+  setHealthMonitoring,
+  getInforEntryPersonObjectGuid,
+  setInforEntryPersonObjectGuid,
 };

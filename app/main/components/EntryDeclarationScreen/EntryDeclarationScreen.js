@@ -65,6 +65,7 @@ import {
 import {
   setInfoDeclare,
   setEntryObjectGUIDInformation,
+  setInforEntryPersonObjectGuid,
 } from '../../../core/storage';
 
 // Data
@@ -655,11 +656,13 @@ class Declaration extends React.Component {
 
   declareSuccess = data => {
     setEntryObjectGUIDInformation(data.Object.ObjectGuid);
+    setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
     this.changeState('visibleModalSuccess', true);
   };
 
   declareError = error => {
     // ...
+    Alert.alert('Có lỗi xảy ra. Vui lòng thử lại');
   };
 
   onModalSuccessPress = () => {
@@ -1441,7 +1444,7 @@ class Declaration extends React.Component {
                       <Text style={styles.star}> *</Text>
                     </Text>
                     <TouchableOpacity
-                      style={styles.checkbvietnameseoxSymptom}
+                      style={styles.checkboxSymptom}
                       activeOpacity={1}
                       onPress={() =>
                         this.onSelectExposureHistory(exposureItem.id, true)

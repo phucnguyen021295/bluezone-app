@@ -20,61 +20,30 @@
  */
 
 'use strict';
+
 import * as React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import FastImage from 'react-native-fast-image';
-import {injectIntl, intlShape} from 'react-intl';
 
 // Components
-import HomeScreen from '../HomeScreen';
-import NotifyScreen from '../NotifyScreen';
-import InfoScreen from '../InfoScreen';
-import FAQScreen from '../FAQScreen';
-import UtilityScreen from '../UtilityScreen';
-import CountNotifications, {
-  broadcastForcusChange,
-} from './components/CountNotification';
-import Text from '../../../base/components/Text';
-
-import {isIPhoneX} from '../../../core/utils/isIPhoneX';
-
-// Language
-import message from '../../../core/msg/tab';
-
-// Styles
-import styles from './style/index.css';
-import {smallest} from '../../../core/fontSize';
-import {TAB_BAR_HEIGHT, TAB_BAR_IPHONEX_HEIGHT} from './style/index.css';
-import {reportScreenAnalytics} from '../../../core/analytics';
+import TabScreen from './components/TabScreen';
 import SCREEN from '../../nameScreen';
 
+// Core
+import {isIPhoneX} from '../../../core/utils/isIPhoneX';
+import {smallest} from '../../../core/fontSize';
+import {reportScreenAnalytics} from '../../../core/analytics';
+
+import configuration from '../../../configuration';
+
+// Styles
+import {TAB_BAR_HEIGHT, TAB_BAR_IPHONEX_HEIGHT} from './style/index.css';
+
 // Consts
-const Tab = createMaterialTopTabNavigator();
-
-const icon = {
-  Home: require('./style/images/home.png'),
-  warning: require('./style/images/ic_warning_normal.png'),
-  Invite: require('./style/images/invite.png'),
-  Notify: require('./style/images/notify.png'),
-  Info: require('./style/images/info.png'),
-  Faq: require('./style/images/faq.png'),
-  Utilities: require('./style/images/faq.png'),
-};
-
-const iconActive = {
-  Home: require('./style/images/home_active.png'),
-  warning: require('./style/images/ic_warning_active.png'),
-  Invite: require('./style/images/invite_active.png'),
-  Notify: require('./style/images/notify_active.png'),
-  Info: require('./style/images/info_active.png'),
-  Faq: require('./style/images/faq_active.png'),
-  Utilities: require('./style/images/faq_active.png'),
-};
+export const Tab = createMaterialTopTabNavigator();
 
 class HomeTabScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.db = null;
   }
 
   componentDidMount() {
@@ -82,8 +51,7 @@ class HomeTabScreen extends React.Component {
   }
 
   render() {
-    const {intl} = this.props;
-    const {formatMessage} = intl;
+    const {AppTabIds} = configuration;
     return (
       <Tab.Navigator
         initialRouteName="Home"
@@ -103,143 +71,20 @@ class HomeTabScreen extends React.Component {
           tabStyle: {
             height: TAB_BAR_HEIGHT,
           },
+          iconStyle: {
+            alignItems: 'center',
+            paddingTop: 2,
+          },
           labelStyle: {
             fontSize: smallest,
             textTransform: 'capitalize',
           },
           allowFontScaling: false,
         }}>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            tabBarLabel: ({focused}) => (
-              <Text
-                text={formatMessage(message.home)}
-                style={[
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                  },
-                  styles.labelStyle,
-                ]}
-              />
-            ),
-            tabBarIcon: ({focused, color, size}) => (
-              <FastImage
-                source={focused ? iconActive.Home : icon.Home}
-                style={styles.iconSquare}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Notify"
-          component={NotifyScreen}
-          options={{
-            tabBarLabel: ({focused}) => (
-              <Text
-                text={formatMessage(message.report)}
-                style={[
-                  styles.labelStyle,
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                  },
-                ]}
-              />
-            ),
-            tabBarIcon: ({focused, color, size, navigate}) => (
-              <CountNotifications
-                focused={focused}
-                icon={icon.Notify}
-                iconActive={iconActive.Notify}
-              />
-            ),
-          }}
-          listeners={({navigation, route}) => ({
-            focus: () => {
-              broadcastForcusChange();
-            },
-          })}
-        />
-        <Tab.Screen
-          name="Utilities"
-          component={UtilityScreen}
-          options={{
-            tabBarLabel: ({focused}) => (
-              <Text
-                text={'Tiện ích'}
-                style={[
-                  styles.labelStyle,
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                    paddingLeft: 3,
-                  },
-                ]}
-              />
-            ),
-            tabBarIcon: ({focused, color, size}) => (
-              <FastImage
-                source={focused ? iconActive.Faq : icon.Faq}
-                style={styles.iconFaq}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="FAQ"
-          component={FAQScreen}
-          options={{
-            tabBarLabel: ({focused}) => (
-              <Text
-                text={formatMessage(message.faq)}
-                style={[
-                  styles.labelStyle,
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                    paddingLeft: 3,
-                  },
-                ]}
-              />
-            ),
-            tabBarIcon: ({focused, color, size}) => (
-              <FastImage
-                source={focused ? iconActive.Faq : icon.Faq}
-                style={styles.iconFaq}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Info"
-          component={InfoScreen}
-          options={{
-            tabBarLabel: ({focused}) => (
-              <Text
-                text={formatMessage(message.about)}
-                numberOfLines={1}
-                style={[
-                  styles.labelStyle,
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                  },
-                ]}
-              />
-            ),
-            tabBarIcon: ({focused, color, size}) => (
-              <FastImage
-                source={focused ? iconActive.Info : icon.Info}
-                style={styles.iconSquare}
-              />
-            ),
-          }}
-        />
+        {TabScreen(AppTabIds)}
       </Tab.Navigator>
     );
   }
 }
 
-HomeTabScreen.propTypes = {
-  intl: intlShape.isRequired,
-};
-
-export default injectIntl(HomeTabScreen);
+export default HomeTabScreen;

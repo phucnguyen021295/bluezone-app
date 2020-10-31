@@ -21,27 +21,3 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
-
-export default defineMessages({
-  home: {
-    id: 'bluezone.tab.home',
-    defaultMessage: 'Trang chủ',
-  },
-  report: {
-    id: 'bluezone.tab.report',
-    defaultMessage: 'Thông báo',
-  },
-  about: {
-    id: 'bluezone.tab.about',
-    defaultMessage: 'Giới thiệu',
-  },
-  faq: {
-    id: 'bluezone.tab.faq',
-    defaultMessage: 'Hỏi đáp',
-  },
-  utilities: {
-    id: 'bluezone.tab.utilities',
-    defaultMessage: 'Tiện ích',
-  },
-});

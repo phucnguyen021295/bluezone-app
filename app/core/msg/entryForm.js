@@ -250,13 +250,13 @@ export default defineMessages({
     defaultMessage: 'Dương tính',
   },
   sendContent: {
+    id: 'bluezone.entryForm.sendContent',
+    defaultMessage: 'Gửi tờ khai',
+  },
+  declareSuccess: {
     id: 'bluezone.entryForm.declareSuccess',
     defaultMessage: 'Khai báo nhập cảnh thành công',
   },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
   // sendContent: {
   //   id: 'bluezone.entryForm.sendContent',
   //   defaultMessage: 'Gửi tờ khai',

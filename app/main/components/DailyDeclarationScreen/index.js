@@ -21,15 +21,8 @@
 
 'use strict';
 
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-  SafeAreaView,
-  View,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import {StatusBar, SafeAreaView, View, ScrollView} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 import {CheckBox} from 'react-native-elements';
@@ -39,48 +32,221 @@ import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import ButtonBase from '../../../base/components/ButtonBase';
 import {LanguageContext} from '../../../../LanguageContext';
+import HealthMonitoringItem from './components/HealthMonitoringItem';
 
+// Apis
+import {
+  InsertEntryPersonReport,
+  GetListDailyDeclaration,
+} from '../../../core/apis/bluezone';
+
+// Core
+import {
+  getInforEntryPersonObjectGuid,
+  getEntryObjectGUIDInformation,
+  setHealthMonitoring,
+  getHealthMonitoring,
+} from '../../../core/storage';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 
 // Styles
 import styles from './styles/index.css';
+import message from '../../../core/msg/register';
+import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
+import ModalBase from '../../../base/components/ModalBase';
 
-const items = [
-  {id: 'sot', name: 'Sốt'},
-  {id: 'ho', name: 'Ho'},
-  {id: 'khotho', name: 'Khó thở'},
-  {id: 'daunguoi_metmoi', name: 'Đau người, mệt mỏi'},
-  {id: 'khoemanh', name: 'Khỏe mạnh'},
+export const listSymptom = [
+  {StateID: 1, name: 'Sốt'},
+  {StateID: 2, name: 'Ho'},
+  {StateID: 3, name: 'Khó thở'},
+  {StateID: 4, name: 'Đau người, mệt mỏi'},
+  {StateID: 5, name: 'Khỏe mạnh'},
+];
+
+let LtinforEntryPersonReportDetail = [
+  {
+    StateID: 1,
+    Value: false,
+  },
+  {
+    StateID: 2,
+    Value: false,
+  },
+  {
+    StateID: 3,
+    Value: false,
+  },
+  {
+    StateID: 4,
+    Value: false,
+  },
+  {
+    StateID: 5,
+    Value: false,
+  },
 ];
 
 class DailyDeclaration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isVisibleError: false,
       itemsSelected: [],
+      data: [],
     };
+
+    this.selectItem = this.selectItem.bind(this);
+    this.onSendInfo = this.onSendInfo.bind(this);
+    this.checkDisabledCheckbox = this.checkDisabledCheckbox.bind(this);
+    this.getLtinforEntryPersonReportDetail = this.getLtinforEntryPersonReportDetail.bind(
+      this,
+    );
+    this.InsertEntryPersonReportSuccess = this.InsertEntryPersonReportSuccess.bind(
+      this,
+    );
+    this.InsertEntryPersonReportError = this.InsertEntryPersonReportError.bind(
+      this,
+    );
+    this.getListHealthMonitoring = this.getListHealthMonitoring.bind(this);
+    this.renderModal = this.renderModal.bind(this);
   }
 
   componentDidMount() {
     reportScreenAnalytics(SCREEN.DAILY_DECLARATION);
+
+    this.getListHealthMonitoring();
   }
 
-  selectItem = item => {
+  async getListHealthMonitoring() {
+    const HealthMonitoring = await getHealthMonitoring();
+    if (!HealthMonitoring) {
+      const InforEntryPersonObjectGuid = await getInforEntryPersonObjectGuid();
+      GetListDailyDeclaration(InforEntryPersonObjectGuid, response => {
+        const Object = response.Object;
+        const data = Object.reverse().map(item => {
+          let ListItem = [];
+          item.LtinforEntryPersonReportDetail.map(
+            id => id.Value && ListItem.push(id.StateID),
+          );
+          return {
+            CreateDate: item.CreateDate,
+            ListItem: ListItem,
+          };
+        });
+
+        this.setState({data: data});
+      });
+    } else {
+      this.setState({data: HealthMonitoring});
+    }
+  }
+
+  selectItem(item) {
     const {itemsSelected} = this.state;
-    const i = itemsSelected.indexOf(item);
+    const i = itemsSelected.indexOf(item.StateID);
     if (i !== -1) {
       itemsSelected.splice(i, 1);
     } else {
-      itemsSelected.push(item);
+      itemsSelected.push(item.StateID);
     }
     this.setState({itemsSelected: itemsSelected});
-  };
+  }
+
+  getLtinforEntryPersonReportDetail(ListItem) {
+    LtinforEntryPersonReportDetail = LtinforEntryPersonReportDetail.map(item =>
+      ListItem.includes(item.StateID)
+        ? {
+            StateID: item.StateID,
+            Value: true,
+          }
+        : {
+            StateID: item.StateID,
+            Value: false,
+          },
+    );
+    return LtinforEntryPersonReportDetail;
+  }
+
+  async onSendInfo() {
+    let {itemsSelected} = this.state;
+    const ListItem = itemsSelected.length > 0 ? itemsSelected : [5];
+
+    const InforEntryObjectGuid = await getEntryObjectGUIDInformation();
+    const InforEntryPersonObjectGuid = await getInforEntryPersonObjectGuid();
+    const LtinforEntryPersonReportDetail = this.getLtinforEntryPersonReportDetail(
+      ListItem,
+    );
+
+    const body = {
+      InforEntryPersonReport: {
+        InforEntryObjectGuid: InforEntryObjectGuid,
+        InforEntryPersonObjectGuid: InforEntryPersonObjectGuid,
+        LtinforEntryPersonReportDetail: LtinforEntryPersonReportDetail,
+      },
+    };
+
+    InsertEntryPersonReport(
+      body,
+      this.InsertEntryPersonReportSuccess,
+      this.InsertEntryPersonReportError,
+    );
+  }
+
+  InsertEntryPersonReportSuccess(response) {
+    let {itemsSelected, data} = this.state;
+    const ListItem = itemsSelected.length > 0 ? itemsSelected : [5];
+    const object = {
+      CreateDate: response.Object.CreateDate,
+      ListItem: ListItem,
+    };
+    data.splice(0, 0, object);
+
+    this.setState({
+      data: data,
+      itemsSelected: [],
+    });
+
+    setHealthMonitoring(data);
+  }
+
+  InsertEntryPersonReportError(error) {
+    this.setState({isVisibleError: true});
+  }
+
+  checkDisabledCheckbox(StateID) {
+    const {itemsSelected} = this.state;
+    if (
+      (itemsSelected.length > 0 && itemsSelected[0] === 5 && StateID !== 5) ||
+      (itemsSelected.length > 0 && itemsSelected[0] !== 5 && StateID === 5)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  onCloseAlertError() {
+    this.setState({isVisibleError: false});
+  }
+
+  renderModal() {
+    const {isProcessing, isVisibleError, codeString} = this.state;
+    return (
+      <>
+        <ModalBase
+          isVisibleModal={isVisibleError}
+          title={'Thông báo'}
+          description={'Gửi thông tin sức khỏe thất bại!'}>
+          <View style={styles.modalFooter}>
+            <ButtonConfirm text={'Đóng'} onPress={this.onCloseAlertError} />
+          </View>
+        </ModalBase>
+      </>
+    );
+  }
 
   render() {
-    const {itemsSelected} = this.state;
-    const {intl, navigation} = this.props;
-    const {formatMessage} = intl;
+    const {itemsSelected, data} = this.state;
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
@@ -89,31 +255,21 @@ class DailyDeclaration extends React.Component {
           <MediumText style={styles.title}>
             Chọn thông tin sức khỏe hiện tại của bạn
           </MediumText>
-          <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-            }}>
-            {items.map(item => {
-              const selected = itemsSelected.find(i => i.id === item.id);
+          <View style={styles.listCheckbox}>
+            {listSymptom.map(item => {
+              const selected = itemsSelected.find(i => i === item.StateID);
               return (
                 <CheckBox
                   iconType={'ionicon'}
-                  center
+                  iconRight
                   title={item.name}
+                  disabled={this.checkDisabledCheckbox(item.StateID)}
                   checkedIcon="ios-checkbox-outline"
                   uncheckedIcon="ios-square-outline"
                   checked={selected}
                   onPress={() => this.selectItem(item)}
-                  containerStyle={{
-                    marginLeft: 0,
-                    marginRight: 0,
-                    margin: 0,
-                    backgroundColor: '#ffffff',
-                    borderWidth: 0,
-                  }}
-                  textStyle={{marginRight: 5, marginLeft: 5}}
+                  containerStyle={styles.containerStyleCheckbox}
+                  textStyle={{marginRight: 10, marginLeft: 0}}
                 />
               );
             })}
@@ -121,7 +277,7 @@ class DailyDeclaration extends React.Component {
 
           <ButtonBase
             title={'Gửi thông tin'}
-            onPress={this.onCloseScreenPress}
+            onPress={this.onSendInfo}
             containerStyle={styles.containerStyle}
             titleStyle={styles.textInvite}
           />
@@ -131,171 +287,9 @@ class DailyDeclaration extends React.Component {
           </MediumText>
 
           <View>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#015cd0',
-                  zIndex: 99,
-                }}
-              />
-              <View
-                style={{
-                  marginRight: 16.5,
-                  borderLeftColor: '#707070',
-                  borderLeftWidth: 1,
-                  marginLeft: 5,
-                }}
-              />
-              <View style={{flex: 1}}>
-                <MediumText>30/09/2020</MediumText>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#b2b2b2',
-                    flex: 1,
-                    padding: 10,
-                    borderRadius: 9,
-                    marginBottom: 47,
-                    marginTop: 7,
-                  }}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingBottom: 13,
-                    }}>
-                    <ButtonBase
-                      title={'Nguy cơ nhiễm bệnh'}
-                      onPress={this.onCloseScreenPress}
-                      containerStyle={styles.containerStyleNCNB}
-                      titleStyle={styles.textInviteNCNB}
-                    />
-                    <Text>10:10</Text>
-                  </View>
-                  <Text>
-                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#015cd0',
-                  zIndex: 99,
-                }}
-              />
-              <View
-                style={{
-                  marginRight: 16.5,
-                  borderLeftColor: '#707070',
-                  borderLeftWidth: 1,
-                  marginLeft: 5,
-                }}
-              />
-              <View style={{flex: 1}}>
-                <MediumText>30/09/2020</MediumText>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#b2b2b2',
-                    flex: 1,
-                    padding: 10,
-                    borderRadius: 9,
-                    marginBottom: 47,
-                    marginTop: 7,
-                  }}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingBottom: 13,
-                    }}>
-                    <ButtonBase
-                      title={'Nguy cơ nhiễm bệnh'}
-                      onPress={this.onCloseScreenPress}
-                      containerStyle={styles.containerStyleNCNB}
-                      titleStyle={styles.textInviteNCNB}
-                    />
-                    <Text>10:10</Text>
-                  </View>
-                  <Text>
-                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: 10,
-                  height: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#015cd0',
-                  zIndex: 99,
-                }}
-              />
-              <View
-                style={{
-                  marginRight: 16.5,
-                  borderLeftColor: '#707070',
-                  borderLeftWidth: 1,
-                  marginLeft: 5,
-                }}
-              />
-              <View style={{flex: 1}}>
-                <MediumText>30/09/2020</MediumText>
-                <View
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#b2b2b2',
-                    flex: 1,
-                    padding: 10,
-                    borderRadius: 9,
-                    marginBottom: 47,
-                    marginTop: 7,
-                  }}>
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      paddingBottom: 13,
-                    }}>
-                    <ButtonBase
-                      title={'Nguy cơ nhiễm bệnh'}
-                      onPress={this.onCloseScreenPress}
-                      containerStyle={styles.containerStyleNCNB}
-                      titleStyle={styles.textInviteNCNB}
-                    />
-                    <Text>10:10</Text>
-                  </View>
-                  <Text>
-                    <MediumText>Thông tin: </MediumText>Ho, Sốt, Khó thở
-                  </Text>
-                </View>
-              </View>
-            </View>
+            {data.map((item, index) => (
+              <HealthMonitoringItem item={item} key={index} />
+            ))}
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -306,7 +300,5 @@ class DailyDeclaration extends React.Component {
 DailyDeclaration.propTypes = {
   intl: intlShape.isRequired,
 };
-
-DailyDeclaration.contextType = LanguageContext;
 
 export default injectIntl(DailyDeclaration);

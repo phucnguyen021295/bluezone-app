@@ -21,27 +21,35 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import * as React from 'react';
+import Svg, {G, Rect, Text, TSpan} from 'react-native-svg';
 
-export default defineMessages({
-  home: {
-    id: 'bluezone.tab.home',
-    defaultMessage: 'Trang chủ',
-  },
-  report: {
-    id: 'bluezone.tab.report',
-    defaultMessage: 'Thông báo',
-  },
-  about: {
-    id: 'bluezone.tab.about',
-    defaultMessage: 'Giới thiệu',
-  },
-  faq: {
-    id: 'bluezone.tab.faq',
-    defaultMessage: 'Hỏi đáp',
-  },
-  utilities: {
-    id: 'bluezone.tab.utilities',
-    defaultMessage: 'Tiện ích',
-  },
-});
+function Faq(props) {
+  const {color} = props;
+  return (
+    <Svg width="1em" height="1em" viewBox="0 0 27 20" {...props}>
+      <G data-name="Group 9344">
+        <G data-name="Rectangle 2421" fill="none" stroke={color}>
+          <Rect width={27} height={20} rx={10} stroke="none" />
+          <Rect x={0.5} y={0.5} width={26} height={19} rx={9.5} />
+        </G>
+        <Text
+          transform="translate(14 13)"
+          fill={color}
+          fontSize={9}
+          fontFamily="Roboto-Bold, Roboto"
+          fontWeight={700}>
+          <TSpan x={-8.378} y={0}>
+            {'FAQ'}
+          </TSpan>
+        </Text>
+      </G>
+    </Svg>
+  );
+}
+
+Faq.defaultProps = {
+  color: '#707070',
+};
+
+export default Faq;

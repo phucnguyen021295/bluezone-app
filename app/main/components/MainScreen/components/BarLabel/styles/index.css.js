@@ -21,27 +21,14 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import {StyleSheet} from 'react-native';
+import {smallest} from '../../../../../../core/fontSize';
 
-export default defineMessages({
-  home: {
-    id: 'bluezone.tab.home',
-    defaultMessage: 'Trang chủ',
-  },
-  report: {
-    id: 'bluezone.tab.report',
-    defaultMessage: 'Thông báo',
-  },
-  about: {
-    id: 'bluezone.tab.about',
-    defaultMessage: 'Giới thiệu',
-  },
-  faq: {
-    id: 'bluezone.tab.faq',
-    defaultMessage: 'Hỏi đáp',
-  },
-  utilities: {
-    id: 'bluezone.tab.utilities',
-    defaultMessage: 'Tiện ích',
+const styles = StyleSheet.create({
+  labelStyle: {
+    fontSize: smallest,
+    marginBottom: 4,
   },
 });
+
+export default styles;
