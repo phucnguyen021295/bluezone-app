@@ -38,77 +38,85 @@ import Header from '../../../base/components/Header';
 
 import SCREEN from '../../nameScreen';
 
-const UtilityScreen = props => {
-  const {intl, navigation} = props;
-  const {formatMessage} = intl;
+class UtilityScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  const open1 = () => {
+  open1 = () => {
+    const {navigation} = this.props;
     navigation.navigate(SCREEN.DOMESTIC_DECLARATION);
   };
 
-  const open2 = () => {
+  open2 = () => {
+    const {navigation} = this.props;
     navigation.navigate(SCREEN.ENTRY_DECLARATION);
   };
 
-  const open3 = () => {
+  open3 = () => {
+    const {navigation} = this.props;
     navigation.navigate(SCREEN.DAILY_DECLARATION);
   };
 
-  return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <StatusBar hidden={true} />
-      <Header title={'Tiện ích'} showBack={false} />
-      <View style={styles.grid}>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.item} onPress={open1}>
-            <Image
-              style={styles.itemImage}
-              source={require('./images/anh.jpeg')}
-            />
-            <Text style={styles.itemText}>Khai bao y te nội địa</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item} onPress={open2}>
-            <Image
-              style={styles.itemImage}
-              source={require('./images/anh.jpeg')}
-            />
-            <Text style={styles.itemText}>Che do nhap canh</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item} onPress={open3}>
-            <Image
-              style={styles.itemImage}
-              source={require('./images/anh.jpeg')}
-            />
-            <Text style={styles.itemText}>Khai bao y te nhập cảnh</Text>
-          </TouchableOpacity>
+  render() {
+    const {intl, navigation} = this.props;
+    const {formatMessage} = intl;
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
+        <StatusBar hidden={true} />
+        <Header title={'Tiện ích'} showBack={false} />
+        <View style={styles.grid}>
+          <View style={styles.row}>
+            <TouchableOpacity style={styles.item} onPress={this.open1}>
+              <Image
+                style={styles.itemImage}
+                source={require('./styles/images/anh.jpeg')}
+              />
+              <Text style={styles.itemText}>Khai bao y te nội địa</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item} onPress={this.open2}>
+              <Image
+                style={styles.itemImage}
+                source={require('./styles/images/anh.jpeg')}
+              />
+              <Text style={styles.itemText}>Che do nhap canh</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item} onPress={this.open3}>
+              <Image
+                style={styles.itemImage}
+                source={require('./styles/images/anh.jpeg')}
+              />
+              <Text style={styles.itemText}>Khai bao y te nhập cảnh</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.row}>
+            <TouchableOpacity style={styles.item}>
+              <Image
+                style={styles.itemImage}
+                source={require('./styles/images/anh.jpeg')}
+              />
+              <Text style={styles.itemText}>BMI</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
+              <Image
+                style={styles.itemImage}
+                source={require('./styles/images/anh.jpeg')}
+              />
+              <Text style={styles.itemText}>BMI</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.item}>
+              <Image
+                style={styles.itemImage}
+                source={require('./styles/images/anh.jpeg')}
+              />
+              <Text style={styles.itemText}>BMI</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.item}>
-            <Image
-              style={styles.itemImage}
-              source={require('./images/anh.jpeg')}
-            />
-            <Text style={styles.itemText}>BMI</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <Image
-              style={styles.itemImage}
-              source={require('./images/anh.jpeg')}
-            />
-            <Text style={styles.itemText}>BMI</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
-            <Image
-              style={styles.itemImage}
-              source={require('./images/anh.jpeg')}
-            />
-            <Text style={styles.itemText}>BMI</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
-  );
-};
+      </SafeAreaView>
+    );
+  }
+}
 
 UtilityScreen.propTypes = {
   intl: intlShape.isRequired,

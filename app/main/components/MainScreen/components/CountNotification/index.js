@@ -152,12 +152,11 @@ class CountNotification extends React.Component {
   render() {
     const {count} = this.state;
     const {icon, iconActive, focused} = this.props;
+
+    const Svg = focused ? iconActive : icon;
     return (
       <Badge count={count}>
-        <FastImage
-          source={focused ? iconActive : icon}
-          style={styles.iconSquare}
-        />
+        <Svg />
       </Badge>
     );
   }

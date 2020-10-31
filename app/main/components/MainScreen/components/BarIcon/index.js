@@ -29,27 +29,34 @@ import FastImage from 'react-native-fast-image';
 import styles from './styles/index.css';
 import CountNotifications from '../CountNotification';
 
-const icon = {
-  Home: require('./styles/images/home.png'),
-  Notify: require('./styles/images/notify.png'),
-  Info: require('./styles/images/info.png'),
-  Faq: require('./styles/images/faq.png'),
-  Utilities: require('./styles/images/faq.png'),
+// Icon
+import Home from './styles/images/Home';
+import Notify from './styles/images/Notify';
+import Utilities from './styles/images/Utilities';
+import Faq from './styles/images/Faq';
+import Info from './styles/images/Info';
+
+// Icon Active
+import HomeActive from './styles/images/HomeActive';
+import NotifyActive from './styles/images/NotifyActive';
+import UtilitiesActive from './styles/images/UtilitiesActive';
+import FaqActive from './styles/images/FaqActive';
+import InfoActive from './styles/images/InfoActive';
+
+const Icon = {
+  Home: () => <Home width={21.2} height={18.9} />,
+  Notify: () => <Notify width={16.7} height={20.4} />,
+  Info: () => <Info width={20} height={20} />,
+  Faq: () => <Faq width={27} height={20} />,
+  Utilities: () => <Utilities width={18.9} height={18.9} />,
 };
 
-const iconActive = {
-  Home: require('./styles/images/home_active.png'),
-  Notify: require('./styles/images/notify_active.png'),
-  Info: require('./styles/images/info_active.png'),
-  Faq: require('./styles/images/faq_active.png'),
-  Utilities: require('./styles/images/faq_active.png'),
-};
-
-const styleBarIcon = {
-  Home: styles.iconSquare,
-  Info: styles.iconSquare,
-  Faq: styles.iconFaq,
-  Utilities: styles.iconFaq,
+const IconActive = {
+  Home: () => <HomeActive width={21.2} height={18.9} />,
+  Notify: () => <NotifyActive width={16.7} height={20.4} />,
+  Info: () => <InfoActive width={20} height={20} />,
+  Faq: () => <FaqActive width={27} height={20} />,
+  Utilities: () => <UtilitiesActive width={18.9} height={18.9} />,
 };
 
 function BarIcon(props) {
@@ -59,18 +66,15 @@ function BarIcon(props) {
     return (
       <CountNotifications
         focused={focused}
-        icon={icon.Notify}
-        iconActive={iconActive.Notify}
+        icon={Icon.Notify}
+        iconActive={IconActive.Notify}
       />
     );
   }
 
-  return (
-    <FastImage
-      source={focused ? iconActive[name] : icon[name]}
-      style={styleBarIcon[name]}
-    />
-  );
+  const Svg = focused ? IconActive[name] : Icon[name];
+
+  return <Svg />;
 }
 
 BarIcon.propTypes = {

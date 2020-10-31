@@ -71,6 +71,10 @@ class HomeTabScreen extends React.Component {
           tabStyle: {
             height: TAB_BAR_HEIGHT,
           },
+          iconStyle: {
+            alignItems: 'center',
+            paddingTop: 2,
+          },
           labelStyle: {
             fontSize: smallest,
             textTransform: 'capitalize',
