@@ -29,7 +29,7 @@ import BarIcon from '../BarIcon';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 // Components
-import {broadcastForcusChange} from '../CountNotification';
+import {broadcastFocusChange} from '../CountNotification';
 
 // Consts
 const Tab = createMaterialTopTabNavigator();

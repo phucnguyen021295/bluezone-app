@@ -43,20 +43,20 @@ import {getNewsNotification} from '../../../../../core/db/SqliteDb';
 // Styles
 import styles from './styles/index.css';
 
-const handleForcusChangeList = [];
+const handleFocusChangeList = [];
 
-const registerFocusTabar = handleChange => {
-  for (let i = 0; i < handleForcusChangeList.length; i++) {
-    if (handleForcusChangeList[i] === handleChange) {
+const registerFocusTabBar = handleChange => {
+  for (let i = 0; i < handleFocusChangeList.length; i++) {
+    if (handleFocusChangeList[i] === handleChange) {
       return;
     }
   }
-  handleForcusChangeList.push(handleChange);
+  handleFocusChangeList.push(handleChange);
 };
 
 export const broadcastFocusChange = () => {
-  for (let i = 0; i < handleForcusChangeList.length; i++) {
-    handleForcusChangeList[i]();
+  for (let i = 0; i < handleFocusChangeList.length; i++) {
+    handleFocusChangeList[i]();
   }
 };
 
@@ -90,7 +90,7 @@ class CountNotification extends React.Component {
       this.onNotificationOpened,
     );
 
-    registerFocusTabar(this.resetCount);
+    registerFocusTabBar(this.resetCount);
   }
 
   componentWillUnmount() {

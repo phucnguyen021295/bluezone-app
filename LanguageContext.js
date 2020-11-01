@@ -62,10 +62,6 @@ class LanguageContextComponent extends React.Component {
   }
 }
 
-LanguageContextComponent.childContextTypes = {
-  language: PropTypes.string,
-};
-
 LanguageContextComponent.propTypes = {
   language: PropTypes.string,
 };
