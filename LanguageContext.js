@@ -32,7 +32,7 @@ class LanguageContextComponent extends React.Component {
     // TODO can xem lai logic code cho nay
     let language = configuration.Language;
     this.state = {
-      language: language,
+      language: language || 'vi',
     };
   }
 

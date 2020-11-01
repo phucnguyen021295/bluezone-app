@@ -257,9 +257,10 @@ class DailyDeclaration extends React.Component {
           </MediumText>
           <View style={styles.listCheckbox}>
             {listSymptom.map(item => {
-              const selected = itemsSelected.find(i => i === item.StateID);
+              const selected = !!itemsSelected.find(i => i === item.StateID);
               return (
                 <CheckBox
+                  key={item.name}
                   iconType={'ionicon'}
                   iconRight
                   title={item.name}

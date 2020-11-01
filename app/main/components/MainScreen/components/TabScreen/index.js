@@ -48,6 +48,7 @@ function TabScreen(appTabIds) {
     const TabScreen1 = Screen[nameApp];
     return (
       <Tab.Screen
+        key={nameApp}
         name={nameApp}
         options={{
           tabBarLabel: ({focused}) => (
