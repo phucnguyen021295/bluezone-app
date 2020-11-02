@@ -176,6 +176,14 @@ export default defineMessages({
     id: 'bluezone.entryForm.vnContactAddress',
     defaultMessage: 'Địa chỉ liên lạc tại Việt Nam',
   },
+  afterQuarantinePlace: {
+    id: 'bluezone.entryForm.afterQuarantinePlace',
+    defaultMessage: 'Nơi lưu trú sau cách ly',
+  },
+  afterQuarantineAddress: {
+    id: 'bluezone.entryForm.afterQuarantineAddress',
+    defaultMessage: 'Địa chỉ lưu trú sau cách ly',
+  },
   vnProvince: {
     id: 'bluezone.entryForm.vnProvince',
     defaultMessage: 'Tỉnh / Thành',
@@ -237,6 +245,10 @@ export default defineMessages({
     id: 'bluezone.entryForm.exposureHistory21Day',
     defaultMessage: 'Lịch sử phơi nhiễm: Trong vòng 21 ngày qua, Anh/Chị có',
   },
+  quarantinePlace: {
+    id: 'bluezone.entryForm.quarantinePlace',
+    defaultMessage: 'Cơ sở cách ly',
+  },
   testResult: {
     id: 'bluezone.entryForm.testResult',
     defaultMessage: 'Phiếu kết quả xét nghiệm',
@@ -257,32 +269,57 @@ export default defineMessages({
     id: 'bluezone.entryForm.declareSuccess',
     defaultMessage: 'Khai báo nhập cảnh thành công',
   },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.cancel',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.selectPortrait',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.selectTestResult',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.takePhoto',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
-  // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
-  //   defaultMessage: 'Gửi tờ khai',
-  // },
+  cancel: {
+    id: 'bluezone.entryForm.cancel',
+    defaultMessage: 'Đóng',
+  },
+  selectPortrait: {
+    id: 'bluezone.entryForm.selectPortrait',
+    defaultMessage: 'Chọn ảnh chân dung',
+  },
+  selectTestResult: {
+    id: 'bluezone.entryForm.selectTestResult',
+    defaultMessage: 'Chọn ảnh kết quả xét nghiệm',
+  },
+  takePhoto: {
+    id: 'bluezone.entryForm.takePhoto',
+    defaultMessage: 'Chụp ảnh…',
+  },
+  selectLibrary: {
+    id: 'bluezone.entryForm.selectLibrary',
+    defaultMessage: 'Chọn từ thư viện ảnh…',
+  },
+  errorPermisson: {
+    id: 'bluezone.entryForm.errorPermisson',
+    defaultMessage: 'Bạn cần cấp quyền để có thể sử chức năng vụ này',
+  },
+  errorForm1: {
+    id: 'bluezone.entryForm.errorForm1',
+    defaultMessage: 'Bạn cần phải chọn thông tin tỉnh/thành trước',
+  },
+  errorForm2: {
+    id: 'bluezone.entryForm.errorForm2',
+    defaultMessage: 'Bạn cần phải chọn thông tin quận/huyện trước',
+  },
+  errorForm3: {
+    id: 'bluezone.entryForm.errorForm3',
+    defaultMessage:
+      'Thông tin tờ khai chưa chính xác. Bạn vui lòng cập nhật các trường thông tin còn trống',
+  },
+  errorForm4: {
+    id: 'bluezone.entryForm.errorForm4',
+    defaultMessage: 'Có lỗi xảy ra. Vui lòng thử lại',
+  },
+  notification: {
+    id: 'bluezone.entryForm.notification',
+    defaultMessage: 'Thông báo',
+  },
+  enterInput: {
+    id: 'bluezone.entryForm.enterInput',
+    defaultMessage: 'Nhập thông tin',
+  },
+  search: {
+    id: 'bluezone.entryForm.search',
+    defaultMessage: 'Tìm kiếm',
+  },
 });

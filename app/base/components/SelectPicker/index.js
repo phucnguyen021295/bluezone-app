@@ -32,12 +32,15 @@ import {
   TextInput,
 } from 'react-native';
 import * as PropTypes from 'prop-types';
+import {injectIntl, intlShape} from 'react-intl';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 // Components
 import Text, {MediumText} from '../Text';
 import ModalBase from '../ModalBase/ButtonHalf';
 import Header from '../Header';
+
+import messages from '../../../core/msg/entryForm';
 
 // Styles
 import styles from './styles/index.css';
@@ -212,6 +215,9 @@ class SelectPicker extends React.PureComponent {
     const {isVisible, searchKey, _data} = this.state;
     const {loading, headerText, enableSearch} = this.props;
 
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+
     return (
       <ModalBase
         isVisible={isVisible}
@@ -223,7 +229,7 @@ class SelectPicker extends React.PureComponent {
             style={[styles.textInput]}
             onChangeText={this.onChangeSearchKey}
             value={searchKey}
-            placeholder={'Tìm kiếm'}
+            placeholder={formatMessage(messages.search)}
           />
         )}
         {!loading ? (
@@ -259,7 +265,7 @@ class SelectPicker extends React.PureComponent {
             text={name ? name : placeholder}
             style={[styles.title, {color: name ? '#000000' : '#dddddd'}]}
           />
-          <Entypo name={'chevron-thin-down'} size={15} />
+          <Entypo name={'triangle-down'} size={16} style={{color: '#6A6A6A'}} />
         </TouchableOpacity>
         {this.renderModal()}
       </>
@@ -273,6 +279,7 @@ SelectPicker.defaultProps = {
 };
 
 SelectPicker.propTypes = {
+  intl: intlShape.isRequired,
   valueDefault: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   containerStyle: PropTypes.object,
   data: PropTypes.array,
@@ -285,4 +292,4 @@ SelectPicker.propTypes = {
   shouldVisible: PropTypes.func,
 };
 
-export default SelectPicker;
+export default injectIntl(SelectPicker);

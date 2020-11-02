@@ -23,7 +23,7 @@
 
 const SCREEN = {
   LOADING: 'Loading',
-  INTRODUTION_WIZARD: 'Introdution',
+  INTRODUCTION_WIZARD: 'Introduction',
   PHONE_NUMBER_REGISTER: 'PhoneNumberRegister',
   PHONE_NUMBER_REGISTER_WIZARD: 'PhoneNumberRegisterWizard',
   PHONE_NUMBER_VERITY_OTP: 'PhoneNumberVerifyOTP',
@@ -49,6 +49,7 @@ const SCREEN = {
   DAILY_DECLARATION: 'DailyDeclaration',
   DOMESTIC_DECLARATION: 'DomesticDeclaration',
   ENTRY_DECLARATION: 'EntryDeclaration',
+  ENTRY_DECLARATION_SUCCESS: 'EntryDeclarationSuccess',
   FAQ: 'FAQ',
 };
 
