@@ -22,7 +22,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import configuration from '../../../../configuration';
-import {getLanguage} from '../../../../core/storage';
 
 export const EntryLanguageContext = React.createContext();
 
@@ -51,8 +50,6 @@ class LanguageContextComponent extends React.Component {
   }
 }
 
-LanguageContextComponent.propTypes = {
-  language1: PropTypes.string,
-};
+LanguageContextComponent.propTypes = {};
 
 export default LanguageContextComponent;

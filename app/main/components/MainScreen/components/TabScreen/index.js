@@ -29,7 +29,7 @@ import BarIcon from '../BarIcon';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 // Components
-import {broadcastForcusChange} from '../CountNotification';
+import {broadcastFocusChange} from '../CountNotification';
 
 // Consts
 const Tab = createMaterialTopTabNavigator();
@@ -48,6 +48,7 @@ function TabScreen(appTabIds) {
     const TabScreen1 = Screen[nameApp];
     return (
       <Tab.Screen
+        key={nameApp}
         name={nameApp}
         options={{
           tabBarLabel: ({focused}) => (

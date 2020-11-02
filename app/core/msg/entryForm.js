@@ -258,19 +258,19 @@ export default defineMessages({
     defaultMessage: 'Khai báo nhập cảnh thành công',
   },
   // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
+  //   id: 'bluezone.entryForm.cancel',
   //   defaultMessage: 'Gửi tờ khai',
   // },
   // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
+  //   id: 'bluezone.entryForm.selectPortrait',
   //   defaultMessage: 'Gửi tờ khai',
   // },
   // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
+  //   id: 'bluezone.entryForm.selectTestResult',
   //   defaultMessage: 'Gửi tờ khai',
   // },
   // sendContent: {
-  //   id: 'bluezone.entryForm.sendContent',
+  //   id: 'bluezone.entryForm.takePhoto',
   //   defaultMessage: 'Gửi tờ khai',
   // },
   // sendContent: {

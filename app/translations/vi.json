@@ -312,7 +312,7 @@
   "bluezone.entryForm.cancel": "Cancel",
   "bluezone.entryForm.selectPortrait": "Chọn ảnh chân dung",
   "bluezone.entryForm.selectTestResult": "Chọn ảnh kết quả xét nghiệm",
-  "bluezone.entryForm.takePhotto": "Chụp ảnh…",
+  "bluezone.entryForm.takePhoto": "Chụp ảnh…",
   "bluezone.entryForm.selectLibrary": "Chọn từ thư viện ảnh…",
   "bluezone.entryForm.errorPermisson": "Bạn cần cấp quyền để có thể sử chức năng vụ này",
   "bluezone.entryForm.errorForm1": "Bạn cần phải chọn thông tin tỉnh/thành trước",
