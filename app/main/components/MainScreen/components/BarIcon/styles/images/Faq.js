@@ -37,7 +37,7 @@ function Faq(props) {
           transform="translate(14 13)"
           fill={color}
           fontSize={9}
-          fontFamily="Roboto-Bold, Roboto"
+          fontFamily="Roboto-Medium"
           fontWeight={700}>
           <TSpan x={-8.378} y={0}>
             {'FAQ'}
