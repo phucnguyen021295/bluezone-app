@@ -1,0 +1,34 @@
+{
+  "version": "3.0.6",
+  "HasApp": ["1", "2", "3", "4"],
+  "App": {
+    "1": {
+      "id": "1",
+      "title": "Khai báo y tế nội địa",
+      "titleEn": "Domestic medical declaration",
+      "image": "",
+      "screen": "DomesticDeclaration",
+    },
+    "2": {
+      "id": "2",
+      "title": "Chế độ nhập cảnh",
+      "titleEn": "Entry mode",
+      "image": "",
+      "screen": "EntryDeclaration"
+    },
+    "3": {
+      "id": "3",
+      "title": "Khai báo y tế nhập cảnh",
+      "titleEn": "Medical entry declaration",
+      "image": "",
+      "screen": "DailyDeclaration"
+    },
+    "4": {
+      "id": "4",
+      "title": "BMI",
+      "titleEn": "BMI",
+      "image": "",
+      "screen": "DailyDeclaration"
+    }
+  }
+}

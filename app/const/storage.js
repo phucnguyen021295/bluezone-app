@@ -45,3 +45,4 @@ export const EntryObjectGUID = 'EntryObjectGUID';
 export const EntryLanguage = 'EntryLanguage';
 export const HealthMonitoring = 'HealthMonitoring';
 export const InforEntryPersonObjectGuid = 'InforEntryPersonObjectGuid';
+export const ConfigComponentApp = 'ConfigComponentApp';

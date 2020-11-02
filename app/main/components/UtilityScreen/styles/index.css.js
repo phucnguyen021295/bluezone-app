@@ -21,3 +21,37 @@
 
 'use strict';
 
+import {StyleSheet} from 'react-native';
+
+const styles = StyleSheet.create({
+  grid: {
+    marginTop: 36,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginVertical: 15,
+  },
+  item: {
+    alignItems: 'center',
+    width: '33.3%',
+    paddingHorizontal: 30,
+  },
+  itemImage: {
+    width: 60,
+    height: 60,
+  },
+
+  itemText: {
+    color: '#AAAAAA',
+    fontSize: 12,
+    paddingVertical: 8,
+    textAlign: 'center',
+    paddingBottom: 30,
+  },
+});
+
+export default styles;

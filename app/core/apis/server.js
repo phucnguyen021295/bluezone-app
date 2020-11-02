@@ -41,10 +41,17 @@ export const DOMAIN_NEW = dev
 export const CONFIG_APP_FILE_NAME = dev
   ? 'configAppTest.json'
   : 'configApp.json';
+
 export const RESOURCE_APP_FILE_NAME = dev
   ? 'resourceAppTest.json'
   : 'resourceApp.json';
+
 export const VERSION_APP_FILE_NAME = dev
   ? 'versionAppTest.json'
   : 'versionApp.json';
+
 export const FAQ_FILE_NAME = dev ? 'dataFAQ.json' : 'dataFAQ.json';
+
+export const CONFIG_COMPONENTS_APP_FILE_NAME = dev
+  ? 'configComponentApp.json'
+  : 'configComponentApp.json';
