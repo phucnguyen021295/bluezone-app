@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   viewBadge: {
     position: 'absolute',
     top: -3,
-    left: 12,
+    left: 9,
     minWidth: 16,
     height: 16,
     borderRadius: 8,

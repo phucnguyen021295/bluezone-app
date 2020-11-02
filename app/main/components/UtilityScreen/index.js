@@ -32,86 +32,81 @@ import {
   Image,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
-import * as PropTypes from 'prop-types';
+import FastImage from 'react-native-fast-image';
 
 import Header from '../../../base/components/Header';
 
 import SCREEN from '../../nameScreen';
+// import data from './configComponentApp';
+import {syncConfigComponentApp} from './data/dataConfigComponentApp';
+
+// Styles
+import styles from './styles/index.css';
+
+const IMAGE = {
+  '1': require('./styles/images/anh.jpeg'),
+  '2': require('./styles/images/anh.jpeg'),
+  '3': require('./styles/images/anh.jpeg'),
+  '4': require('./styles/images/anh.jpeg'),
+};
 
 class UtilityScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      HasApp: [],
+      App: {},
+    };
+
+    this.onChangeEvent = this.onChangeEvent.bind(this);
   }
 
-  open1 = () => {
-    const {navigation} = this.props;
-    navigation.navigate(SCREEN.DOMESTIC_DECLARATION);
-  };
+  componentDidMount() {
+    syncConfigComponentApp(data => {
+      this.setState({HasApp: data.HasApp, App: data.App});
+    });
+  }
 
-  open2 = () => {
+  onChangeEvent(app) {
     const {navigation} = this.props;
-    navigation.navigate(SCREEN.ENTRY_DECLARATION);
-  };
 
-  open3 = () => {
-    const {navigation} = this.props;
-    navigation.navigate(SCREEN.DAILY_DECLARATION);
-  };
+    switch (app.screen) {
+      case SCREEN.DOMESTIC_DECLARATION:
+        navigation.navigate(SCREEN.DOMESTIC_DECLARATION);
+        break;
+      case SCREEN.ENTRY_DECLARATION:
+        navigation.navigate(SCREEN.ENTRY_DECLARATION);
+        break;
+      case SCREEN.DAILY_DECLARATION:
+        navigation.navigate(SCREEN.DAILY_DECLARATION);
+        break;
+      default:
+        break;
+    }
+  }
 
   render() {
-    const {intl, navigation} = this.props;
-    const {formatMessage} = intl;
+    const {intl} = this.props;
+    const {HasApp, App} = this.state;
+    const {locale} = intl;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <StatusBar hidden={true} />
         <Header title={'Tiện ích'} showBack={false} />
         <View style={styles.grid}>
-          <View style={styles.row}>
-            <TouchableOpacity style={styles.item} onPress={this.open1}>
-              <Image
-                style={styles.itemImage}
-                source={require('./styles/images/anh.jpeg')}
-              />
-              <Text style={styles.itemText}>Khai bao y te nội địa</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item} onPress={this.open2}>
-              <Image
-                style={styles.itemImage}
-                source={require('./styles/images/anh.jpeg')}
-              />
-              <Text style={styles.itemText}>Che do nhap canh</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item} onPress={this.open3}>
-              <Image
-                style={styles.itemImage}
-                source={require('./styles/images/anh.jpeg')}
-              />
-              <Text style={styles.itemText}>Khai bao y te nhập cảnh</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.row}>
-            <TouchableOpacity style={styles.item}>
-              <Image
-                style={styles.itemImage}
-                source={require('./styles/images/anh.jpeg')}
-              />
-              <Text style={styles.itemText}>BMI</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item}>
-              <Image
-                style={styles.itemImage}
-                source={require('./styles/images/anh.jpeg')}
-              />
-              <Text style={styles.itemText}>BMI</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.item}>
-              <Image
-                style={styles.itemImage}
-                source={require('./styles/images/anh.jpeg')}
-              />
-              <Text style={styles.itemText}>BMI</Text>
-            </TouchableOpacity>
-          </View>
+          {HasApp.map(id => {
+            const app = App[id];
+            const title = locale === 'vi' ? app.title : app.titleEn;
+            const source = app.image ? {uri: app.image} : IMAGE[id];
+            return (
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => this.onChangeEvent(app)}>
+                <FastImage style={styles.itemImage} source={source} />
+                <Text style={styles.itemText}>{title}</Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </SafeAreaView>
     );
@@ -121,32 +116,5 @@ class UtilityScreen extends React.Component {
 UtilityScreen.propTypes = {
   intl: intlShape.isRequired,
 };
-
-const styles = StyleSheet.create({
-  grid: {
-    marginTop: 20,
-  },
-
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 15,
-  },
-  item: {
-    alignItems: 'center',
-    width: '33%',
-  },
-  itemImage: {
-    width: 60,
-    height: 60,
-  },
-
-  itemText: {
-    color: '#AAAAAA',
-    fontSize: 12,
-    paddingVertical: 5,
-    textAlign: 'center',
-  },
-});
 
 export default injectIntl(UtilityScreen);

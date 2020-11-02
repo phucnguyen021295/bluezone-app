@@ -41,7 +41,7 @@ function FaqActive(props) {
           transform="translate(2677 7125)"
           fill="#fff"
           fontSize={9}
-          fontFamily="Roboto-Bold, Roboto"
+          fontFamily="Roboto-Medium"
           fontWeight={700}>
           <TSpan x={-8.378} y={0}>
             {'FAQ'}

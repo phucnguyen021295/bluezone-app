@@ -48,6 +48,7 @@ import {
   RESOURCE_APP_FILE_NAME,
   VERSION_APP_FILE_NAME,
   FAQ_FILE_NAME,
+  CONFIG_COMPONENTS_APP_FILE_NAME,
 } from './server';
 import {
   TIME_RETRY_REGISTER_USER,
@@ -1381,6 +1382,27 @@ const GetListDailyDeclaration = (
     }, failure);
 };
 
+/**
+ * Lấy cấu hình config app
+ * @param success
+ * @param failure
+ * @returns {Promise<void>}
+ */
+const getConfigComponentsApp = (
+  success = _defaultFunc,
+  failure = _defaultFunc,
+) => {
+  const options = {
+    method: 'GET',
+    url: `${DOMAIN_CONFIG}/api/App/${CONFIG_COMPONENTS_APP_FILE_NAME}`,
+    timeout: 3000,
+  };
+
+  axios(options).then(response => {
+    success(response.data);
+  }, createErrorFn(failure));
+};
+
 export {
   // Token firebase
   registerTokenFirebase,
@@ -1416,4 +1438,5 @@ export {
   getRegionByParentID,
   InsertEntryPersonReport,
   GetListDailyDeclaration,
+  getConfigComponentsApp,
 };
