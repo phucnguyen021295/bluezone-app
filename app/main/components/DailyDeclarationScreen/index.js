@@ -110,6 +110,7 @@ class DailyDeclaration extends React.Component {
     );
     this.getListHealthMonitoring = this.getListHealthMonitoring.bind(this);
     this.renderModal = this.renderModal.bind(this);
+    this.onCloseAlertError = this.onCloseAlertError.bind(this);
   }
 
   componentDidMount() {
@@ -293,6 +294,7 @@ class DailyDeclaration extends React.Component {
             ))}
           </View>
         </ScrollView>
+        {this.renderModal()}
       </SafeAreaView>
     );
   }
