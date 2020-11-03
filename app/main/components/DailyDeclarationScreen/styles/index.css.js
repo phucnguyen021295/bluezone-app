@@ -103,6 +103,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#015cd0',
     zIndex: 99,
   },
+
+  modalFooter: {
+    borderTopWidth: 0.5,
+    borderTopColor: 'rgba(60, 60, 67, 0.29)',
+    width: '100%',
+    flexDirection: 'row',
+  },
 });
 
 export default styles;
