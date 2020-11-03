@@ -37,7 +37,6 @@ import FastImage from 'react-native-fast-image';
 import Header from '../../../base/components/Header';
 
 import SCREEN from '../../nameScreen';
-// import data from './configComponentApp';
 import {syncConfigComponentApp} from './data/dataConfigComponentApp';
 
 // Styles
