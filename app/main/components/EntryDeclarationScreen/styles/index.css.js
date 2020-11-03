@@ -79,6 +79,13 @@ const styles = StyleSheet.create({
 
   checkbox: {
     marginLeft: -7,
+    ...Platform.select({
+      ios: {
+        width: 15,
+        height: 15,
+        marginRight: 5,
+      },
+    }),
   },
 
   date: {

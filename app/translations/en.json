@@ -322,5 +322,17 @@
     "bluezone.entryForm.errorForm4": "An error occurred. Please try again",
     "bluezone.entryForm.notification": "Notification",
     "bluezone.entryForm.enterInput": "Enter input",
-    "bluezone.entryForm.search": "Search"
+    "bluezone.entryForm.search": "Search",
+
+    "bluezone.dailyDeclaration.option": "Choose your current health information",
+    "bluezone.dailyDeclaration.btnSendInfo": "Send information",
+    "bluezone.dailyDeclaration.trackHistory": "Health tracking history",
+    "bluezone.dailyDeclaration.titleModal": "Notification",
+    "bluezone.dailyDeclaration.describeModal": "Health information submission failed!",
+    "bluezone.dailyDeclaration.btnCloseModal": "Close",
+    "bluezone.dailyDeclaration.describeSuccessModal": "Successful submission of health information.",
+    "bluezone.dailyDeclaration.btnAgreeModal": "Agree",
+    "bluezone.dailyDeclaration.titleSafe": "Safe",
+    "bluezone.dailyDeclaration.titleRisk": "Risk of infection sick",
+    "bluezone.dailyDeclaration.info": "Information"
 }

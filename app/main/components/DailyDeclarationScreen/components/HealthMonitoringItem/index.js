@@ -34,6 +34,7 @@ import {listSymptom} from '../../index';
 
 // Styles
 import styles from './styles/index.css';
+import message from '../../../../../core/msg/dailyDeclaration';
 
 class DailyDeclaration extends React.Component {
   constructor(props) {
@@ -46,7 +47,8 @@ class DailyDeclaration extends React.Component {
   }
 
   getInfo() {
-    const {item} = this.props;
+    const {item, intl} = this.props;
+    const {locale} = intl;
     const ListItem = item.ListItem;
     let textInfo = '';
     ListItem.map(id => {
@@ -54,7 +56,8 @@ class DailyDeclaration extends React.Component {
       if (symptom.length === 0) {
         return;
       }
-      textInfo = textInfo ? `${textInfo}, ${symptom[0].name}` : symptom[0].name;
+      const name = locale === 'vi' ? symptom[0].name : symptom[0].nameEn;
+      textInfo = textInfo ? `${textInfo}, ${name}` : name;
     });
     return textInfo;
   }
@@ -83,7 +86,9 @@ class DailyDeclaration extends React.Component {
   }
 
   render() {
-    const {item} = this.props;
+    const {item, intl} = this.props;
+    const {formatMessage} = intl;
+
     return (
       <View style={{flexDirection: 'row'}}>
         <View style={styles.dot} />
@@ -93,7 +98,11 @@ class DailyDeclaration extends React.Component {
           <View style={styles.body}>
             <View style={styles.row}>
               <ButtonBase
-                title={this.checkHealth() ? 'An toàn' : 'Nguy cơ nhiễm bệnh'}
+                title={
+                  this.checkHealth()
+                    ? formatMessage(message.titleSafe)
+                    : formatMessage(message.titleRisk)
+                }
                 onPress={this.onCloseScreenPress}
                 containerStyle={[
                   styles.containerStyleNCNB,
@@ -104,7 +113,7 @@ class DailyDeclaration extends React.Component {
               <Text>{this.formatHour(item.CreateDate)}</Text>
             </View>
             <Text>
-              <MediumText>Thông tin: </MediumText>
+              <MediumText>{`${formatMessage(message.info)}:`} </MediumText>
               {this.getInfo()}
             </Text>
           </View>
