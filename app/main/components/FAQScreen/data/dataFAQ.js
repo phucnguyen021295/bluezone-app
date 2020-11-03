@@ -24,22 +24,26 @@
 import {getQuestionFAQ as getQuestionFAQAPI} from '../../../../core/apis/bluezone';
 import {setQuestionFAQ, getQuestionFAQ} from '../../../../core/storage';
 import dataFAQ from '../dataFAQ.json';
+import {versionCompare} from '../../../../core/version';
 
 const _defaultFunc = () => {};
 
-const syncQuestionFAQ = async (
-  success = _defaultFunc,
-  failure = _defaultFunc,
-) => {
+const syncQuestionFAQ = async (success = _defaultFunc) => {
   const FAQStorage = await getQuestionFAQ();
   let syncFAQ = dataFAQ;
   if (FAQStorage) {
     syncFAQ = FAQStorage;
   }
 
+  success(syncFAQ);
+
   const _success = FAQApi => {
     // >
-    if (FAQApi.version !== syncFAQ.version) {
+    if (!FAQApi.version) {
+      return;
+    }
+
+    if (versionCompare(FAQApi.version, syncFAQ.version) === 1) {
       setQuestionFAQ(FAQApi);
       syncFAQ = FAQApi;
     }
@@ -47,11 +51,7 @@ const syncQuestionFAQ = async (
     success(syncFAQ);
   };
 
-  const _failre = () => {
-    success(syncFAQ);
-  };
-
-  return getQuestionFAQAPI(_success, _failre);
+  return getQuestionFAQAPI(_success);
 };
 
 export default dataFAQ;
