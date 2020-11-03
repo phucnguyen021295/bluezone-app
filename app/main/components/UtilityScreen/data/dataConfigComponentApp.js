@@ -27,22 +27,24 @@ import {
   getConfigComponentApp,
 } from '../../../../core/storage';
 import configComponentApp from '../configComponentApp';
+import {versionCompare} from '../../../../core/version';
 
 const _defaultFunc = () => {};
 
-const syncConfigComponentApp = async (
-  success = _defaultFunc,
-  failure = _defaultFunc,
-) => {
-  const FAQStorage = await getConfigComponentApp();
+const syncConfigComponentApp = async (success = _defaultFunc) => {
+  const configStorage = await getConfigComponentApp();
   let syncConfigApp = configComponentApp;
-  if (FAQStorage) {
-    syncConfigApp = FAQStorage;
+  if (configStorage) {
+    syncConfigApp = configStorage;
   }
 
+  success(syncConfigApp);
+
   const _success = configAppApi => {
-    // >
-    if (configAppApi.version !== syncConfigApp.version) {
+    if (!configAppApi.version) {
+      return;
+    }
+    if (versionCompare(configAppApi.version, syncConfigApp.version) === 1) {
       setConfigComponentApp(configAppApi);
       syncConfigApp = configAppApi;
     }
@@ -50,11 +52,7 @@ const syncConfigComponentApp = async (
     success(syncConfigApp);
   };
 
-  const _failre = () => {
-    success(syncConfigApp);
-  };
-
-  return getConfigComponentsAppAPI(_success, _failre);
+  return getConfigComponentsAppAPI(_success);
 };
 
 export default configComponentApp;

@@ -96,10 +96,14 @@ class UtilityScreen extends React.Component {
         <View style={styles.grid}>
           {HasApp.map(id => {
             const app = App[id];
+            if (!app) {
+              return null;
+            }
             const title = locale === 'vi' ? app.title : app.titleEn;
             const source = app.image ? {uri: app.image} : IMAGE[id];
             return (
               <TouchableOpacity
+                key={id}
                 style={styles.item}
                 onPress={() => this.onChangeEvent(app)}>
                 <FastImage style={styles.itemImage} source={source} />
