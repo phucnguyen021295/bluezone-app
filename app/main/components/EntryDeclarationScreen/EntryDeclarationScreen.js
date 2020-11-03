@@ -35,6 +35,7 @@ import {
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import CheckBox from '@react-native-community/checkbox';
+import {CheckBox as CheckBox1} from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
@@ -69,12 +70,17 @@ import {
 } from '../../../core/storage';
 
 // Data
-import {yearBirth, symptomData, exposureHistoryData} from './data';
+import {
+  yearBirth,
+  symptomData,
+  exposureHistoryData,
+  quarantinePlaceData,
+} from './data';
+import SCREEN from '../../nameScreen';
 
 // Styles
 import styles from './styles/index.css';
 import {reportScreenAnalytics} from '../../../core/analytics';
-import SCREEN from '../../nameScreen';
 import messages from '../../../core/msg/entryForm';
 
 const VIETNAM_ID = 234;
@@ -115,12 +121,13 @@ class Declaration extends React.Component {
       country21Day: '',
       endCountryID: VIETNAM_ID,
       endProvinceID: null,
-      vn_Province: '',
+      afterQuarantine_ProvinceID: null,
+      afterQuarantine_DistrictID: null,
+      afterQuarantine_WardID: null,
+      afterQuarantine_Address: '',
       vn_ProvinceID: null,
-      vn_District: '',
       vn_DistrictID: null,
-      vn_Ward: '',
-      vn_WardID: '',
+      vn_WardID: null,
       vn_Address: '',
       numberPhone: '',
       email: '',
@@ -132,11 +139,18 @@ class Declaration extends React.Component {
       gates: null,
       countries: null,
       provinces: null,
-      districts: null,
-      wards: null,
+      vn_Districts: null,
+      vn_Wards: null,
+      afterQuarantine_Districts: null,
+      afterQuarantine_Wards: null,
+      quarantinePlace: null,
+      otherQuarantinePlace: '',
     };
-    this.lastProvinceIDCallApi = null;
-    this.lastDistrictIDCallApi = null;
+    this.lastVNProvinceIDApi = null;
+    this.lastVNDistrictIDApi = null;
+
+    this.lastAfterQuarantineProvinceIDApi = null;
+    this.lastAfterQuarantineDistrictIDApi = null;
   }
 
   componentDidMount() {
@@ -156,56 +170,53 @@ class Declaration extends React.Component {
     const {intl} = this.props;
     const {formatMessage} = intl;
     const options = {
-      title: 'Chọn ảnh chân dung',
-      cancelButtonTitle: 'Đóng',
-      takePhotoButtonTitle: 'Chụp ảnh…',
-      chooseFromLibraryButtonTitle: 'Chọn từ thư viện ảnh…',
+      title: formatMessage(messages.selectPortrait),
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
     };
 
-    ImagePicker.showImagePicker(options, (response, a) => {
-      if (response.didCancel || response.customButton) {
-        return;
-      }
-
-      if (response.error) {
-        Alert.alert('Bạn cần cấp quyền để có thể sử chức năng vụ này');
-        return;
-      }
-
-      this.changeState('portrait', response.data);
-    });
+    this.onSelectImage(options, 'portrait');
   };
 
   onSelectTestResultImage = () => {
     const {intl} = this.props;
     const {formatMessage} = intl;
     const options = {
-      title: 'Chọn ảnh kết quả xét nghiệm',
-      cancelButtonTitle: 'Đóng',
-      takePhotoButtonTitle: 'Chụp ảnh…',
-      chooseFromLibraryButtonTitle: 'Chọn từ thư viện ảnh…',
+      title: formatMessage(messages.selectTestResult),
       storageOptions: {
         skipBackup: true,
         path: 'images',
       },
     };
 
-    ImagePicker.showImagePicker(options, response => {
-      if (response.didCancel || response.customButton) {
-        return;
-      }
+    this.onSelectImage(options, 'testResultImage');
+  };
 
-      if (response.error) {
-        Alert.alert('Bạn cần cấp quyền để có thể sử dụng tác vụ này');
-        return;
-      }
+  onSelectImage = (options, property) => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+    ImagePicker.showImagePicker(
+      {
+        ...options,
+        cancelButtonTitle: formatMessage(messages.cancel),
+        takePhotoButtonTitle: formatMessage(messages.takePhoto),
+        chooseFromLibraryButtonTitle: formatMessage(messages.selectLibrary),
+      },
+      response => {
+        if (response.didCancel || response.customButton) {
+          return;
+        }
 
-      this.changeState('testResultImage', response.data);
-    });
+        if (response.error) {
+          Alert.alert(formatMessage(messages.errorPermisson));
+          return;
+        }
+
+        this.changeState(property, response.data);
+      },
+    );
   };
 
   onSelectGate = id => {
@@ -298,6 +309,38 @@ class Declaration extends React.Component {
     this.changeState('endProvinceID', id);
   };
 
+  onSelectAfterQuarantineProvince = id => {
+    const {afterQuarantine_ProvinceID} = this.state;
+    if (afterQuarantine_ProvinceID === id) {
+      return;
+    }
+
+    this.setState({
+      afterQuarantine_ProvinceID: id,
+      afterQuarantine_Districts: null,
+      afterQuarantine_DistrictID: null,
+      afterQuarantine_Wards: null,
+      afterQuarantine_WardID: null,
+    });
+  };
+
+  onSelectAfterQuarantinePDistrict = id => {
+    const {afterQuarantine_DistrictID} = this.state;
+    if (afterQuarantine_DistrictID === id) {
+      return;
+    }
+
+    this.setState({
+      afterQuarantine_DistrictID: id,
+      afterQuarantine_Wards: null,
+      afterQuarantine_WardID: null,
+    });
+  };
+
+  onSelectAfterQuarantineWard = id => {
+    this.changeState('afterQuarantine_WardID', id);
+  };
+
   onSelectVNProvince = id => {
     const {vn_ProvinceID} = this.state;
     if (vn_ProvinceID === id) {
@@ -306,9 +349,9 @@ class Declaration extends React.Component {
 
     this.setState({
       vn_ProvinceID: id,
-      districts: null,
+      vn_Districts: null,
       vn_DistrictID: null,
-      wards: null,
+      vn_Wards: null,
       vn_WardID: null,
     });
   };
@@ -321,7 +364,7 @@ class Declaration extends React.Component {
 
     this.setState({
       vn_DistrictID: id,
-      wards: null,
+      vn_Wards: null,
       vn_WardID: null,
     });
   };
@@ -378,6 +421,10 @@ class Declaration extends React.Component {
     this.changeState('country21Day', text);
   };
 
+  onAfterQuarantineAddressInputChange = text => {
+    this.changeState('afterQuarantine_Address', text);
+  };
+
   onVNAddressInputChange = text => {
     this.changeState('vn_Address', text);
   };
@@ -398,25 +445,69 @@ class Declaration extends React.Component {
     return id === VIETNAM_ID;
   };
 
+  shouldVisibleAfterQuarantineDistrict = () => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+    const {afterQuarantine_ProvinceID} = this.state;
+    if (!afterQuarantine_ProvinceID) {
+      Alert.alert('', formatMessage(messages.errorForm1));
+      return false;
+    }
+    return true;
+  };
+
+  shouldVisibleAfterQuarantineWard = () => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+    const {afterQuarantine_DistrictID} = this.state;
+    if (!afterQuarantine_DistrictID) {
+      Alert.alert('', formatMessage(messages.errorForm2));
+      return false;
+    }
+    return true;
+  };
+
   shouldVisibleVNDistrict = () => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
     const {vn_ProvinceID} = this.state;
     if (!vn_ProvinceID) {
-      Alert.alert('', 'Bạn cần phải chọn thông tin tỉnh/thành trước');
+      Alert.alert('', formatMessage(messages.errorForm1));
       return false;
     }
     return true;
   };
 
   shouldVisibleVNWard = () => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
     const {vn_DistrictID} = this.state;
     if (!vn_DistrictID) {
-      Alert.alert('', 'Bạn cần phải chọn thông tin quận/huyện trước');
+      Alert.alert('', formatMessage(messages.errorForm2));
       return false;
     }
     return true;
   };
 
+  onSelectQuarantinePlace = id => {
+    this.changeState('quarantinePlace', id);
+  };
+
+  onOtherQuarantinePlaceInputChange = text => {
+    this.changeState('otherQuarantinePlace', text);
+  };
+
   onSend = () => {
+    // const {navigation} = this.props;
+    // navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
+    //   code: '1254785214',
+    //   passport: '2132456465',
+    // });
+    // return;
+
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+
     const {
       portrait,
       gateID,
@@ -445,11 +536,12 @@ class Declaration extends React.Component {
       endCountryID,
       endProvinceID,
       country21Day,
-      vn_Province,
+      afterQuarantine_ProvinceID,
+      afterQuarantine_DistrictID,
+      afterQuarantine_WardID,
+      afterQuarantine_Address,
       vn_ProvinceID,
-      vn_District,
       vn_DistrictID,
-      vn_Ward,
       vn_WardID,
       vn_Address,
       numberPhone,
@@ -459,6 +551,8 @@ class Declaration extends React.Component {
       exposureHistory,
       testResultImage,
       testResult,
+      quarantinePlace,
+      otherQuarantinePlace,
     } = this.state;
 
     const _startDate = moment(startDate).format('YYYY/MM/DD');
@@ -545,14 +639,27 @@ class Declaration extends React.Component {
     if (Object.keys(symptom).length < Object.keys(symptomData)) {
       contentError = 'Chưa chọn đủ thông tin triệu chứng trong 21 ngày';
     }
+
     if (
       Object.keys(exposureHistory).length < Object.keys(exposureHistoryData)
     ) {
       contentError = 'Chưa chọn đủ thông tin lịch sử phơi nhiễm trong 21 ngày';
     }
 
+    if (
+      !quarantinePlace ||
+      (quarantinePlace === 'quarantineOther' &&
+        otherQuarantinePlace.length === 0)
+    ) {
+      contentError = 'Bạn chưa chọn đủ thông tin cơ sở cách ly';
+    }
+
     if (contentError) {
-      Alert.alert(titleError, contentError);
+      // Alert.alert(titleError, contentError);
+      Alert.alert(
+        formatMessage(messages.notification),
+        formatMessage(messages.errorForm3),
+      );
       return;
     }
 
@@ -600,6 +707,11 @@ class Declaration extends React.Component {
       DiaDiemNoiDen_MaQuocGia: endCountryID.toString(),
       DiaDiemNoiDen_MaTinh: endProvinceID.toString(),
       QuocGiaDenTrong21NgayQua: country21Day,
+
+      DiaChiLuuTruSauCachLy_MaTinh: afterQuarantine_ProvinceID.toString(),
+      DiaChiLuuTruSauCachLy_MaHuyen: afterQuarantine_DistrictID.toString(),
+      DiaChiLuuTruSauCachLy_MaPhuongXa: afterQuarantine_WardID.toString(),
+      DiaChiLuuTruSauCachLy_ChiTiet: afterQuarantine_Address,
       DiaChiLienLac_VN_MaTinh: vn_ProvinceID.toString(),
       DiaChiLienLac_VN_MaHuyen: vn_DistrictID.toString(),
       DiaChiLienLac_VN_MaPhuongXa: vn_WardID.toString(),
@@ -611,6 +723,12 @@ class Declaration extends React.Component {
       LichSuPhoiNhiem: JSON.stringify(exposureHistoryResult),
       KetQuaXetNghiem: testResult,
       FileKetQuaXetNghiemBase64: testResultImage,
+      ChonCoSoCachLy: JSON.stringify(
+        quarantinePlaceData.map(({id}) => [
+          {ID: id, Value: id === quarantinePlace},
+        ]),
+      ),
+      CoSoCachLyKhac: otherQuarantinePlace,
     };
 
     // const data1 = {
@@ -655,14 +773,24 @@ class Declaration extends React.Component {
   };
 
   declareSuccess = data => {
+    const {navigation} = this.props;
+
+    navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
+      code: data.Object.ObjectGuid,
+      passport: this.state.passport,
+    });
+
+    // setInfoDeclare()
     setEntryObjectGUIDInformation(data.Object.ObjectGuid);
     setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
-    this.changeState('visibleModalSuccess', true);
+
+    // this.changeState('visibleModalSuccess', true);
   };
 
   declareError = error => {
-    // ...
-    Alert.alert('Có lỗi xảy ra. Vui lòng thử lại');
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+    Alert.alert(formatMessage(messages.errorForm4));
   };
 
   onModalSuccessPress = () => {
@@ -673,12 +801,14 @@ class Declaration extends React.Component {
   };
 
   renderModal = () => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
     const {visibleModalSuccess} = this.state;
 
     return (
       <ModalBase
         isVisibleModal={visibleModalSuccess}
-        title={'Khai báo nhập cảnh thành công'}>
+        title={formatMessage(messages.declareSuccess)}>
         <View style={styles.lBtnModal}>
           <ButtonConfirm text={'OK'} onPress={this.onModalSuccessPress} />
         </View>
@@ -734,17 +864,65 @@ class Declaration extends React.Component {
     }
   };
 
-  onVisiblePickerDistrict = () => {
+  onVisiblePickerAfterQuarantineDistrict = () => {
+    const {afterQuarantine_ProvinceID} = this.state;
+    if (!afterQuarantine_ProvinceID) {
+      return;
+    }
+
+    if (afterQuarantine_ProvinceID === this.lastAfterQuarantineProvinceIDApi) {
+      return;
+    }
+
+    this.lastAfterQuarantineProvinceIDApi = afterQuarantine_ProvinceID;
+    getRegionByParentID(
+      afterQuarantine_ProvinceID,
+      data => {
+        const _data = data.map(({RegionID, RegionName}) => ({
+          id: RegionID,
+          name: RegionName,
+        }));
+        this.setState({afterQuarantine_Districts: _data});
+      },
+      () => {},
+    );
+  };
+
+  onVisiblePickerAfterQuarantineWard = () => {
+    const {afterQuarantine_DistrictID} = this.state;
+    if (!afterQuarantine_DistrictID) {
+      return;
+    }
+
+    if (afterQuarantine_DistrictID === this.lastAfterQuarantineDistrictIDApi) {
+      return;
+    }
+
+    this.lastAfterQuarantineDistrictIDApi = afterQuarantine_DistrictID;
+    getRegionByParentID(
+      afterQuarantine_DistrictID,
+      data => {
+        const _data = data.map(({RegionID, RegionName}) => ({
+          id: RegionID,
+          name: RegionName,
+        }));
+        this.setState({afterQuarantine_Wards: _data});
+      },
+      () => {},
+    );
+  };
+
+  onVisiblePickerVNDistrict = () => {
     const {vn_ProvinceID} = this.state;
     if (!vn_ProvinceID) {
       return;
     }
 
-    if (vn_ProvinceID === this.lastProvinceIDCallApi) {
+    if (vn_ProvinceID === this.lastVNProvinceIDApi) {
       return;
     }
 
-    this.lastProvinceIDCallApi = vn_ProvinceID;
+    this.lastVNProvinceIDApi = vn_ProvinceID;
     getRegionByParentID(
       vn_ProvinceID,
       data => {
@@ -752,23 +930,23 @@ class Declaration extends React.Component {
           id: RegionID,
           name: RegionName,
         }));
-        this.setState({districts: _data});
+        this.setState({vn_Districts: _data});
       },
       () => {},
     );
   };
 
-  onVisiblePickerWard = () => {
+  onVisiblePickerVNWard = () => {
     const {vn_DistrictID} = this.state;
     if (!vn_DistrictID) {
       return;
     }
 
-    if (vn_DistrictID === this.lastDistrictIDCallApi) {
+    if (vn_DistrictID === this.lastVNDistrictIDApi) {
       return;
     }
 
-    this.lastDistrictIDCallApi = vn_DistrictID;
+    this.lastVNDistrictIDApi = vn_DistrictID;
     getRegionByParentID(
       vn_DistrictID,
       data => {
@@ -776,44 +954,11 @@ class Declaration extends React.Component {
           id: RegionID,
           name: RegionName,
         }));
-        this.setState({wards: _data});
+        this.setState({vn_Wards: _data});
       },
       () => {},
     );
   };
-
-  // hihi = () => {
-  //   this.setState(prev => {
-  //     return {
-  //       xxx: (prev.xxx || 0) + 1,
-  //     };
-  //   });
-  // };
-  // haha = () => {
-  //   this.setState(prev => {
-  //     return {
-  //       yyy: !prev.yyy,
-  //     };
-  //   });
-  // };
-  //
-  // render1() {
-  //   const b = [];
-  //   for (let i = 0; i < 50; i++) {
-  //     b.push(<Text>{i}</Text>);
-  //   }
-  //   return (
-  //     <KeyboardAvoidingView behavior="padding">
-  //       <RadioButton checked={this.state.yyy} onPress={this.haha} />
-  //       <RadioButton checked={!this.state.yyy} />
-  //       <TouchableOpacity
-  //         style={{padding: 20, backgroundColor: 'red'}}
-  //         onPress={() => this.hihi()}>
-  //         <Text>{this.state.xxx}</Text>
-  //       </TouchableOpacity>
-  //     </KeyboardAvoidingView>
-  //   );
-  // }
 
   render() {
     const {
@@ -844,11 +989,12 @@ class Declaration extends React.Component {
       startProvinceID,
       endProvinceID,
       country21Day,
-      vn_Province,
+      afterQuarantine_ProvinceID,
+      afterQuarantine_DistrictID,
+      afterQuarantine_WardID,
+      afterQuarantine_Address,
       vn_ProvinceID,
-      vn_District,
       vn_DistrictID,
-      vn_Ward,
       vn_WardID,
       vn_Address,
       numberPhone,
@@ -861,8 +1007,12 @@ class Declaration extends React.Component {
       gates,
       countries,
       provinces,
-      districts,
-      wards,
+      vn_Districts,
+      vn_Wards,
+      afterQuarantine_Districts,
+      afterQuarantine_Wards,
+      quarantinePlace,
+      otherQuarantinePlace,
     } = this.state;
     const {language} = this.context;
     const vietnamese = language === 'vi';
@@ -890,6 +1040,7 @@ class Declaration extends React.Component {
               {formatMessage(messages.content2)}
             </Text>
 
+            {/*Anh chan dung*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -916,13 +1067,7 @@ class Declaration extends React.Component {
                   />
                   {!portrait && (
                     <Image
-                      style={{
-                        width: 34,
-                        height: 34,
-                        position: 'absolute',
-                        top: 99,
-                        left: 87,
-                      }}
+                      style={styles.camera}
                       source={require('./images/camera.png')}
                     />
                   )}
@@ -930,6 +1075,7 @@ class Declaration extends React.Component {
               </View>
             </View>
 
+            {/*Cua khau*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -947,6 +1093,8 @@ class Declaration extends React.Component {
                 onSelect={this.onSelectGate}
               />
             </View>
+
+            {/*Ho ten*/}
             <FormInput
               title={formatMessage(messages.fullName)}
               star={true}
@@ -954,6 +1102,7 @@ class Declaration extends React.Component {
               value={fullName}
             />
 
+            {/*Nam sinh*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -970,6 +1119,7 @@ class Declaration extends React.Component {
               />
             </View>
 
+            {/*Gioi tinh*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 text={formatMessage(messages.gender)}
@@ -1018,6 +1168,7 @@ class Declaration extends React.Component {
               </View>
             </View>
 
+            {/*Quoc tich*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -1037,6 +1188,7 @@ class Declaration extends React.Component {
               />
             </View>
 
+            {/*So ho chieu / giay thong hanh*/}
             <FormInput
               title={formatMessage(messages.passportNumber)}
               star={true}
@@ -1046,6 +1198,7 @@ class Declaration extends React.Component {
               value={passport}
             />
 
+            {/*Thong tin di lai*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -1114,13 +1267,17 @@ class Declaration extends React.Component {
                 value={otherVehicles}
               />
             </View>
+
             {/*<View style={styles.flexRow}>*/}
+            {/*So hieu phuong tien*/}
             <FormInput
               containerStyle={styles.vehicleNumber}
               title={formatMessage(messages.vehicleNumber)}
               onChangeText={this.onVehicleNumberInputChange}
               value={vehicleNumber}
             />
+
+            {/*So ghe*/}
             <FormInput
               containerStyle={styles.vehicleSeat}
               title={formatMessage(messages.vehicleSeat)}
@@ -1129,6 +1286,7 @@ class Declaration extends React.Component {
             />
             {/*</View>*/}
 
+            {/*Ngay khoi hanh*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -1148,6 +1306,7 @@ class Declaration extends React.Component {
               />
             </View>
 
+            {/*Ngay nhap canh*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -1167,199 +1326,281 @@ class Declaration extends React.Component {
               />
             </View>
 
-            <TextInfo
-              styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-              text={formatMessage(messages.startPlace)}
-            />
-
-            <View style={styles.item2Container}>
+            {/*Dia diem khoi hanh*/}
+            <View>
               <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.country)}
-                star
+                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                text={formatMessage(messages.startPlace)}
               />
-              <SelectPicker
-                enableSearch={true}
-                data={countries}
-                loading={!countries}
-                value={startCountryID}
-                headerText={formatMessage(messages.selectCountry)}
-                placeholder={formatMessage(messages.select)}
-                onVisible={this.onVisiblePickerCountry}
-                onSelect={this.onSelectStartCountry}
-              />
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.country)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={countries}
+                  loading={!countries}
+                  value={startCountryID}
+                  headerText={formatMessage(messages.selectCountry)}
+                  placeholder={formatMessage(messages.select)}
+                  onVisible={this.onVisiblePickerCountry}
+                  onSelect={this.onSelectStartCountry}
+                />
+              </View>
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.province)}
+                  star
+                />
+                {startVN ? (
+                  <SelectPicker
+                    enableSearch={true}
+                    data={provinces}
+                    loading={!provinces}
+                    value={startProvinceID}
+                    headerText={formatMessage(messages.selectProvince)}
+                    placeholder={formatMessage(messages.select)}
+                    onVisible={this.onVisiblePickerProvince}
+                    onSelect={this.onSelectStartProvince}
+                  />
+                ) : (
+                  <TextInput
+                    style={styles.textInput}
+                    onChangeText={this.onStartProvinceInputChange}
+                    value={startProvince}
+                  />
+                )}
+              </View>
             </View>
 
-            <View style={styles.item2Container}>
+            {/*Dia diem noi den*/}
+            <View>
               <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.province)}
-                star
+                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                text={formatMessage(messages.endPlace)}
               />
-              {startVN ? (
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.country)}
+                  star
+                />
+                <View style={styles.labelVietNam}>
+                  <Text>{formatMessage(messages.vietnam)}</Text>
+                </View>
+              </View>
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.province)}
+                  star
+                />
                 <SelectPicker
                   enableSearch={true}
                   data={provinces}
                   loading={!provinces}
-                  value={startProvinceID}
+                  value={endProvinceID}
                   headerText={formatMessage(messages.selectProvince)}
                   placeholder={formatMessage(messages.select)}
                   onVisible={this.onVisiblePickerProvince}
-                  onSelect={this.onSelectStartProvince}
+                  onSelect={this.onSelectEndProvince}
                 />
-              ) : (
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={this.onStartProvinceInputChange}
-                  value={startProvince}
-                />
-              )}
-            </View>
-
-            <TextInfo
-              styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-              text={formatMessage(messages.endPlace)}
-            />
-
-            <View style={styles.item2Container}>
-              <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.country)}
-                star
-              />
-              <View style={styles.labelVietNam}>
-                <Text>{formatMessage(messages.vietnam)}</Text>
               </View>
-            </View>
-
-            <View style={styles.item2Container}>
-              <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.province)}
+              <FormInput
+                title={formatMessage(messages.country21Day)}
+                textStyle={styles.headerTwo}
+                onChangeText={this.onCountry21DayInputChange}
+                value={country21Day}
                 star
               />
-              <SelectPicker
-                enableSearch={true}
-                data={provinces}
-                loading={!provinces}
-                value={endProvinceID}
-                headerText={formatMessage(messages.selectProvince)}
-                placeholder={formatMessage(messages.select)}
-                onVisible={this.onVisiblePickerProvince}
-                onSelect={this.onSelectEndProvince}
-              />
             </View>
 
-            <FormInput
-              title={formatMessage(messages.country21Day)}
-              textStyle={styles.headerTwo}
-              onChangeText={this.onCountry21DayInputChange}
-              value={country21Day}
-              star
-            />
-
-            <TextInfo
-              styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-              style={styles.bigText}
-              text={formatMessage(messages.vnContactAddress)}
-            />
-
-            <View style={styles.item2Container}>
+            {/*Dia chi luu tru sau khi cach ly*/}
+            <View>
               <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.vnProvince)}
+                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                text={formatMessage(messages.afterQuarantinePlace)}
+              />
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vnProvince)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={provinces}
+                  loading={!provinces}
+                  value={vn_ProvinceID}
+                  headerText={formatMessage(messages.vnSelectProvince)}
+                  placeholder={formatMessage(messages.select)}
+                  onVisible={this.onVisiblePickerProvince}
+                  onSelect={this.onSelectAfterQuarantineProvince}
+                />
+              </View>
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vnDistrict)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={afterQuarantine_Districts}
+                  loading={!afterQuarantine_Districts}
+                  value={afterQuarantine_DistrictID}
+                  headerText={formatMessage(messages.vnSelectDistrict)}
+                  placeholder={formatMessage(messages.select)}
+                  onSelect={this.onSelectAfterQuarantinePDistrict}
+                  onVisible={this.onVisiblePickerAfterQuarantineDistrict}
+                  shouldVisible={this.shouldVisibleAfterQuarantineDistrict}
+                />
+              </View>
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vnWard)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={afterQuarantine_Wards}
+                  loading={!afterQuarantine_Wards}
+                  value={afterQuarantine_WardID}
+                  headerText={formatMessage(messages.vnSelectWard)}
+                  placeholder={formatMessage(messages.select)}
+                  onSelect={this.onSelectAfterQuarantineWard}
+                  onVisible={this.onVisiblePickerAfterQuarantineWard}
+                  shouldVisible={this.shouldVisibleAfterQuarantineWard}
+                />
+              </View>
+
+              <FormInput
+                title={formatMessage(messages.afterQuarantineAddress)}
+                textStyle={styles.headerTwo}
+                containerStyle={styles.headerTwoContainer}
+                onChangeText={this.onAfterQuarantineAddressInputChange}
+                value={afterQuarantine_Address}
                 star
               />
-              <SelectPicker
-                enableSearch={true}
-                data={provinces}
-                loading={!provinces}
-                value={vn_ProvinceID}
-                headerText={formatMessage(messages.vnSelectProvince)}
-                placeholder={formatMessage(messages.select)}
-                onVisible={this.onVisiblePickerProvince}
-                onSelect={this.onSelectVNProvince}
-              />
             </View>
 
-            <View style={styles.item2Container}>
+            {/*Dia chi lien lac tai viet nam*/}
+            <View>
               <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.vnDistrict)}
+                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                text={formatMessage(messages.vnContactAddress)}
+              />
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vnProvince)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={provinces}
+                  loading={!provinces}
+                  value={vn_ProvinceID}
+                  headerText={formatMessage(messages.vnSelectProvince)}
+                  placeholder={formatMessage(messages.select)}
+                  onVisible={this.onVisiblePickerProvince}
+                  onSelect={this.onSelectVNProvince}
+                />
+              </View>
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vnDistrict)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={vn_Districts}
+                  loading={!vn_Districts}
+                  value={vn_DistrictID}
+                  headerText={formatMessage(messages.vnSelectDistrict)}
+                  placeholder={formatMessage(messages.select)}
+                  onSelect={this.onSelectVNPDistrict}
+                  onVisible={this.onVisiblePickerVNDistrict}
+                  shouldVisible={this.shouldVisibleVNDistrict}
+                />
+              </View>
+
+              <View style={styles.item2Container}>
+                <TextInfo
+                  styleContainer={styles.headerTwoContainer}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vnWard)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={vn_Wards}
+                  loading={!vn_Wards}
+                  value={vn_WardID}
+                  headerText={formatMessage(messages.vnSelectWard)}
+                  placeholder={formatMessage(messages.select)}
+                  onSelect={this.onSelectVNWard}
+                  onVisible={this.onVisiblePickerVNWard}
+                  shouldVisible={this.shouldVisibleVNWard}
+                />
+              </View>
+
+              <FormInput
+                title={formatMessage(messages.vnAddress)}
+                textStyle={styles.headerTwo}
+                containerStyle={styles.headerTwoContainer}
+                onChangeText={this.onVNAddressInputChange}
+                value={vn_Address}
                 star
               />
-              <SelectPicker
-                enableSearch={true}
-                data={districts}
-                loading={!districts}
-                value={vn_DistrictID}
-                headerText={formatMessage(messages.vnSelectDistrict)}
-                placeholder={formatMessage(messages.select)}
-                onSelect={this.onSelectVNPDistrict}
-                onVisible={this.onVisiblePickerDistrict}
-                shouldVisible={this.shouldVisibleVNDistrict}
-              />
-            </View>
 
-            <View style={styles.item2Container}>
-              <TextInfo
-                styleContainer={styles.headerTwoContainer}
-                style={styles.headerTwo}
-                text={formatMessage(messages.vnWard)}
+              <FormInput
+                title={formatMessage(messages.phoneNumber)}
+                textStyle={styles.headerTwo}
+                containerStyle={styles.headerTwoContainer}
+                onChangeText={this.onNumberPhoneInputChange}
                 star
+                value={numberPhone}
               />
-              <SelectPicker
-                enableSearch={true}
-                data={wards}
-                loading={!wards}
-                value={vn_WardID}
-                headerText={formatMessage(messages.vnSelectWard)}
-                placeholder={formatMessage(messages.select)}
-                onSelect={this.onSelectVNWard}
-                onVisible={this.onVisiblePickerWard}
-                shouldVisible={this.shouldVisibleVNWard}
+
+              <FormInput
+                title={formatMessage(messages.email)}
+                textStyle={styles.headerTwo}
+                containerStyle={styles.headerTwoContainer}
+                onChangeText={this.onEmailInputChange}
+                value={email}
               />
             </View>
 
-            <FormInput
-              title={formatMessage(messages.vnAddress)}
-              textStyle={styles.headerTwo}
-              containerStyle={styles.headerTwoContainer}
-              onChangeText={this.onVNAddressInputChange}
-              value={vn_Address}
-              star
-            />
-
-            <FormInput
-              title={formatMessage(messages.phoneNumber)}
-              textStyle={styles.headerTwo}
-              containerStyle={styles.headerTwoContainer}
-              onChangeText={this.onNumberPhoneInputChange}
-              star
-              value={numberPhone}
-            />
-
-            <FormInput
-              title={formatMessage(messages.email)}
-              textStyle={styles.headerTwo}
-              containerStyle={styles.headerTwoContainer}
-              onChangeText={this.onEmailInputChange}
-              value={email}
-            />
-
+            {/*Trieu chung trong 21 ngay*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
                 text={formatMessage(messages.symptom21Day)}
                 star
               />
-              <View>
+              <View style={{paddingBottom: 10}}>
                 <View style={styles.rowSymptom0}>
                   <MediumText style={styles.nameSymptom}>
                     {formatMessage(messages.symptom)}
@@ -1411,15 +1652,19 @@ class Declaration extends React.Component {
                   </View>
                 ))}
               </View>
+              <FormInput
+                textStyle={styles.headerTwo}
+                containerStyle={{
+                  paddingTop: 0,
+                  paddingBottom: 0,
+                }}
+                title={formatMessage(messages.vacxinContent)}
+                onChangeText={this.onVacXinInputChange}
+                value={vacxin}
+              />
             </View>
-            <FormInput
-              textStyle={styles.headerTwo}
-              containerStyle={styles.headerTwoContainer}
-              title={formatMessage(messages.vacxinContent)}
-              onChangeText={this.onVacXinInputChange}
-              value={vacxin}
-            />
 
+            {/*Lich su phoi nhiem trong 21 ngay*/}
             <View style={styles.itemContainer}>
               <TextInfo
                 styleContainer={styles.itemTitle}
@@ -1474,6 +1719,39 @@ class Declaration extends React.Component {
               </View>
             </View>
 
+            {/*Co so cach ly*/}
+            <View style={styles.itemContainer}>
+              <TextInfo
+                styleContainer={styles.itemTitle}
+                text={formatMessage(messages.quarantinePlace)}
+                star
+              />
+              {quarantinePlaceData.map(item => {
+                return (
+                  <CheckBox1
+                    key={item.id}
+                    title={language === 'vi' ? item.name : item.nameEn}
+                    containerStyle={styles.checkboxContainer}
+                    textStyle={styles.checkBoxText}
+                    checkedIcon="dot-circle-o"
+                    uncheckedIcon="circle-o"
+                    size={18}
+                    onPress={() => this.onSelectQuarantinePlace(item.id)}
+                    checked={item.id === quarantinePlace}
+                  />
+                );
+              })}
+
+              {quarantinePlace === 'quarantineOther' && (
+                <TextInput
+                  style={[styles.textInput]}
+                  onChangeText={this.onOtherQuarantinePlaceInputChange}
+                  value={otherQuarantinePlace}
+                />
+              )}
+            </View>
+
+            {/*Phieu ket qua xet nghiem*/}
             <View>
               <TextInfo
                 styleContainer={styles.itemTitle}

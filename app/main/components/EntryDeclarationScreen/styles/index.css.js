@@ -260,6 +260,30 @@ const styles = StyleSheet.create({
   gender: {
     fontSize: fontSize.small,
   },
+
+  camera: {
+    width: 34,
+    height: 34,
+    position: 'absolute',
+    top: 99,
+    left: 87,
+  },
+
+  checkboxContainer: {
+    backgroundColor: '#FFF',
+    borderWidth: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 8,
+    marginLeft: 0,
+    marginRight: 0,
+    margin: 0,
+  },
+
+  checkBoxText: {
+    fontSize: fontSize.small,
+    fontFamily: 'OpenSans-Bold',
+    fontWeight: 'normal',
+  },
 });
 
 export default styles;

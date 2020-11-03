@@ -47,6 +47,7 @@ import FAQ from './app/main/components/FAQScreen';
 import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
 import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
 import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
+import EntryDeclareSuccess from './app/main/components/EntryDeclareSuccess';
 
 import ContextProvider from './LanguageContext';
 import LanguageProvider from './app/base/LanguageProvider';
@@ -83,7 +84,7 @@ import SCREEN from './app/main/nameScreen';
 
 let wizard = [
   SCREEN.LOADING,
-  SCREEN.INTRODUTION_WIZARD,
+  SCREEN.INTRODUCTION_WIZARD,
   SCREEN.PHONE_NUMBER_REGISTER_WIZARD,
   SCREEN.PHONE_NUMBER_VERITY_OTP_WIZARD,
   SCREEN.REGISTER_INFORMATION_WIZARD,
@@ -131,7 +132,7 @@ class App extends React.Component {
 
     this.IntroducationProps = propsComponent => (
       <Introduction
-        name={SCREEN.INTRODUTION_WIZARD}
+        name={SCREEN.INTRODUCTION_WIZARD}
         onFinished={this.handleFinishedWork}
         {...propsComponent}
       />
@@ -260,11 +261,11 @@ class App extends React.Component {
     if (gotoMainScreen) {
       wizard = [
         SCREEN.LOADING,
-        SCREEN.INTRODUTION_WIZARD,
+        SCREEN.INTRODUCTION_WIZARD,
         SCREEN.START_USE_WIZARD,
       ];
       name =
-        name !== SCREEN.LOADING ? SCREEN.INTRODUTION_WIZARD : SCREEN.LOADING;
+        name !== SCREEN.LOADING ? SCREEN.INTRODUCTION_WIZARD : SCREEN.LOADING;
     }
 
     navigate(nextStepName(name), result);
@@ -380,7 +381,7 @@ class App extends React.Component {
                   component={this.LoadingProps}
                 />
                 <Stack.Screen
-                  name={SCREEN.INTRODUTION_WIZARD}
+                  name={SCREEN.INTRODUCTION_WIZARD}
                   component={this.IntroducationProps}
                 />
                 <Stack.Screen
@@ -489,6 +490,10 @@ class App extends React.Component {
                 <Stack.Screen
                   name={SCREEN.ENTRY_DECLARATION}
                   component={EntryDeclaration}
+                />
+                <Stack.Screen
+                  name={SCREEN.ENTRY_DECLARATION_SUCCESS}
+                  component={EntryDeclareSuccess}
                 />
                 <Stack.Screen name={SCREEN.FAQ}>
                   {props => <FAQ {...props} showBack={true} />}

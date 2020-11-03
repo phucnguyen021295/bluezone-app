@@ -38,7 +38,7 @@ class Declaration extends React.Component {
     return (
       <ContextProvider>
         <LanguageProvider messages={translationMessages}>
-          <Entry />
+          <Entry {...this.props} />
         </LanguageProvider>
       </ContextProvider>
     );

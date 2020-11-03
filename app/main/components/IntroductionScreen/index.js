@@ -48,7 +48,7 @@ class IntroductionScreen extends React.Component {
   }
 
   componentDidMount() {
-    reportScreenAnalytics(SCREEN.INTRODUTION_WIZARD);
+    reportScreenAnalytics(SCREEN.INTRODUCTION_WIZARD);
   }
 
   doFinishedWorks(gotoMainScreen) {

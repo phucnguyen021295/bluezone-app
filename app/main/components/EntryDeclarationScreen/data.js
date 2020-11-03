@@ -491,3 +491,21 @@ export const exposureHistoryData = [
     nameEn: 'Tiếp xúc gần (< 2m) với người mắc bệnh viêm đường hô hấp do nCOV',
   },
 ];
+
+export const quarantinePlaceData = [
+  {
+    id: 'quarantine1',
+    name: 'Cơ sở cách ly tập trung',
+    nameEn: 'Concentrated quarantine place',
+  },
+  {
+    id: 'quarantine2',
+    name: 'Cơ sở cách ly tự chọn',
+    nameEn: 'Elective quarantine place',
+  },
+  {
+    id: 'quarantineOther',
+    name: 'Khác',
+    nameEn: 'Other',
+  },
+];
