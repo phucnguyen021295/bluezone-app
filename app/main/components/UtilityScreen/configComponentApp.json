@@ -1,18 +1,23 @@
 {
   "version": "3.0.6",
-  "HasApp": ["1", "2"],
+  "HasApp": ["1", "2", "3"],
   "App": {
     "1": {
       "id": "1",
       "title": "Chế độ nhập cảnh",
-      "titleEn": "Entry mode",
-      "image": "",
-      "screen": "EntryDeclaration"
+      "titleEn": "Entry mode"
     },
     "2": {
       "id": "2",
       "title": "Khai báo y tế nhập cảnh",
       "titleEn": "Medical entry declaration",
+      "image": "",
+      "screen": "EntryDeclaration"
+    },
+    "3": {
+      "id": "3",
+      "title": "Khai báo y tế hàng ngày",
+      "titleEn": "Medical daily declaration",
       "image": "",
       "screen": "DailyDeclaration"
     }
