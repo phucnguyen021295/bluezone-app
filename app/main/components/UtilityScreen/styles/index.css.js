@@ -22,6 +22,7 @@
 'use strict';
 
 import {StyleSheet} from 'react-native';
+import * as fontSize from '../../../../core/fontSize';
 
 const styles = StyleSheet.create({
   grid: {
@@ -38,7 +39,6 @@ const styles = StyleSheet.create({
   item: {
     alignItems: 'center',
     width: '33.3%',
-    paddingHorizontal: 30,
   },
   itemImage: {
     width: 60,
@@ -46,8 +46,9 @@ const styles = StyleSheet.create({
   },
 
   itemText: {
-    color: '#AAAAAA',
-    fontSize: 12,
+    paddingHorizontal: 5,
+    color: '#000000',
+    fontSize: fontSize.fontSize11,
     paddingVertical: 8,
     textAlign: 'center',
     paddingBottom: 30,

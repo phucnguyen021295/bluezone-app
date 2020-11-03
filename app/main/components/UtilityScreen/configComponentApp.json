@@ -9,14 +9,14 @@
     },
     "2": {
       "id": "2",
-      "title": "Khai báo y tế nhập cảnh",
+      "title": "Khai báo y tế\nnhập cảnh",
       "titleEn": "Medical entry declaration",
       "image": "",
       "screen": "EntryDeclaration"
     },
     "3": {
       "id": "3",
-      "title": "Khai báo y tế hàng ngày",
+      "title": "Khai báo y tế\nhàng ngày",
       "titleEn": "Medical daily declaration",
       "image": "",
       "screen": "DailyDeclaration"
