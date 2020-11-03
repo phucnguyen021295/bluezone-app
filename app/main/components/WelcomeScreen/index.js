@@ -22,13 +22,7 @@
 'use strict';
 
 import React from 'react';
-import * as PropTypes from 'prop-types';
 import moment from 'moment';
-
-// Api
-import {dev} from '../../../core/apis/server';
-
-// Components
 import {
   StatusBar,
   View,
@@ -39,11 +33,17 @@ import {
   UIManager,
   AppState,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
+// Components
 import HeaderFull from './Header/HeaderFull';
 import ImageBackgroundBase from './ImageBackgroundBase';
 import ButtonBase from '../../../base/components/ButtonBase';
 import ButtonIconText from '../../../base/components/ButtonIconText';
 import Text, {LightText} from '../../../base/components/Text';
+
+// Api
+import {dev} from '../../../core/apis/server';
 
 // Styles
 import styles, {HEIGHT_HEADER, HEIGHT_DEFAULT} from './styles/index.css';
@@ -267,13 +267,7 @@ class WelcomeScreen extends React.Component {
   };
 
   render() {
-    const {
-      width,
-      images,
-      info,
-      setHeight,
-      textF,
-    } = this.state;
+    const {width, images, info, setHeight, textF} = this.state;
     const {intl} = this.props;
     const {formatMessage} = intl;
     const {Language} = configuration;
@@ -337,6 +331,16 @@ class WelcomeScreen extends React.Component {
             ]}>
             {Language === 'vi' ? images.address : images.addressEn}
           </LightText>
+          <LinearGradient
+            colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.62)']}
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              height: 100,
+              width: '100%',
+              zIndex: 998,
+            }}
+          />
         </View>
         <TouchableOpacity
           style={styles.maxim}
