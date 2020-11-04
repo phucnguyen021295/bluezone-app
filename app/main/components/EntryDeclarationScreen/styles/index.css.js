@@ -140,21 +140,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize.normal,
   },
 
-  vehicleItemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 35,
-  },
-
-  vehicleItemText: {
-    fontSize: fontSize.small,
-  },
-
-  vehicleFirstItemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
   portraitContainer: {
     alignItems: 'center',
     paddingTop: 10,
@@ -275,14 +260,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 8,
     marginLeft: 0,
-    marginRight: 0,
     margin: 0,
+    marginRight: 35,
   },
 
   checkBoxText: {
+    color: '#000',
     fontSize: fontSize.small,
     fontFamily: 'OpenSans-Bold',
     fontWeight: 'normal',
+    marginRight: 0,
   },
 });
 

@@ -22,21 +22,17 @@
 'use strict';
 
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
-
-// Styles
-import styles from './styles/index.css';
+import {Image} from 'react-native';
+import {CheckBox} from 'react-native-elements';
 
 function RadioButton(props) {
-  const {checked, onPress, radioStyle, checkedCircleStyle} = props;
   return (
-    <TouchableOpacity style={[styles.squares, radioStyle]} onPress={onPress}>
-      {checked ? (
-        <View style={[styles.checkedCircle, checkedCircleStyle]} />
-      ) : (
-        <View />
-      )}
-    </TouchableOpacity>
+    <CheckBox
+      activeOpacity={1}
+      checkedIcon={<Image source={require('./images/checked.png')} />}
+      uncheckedIcon={<Image source={require('./images/unchecked.png')} />}
+      {...props}
+    />
   );
 }
 

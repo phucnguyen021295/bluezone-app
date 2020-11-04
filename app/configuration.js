@@ -347,8 +347,8 @@ const configuration = {
   AndroidScanNotificationVersion2: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
-    bigText: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl>và vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: '<b>Bluetooth</b><!bl>Location</!bl><bl>and location</bl> need to be turned on for Bluezone to send alerts to you.',
+    bigText: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl> và vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth</b><!bl>Location</!bl><bl> and location</bl> need to be turned on for Bluezone to send alerts to you.',
     buttonText: 'Kiểm tra ngay',
     buttonTextEn: 'Check now',
   },
@@ -363,8 +363,8 @@ const configuration = {
   iOSScanNotificationVersion2: {
     title: 'Bluezone đang không thể hoạt động chính xác !',
     titleEn: 'Bluezone not working properly !',
-    bigText: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl>và vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
-    bigTextEn: '<b>Bluetooth</b><!bl>Location</!bl><bl>and location</bl> need to be turned on for Bluezone to send alerts to you.',
+    bigText: '<b>Bluetooth</b><!bl>Vị trí</!bl><bl> và vị trí</bl> cần được bật để Bluezone có thể cảnh báo tới bạn.',
+    bigTextEn: '<b>Bluetooth</b><!bl>Location</!bl><bl> and location</bl> need to be turned on for Bluezone to send alerts to you.',
     buttonText: 'Kiểm tra ngay',
     buttonTextEn: 'Check now',
   },

@@ -1279,44 +1279,25 @@ const entryDeclaration = (
   }, createErrorFn(failure));
 };
 
-const configRegionApi = {
-  timeout: 10000,
+const getEntryInfo = (guid, success, failure) => {
+  getData(
+    `${DOMAIN}/api/AppInforEntry/GetOne`,
+    {InforEntryObjectGuid: guid},
+    success,
+    failure,
+  );
 };
 
 const getAllCountryApi = (success = _defaultFunc, failure = _defaultFunc) => {
-  axios
-    .get(`${DOMAIN}/api/Region/GetAllCountry`, configRegionApi)
-    .then(response => {
-      if (response.status === 200 && response.data.isOk === true) {
-        success(response.data.Object);
-      } else {
-        failure(response);
-      }
-    }, failure);
+  getData(`${DOMAIN}/api/Region/GetAllCountry`, {}, success, failure);
 };
 
 const getAllAirPortApi = (success = _defaultFunc, failure = _defaultFunc) => {
-  axios
-    .get(`${DOMAIN}/api/Region/GetAllAirPortVN`, configRegionApi)
-    .then(response => {
-      if (response.status === 200 && response.data.isOk === true) {
-        success(response.data.Object);
-      } else {
-        failure(response);
-      }
-    }, failure);
+  getData(`${DOMAIN}/api/Region/GetAllAirPortVN`, {}, success, failure);
 };
 
 const getAllProvinceApi = (success = _defaultFunc, failure = _defaultFunc) => {
-  axios
-    .get(`${DOMAIN}/api/Region/GetProvinceVN`, configRegionApi)
-    .then(response => {
-      if (response.status === 200 && response.data.isOk === true) {
-        success(response.data.Object);
-      } else {
-        failure(response);
-      }
-    }, failure);
+  getData(`${DOMAIN}/api/Region/GetProvinceVN`, {}, success, failure);
 };
 
 const getRegionByParentID = (
@@ -1324,11 +1305,29 @@ const getRegionByParentID = (
   success = _defaultFunc,
   failure = _defaultFunc,
 ) => {
+  getData(
+    `${DOMAIN}/api/Region/GetRegionByID`,
+    {
+      ParentID: parentID,
+    },
+    success,
+    failure,
+  );
+};
+
+const configRegionApi = {
+  timeout: 10000,
+};
+
+const getData = (
+  url,
+  params,
+  success = _defaultFunc,
+  failure = _defaultFunc,
+) => {
   axios
-    .get(`${DOMAIN}/api/Region/GetRegionByID`, {
-      params: {
-        ParentID: parentID,
-      },
+    .get(url, {
+      params: params,
       ...configRegionApi,
     })
     .then(response => {
@@ -1403,6 +1402,43 @@ const getConfigComponentsApp = (
   }, createErrorFn(failure));
 };
 
+/**
+ * Kiem tra mode nhap canh cua so dien thoai
+ * @param success
+ * @param failure
+ */
+const checkModeEntry = (success, failure) => {
+  const {PhoneNumber, TokenFirebase} = configuration;
+  getData(
+    `${DOMAIN}/api/Region/GetProvinceVN`,
+    {PhoneNumber, TokenFirebase},
+    success,
+    failure,
+  );
+};
+
+const verifyOTPEntry = (otp, success, failure) => {
+  const {TokenFirebase, PhoneNumber} = configuration;
+  const options = {
+    method: 'POST',
+    data: {
+      OTP: otp,
+      PhoneNumber,
+      TokenFirebase,
+    },
+    url: `${DOMAIN}/api/AppInforEntry/VerifyOTPEntry`,
+    timeout: 10000,
+  };
+
+  axios(options).then(response => {
+    if (response.status === 200 && response.data.isOk === true) {
+      success(response.data);
+    } else {
+      failure(response);
+    }
+  }, createErrorFn(failure));
+};
+
 export {
   // Token firebase
   registerTokenFirebase,
@@ -1431,6 +1467,7 @@ export {
   getResourceLanguage,
   getAnswerMessage,
   getQuestionFAQ,
+  getEntryInfo,
   entryDeclaration,
   getAllCountryApi,
   getAllAirPortApi,
@@ -1439,4 +1476,6 @@ export {
   InsertEntryPersonReport,
   GetListDailyDeclaration,
   getConfigComponentsApp,
+  checkModeEntry,
+  verifyOTPEntry,
 };
