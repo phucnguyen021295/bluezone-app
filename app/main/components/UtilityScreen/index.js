@@ -67,17 +67,19 @@ class UtilityScreen extends React.Component {
   }
 
   onChangeEvent(app) {
-    const {navigation} = this.props;
+    const {navigation, intl} = this.props;
+    const {locale} = intl;
+    const title = locale === 'vi' ? app.title : app.titleEn;
 
     switch (app.screen) {
       case SCREEN.DOMESTIC_DECLARATION:
-        navigation.navigate(SCREEN.DOMESTIC_DECLARATION);
+        navigation.navigate(SCREEN.DOMESTIC_DECLARATION, {title});
         break;
       case SCREEN.ENTRY_DECLARATION:
-        navigation.navigate(SCREEN.ENTRY_DECLARATION);
+        navigation.navigate(SCREEN.ENTRY_DECLARATION, {title});
         break;
       case SCREEN.DAILY_DECLARATION:
-        navigation.navigate(SCREEN.DAILY_DECLARATION);
+        navigation.navigate(SCREEN.DAILY_DECLARATION, {title});
         break;
       default:
         break;
@@ -91,7 +93,7 @@ class UtilityScreen extends React.Component {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <StatusBar hidden={true} />
-        <Header title={'Tiện ích'} showBack={false} />
+        <Header title={locale === 'vi' ? 'Tiện ích' : 'Utilities'} showBack={false} />
         <View style={styles.grid}>
           {HasApp.map(id => {
             const app = App[id];

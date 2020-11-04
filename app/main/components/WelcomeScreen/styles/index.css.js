@@ -52,6 +52,7 @@ const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((15 / 720) * 100);
 const TEXT_CALENDAR_PADDING_TOP = heightPercentageToDP((11 / 720) * 100);
 const CALENDAR_HEIGHT = heightPercentageToDP((125 / 720) * 100);
 const TEXT_F_LINE_HEIGHT = heightPercentageToDP((20 / 720) * 100);
+const LINEAR_GRADIENT_HEIGHT = heightPercentageToDP((159 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -231,6 +232,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
+  },
+
+  linearGradient: {
+    position: 'absolute',
+    bottom: 0,
+    height: LINEAR_GRADIENT_HEIGHT,
+    width: '100%',
+    zIndex: 998,
   }
 });
 

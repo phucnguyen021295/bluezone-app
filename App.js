@@ -355,6 +355,8 @@ class App extends React.Component {
           navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
       }
+    } else if (obj && obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION) {
+      this.setState({loading: false, isHome: true});
     }
     // getNotifications().cancelNotification(remoteMessage.notification._notificationId);
     removeDeliveredNotification(remoteMessage.notification._notificationId);

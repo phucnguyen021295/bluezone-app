@@ -49,6 +49,10 @@ const isPhoneNumberRegister = notify => {
   return notify.data.Type === NOTIFICATION_TYPE.REMIND_PHONE_NUMBER;
 };
 
+const isUpdateVersion = notify => {
+  return notify.data.Type === NOTIFICATION_TYPE.UPDATE_VERSION;
+};
+
 const showNotify = async notify => {
   const language = (await getLanguage()) || 'vi';
   const notifyLang = notify.data.Notify.TypeLanguage;
@@ -126,7 +130,8 @@ const createNews = (notify, success, failure) => {
     !isShortNews(notify) &&
     !isLinkNews(notify) &&
     !isHtmlNews(notify) &&
-    !isPhoneNumberRegister(notify)
+    !isPhoneNumberRegister(notify) &&
+    !isUpdateVersion(notify)
   ) {
     return;
   }

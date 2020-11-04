@@ -324,5 +324,17 @@
   "bluezone.entryForm.errorForm4": "Có lỗi xảy ra. Vui lòng thử lại",
   "bluezone.entryForm.notification": "Thông báo",
   "bluezone.entryForm.enterInput": "Nhập thông tin",
-  "bluezone.entryForm.search": "Tìm kiếm"
+  "bluezone.entryForm.search": "Tìm kiếm",
+
+  "bluezone.dailyDeclaration.option": "Chọn thông tin sức khỏe hiện tại của bạn",
+  "bluezone.dailyDeclaration.btnSendInfo": "Gửi thông tin",
+  "bluezone.dailyDeclaration.trackHistory": "Lịch sử theo dõi sức khỏe",
+  "bluezone.dailyDeclaration.titleModal": "Thông báo",
+  "bluezone.dailyDeclaration.describeModal": "Gửi thông tin sức khỏe thất bại!",
+  "bluezone.dailyDeclaration.btnCloseModal": "Đóng",
+  "bluezone.dailyDeclaration.describeSuccessModal": "Gửi thông tin sức khỏe thành công.",
+  "bluezone.dailyDeclaration.btnAgreeModal": "Đồng ý",
+  "bluezone.dailyDeclaration.titleSafe": "An toàn",
+  "bluezone.dailyDeclaration.titleRisk": "Nguy cơ nhiễm bệnh",
+  "bluezone.dailyDeclaration.info": "Thông tin"
 }

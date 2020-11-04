@@ -31,7 +31,6 @@ import {CheckBox} from 'react-native-elements';
 import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import ButtonBase from '../../../base/components/ButtonBase';
-import {LanguageContext} from '../../../../LanguageContext';
 import HealthMonitoringItem from './components/HealthMonitoringItem';
 
 // Apis
@@ -52,16 +51,16 @@ import SCREEN from '../../nameScreen';
 
 // Styles
 import styles from './styles/index.css';
-import message from '../../../core/msg/register';
+import message from '../../../core/msg/dailyDeclaration';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import ModalBase from '../../../base/components/ModalBase';
 
 export const listSymptom = [
-  {StateID: 1, name: 'Sốt'},
-  {StateID: 2, name: 'Ho'},
-  {StateID: 3, name: 'Khó thở'},
-  {StateID: 4, name: 'Đau người, mệt mỏi'},
-  {StateID: 5, name: 'Khỏe mạnh'},
+  {StateID: 1, name: 'Sốt', nameEn: 'Fever'},
+  {StateID: 2, name: 'Ho', nameEn: 'Cough'},
+  {StateID: 3, name: 'Khó thở', nameEn: 'Dyspnea'},
+  {StateID: 4, name: 'Đau người, mệt mỏi', nameEn: 'Body pain, fatigue'},
+  {StateID: 5, name: 'Khỏe mạnh', nameEn: 'Healthy'},
 ];
 
 let LtinforEntryPersonReportDetail = [
@@ -92,6 +91,7 @@ class DailyDeclaration extends React.Component {
     super(props);
     this.state = {
       isVisibleError: false,
+      isVisibleSuccess: false,
       itemsSelected: [],
       data: [],
     };
@@ -206,6 +206,7 @@ class DailyDeclaration extends React.Component {
     this.setState({
       data: data,
       itemsSelected: [],
+      isVisibleSuccess: true,
     });
 
     setHealthMonitoring(data);
@@ -227,19 +228,35 @@ class DailyDeclaration extends React.Component {
   }
 
   onCloseAlertError() {
-    this.setState({isVisibleError: false});
+    this.setState({isVisibleError: false, isVisibleSuccess: false});
   }
 
   renderModal() {
-    const {isProcessing, isVisibleError, codeString} = this.state;
+    const {intl} = this.props;
+    const {isProcessing, isVisibleError, isVisibleSuccess} = this.state;
+    const {formatMessage} = intl;
     return (
       <>
         <ModalBase
           isVisibleModal={isVisibleError}
-          title={'Thông báo'}
-          description={'Gửi thông tin sức khỏe thất bại!'}>
+          title={formatMessage(message.titleModal)}
+          description={formatMessage(message.describeModal)}>
           <View style={styles.modalFooter}>
-            <ButtonConfirm text={'Đóng'} onPress={this.onCloseAlertError} />
+            <ButtonConfirm
+              text={formatMessage(message.btnCloseModal)}
+              onPress={this.onCloseAlertError}
+            />
+          </View>
+        </ModalBase>
+        <ModalBase
+          isVisibleModal={isVisibleSuccess}
+          title={formatMessage(message.titleModal)}
+          description={formatMessage(message.describeSuccessModal)}>
+          <View style={styles.modalFooter}>
+            <ButtonConfirm
+              text={formatMessage(message.btnAgreeModal)}
+              onPress={this.onCloseAlertError}
+            />
           </View>
         </ModalBase>
       </>
@@ -247,24 +264,28 @@ class DailyDeclaration extends React.Component {
   }
 
   render() {
+    const {intl, route} = this.props;
     const {itemsSelected, data} = this.state;
+
+    const {formatMessage, locale} = intl;
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
-        <Header title={'Khai báo Y tế hàng ngày'} />
+        <Header title={route?.params?.title} />
         <ScrollView contentContainerStyle={styles.contentContainerStyle}>
           <MediumText style={styles.title}>
-            Chọn thông tin sức khỏe hiện tại của bạn
+            {formatMessage(message.option)}
           </MediumText>
           <View style={styles.listCheckbox}>
             {listSymptom.map(item => {
               const selected = !!itemsSelected.find(i => i === item.StateID);
+              const name = locale === 'vi' ? item.name : item.nameEn;
               return (
                 <CheckBox
-                  key={item.name}
+                  key={item.StateID}
                   iconType={'ionicon'}
                   iconRight
-                  title={item.name}
+                  title={name}
                   disabled={this.checkDisabledCheckbox(item.StateID)}
                   checkedIcon="ios-checkbox-outline"
                   uncheckedIcon="ios-square-outline"
@@ -278,14 +299,14 @@ class DailyDeclaration extends React.Component {
           </View>
 
           <ButtonBase
-            title={'Gửi thông tin'}
+            title={formatMessage(message.btnSendInfo)}
             onPress={this.onSendInfo}
             containerStyle={styles.containerStyle}
             titleStyle={styles.textInvite}
           />
 
           <MediumText style={styles.title}>
-            Lịch sử theo dõi sức khỏe
+            {formatMessage(message.trackHistory)}
           </MediumText>
 
           <View>
