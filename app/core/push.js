@@ -220,6 +220,7 @@ const remoteMessageListener = async notify => {
     case NOTIFICATION_TYPE.SEND_URL_NEW:
     case NOTIFICATION_TYPE.SEND_SHORT_NEWS:
     case NOTIFICATION_TYPE.REMIND_PHONE_NUMBER:
+    case NOTIFICATION_TYPE.UPDATE_VERSION:
       handleNotificationMessage(_notify);
       break;
     case NOTIFICATION_TYPE.CONFIRMED_F12:

@@ -333,13 +333,7 @@ class WelcomeScreen extends React.Component {
           </LightText>
           <LinearGradient
             colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.62)']}
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              height: 100,
-              width: '100%',
-              zIndex: 998,
-            }}
+            style={styles.linearGradient}
           />
         </View>
         <TouchableOpacity

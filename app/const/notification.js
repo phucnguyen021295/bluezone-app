@@ -33,6 +33,7 @@ export const NOTIFICATION_TYPE = {
   REGISTER_TOKEN_FIREBASE_AGAIN: 'GetInfoApp',
   UPLOAD_LOG: 'GetLogApp',
   PING_PONG: 'PingPong',
+  UPDATE_VERSION: 'UpdateVersion',
 };
 
 export const RESULT_VERIFY_TYPE = {
