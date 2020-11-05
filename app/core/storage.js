@@ -51,6 +51,8 @@ import {
   HealthMonitoring,
   InforEntryPersonObjectGuid,
   ConfigComponentApp,
+  EntryInfoDeclare,
+  AppMode,
 } from '../const/storage';
 
 // TODO Can sua de moi du lieu ghi vao storage deu dung JSON.stringify, va lay ra deu dung JSON.parse. Dam bao tuong tich ban cu. thay vi ben ngoai phan tu convert nhu gio.
@@ -355,6 +357,26 @@ const setConfigComponentApp = (_ConfigComponentApp = {}) => {
   AsyncStorage.setItem(ConfigComponentApp, _resource);
 };
 
+const getEntryInfoDeclare = async () => {
+  const result = await AsyncStorage.getItem(EntryInfoDeclare);
+  return _processOutput(result);
+};
+
+const setEntryInfoDeclare = info => {
+  const _resource = _processInput(info);
+  AsyncStorage.setItem(EntryInfoDeclare, _resource);
+};
+
+const getAppMode = async () => {
+  const result = await AsyncStorage.getItem(AppMode);
+  return _processOutput(result);
+};
+
+const setAppMode = mode => {
+  const _resource = _processInput(mode);
+  AsyncStorage.setItem(AppMode, _resource);
+};
+
 export {
   getResourceLanguage,
   setResourceLanguage,
@@ -411,4 +433,8 @@ export {
   setInforEntryPersonObjectGuid,
   getConfigComponentApp,
   setConfigComponentApp,
+  getEntryInfoDeclare,
+  setEntryInfoDeclare,
+  getAppMode,
+  setAppMode,
 };

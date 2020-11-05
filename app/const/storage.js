@@ -46,3 +46,5 @@ export const EntryLanguage = 'EntryLanguage';
 export const HealthMonitoring = 'HealthMonitoring';
 export const InforEntryPersonObjectGuid = 'InforEntryPersonObjectGuid';
 export const ConfigComponentApp = 'ConfigComponentApp';
+export const EntryInfoDeclare = 'EntryInfoDeclare';
+export const AppMode = 'AppMode';

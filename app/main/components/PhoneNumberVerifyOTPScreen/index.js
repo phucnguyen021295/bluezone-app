@@ -46,6 +46,7 @@ import ModalBase from '../../../base/components/ModalBase';
 
 // Utils
 import configuration, {
+  setAppMode,
   setPhoneNumber,
   syncTokenFirebase,
 } from '../../../configuration';
@@ -54,7 +55,11 @@ import {messageNotifyOTPSuccess} from '../../../core/data';
 import message from '../../../core/msg/verifyOtp';
 
 // Api
-import {CreateAndSendOTPCode, VerifyOTPCode} from '../../../core/apis/bluezone';
+import {
+  CreateAndSendOTPCode,
+  VerifyOTPCode,
+  checkModeEntry,
+} from '../../../core/apis/bluezone';
 import {ConfirmOTPCodeErrorCode} from '../../../core/apis/errorCode';
 import {
   clearScheduleRegisterNotification,
@@ -229,6 +234,7 @@ class VerifyOTPScreen extends React.Component {
     const PhoneNumber = data.Object.PhoneNumber || this.PhoneNumber;
     setPhoneNumber(PhoneNumber);
 
+    this.checkModeEntryPhoneNumber();
     // Clear cac notification lien quan den viec nhac khai bao so dien thoai
     clearScheduleRegisterNotification();
     // Tạo notify định kì nhắc cập nhật thông tin bổ sung
@@ -359,6 +365,19 @@ class VerifyOTPScreen extends React.Component {
     this.onResetModal();
   }
 
+  checkModeEntryPhoneNumber = () => {
+    checkModeEntry(
+      data => {
+        if (data.Object.result) {
+          setAppMode('entry');
+        } else {
+          setAppMode('default');
+        }
+      },
+      () => {},
+    );
+  };
+
   renderModal() {
     const {
       codeString,
@@ -412,7 +431,10 @@ class VerifyOTPScreen extends React.Component {
           isVisibleModal={isVisibleVerifySuccess}
           title={formatMessage(message.otpsuccess)}>
           <View style={styles.lBtnModal}>
-            <ButtonConfirm text={formatMessage(message.btnAgree)} onPress={this.onOTPSuccessModalPress} />
+            <ButtonConfirm
+              text={formatMessage(message.btnAgree)}
+              onPress={this.onOTPSuccessModalPress}
+            />
           </View>
         </ModalBase>
 

@@ -48,6 +48,7 @@ import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
 import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
 import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
 import EntryDeclareSuccess from './app/main/components/EntryDeclareSuccess';
+import Entry from './app/main/components/EntryScreen';
 
 import ContextProvider from './LanguageContext';
 import LanguageProvider from './app/base/LanguageProvider';
@@ -506,6 +507,7 @@ class App extends React.Component {
                   name={SCREEN.ENTRY_DECLARATION_SUCCESS}
                   component={EntryDeclareSuccess}
                 />
+                <Stack.Screen name={SCREEN.ENTRY} component={Entry} />
                 <Stack.Screen name={SCREEN.FAQ}>
                   {props => <FAQ {...props} showBack={true} />}
                 </Stack.Screen>

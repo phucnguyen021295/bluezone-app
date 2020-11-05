@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
 
   infoValue: {
+    flex: 1,
     fontSize: fontSize.normal,
   },
 

@@ -34,7 +34,6 @@ import {
   Alert,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
-import CheckBox from '@react-native-community/checkbox';
 import {CheckBox as CheckBox1} from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -42,6 +41,7 @@ import moment from 'moment';
 
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
+import CheckBox from '../../../base/components/CheckBox';
 import Header from '../../../base/components/Header';
 // import InputScrollView from '../../../base/components/InputScrollView';
 import FormInput from '../../../base/components/FormInput';
@@ -64,7 +64,7 @@ import {
 
 // Storage
 import {
-  setInfoDeclare,
+  setEntryInfoDeclare,
   setEntryObjectGUIDInformation,
   setInforEntryPersonObjectGuid,
 } from '../../../core/storage';
@@ -93,7 +93,8 @@ class Declaration extends React.Component {
     const nowString = moment(now).format('DD-MM-YYYY');
 
     this.state = {
-      portrait: null,
+      portraitURL: null,
+      portraitBase64: null,
       gateID: null,
       gate: null,
       fullName: '',
@@ -134,7 +135,8 @@ class Declaration extends React.Component {
       symptom: {},
       vacxin: '',
       exposureHistory: {},
-      testResultImage: '',
+      testResultImageUR: '',
+      testResultImageBase64: '',
       testResult: {},
       gates: null,
       countries: null,
@@ -154,6 +156,57 @@ class Declaration extends React.Component {
   }
 
   componentDidMount() {
+    // getEntryInfoDeclare().then(info => {
+    //   const xxx = {
+    //     AnhChanDung: "/File/FileInforEntry/254fcf06-b5e6-4536-974e-56591fa87a25/Avatar_.jpg"
+    //     AnhChanDungBase64: null
+    //     ChonCoSoCachLy: null
+    //     CreateDate: "2020-11-03T11:04:49.933"
+    //     DiaChiLienLac_VN_ChiTiet: "Sjsjsj"
+    //     DiaChiLienLac_VN_MaHuyen: "280"
+    //     DiaChiLienLac_VN_MaPhuongXa: "259"
+    //     DiaChiLienLac_VN_MaTinh: "286"
+    //     DiaChiLuuTruSauCachLy_ChiTiet: null
+    //     DiaChiLuuTruSauCachLy_MaHuyen: null
+    //     DiaChiLuuTruSauCachLy_MaPhuongXa: null
+    //     DiaChiLuuTruSauCachLy_MaTinh: null
+    //     DiaDiemKhoiHanh_MaQuocGia: "15"
+    //     DiaDiemKhoiHanh_MaTinh: "Kkkk"
+    //     DiaDiemNoiDen_MaQuocGia: "234"
+    //     DiaDiemNoiDen_MaTinh: "276"
+    //     Email: "Sjjsjs"
+    //     FileKetQuaXetNghiem: "/File/FileInforEntry/2f64faca-3aa5-4220-927f-eba1864a24da/ketquaxetnghiem_.jpg"
+    //     FileKetQuaXetNghiemBase64: null
+    //     FullName: "Phan Anh Nhật"
+    //     InforEntryID: 25
+    //     InforEntryPersonObjectGuid: "5a1fe2fa-0fbc-4a40-a386-0794fad1ed9e"
+    //     KetQuaXetNghiem: true
+    //     LastUpdate: "2020-11-03T11:04:49.933"
+    //     LichSuPhoiNhiem: "[{"ID":"exposure1","Value":true},{"ID":"exposure2","Value":true}]"
+    //     MaCuaKhau: "1"
+    //     MaGioiTinh: 1
+    //     MaQuocTich: 12
+    //     NamSinh: "2011"
+    //     NgayKhoiHanh: "2020-10-16T00:00:00"
+    //     NgayNhapCanh: "2020-10-25T00:00:00"
+    //     ObjectGuid: "483bf7f3-3ef1-4061-998f-dbce0d942e18"
+    //     PhoneNumber: ""
+    //     QuocGiaDenTrong21NgayQua: "Japan"
+    //     SoDienThoai: "0374571868"
+    //     SoGhe: "Thd"
+    //     SoHieuPhuongTien: "Thd"
+    //     SoHoChieu: "6597988858"
+    //     ThongTinDiLai: "[{"ID":1,"Text":"Máy bay","Value":true},{"ID":1,"Text":"Tàu thuyền","Value":false},{"ID":1,"Text":"Ô tô","Value":false}]"
+    //     ThongTinDiLaiKhac: "Xe đạp"
+    //     TokenFirebase: "fULUfUHjR0ithVhF9ZVlvy:APA91bH_dIpauYnp3Qg-Z37oUDLcGGUwSwXRTARskLv6xynutdTBbkO1kkm19clRrbGio6UHUE2bGp1aLKxSi-AL2sRJkQSzLMkgLX2-WOC8z4eSTnE_-_MFUM8fi-ap2PPOaN61aTge"
+    //     TrieuChungBenh: "[{"ID":"sot","Text":"Sốt","Value":true},{"ID":"ho","Text":"Ho","Value":true},{"ID":"kho_tho","Text":"Khó thở","Value":true},{"ID":"dau_hong","Text":"Đau họng","Value":true},{"ID":"non_buon_non","Text":"Nôn / Buồn nôn","Value":true},{"ID":"tieu_chay","Text":"Tiêu chảy","Value":true},{"ID":"xuat_huyet_ngoai_da","Text":"Xuất huyết ngoài da","Value":true},{"ID":"noi_ban_ngoai_da","Text":"Nôi ban ngoài da","Value":true}]"
+    //   UserID: 248010
+    //   VacXinSuDung: "Lalala"
+    //   }
+    //   this.setState({
+    //     portraitURL: `${DOMAIN}${info.AnhChanDung}`,
+    //   })
+    // });
     reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
   }
 
@@ -177,7 +230,7 @@ class Declaration extends React.Component {
       },
     };
 
-    this.onSelectImage(options, 'portrait');
+    this.onSelectImage(options, 'portraitBase64');
   };
 
   onSelectTestResultImage = () => {
@@ -191,7 +244,7 @@ class Declaration extends React.Component {
       },
     };
 
-    this.onSelectImage(options, 'testResultImage');
+    this.onSelectImage(options, 'testResultImageBase64');
   };
 
   onSelectImage = (options, property) => {
@@ -219,8 +272,9 @@ class Declaration extends React.Component {
     );
   };
 
-  onSelectGate = id => {
+  onSelectGate = (id, name) => {
     this.changeState('gateID', id);
+    this.gateName = name;
   };
 
   onSelectYearOfBirth = year => {
@@ -239,8 +293,9 @@ class Declaration extends React.Component {
     this.changeState('gender', '3');
   };
 
-  onSelectNationality = id => {
+  onSelectNationality = (id, name) => {
     this.changeState('nationalityID', id);
+    this.nationalityName = name;
   };
 
   onCheckBoxChange_Planes = value => {
@@ -297,19 +352,22 @@ class Declaration extends React.Component {
     this.changeState('isPickerEndDateVisible', false);
   };
 
-  onSelectStartCountry = id => {
+  onSelectStartCountry = (id, name) => {
     this.changeState('startCountryID', id);
+    this.startCountryName = name;
   };
 
-  onSelectStartProvince = id => {
+  onSelectStartProvince = (id, name) => {
     this.changeState('startProvinceID', id);
+    this.startProvinceName = name;
   };
 
-  onSelectEndProvince = id => {
+  onSelectEndProvince = (id, name) => {
     this.changeState('endProvinceID', id);
+    this.endProvinceName = name;
   };
 
-  onSelectAfterQuarantineProvince = id => {
+  onSelectAfterQuarantineProvince = (id, name) => {
     const {afterQuarantine_ProvinceID} = this.state;
     if (afterQuarantine_ProvinceID === id) {
       return;
@@ -322,9 +380,10 @@ class Declaration extends React.Component {
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
     });
+    this.afterQuarantine_ProvinceName = name;
   };
 
-  onSelectAfterQuarantinePDistrict = id => {
+  onSelectAfterQuarantinePDistrict = (id, name) => {
     const {afterQuarantine_DistrictID} = this.state;
     if (afterQuarantine_DistrictID === id) {
       return;
@@ -335,13 +394,15 @@ class Declaration extends React.Component {
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
     });
+    this.afterQuarantine_DistrictName = name;
   };
 
-  onSelectAfterQuarantineWard = id => {
+  onSelectAfterQuarantineWard = (id, name) => {
     this.changeState('afterQuarantine_WardID', id);
+    this.afterQuarantine_WardName = name;
   };
 
-  onSelectVNProvince = id => {
+  onSelectVNProvince = (id, name) => {
     const {vn_ProvinceID} = this.state;
     if (vn_ProvinceID === id) {
       return;
@@ -354,9 +415,10 @@ class Declaration extends React.Component {
       vn_Wards: null,
       vn_WardID: null,
     });
+    this.vn_ProvinceName = name;
   };
 
-  onSelectVNPDistrict = id => {
+  onSelectVNPDistrict = (id, name) => {
     const {vn_DistrictID} = this.state;
     if (vn_DistrictID === id) {
       return;
@@ -367,10 +429,12 @@ class Declaration extends React.Component {
       vn_Wards: null,
       vn_WardID: null,
     });
+    this.vn_DistrictName = name;
   };
 
-  onSelectVNWard = id => {
+  onSelectVNWard = (id, name) => {
     this.changeState('vn_WardID', id);
+    this.vn_WardName = name;
   };
 
   onSelectSymptom = (type, value) => {
@@ -509,7 +573,7 @@ class Declaration extends React.Component {
     // const {formatMessage} = intl;
     //
     // const {
-    //   portrait,
+    //   portraitBase64,
     //   gateID,
     //   gate,
     //   fullName,
@@ -549,7 +613,7 @@ class Declaration extends React.Component {
     //   symptom,
     //   vacxin,
     //   exposureHistory,
-    //   testResultImage,
+    //   testResultImageBase64,
     //   testResult,
     //   quarantinePlace,
     //   otherQuarantinePlace,
@@ -560,7 +624,7 @@ class Declaration extends React.Component {
     //
     // const titleError = '';
     // let contentError;
-    // if (!portrait) {
+    // if (!portraitBase64) {
     //   contentError = 'Thiếu thông tin ảnh chân dung';
     // }
     //
@@ -682,7 +746,7 @@ class Declaration extends React.Component {
     //
     // const data = {
     //   ObjectGuid: '00000000-0000-0000-0000-000000000000',
-    //   AnhChanDungBase64: portrait,
+    //   AnhChanDungBase64: portraitBase64,
     //   MaCuaKhau: gateID.toString(),
     //   FullName: fullName,
     //   NamSinh: yearOfBirth,
@@ -722,7 +786,7 @@ class Declaration extends React.Component {
     //   VacXinSuDung: vacxin,
     //   LichSuPhoiNhiem: JSON.stringify(exposureHistoryResult),
     //   KetQuaXetNghiem: testResult,
-    //   FileKetQuaXetNghiemBase64: testResultImage,
+    //   FileKetQuaXetNghiemBase64: testResultImageBase64,
     //   ChonCoSoCachLy: JSON.stringify(
     //     quarantinePlaceData.map(({id}) => [
     //       {ID: id, Value: id === quarantinePlace},
@@ -750,7 +814,7 @@ class Declaration extends React.Component {
       NgayNhapCanh: '2020/10/25',
       DiaDiemKhoiHanh_MaQuocGia: '15',
       DiaDiemKhoiHanh_MaTinh: 'Kkkk',
-      DiaDiemNoiDen_MaQuocGia: 'Việt Nam',
+      DiaDiemNoiDen_MaQuocGia: VIETNAM_ID.toString(),
       DiaDiemNoiDen_MaTinh: '276',
       QuocGiaDenTrong21NgayQua: 'Japan',
       DiaChiLienLac_VN_MaTinh: '286',
@@ -774,17 +838,30 @@ class Declaration extends React.Component {
 
   declareSuccess = data => {
     const {navigation} = this.props;
+    const {startProvinceID, startProvince} = this.state;
+    const startVN = this.isIDVietNam(startProvinceID);
 
     navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
       code: data.Object.ObjectGuid,
       passport: this.state.passport,
     });
 
-    // setInfoDeclare()
+    setEntryInfoDeclare({
+      ...data.Object,
+      TenCuaKhau: this.gateName,
+      TenQuocTich: this.nationalityName,
+      DiaDiemKhoiHanh_TenQuocGia: this.startCountryName,
+      DiaDiemKhoiHanh_TenTinh: startVN ? this.startProvinceName : startProvince,
+      DiaDiemNoiDen_TenTinh: this.endProvinceName,
+      DiaChiLuuTruSauCachLy_TenTinh: this.afterQuarantine_ProvinceName,
+      DiaChiLuuTruSauCachLy_TenHuyen: this.afterQuarantine_DistrictName,
+      DiaChiLuuTruSauCachLy_TenPhuongXa: this.afterQuarantine_WardName,
+      DiaChiLienLac_VN_TenTinh: this.vn_ProvinceName,
+      DiaChiLienLac_VN_TenHuyen: this.vn_DistrictName,
+      DiaChiLienLac_VN_TenPhuongXa: this.vn_WardName,
+    });
     setEntryObjectGUIDInformation(data.Object.ObjectGuid);
     setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
-
-    // this.changeState('visibleModalSuccess', true);
   };
 
   declareError = error => {
@@ -962,7 +1039,8 @@ class Declaration extends React.Component {
 
   render() {
     const {
-      portrait,
+      portraitURL,
+      portraitBase64,
       gateID,
       gate,
       fullName,
@@ -1002,7 +1080,8 @@ class Declaration extends React.Component {
       symptom,
       vacxin,
       exposureHistory,
-      testResultImage,
+      testResultImageURL,
+      testResultImageBase64,
       testResult,
       gates,
       countries,
@@ -1019,16 +1098,36 @@ class Declaration extends React.Component {
 
     const startVN = this.isIDVietNam(startCountryID);
 
-    const {intl} = this.props;
+    const {intl, displayHeader} = this.props;
     const {formatMessage} = intl;
+
+    const portraitSource =
+      portraitBase64 || portraitURL
+        ? {
+            uri: portraitBase64
+              ? `data:image/png;base64,${portraitBase64}`
+              : portraitURL,
+          }
+        : require('./images/avatar.png');
+
+    const testResultImageSource =
+      testResultImageURL || testResultImageBase64
+        ? {
+            uri: testResultImageBase64
+              ? `data:image/png;base64,${testResultImageBase64}`
+              : testResultImageURL,
+          }
+        : null;
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
-          <Header
-            styleTitle={styles.textHeader}
-            title={formatMessage(messages.header)}
-          />
+          {displayHeader && (
+            <Header
+              styleTitle={styles.textHeader}
+              title={formatMessage(messages.header)}
+            />
+          )}
           <ScrollView
             style={styles.scroll}
             keyboardShouldPersistTaps={'handled'}>
@@ -1053,19 +1152,12 @@ class Declaration extends React.Component {
                   onPress={this.onSelectPortrait}
                   activeOpacity={1}
                   style={
-                    !portrait ? styles.portraitBtn : styles.portraitImageBtn
+                    portraitBase64 || portraitURL
+                      ? styles.portraitImageBtn
+                      : styles.portraitBtn
                   }>
-                  <Image
-                    style={styles.portraitImage}
-                    source={
-                      portrait
-                        ? {
-                            uri: `data:image/png;base64,${portrait}`,
-                          }
-                        : require('./images/avatar.png')
-                    }
-                  />
-                  {!portrait && (
+                  <Image style={styles.portraitImage} source={portraitSource} />
+                  {!portraitBase64 && !portraitURL && (
                     <Image
                       style={styles.camera}
                       source={require('./images/camera.png')}
@@ -1206,67 +1298,36 @@ class Declaration extends React.Component {
                 star
               />
               <View style={styles.flexRow}>
-                <TouchableOpacity
-                  style={styles.vehicleFirstItemContainer}
-                  onPress={() => this.onChangeStatusVehicle('vehicle_Planes')}>
-                  <CheckBox
-                    value={vehicle_Planes}
-                    boxType={'square'}
-                    onValueChange={this.onCheckBoxChange_Planes}
-                    style={styles.checkbox}
-                  />
-                  <MediumText
-                    style={styles.vehicleItemText}
-                    text={formatMessage(messages.planes)}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.vehicleItemContainer}
-                  onPress={() => this.onChangeStatusVehicle('vehicle_Ship')}>
-                  <CheckBox
-                    value={vehicle_Ship}
-                    boxType={'square'}
-                    onValueChange={this.onCheckBoxChange_Ship}
-                    style={styles.checkbox}
-                  />
-                  <MediumText
-                    style={styles.vehicleItemText}
-                    text={formatMessage(messages.ship)}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.vehicleItemContainer}
-                  onPress={() => this.onChangeStatusVehicle('vehicle_Car')}>
-                  <CheckBox
-                    value={vehicle_Car}
-                    boxType={'square'}
-                    onValueChange={this.onCheckBoxChange_Car}
-                    style={styles.checkbox}
-                  />
-                  <MediumText
-                    style={styles.vehicleItemText}
-                    text={formatMessage(messages.car)}
-                  />
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity
-                style={styles.vehicleFirstItemContainer}
-                onPress={() => this.onChangeStatusVehicle('vehicle_Other')}>
                 <CheckBox
-                  value={vehicle_Other}
-                  boxType={'square'}
-                  onValueChange={this.onCheckBoxChange_Other}
-                  style={styles.checkbox}
+                  checked={vehicle_Planes}
+                  title={formatMessage(messages.planes)}
+                  onPress={() => this.onChangeStatusVehicle('vehicle_Planes')}
+                  containerStyle={styles.checkboxContainer}
+                  textStyle={styles.checkBoxText}
                 />
-                <MediumText
-                  style={styles.vehicleItemText}
-                  text={formatMessage(messages.vehicleOther)}
+                <CheckBox
+                  checked={vehicle_Ship}
+                  title={formatMessage(messages.ship)}
+                  onPress={() => this.onChangeStatusVehicle('vehicle_Ship')}
+                  containerStyle={styles.checkboxContainer}
+                  textStyle={styles.checkBoxText}
                 />
-              </TouchableOpacity>
+                <CheckBox
+                  checked={vehicle_Car}
+                  title={formatMessage(messages.car)}
+                  onPress={() => this.onChangeStatusVehicle('vehicle_Car')}
+                  containerStyle={styles.checkboxContainer}
+                  textStyle={styles.checkBoxText}
+                />
+              </View>
 
+              <TextInfo
+                styleContainer={[styles.headerTwoContainer, {marginTop: 10}]}
+                style={styles.headerTwo}
+                text={formatMessage(messages.vehicleOther)}
+              />
               <TextInput
-                editable={vehicle_Other}
-                style={[styles.textInput, {marginTop: 10}]}
+                style={styles.textInput}
                 onChangeText={this.onOtherVehiclesInputChange}
                 value={otherVehicles}
               />
@@ -1769,16 +1830,16 @@ class Declaration extends React.Component {
                 <TouchableOpacity
                   onPress={this.onSelectTestResultImage}
                   style={
-                    !testResultImage
-                      ? styles.testResultBtn
-                      : styles.testResultImageBtn
+                    testResultImageBase64 || testResultImageURL
+                      ? styles.testResultImageBtn
+                      : styles.testResultBtn
                   }>
-                  <Image
-                    style={styles.testResultImage}
-                    source={{
-                      uri: `data:image/png;base64,${testResultImage}`,
-                    }}
-                  />
+                  {testResultImageBase64 || testResultImageURL ? (
+                    <Image
+                      style={styles.testResultImage}
+                      source={testResultImageSource}
+                    />
+                  ) : null}
                 </TouchableOpacity>
 
                 <View style={{marginLeft: 20}}>
@@ -1827,7 +1888,9 @@ Declaration.propTypes = {
   intl: intlShape.isRequired,
 };
 
-Declaration.defaultProps = {};
+Declaration.defaultProps = {
+  displayHeader: true,
+};
 
 Declaration.contextType = EntryLanguageContext;
 
