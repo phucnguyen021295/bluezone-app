@@ -206,10 +206,11 @@ class App extends React.Component {
       await remoteMessageListener(notifyObj);
     });
 
-    this.removeNotificationListener = registerNotification(async notifyObj => {
+    this.removeNotificationListener = registerNotification(notifyObj => {
       if (__DEV__) {
-        alert(JSON.stringify(notifyObj));
+        alert(JSON.stringify(notifyObj.data));
       }
+      remoteMessageListener(notifyObj);
     });
   }
 
@@ -363,8 +364,7 @@ class App extends React.Component {
           navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
       }
-    } else if (obj && obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION) {
-      debugger;
+    } else if (obj && (obj.data.Type === NOTIFICATION_TYPE.UPDATE_VERSION || obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION)) {
       this.setState({loading: false, isHome: true});
     }
     // getNotifications().cancelNotification(remoteMessage.notification._notificationId);

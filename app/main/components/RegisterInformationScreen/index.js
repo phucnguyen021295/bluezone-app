@@ -60,6 +60,8 @@ import message from '../../../core/msg/registerInformation';
 import {clearScheduleAddInfoNotification} from '../../../core/notifyScheduler';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
+import {createPhoneNumberReminder} from '../../../core/announcement';
+import {messageNotifyRegisterInfoSuccess} from '../../../core/data';
 
 const visibleModal = {
   isProcessing: false,
@@ -183,6 +185,7 @@ class RegisterInformationScreen extends React.Component {
     });
 
     clearScheduleAddInfoNotification();
+    createPhoneNumberReminder(messageNotifyRegisterInfoSuccess);
 
     this.onResetModalTimeout(() => this.setState({isVisibleInfoSuccess: true}));
   }

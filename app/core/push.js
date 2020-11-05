@@ -38,7 +38,7 @@ import {
 } from '../configuration';
 import {mergeResourceLanguage} from './language';
 import {addJob} from './jobScheduler';
-import {removeNotification, createNews} from './announcement';
+import {removeNotification, createNews, showNotify} from './announcement';
 import log from './log';
 import tmpl, * as msg from '../const/log';
 import {reportPushAnalytics} from './analytics';
@@ -57,6 +57,17 @@ const handleNotificationMessage = notify => {
     new Date().getTime();
   notify.data.notifyId = _notifyId + '';
   createNews(notify);
+};
+
+const handleNotification = notify => {
+  // TODO xem lai can thiet gan notifyId nhu nay khong?
+  const _notifyId =
+    notify.data.notifyId ||
+    notify.data.Notify.NotifyID ||
+    notify.data.timestamp ||
+    new Date().getTime();
+  notify.data.notifyId = _notifyId + '';
+  showNotify(notify);
 };
 
 // HistoryF12
@@ -220,7 +231,6 @@ const remoteMessageListener = async notify => {
     case NOTIFICATION_TYPE.SEND_URL_NEW:
     case NOTIFICATION_TYPE.SEND_SHORT_NEWS:
     case NOTIFICATION_TYPE.REMIND_PHONE_NUMBER:
-    case NOTIFICATION_TYPE.UPDATE_VERSION:
       handleNotificationMessage(_notify);
       break;
     case NOTIFICATION_TYPE.CONFIRMED_F12:
@@ -249,6 +259,9 @@ const remoteMessageListener = async notify => {
       break;
     case NOTIFICATION_TYPE.PING_PONG:
       handleReportPushAnalytics(_notify);
+      break;
+    case NOTIFICATION_TYPE.UPDATE_VERSION:
+      handleNotification(_notify);
       break;
   }
 };
