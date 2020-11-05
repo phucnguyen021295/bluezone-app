@@ -64,7 +64,6 @@ import {
 
 // Storage
 import {
-  getEntryInfoDeclare,
   setEntryInfoDeclare,
   setEntryObjectGUIDInformation,
   setInforEntryPersonObjectGuid,
@@ -78,7 +77,6 @@ import {
   quarantinePlaceData,
 } from './data';
 import SCREEN from '../../nameScreen';
-import {DOMAIN} from '../../../core/apis/server';
 
 // Styles
 import styles from './styles/index.css';
@@ -274,8 +272,9 @@ class Declaration extends React.Component {
     );
   };
 
-  onSelectGate = id => {
+  onSelectGate = (id, name) => {
     this.changeState('gateID', id);
+    this.gateName = name;
   };
 
   onSelectYearOfBirth = year => {
@@ -294,8 +293,9 @@ class Declaration extends React.Component {
     this.changeState('gender', '3');
   };
 
-  onSelectNationality = id => {
+  onSelectNationality = (id, name) => {
     this.changeState('nationalityID', id);
+    this.nationalityName = name;
   };
 
   onCheckBoxChange_Planes = value => {
@@ -352,19 +352,22 @@ class Declaration extends React.Component {
     this.changeState('isPickerEndDateVisible', false);
   };
 
-  onSelectStartCountry = id => {
+  onSelectStartCountry = (id, name) => {
     this.changeState('startCountryID', id);
+    this.startCountryName = name;
   };
 
-  onSelectStartProvince = id => {
+  onSelectStartProvince = (id, name) => {
     this.changeState('startProvinceID', id);
+    this.startProvinceName = name;
   };
 
-  onSelectEndProvince = id => {
+  onSelectEndProvince = (id, name) => {
     this.changeState('endProvinceID', id);
+    this.endProvinceName = name;
   };
 
-  onSelectAfterQuarantineProvince = id => {
+  onSelectAfterQuarantineProvince = (id, name) => {
     const {afterQuarantine_ProvinceID} = this.state;
     if (afterQuarantine_ProvinceID === id) {
       return;
@@ -377,9 +380,10 @@ class Declaration extends React.Component {
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
     });
+    this.afterQuarantine_ProvinceName = name;
   };
 
-  onSelectAfterQuarantinePDistrict = id => {
+  onSelectAfterQuarantinePDistrict = (id, name) => {
     const {afterQuarantine_DistrictID} = this.state;
     if (afterQuarantine_DistrictID === id) {
       return;
@@ -390,13 +394,15 @@ class Declaration extends React.Component {
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
     });
+    this.afterQuarantine_DistrictName = name;
   };
 
-  onSelectAfterQuarantineWard = id => {
+  onSelectAfterQuarantineWard = (id, name) => {
     this.changeState('afterQuarantine_WardID', id);
+    this.afterQuarantine_WardName = name;
   };
 
-  onSelectVNProvince = id => {
+  onSelectVNProvince = (id, name) => {
     const {vn_ProvinceID} = this.state;
     if (vn_ProvinceID === id) {
       return;
@@ -409,9 +415,10 @@ class Declaration extends React.Component {
       vn_Wards: null,
       vn_WardID: null,
     });
+    this.vn_ProvinceName = name;
   };
 
-  onSelectVNPDistrict = id => {
+  onSelectVNPDistrict = (id, name) => {
     const {vn_DistrictID} = this.state;
     if (vn_DistrictID === id) {
       return;
@@ -422,10 +429,12 @@ class Declaration extends React.Component {
       vn_Wards: null,
       vn_WardID: null,
     });
+    this.vn_DistrictName = name;
   };
 
-  onSelectVNWard = id => {
+  onSelectVNWard = (id, name) => {
     this.changeState('vn_WardID', id);
+    this.vn_WardName = name;
   };
 
   onSelectSymptom = (type, value) => {
@@ -829,6 +838,8 @@ class Declaration extends React.Component {
 
   declareSuccess = data => {
     const {navigation} = this.props;
+    const {startProvinceID, startProvince} = this.state;
+    const startVN = this.isIDVietNam(startProvinceID);
 
     navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
       code: data.Object.ObjectGuid,
@@ -837,11 +848,20 @@ class Declaration extends React.Component {
 
     setEntryInfoDeclare({
       ...data.Object,
+      TenCuaKhau: this.gateName,
+      TenQuocTich: this.nationalityName,
+      DiaDiemKhoiHanh_TenQuocGia: this.startCountryName,
+      DiaDiemKhoiHanh_TenTinh: startVN ? this.startProvinceName : startProvince,
+      DiaDiemNoiDen_TenTinh: this.endProvinceName,
+      DiaChiLuuTruSauCachLy_TenTinh: this.afterQuarantine_ProvinceName,
+      DiaChiLuuTruSauCachLy_TenHuyen: this.afterQuarantine_DistrictName,
+      DiaChiLuuTruSauCachLy_TenPhuongXa: this.afterQuarantine_WardName,
+      DiaChiLienLac_VN_TenTinh: this.vn_ProvinceName,
+      DiaChiLienLac_VN_TenHuyen: this.vn_DistrictName,
+      DiaChiLienLac_VN_TenPhuongXa: this.vn_WardName,
     });
     setEntryObjectGUIDInformation(data.Object.ObjectGuid);
     setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
-
-    // this.changeState('visibleModalSuccess', true);
   };
 
   declareError = error => {
@@ -1078,7 +1098,7 @@ class Declaration extends React.Component {
 
     const startVN = this.isIDVietNam(startCountryID);
 
-    const {intl} = this.props;
+    const {intl, displayHeader} = this.props;
     const {formatMessage} = intl;
 
     const portraitSource =
@@ -1102,10 +1122,12 @@ class Declaration extends React.Component {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
-          <Header
-            styleTitle={styles.textHeader}
-            title={formatMessage(messages.header)}
-          />
+          {displayHeader && (
+            <Header
+              styleTitle={styles.textHeader}
+              title={formatMessage(messages.header)}
+            />
+          )}
           <ScrollView
             style={styles.scroll}
             keyboardShouldPersistTaps={'handled'}>
@@ -1866,7 +1888,9 @@ Declaration.propTypes = {
   intl: intlShape.isRequired,
 };
 
-Declaration.defaultProps = {};
+Declaration.defaultProps = {
+  displayHeader: true,
+};
 
 Declaration.contextType = EntryLanguageContext;
 

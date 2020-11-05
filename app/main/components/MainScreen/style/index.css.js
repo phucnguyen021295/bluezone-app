@@ -23,16 +23,19 @@
 
 import {StyleSheet} from 'react-native';
 import {smallest} from '../../../../core/fontSize';
-import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../core/utils/dimension';
 
 export const TAB_BAR_HEIGHT = heightPercentageToDP((52 / 720) * 100);
 export const TAB_BAR_IPHONEX_HEIGHT = heightPercentageToDP(
   ((52 + 34) / 720) * 100,
 );
-const ICON_SQUARE_HEIGHT = heightPercentageToDP((24 / 720) * 100);
-const ICON_SQUARE_WIDTH = widthPercentageToDP((24 / 360) * 100);
-const ICON_FAQ_HEIGHT = heightPercentageToDP((20 / 720) * 100);
-const ICON_FAQ_WIDTH = widthPercentageToDP((27 / 360) * 100);
+// const ICON_SQUARE_HEIGHT = heightPercentageToDP((24 / 720) * 100);
+// const ICON_SQUARE_WIDTH = widthPercentageToDP((24 / 360) * 100);
+// const ICON_FAQ_HEIGHT = heightPercentageToDP((20 / 720) * 100);
+// const ICON_FAQ_WIDTH = widthPercentageToDP((27 / 360) * 100);
 
 const styles = StyleSheet.create({
   iconSquare: {

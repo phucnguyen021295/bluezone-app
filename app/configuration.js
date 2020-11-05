@@ -38,6 +38,7 @@ import {
   setTokenFirebase as setTokenFirebaseStorage,
   setPersonalInformation as setPersonalInformationStorage,
   setEntryLanguage as setEntryLanguageStorage,
+  setAppMode as setAppModeStorage,
   multiGet,
 } from './core/storage';
 import {getTokenFirebase} from './core/fcm';
@@ -403,6 +404,7 @@ const mergeConfiguration = (
   StatusNotifyRegister,
   PhoneNumber,
   PersonalInformation,
+  AppMode,
 ) => {
   Object.assign(configuration, configObject, {
     TokenFirebase: TokenFirebase || '',
@@ -412,6 +414,7 @@ const mergeConfiguration = (
     StatusNotifyRegister: StatusNotifyRegister || null,
     PhoneNumber: PhoneNumber || '',
     PersonalInformation: PersonalInformation || '',
+    AppMode: AppMode,
   });
 };
 
@@ -425,6 +428,7 @@ const initConfiguration = async callBack => {
     'StatusNotifyRegister',
     'PhoneNumber',
     'PersonalInformation',
+    'AppMode',
   ]).then(results => {
     const {
       Configuration,
@@ -435,6 +439,7 @@ const initConfiguration = async callBack => {
       StatusNotifyRegister,
       PhoneNumber,
       PersonalInformation,
+      AppMode,
     } = results;
 
     console.log('TokenFirebase', TokenFirebase);
@@ -447,6 +452,7 @@ const initConfiguration = async callBack => {
       StatusNotifyRegister,
       PhoneNumber,
       PersonalInformation,
+      AppMode,
     );
 
     callBack(configuration);
@@ -497,6 +503,15 @@ const setLanguage = Language => {
 const setEntryLanguage = EntryLanguage => {
   Object.assign(configuration, {EntryLanguage});
   setEntryLanguageStorage(EntryLanguage);
+};
+
+/**
+ * Luu che do cua app
+ * @param Language
+ */
+const setAppMode = mode => {
+  Object.assign(configuration, {AppMode: mode});
+  setAppModeStorage(mode);
 };
 
 // TODO xem xet bo ham nay di
@@ -857,4 +872,5 @@ export {
   syncTokenFirebase,
   retrySyncTokenFirebase,
   retrySyncTokenFirebaseAgain,
+  setAppMode,
 };

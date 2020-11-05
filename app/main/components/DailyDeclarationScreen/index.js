@@ -264,14 +264,14 @@ class DailyDeclaration extends React.Component {
   }
 
   render() {
-    const {intl, route} = this.props;
+    const {intl, route, displayHeader} = this.props;
     const {itemsSelected, data} = this.state;
 
     const {formatMessage, locale} = intl;
     return (
       <SafeAreaView style={styles.container}>
         <StatusBar hidden={true} />
-        <Header title={route?.params?.title} />
+        {displayHeader && <Header title={route?.params?.title} />}
         <ScrollView contentContainerStyle={styles.contentContainerStyle}>
           <MediumText style={styles.title}>
             {formatMessage(message.option)}
@@ -323,6 +323,10 @@ class DailyDeclaration extends React.Component {
 
 DailyDeclaration.propTypes = {
   intl: intlShape.isRequired,
+};
+
+DailyDeclaration.defaultProps = {
+  displayHeader: true,
 };
 
 export default injectIntl(DailyDeclaration);

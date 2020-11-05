@@ -4,8 +4,9 @@
   "App": {
     "1": {
       "id": "1",
-      "title": "Chế độ nhập cảnh",
-      "titleEn": "Entry mode"
+      "title": "Nhập cảnh",
+      "titleEn": "Entry",
+      "screen": "Entry"
     },
     "2": {
       "id": "2",

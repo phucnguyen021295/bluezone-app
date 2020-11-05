@@ -36,6 +36,7 @@ import FastImage from 'react-native-fast-image';
 
 import Header from '../../../base/components/Header';
 
+import configuration from '../../../configuration';
 import SCREEN from '../../nameScreen';
 import {syncConfigComponentApp} from './data/dataConfigComponentApp';
 
@@ -80,6 +81,13 @@ class UtilityScreen extends React.Component {
         break;
       case SCREEN.DAILY_DECLARATION:
         navigation.navigate(SCREEN.DAILY_DECLARATION, {title});
+        break;
+      case 'Entry':
+        const {AppMode} = configuration;
+        if (AppMode === 'entry') {
+        } else {
+        }
+        navigation.navigate(SCREEN.ENTRY);
         break;
       default:
         break;

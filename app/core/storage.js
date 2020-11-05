@@ -52,6 +52,7 @@ import {
   InforEntryPersonObjectGuid,
   ConfigComponentApp,
   EntryInfoDeclare,
+  AppMode,
 } from '../const/storage';
 
 // TODO Can sua de moi du lieu ghi vao storage deu dung JSON.stringify, va lay ra deu dung JSON.parse. Dam bao tuong tich ban cu. thay vi ben ngoai phan tu convert nhu gio.
@@ -366,6 +367,16 @@ const setEntryInfoDeclare = info => {
   AsyncStorage.setItem(EntryInfoDeclare, _resource);
 };
 
+const getAppMode = async () => {
+  const result = await AsyncStorage.getItem(AppMode);
+  return _processOutput(result);
+};
+
+const setAppMode = mode => {
+  const _resource = _processInput(mode);
+  AsyncStorage.setItem(AppMode, _resource);
+};
+
 export {
   getResourceLanguage,
   setResourceLanguage,
@@ -424,4 +435,6 @@ export {
   setConfigComponentApp,
   getEntryInfoDeclare,
   setEntryInfoDeclare,
+  getAppMode,
+  setAppMode,
 };
