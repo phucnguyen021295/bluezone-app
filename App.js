@@ -55,7 +55,7 @@ import {translationMessages} from './app/i18n';
 import {remoteMessageListener} from './app/core/push';
 import decorateMainAppStart from './app/main/decorateMainAppStart';
 import {navigationRef, navigate} from './RootNavigation';
-import {registerMessageHandler} from './app/core/fcm';
+import {registerMessageHandler, registerNotification} from './app/core/fcm';
 
 // Api
 import {registerResourceLanguageChange} from './app/core/language';
@@ -205,6 +205,12 @@ class App extends React.Component {
       }
       await remoteMessageListener(notifyObj);
     });
+
+    this.removeNotificationListener = registerNotification(async notifyObj => {
+      if (__DEV__) {
+        alert(JSON.stringify(notifyObj));
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -220,6 +226,7 @@ class App extends React.Component {
     this.removeNotificationOpenedListener &&
       this.removeNotificationOpenedListener();
     this.removeMessageListener && this.removeMessageListener();
+    this.removeNotificationListener && this.removeNotificationListener();
   }
 
   /**
@@ -281,6 +288,7 @@ class App extends React.Component {
 
   onNotificationOpened = remoteMessage => {
     const {loading, isHome} = this.state;
+    debugger;
     console.log('onNotificationOpened');
     if (!remoteMessage) {
       return;
@@ -356,6 +364,7 @@ class App extends React.Component {
         }
       }
     } else if (obj && obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION) {
+      debugger;
       this.setState({loading: false, isHome: true});
     }
     // getNotifications().cancelNotification(remoteMessage.notification._notificationId);
