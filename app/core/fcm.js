@@ -83,6 +83,10 @@ const registerNotificationOpened = callback => {
   return firebase.notifications().onNotificationOpened(callback);
 };
 
+const registerNotification = callback => {
+  return firebase.notifications().onNotification(callback);
+};
+
 const registerInitialNotification = callback => {
   firebase
     .notifications()
@@ -127,4 +131,5 @@ export {
   createNotification,
   registerNotificationDisplay,
   setBadge,
+  registerNotification,
 };

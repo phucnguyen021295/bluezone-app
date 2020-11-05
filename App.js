@@ -56,7 +56,7 @@ import {translationMessages} from './app/i18n';
 import {remoteMessageListener} from './app/core/push';
 import decorateMainAppStart from './app/main/decorateMainAppStart';
 import {navigationRef, navigate} from './RootNavigation';
-import {registerMessageHandler} from './app/core/fcm';
+import {registerMessageHandler, registerNotification} from './app/core/fcm';
 
 // Api
 import {registerResourceLanguageChange} from './app/core/language';
@@ -206,6 +206,13 @@ class App extends React.Component {
       }
       await remoteMessageListener(notifyObj);
     });
+
+    this.removeNotificationListener = registerNotification(notifyObj => {
+      if (__DEV__) {
+        alert(JSON.stringify(notifyObj.data));
+      }
+      remoteMessageListener(notifyObj);
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -221,6 +228,7 @@ class App extends React.Component {
     this.removeNotificationOpenedListener &&
       this.removeNotificationOpenedListener();
     this.removeMessageListener && this.removeMessageListener();
+    this.removeNotificationListener && this.removeNotificationListener();
   }
 
   /**
@@ -282,6 +290,7 @@ class App extends React.Component {
 
   onNotificationOpened = remoteMessage => {
     const {loading, isHome} = this.state;
+    debugger;
     console.log('onNotificationOpened');
     if (!remoteMessage) {
       return;
@@ -356,7 +365,7 @@ class App extends React.Component {
           navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
       }
-    } else if (obj && obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION) {
+    } else if (obj && (obj.data.Type === NOTIFICATION_TYPE.UPDATE_VERSION || obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION)) {
       this.setState({loading: false, isHome: true});
     }
     // getNotifications().cancelNotification(remoteMessage.notification._notificationId);
