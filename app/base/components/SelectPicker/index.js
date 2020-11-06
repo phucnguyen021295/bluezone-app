@@ -253,17 +253,18 @@ class SelectPicker extends React.PureComponent {
   }
 
   render() {
+    const {content} = this.props;
     const {name} = this.state;
     const {placeholder, containerStyle} = this.props;
-
+    const text = content || name;
     return (
       <>
         <TouchableOpacity
           style={[styles.containerStyle, containerStyle]}
           onPress={this.onShowSelect}>
           <Text
-            text={name ? name : placeholder}
-            style={[styles.title, {color: name ? '#000000' : '#dddddd'}]}
+            text={text ? text : placeholder}
+            style={[styles.title, {color: text ? '#000000' : '#dddddd'}]}
           />
           <Entypo name={'triangle-down'} size={16} style={{color: '#6A6A6A'}} />
         </TouchableOpacity>

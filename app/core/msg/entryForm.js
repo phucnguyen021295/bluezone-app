@@ -261,6 +261,10 @@ export default defineMessages({
     id: 'bluezone.entryForm.positive',
     defaultMessage: 'Dương tính',
   },
+  testDate: {
+    id: 'bluezone.entryForm.testDate',
+    defaultMessage: 'Ngày xét nghiệm',
+  },
   sendContent: {
     id: 'bluezone.entryForm.sendContent',
     defaultMessage: 'Gửi tờ khai',

@@ -310,6 +310,7 @@
   "bluezone.entryForm.testResult": "Phiếu kết quả xét nghiệm",
   "bluezone.entryForm.negative": "Âm tính",
   "bluezone.entryForm.positive": "Dương tính",
+  "bluezone.entryForm.testDate": "Ngày xét nghiệm",
   "bluezone.entryForm.sendContent": "Gửi tờ khai",
   "bluezone.entryForm.declareSuccess": "Khai báo nhập cảnh thành công",
   "bluezone.entryForm.cancel": "Đóng",
