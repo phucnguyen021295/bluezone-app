@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
   },
 
   label1: {
+    color: '#000',
     marginVertical: 7,
     fontSize: fontSize.normal,
   },
@@ -277,6 +278,29 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Bold',
     fontWeight: 'normal',
     marginRight: 0,
+  },
+
+  btnOTPEntry: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: '#015cd0',
+    borderRadius: 10,
+  },
+
+  btnOTPEntryContent: {
+    color: '#FFF',
+    fontSize: fontSize.smaller,
+  },
+
+  label2: {
+    color: '#000',
+    marginTop: 7,
+    fontSize: fontSize.smaller,
+  },
+
+  OTPEntryContainer: {
+    marginTop: 15,
+    alignItems: 'center',
   },
 });
 

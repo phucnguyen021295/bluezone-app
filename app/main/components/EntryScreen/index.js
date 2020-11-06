@@ -39,25 +39,25 @@ import EntryDeclarationScreen from '../EntryDeclarationScreen';
 import DailyDeclarationScreen from '../DailyDeclarationScreen';
 
 import {isIPhoneX} from '../../../core/utils/isIPhoneX';
-import {
-  TAB_BAR_HEIGHT,
-  TAB_BAR_IPHONEX_HEIGHT,
-} from '../MainScreen/style/index.css';
 import * as fontSize from '../../../core/fontSize';
 import Header from '../../../base/components/Header';
+import {heightPercentageToDP} from '../../../core/utils/dimension';
 
 // Styles
+
+export const TAB_BAR_HEIGHT = heightPercentageToDP((42 / 720) * 100);
 
 export const Tab = createMaterialTopTabNavigator();
 
 const EntryDeclareSuccessScreen = props => {
-  const {navigation} = props;
+  const {route} = props;
+  const initialRouteName = route.params?.tabFocus;
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
       <Header title={'Nhập cảnh'} />
       <Tab.Navigator
-        initialRouteName="EntryDeclare"
+        initialRouteName={initialRouteName}
         tabBarPosition={'top'}
         tabBarOptions={{
           showIcon: false,
@@ -69,7 +69,8 @@ const EntryDeclareSuccessScreen = props => {
           style: {
             borderTopColor: '#dddddd',
             borderTopWidth: 0.5,
-            height: isIPhoneX ? TAB_BAR_IPHONEX_HEIGHT : TAB_BAR_HEIGHT,
+            height: TAB_BAR_HEIGHT,
+            marginTop: 10,
           },
           tabStyle: {
             height: TAB_BAR_HEIGHT,
@@ -89,7 +90,7 @@ const EntryDeclareSuccessScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-                text={'TO khai nhap canh'}
+                text={'Tờ khai nhập cảnh'}
                 style={[
                   {
                     fontSize: fontSize.normal,
@@ -110,7 +111,7 @@ const EntryDeclareSuccessScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-                text={'Khai bao hang ngay'}
+                text={'Khai báo hàng ngày'}
                 style={[
                   {
                     fontSize: fontSize.normal,

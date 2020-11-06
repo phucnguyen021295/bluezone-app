@@ -44,7 +44,6 @@ class ModalNotify extends React.Component {
       <ModalBase
         isVisibleModal={isVisible}
         description={content}
-        styleTitle={styles.textTitle}
         styleDescription={styles.textContent}>
         <View style={styles.container}>
           <ButtonBase

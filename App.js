@@ -49,6 +49,7 @@ import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen
 import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
 import EntryDeclareSuccess from './app/main/components/EntryDeclareSuccess';
 import Entry from './app/main/components/EntryScreen';
+import EntryVerifyOTP from './app/main/components/EntryVerifyOTPScreen';
 
 import ContextProvider from './LanguageContext';
 import LanguageProvider from './app/base/LanguageProvider';
@@ -364,7 +365,11 @@ class App extends React.Component {
           navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
       }
-    } else if (obj && (obj.data.Type === NOTIFICATION_TYPE.UPDATE_VERSION || obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION)) {
+    } else if (
+      obj &&
+      (obj.data.Type === NOTIFICATION_TYPE.UPDATE_VERSION ||
+        obj.data._group === NOTIFICATION_TYPE.UPDATE_VERSION)
+    ) {
       this.setState({loading: false, isHome: true});
     }
     // getNotifications().cancelNotification(remoteMessage.notification._notificationId);
@@ -507,6 +512,10 @@ class App extends React.Component {
                   component={EntryDeclareSuccess}
                 />
                 <Stack.Screen name={SCREEN.ENTRY} component={Entry} />
+                <Stack.Screen
+                  name={SCREEN.ENTRY_VERIFY_OTP}
+                  component={EntryVerifyOTP}
+                />
                 <Stack.Screen name={SCREEN.FAQ}>
                   {props => <FAQ {...props} showBack={true} />}
                 </Stack.Screen>

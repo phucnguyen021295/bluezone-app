@@ -326,4 +326,14 @@ export default defineMessages({
     id: 'bluezone.entryForm.search',
     defaultMessage: 'Tìm kiếm',
   },
+
+  btnEntryOTP: {
+    id: 'bluezone.entryForm.btnEntryOTP',
+    defaultMessage: 'Xác nhận nhập cảnh',
+  },
+
+  content4: {
+    id: 'bluezone.entryForm.content4',
+    defaultMessage: '*Sử dụng khi làm thủ tục nhập cảnh',
+  },
 });

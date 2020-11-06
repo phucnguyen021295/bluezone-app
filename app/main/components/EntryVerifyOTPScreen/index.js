@@ -57,8 +57,8 @@ import message from '../../../core/msg/verifyOtp';
 // Api
 import {
   CreateAndSendOTPCode,
-  VerifyOTPCode,
   checkModeEntry,
+  verifyOTPEntry,
 } from '../../../core/apis/bluezone';
 import {ConfirmOTPCodeErrorCode} from '../../../core/apis/errorCode';
 import {
@@ -112,7 +112,6 @@ class VerifyOTPScreen extends React.Component {
     this.alertVerifyOTPError = this.alertVerifyOTPError.bind(this);
     this.alertOTPInvalid = this.alertOTPInvalid.bind(this);
     this.alertOTPExpired = this.alertOTPExpired.bind(this);
-    this.onGoBack = this.onGoBack.bind(this);
     this.onOTPChange = this.onOTPChange.bind(this);
     this.onReGetOTP = this.onReGetOTP.bind(this);
     this.onRegetOTPByButtonModal = this.onRegetOTPByButtonModal.bind(this);
@@ -123,12 +122,9 @@ class VerifyOTPScreen extends React.Component {
     this.createAndSendOTPCodeFail = this.createAndSendOTPCodeFail.bind(this);
     this.onVisibleResetOTP = this.onVisibleResetOTP.bind(this);
     this.onCloseScreenPress = this.onCloseScreenPress.bind(this);
-    this.doFinishedWorks = this.doFinishedWorks.bind(this);
     this.onTryAgain = this.onTryAgain.bind(this);
     this.onResetModal = this.onResetModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
-
-    this.PhoneNumber = this.props.route.params.phoneNumber;
   }
 
   componentDidMount() {
@@ -164,47 +160,9 @@ class VerifyOTPScreen extends React.Component {
     this.countDownRef = ref;
   };
 
-  doFinishedWorks(gotoMainScreen = false, goBack = false) {
-    const {onFinished, name, route} = this.props;
-
-    // Trường hợp theo wizard
-    if (onFinished) {
-      setTimeout(() => {
-        onFinished(
-          name,
-          {PhoneNumber: this.PhoneNumber},
-          gotoMainScreen,
-          goBack,
-        );
-      }, 900);
-
-      return;
-    }
-
-    if (!gotoMainScreen && !goBack) {
-      setTimeout(() => {
-        this.props.navigation.replace(SCREEN.REGISTER_INFORMATION, {
-          phoneNumber: this.PhoneNumber,
-        });
-      }, 900);
-      return;
-    }
-
-    if (gotoMainScreen) {
-      this.props.navigation.goBack();
-      return true;
-    }
-
-    this.props.navigation.replace(SCREEN.PHONE_NUMBER_REGISTER, {
-      phoneNumber: route.params.phoneNumber,
-    });
-  }
-
   onOTPSuccessModalPress() {
     this.onResetModal(() => {
-      this.doFinishedWorks();
-      removeDeliveredNotification(messageNotifyOTPSuccess.data.notifyId);
-      createPhoneNumberReminder(messageNotifyOTPSuccess);
+      this.props.navigation.goBack();
     });
   }
 
@@ -215,31 +173,17 @@ class VerifyOTPScreen extends React.Component {
     );
   }
 
-  verifyOTPCodeApi(phoneNumber, otp) {
-    const {TokenFirebase} = configuration;
-    VerifyOTPCode(
-      phoneNumber,
-      TokenFirebase,
-      otp,
-      this.onVerifyOTPCodeSuccess,
-      this.onVerifyOTPCodeFail,
-    );
+  verifyOTPCodeApi(otp) {
+    // verifyOTPEntry(otp, this.onVerifyOTPCodeSuccess, this.onVerifyOTPCodeFail);
+    this.onVerifyOTPCodeSuccess();
   }
 
   stopLoading(callback) {
     this.setState({isProcessing: false}, callback);
   }
 
-  onVerifyOTPCodeSuccess(data) {
-    const PhoneNumber = data.Object.PhoneNumber || this.PhoneNumber;
-    setPhoneNumber(PhoneNumber);
-
-    this.checkModeEntryPhoneNumber();
-    // Clear cac notification lien quan den viec nhac khai bao so dien thoai
-    clearScheduleRegisterNotification();
-    // Tạo notify định kì nhắc cập nhật thông tin bổ sung
-    creatScheduleAddInfoNotification();
-
+  onVerifyOTPCodeSuccess() {
+    setAppMode('entry');
     this.stopLoading(() =>
       setTimeout(() => {
         this.setState({isVisibleVerifySuccess: true});
@@ -254,16 +198,12 @@ class VerifyOTPScreen extends React.Component {
       this.stopLoading(() => {
         setTimeout(() => this.alertOTPInvalid(Status), TIMEOUT_LOADING);
       });
-    } else if (Status === ConfirmOTPCodeErrorCode.MA_OTP_DA_HET_HAN) {
-      this.stopLoading(() => {
-        setTimeout(() => this.alertOTPExpired(Status), TIMEOUT_LOADING);
-      });
+      // } else if (Status === ConfirmOTPCodeErrorCode.MA_OTP_DA_HET_HAN) {
+      //   this.stopLoading(() => {
+      //     setTimeout(() => this.alertOTPExpired(Status), TIMEOUT_LOADING);
+      //   });
     } else {
       this.modalVerifyOTPError(Status);
-
-      // this.stopLoading(() => {
-      //   setTimeout(() => this.alertOTPInvalid(Status), TIMEOUT_LOADING);
-      // });
     }
   }
 
@@ -271,10 +211,6 @@ class VerifyOTPScreen extends React.Component {
     this.stopLoading(() => {
       setTimeout(() => this.alertVerifyOTPError(codeString), TIMEOUT_LOADING);
     });
-
-    // this.stopLoading(() => {
-    //   setTimeout(() => this.alertVerifyOTPError(codeString), TIMEOUT_LOADING);
-    // });
   }
 
   alertVerifyOTPError(Status) {
@@ -287,10 +223,6 @@ class VerifyOTPScreen extends React.Component {
 
   alertOTPExpired(Status) {
     this.setState({isVisibleVerifyOTPExpired: true, codeString: Status});
-  }
-
-  onGoBack() {
-    this.doFinishedWorks(false, true);
   }
 
   onOTPChange(value) {
@@ -340,7 +272,7 @@ class VerifyOTPScreen extends React.Component {
   }
 
   onCloseScreenPress() {
-    this.doFinishedWorks(true);
+    this.props.navigation.goBack();
   }
 
   onVisibleResetOTP() {
@@ -364,17 +296,6 @@ class VerifyOTPScreen extends React.Component {
   onCloseModal() {
     this.onResetModal();
   }
-
-  checkModeEntryPhoneNumber = () => {
-    checkModeEntry(
-      data => {
-        if (data.Object.result) {
-          setAppMode('entry');
-        }
-      },
-      () => {},
-    );
-  };
 
   renderModal() {
     const {
@@ -453,13 +374,12 @@ class VerifyOTPScreen extends React.Component {
   }
 
   render() {
-    const {route, intl} = this.props;
+    const {intl} = this.props;
     const {disabled, visibleSendOTPBtn} = this.state;
     const {formatMessage} = intl;
-    const phoneNumber = route.params.phoneNumber;
     return (
       <SafeAreaView style={styles.container}>
-        <Header onBack={this.onGoBack} title={formatMessage(message.title)} />
+        <Header title={'Xác thực nhập cảnh'} />
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -473,9 +393,6 @@ class VerifyOTPScreen extends React.Component {
             <View style={styles.content}>
               <Text style={styles.text1}>
                 {formatMessage(message.enterPin)}
-              </Text>
-              <Text style={styles.textPhoneNumber} onPress={this.onGoBack}>
-                {phoneNumber}
               </Text>
             </View>
             <TextInput
@@ -501,23 +418,23 @@ class VerifyOTPScreen extends React.Component {
                 styleIcon={styles.iconButtonConfirm}
               />
             </View>
-            <View style={styles.layoutCountdown}>
-              {!visibleSendOTPBtn ? (
-                <>
-                  <Text style={styles.text3}>
-                    {formatMessage(message.validPin)}{' '}
-                  </Text>
-                  <CountDown
-                    ref={this.setCountDownRef}
-                    onVisibleResetOTP={this.onVisibleResetOTP}
-                  />
-                </>
-              ) : (
-                <Text onPress={this.onReGetOTP} style={styles.textSendOTP}>
-                  {formatMessage(message.resetOTP)}
-                </Text>
-              )}
-            </View>
+            {/*<View style={styles.layoutCountdown}>*/}
+            {/*  {!visibleSendOTPBtn ? (*/}
+            {/*    <>*/}
+            {/*      <Text style={styles.text3}>*/}
+            {/*        {formatMessage(message.validPin)}{' '}*/}
+            {/*      </Text>*/}
+            {/*      <CountDown*/}
+            {/*        ref={this.setCountDownRef}*/}
+            {/*        onVisibleResetOTP={this.onVisibleResetOTP}*/}
+            {/*      />*/}
+            {/*    </>*/}
+            {/*  ) : (*/}
+            {/*    <Text onPress={this.onReGetOTP} style={styles.textSendOTP}>*/}
+            {/*      {formatMessage(message.resetOTP)}*/}
+            {/*    </Text>*/}
+            {/*  )}*/}
+            {/*</View>*/}
           </ScrollView>
         </KeyboardAvoidingView>
         <ButtonBase

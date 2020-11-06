@@ -1,26 +1,12 @@
 {
   "version": "3.0.6",
-  "HasApp": ["1", "2", "3"],
+  "HasApp": ["1"],
   "App": {
     "1": {
       "id": "1",
       "title": "Nhập cảnh",
       "titleEn": "Entry",
       "screen": "Entry"
-    },
-    "2": {
-      "id": "2",
-      "title": "Khai báo y tế\nnhập cảnh",
-      "titleEn": "Medical entry declaration",
-      "image": "",
-      "screen": "EntryDeclaration"
-    },
-    "3": {
-      "id": "3",
-      "title": "Khai báo y tế\nhàng ngày",
-      "titleEn": "Medical daily declaration",
-      "image": "",
-      "screen": "DailyDeclaration"
     }
   }
 }

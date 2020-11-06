@@ -48,7 +48,7 @@ import FormInput from '../../../base/components/FormInput';
 import RadioButton from '../../../base/components/RadioButton';
 import SelectPicker from '../../../base/components/SelectPicker';
 import TextInfo from './components/TextInfo';
-import ModalBase from '../../../base/components/ModalBase';
+import ModalNotify from '../HomeScreen/components/ModalNotify/ModalNotify';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import {EntryLanguageContext} from './components/LanguageContext';
 import SwitchLanguage from './components/SwitchLanguage';
@@ -66,6 +66,7 @@ import {
 import {
   getEntryInfoDeclare,
   setEntryInfoDeclare,
+  getEntryObjectGUIDInformation,
   setEntryObjectGUIDInformation,
   setInforEntryPersonObjectGuid,
 } from '../../../core/storage';
@@ -79,6 +80,7 @@ import {
 } from './data';
 import SCREEN from '../../nameScreen';
 import {DOMAIN} from '../../../core/apis/server';
+import configuration from '../../../configuration';
 
 // Styles
 import styles from './styles/index.css';
@@ -86,13 +88,16 @@ import {reportScreenAnalytics} from '../../../core/analytics';
 import messages from '../../../core/msg/entryForm';
 
 const VIETNAM_ID = '234';
+const regxEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 class Declaration extends React.Component {
   constructor(props) {
     super(props);
 
-    const now = new Date();
-    const nowString = moment(now).format('DD/MM/YYYY');
+    // const now = new Date();
+    // const nowString = moment(now).format('DD/MM/YYYY');
+
+    this.now = new Date();
 
     this.state = {
       portraitURL: null,
@@ -112,11 +117,11 @@ class Declaration extends React.Component {
       vehicleNumber: '',
       vehicleSeat: '',
       isPickerStartDateVisible: false,
-      startDateString: nowString,
-      startDate: now,
+      startDateString: 'DD/MM/YYYY',
+      startDate: null,
       isPickerEndDateVisible: false,
-      endDateString: nowString,
-      endDate: now,
+      endDateString: 'DD/MM/YYYY',
+      endDate: null,
       startCountryID: null,
       startCountryName: '',
       startProvince: '',
@@ -145,11 +150,11 @@ class Declaration extends React.Component {
       symptom: {},
       vacxin: '',
       exposureHistory: {},
-      testResultImageURL: '',
-      testResultImageBase64: '',
+      testResultImageURL: null,
+      testResultImageBase64: null,
       testResult: null,
-      testDateString: nowString,
-      testDate: now,
+      testDateString: 'DD/MM/YYYY',
+      testDate: null,
       isPickerTestDateVisible: false,
       gates: null,
       countries: null,
@@ -170,53 +175,6 @@ class Declaration extends React.Component {
 
   componentDidMount() {
     getEntryInfoDeclare().then(info => {
-      // const xxx = {
-      //   AnhChanDung: "/File/FileInforEntry/254fcf06-b5e6-4536-974e-56591fa87a25/Avatar_.jpg"
-      //   AnhChanDungBase64: null
-      //   ChonCoSoCachLy: null
-      //   CreateDate: "2020-11-03T11:04:49.933"
-      //   DiaChiLienLac_VN_ChiTiet: "Sjsjsj"
-      //   DiaChiLienLac_VN_MaHuyen: "280"
-      //   DiaChiLienLac_VN_MaPhuongXa: "259"
-      //   DiaChiLienLac_VN_MaTinh: "286"
-      //   DiaChiLuuTruSauCachLy_ChiTiet: null
-      //   DiaChiLuuTruSauCachLy_MaHuyen: null
-      //   DiaChiLuuTruSauCachLy_MaPhuongXa: null
-      //   DiaChiLuuTruSauCachLy_MaTinh: null
-      //   DiaDiemKhoiHanh_MaQuocGia: "15"
-      //   DiaDiemKhoiHanh_MaTinh: "Kkkk"
-      //   DiaDiemNoiDen_MaQuocGia: "234"
-      //   DiaDiemNoiDen_MaTinh: "276"
-      //   Email: "Sjjsjs"
-      //   FileKetQuaXetNghiem: "/File/FileInforEntry/2f64faca-3aa5-4220-927f-eba1864a24da/ketquaxetnghiem_.jpg"
-      //   FileKetQuaXetNghiemBase64: null
-      //   FullName: "Phan Anh Nhật"
-      //   InforEntryID: 25
-      //   InforEntryPersonObjectGuid: "5a1fe2fa-0fbc-4a40-a386-0794fad1ed9e"
-      //   KetQuaXetNghiem: true
-      //   LastUpdate: "2020-11-03T11:04:49.933"
-      //   LichSuPhoiNhiem: "[{"ID":"exposure1","Value":true},{"ID":"exposure2","Value":true}]"
-      //   MaCuaKhau: "1"
-      //   MaGioiTinh: 1
-      //   MaQuocTich: 12
-      //   NamSinh: "2011"
-      //   NgayKhoiHanh: "2020-10-16T00:00:00"
-      //   NgayNhapCanh: "2020-10-25T00:00:00"
-      //   ObjectGuid: "483bf7f3-3ef1-4061-998f-dbce0d942e18"
-      //   PhoneNumber: ""
-      //   QuocGiaDenTrong21NgayQua: "Japan"
-      //   SoDienThoai: "0374571868"
-      //   SoGhe: "Thd"
-      //   SoHieuPhuongTien: "Thd"
-      //   SoHoChieu: "6597988858"
-      //   ThongTinDiLai: "[{"ID":1,"Text":"Máy bay","Value":true},{"ID":1,"Text":"Tàu thuyền","Value":false},{"ID":1,"Text":"Ô tô","Value":false}]"
-      //   ThongTinDiLaiKhac: "Xe đạp"
-      //   TokenFirebase: "fULUfUHjR0ithVhF9ZVlvy:APA91bH_dIpauYnp3Qg-Z37oUDLcGGUwSwXRTARskLv6xynutdTBbkO1kkm19clRrbGio6UHUE2bGp1aLKxSi-AL2sRJkQSzLMkgLX2-WOC8z4eSTnE_-_MFUM8fi-ap2PPOaN61aTge"
-      //   TrieuChungBenh: "[{"ID":"sot","Text":"Sốt","Value":true},{"ID":"ho","Text":"Ho","Value":true},{"ID":"kho_tho","Text":"Khó thở","Value":true},{"ID":"dau_hong","Text":"Đau họng","Value":true},{"ID":"non_buon_non","Text":"Nôn / Buồn nôn","Value":true},{"ID":"tieu_chay","Text":"Tiêu chảy","Value":true},{"ID":"xuat_huyet_ngoai_da","Text":"Xuất huyết ngoài da","Value":true},{"ID":"noi_ban_ngoai_da","Text":"Nôi ban ngoài da","Value":true}]"
-      // UserID: 248010
-      // VacXinSuDung: "Lalala"
-      // }
-
       if (!info) {
         return;
       }
@@ -235,8 +193,10 @@ class Declaration extends React.Component {
         exposureHistory[ID] = Value;
       });
 
+      const timestampNow = new Date().getTime();
+
       this.setState({
-        portraitURL: `${DOMAIN}${info.AnhChanDung}`,
+        portraitURL: `${DOMAIN}${info.AnhChanDung}?datetime=${timestampNow}`,
         gateID: info.MaCuaKhau,
         gateName: info.TenCuaKhau,
         fullName: info.FullName,
@@ -252,12 +212,14 @@ class Declaration extends React.Component {
         vehicleNumber: info.SoHieuPhuongTien,
         vehicleSeat: info.SoGhe,
         isPickerStartDateVisible: false,
-        startDateString: moment(new Date(info.NgayKhoiHanh)).format(
-          'DD/MM/YYYY',
-        ),
-        startDate: new Date(info.NgayKhoiHanh),
-        endDateString: moment(new Date(info.NgayNhapCanh)).format('DD/MM/YYYY'),
-        endDate: new Date(info.NgayNhapCanh),
+        startDateString: info.NgayKhoiHanh
+          ? moment(new Date(info.NgayKhoiHanh)).format('DD/MM/YYYY')
+          : 'DD/MM/YYYY',
+        startDate: info.NgayKhoiHanh ? new Date(info.NgayKhoiHanh) : null,
+        endDateString: info.NgayNhapCanh
+          ? moment(new Date(info.NgayNhapCanh)).format('DD/MM/YYYY')
+          : 'DD/MM/YYYY',
+        endDate: info.NgayNhapCanh ? new Date(info.NgayNhapCanh) : null,
         startCountryID: info.DiaDiemKhoiHanh_MaQuocGia,
         startCountryName: info.DiaDiemKhoiHanh_TenQuocGia,
         startProvinceID: this.isIDVietNam(info.DiaDiemKhoiHanh_MaQuocGia)
@@ -291,20 +253,79 @@ class Declaration extends React.Component {
         symptom: symptom,
         vacxin: info.VacXinSuDung,
         exposureHistory: exposureHistory,
-        testResultImageURL: `${DOMAIN}${info.FileKetQuaXetNghiem}`,
+        testResultImageURL: `${DOMAIN}${
+          info.FileKetQuaXetNghiem
+        }?datetime=${timestampNow}`,
         testResult: info.KetQuaXetNghiem,
-        testDateString: moment(
-          new Date(info.KetQuaXetNghiem_NgayXetNghiem),
-        ).format('DD/MM/YYYY'),
-        testDate: new Date(info.KetQuaXetNghiem_NgayXetNghiem),
+        testDateString: info.KetQuaXetNghiem_NgayXetNghiem
+          ? moment(new Date(info.KetQuaXetNghiem_NgayXetNghiem)).format(
+              'DD/MM/YYYY',
+            )
+          : 'DD/MM/YYYY',
+        testDate: info.KetQuaXetNghiem_NgayXetNghiem
+          ? new Date(info.KetQuaXetNghiem_NgayXetNghiem)
+          : null,
         quarantinePlace: info.ChonCoSoCachLy
           ? JSON.parse(info.ChonCoSoCachLy).find(i => i.Value === true)?.ID
           : null,
-        otherQuarantinePlace: info.ChonCoSoCachLy,
+        otherQuarantinePlace: info.ChonCoSoCachLy_Khac,
       });
+    });
+    getEntryObjectGUIDInformation().then(objectGUID => {
+      this.changeState('objectGUID', objectGUID);
+      this.objectGUID = objectGUID;
     });
     reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
   }
+
+  saveFormState = () => {
+    const {
+      portraitBase64,
+      gateID,
+      fullName,
+      yearOfBirth,
+      gender,
+      nationalityID,
+      passport,
+      vehicle_Planes,
+      vehicle_Ship,
+      vehicle_Car,
+      otherVehicles,
+      vehicleNumber,
+      vehicleSeat,
+      isPickerStartDateVisible,
+      startDateString,
+      startDate,
+      isPickerEndDateVisible,
+      endDateString,
+      endDate,
+      startCountryID,
+      startProvince,
+      startProvinceID,
+      endCountryID,
+      endProvinceID,
+      country21Day,
+      afterQuarantine_ProvinceID,
+      afterQuarantine_DistrictID,
+      afterQuarantine_WardID,
+      afterQuarantine_Address,
+      vn_ProvinceID,
+      vn_DistrictID,
+      vn_WardID,
+      vn_Address,
+      numberPhone,
+      email,
+      symptom,
+      vacxin,
+      exposureHistory,
+      testResultImageBase64,
+      testResult,
+      quarantinePlace,
+      otherQuarantinePlace,
+      testDateString,
+      testDate,
+    } = this.state;
+  };
 
   changeState = (key, value, fn) => {
     this.setState(
@@ -686,13 +707,6 @@ class Declaration extends React.Component {
   };
 
   onSend = () => {
-    // const {navigation} = this.props;
-    // navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
-    //   code: '1254785214',
-    //   passport: '2132456465',
-    // });
-    // return;
-
     const {intl} = this.props;
     const {formatMessage} = intl;
 
@@ -749,7 +763,7 @@ class Declaration extends React.Component {
 
     const titleError = '';
     let contentError;
-    if (!portraitBase64) {
+    if (!this.objectGUID && !portraitBase64) {
       contentError = 'Thiếu thông tin ảnh chân dung';
     }
 
@@ -825,6 +839,10 @@ class Declaration extends React.Component {
       contentError = 'Thiếu thông tin số điện thoại';
     }
 
+    if (!regxEmail.test(email)) {
+      contentError = 'Dia chi email khong chinh xac';
+    }
+
     if (Object.keys(symptom).length < Object.keys(symptomData)) {
       contentError = 'Chưa chọn đủ thông tin triệu chứng trong 21 ngày';
     }
@@ -870,7 +888,7 @@ class Declaration extends React.Component {
     });
 
     const data = {
-      ObjectGuid: '00000000-0000-0000-0000-000000000000',
+      ObjectGuid: this.objectGUID || '00000000-0000-0000-0000-000000000000',
       AnhChanDungBase64: portraitBase64,
       MaCuaKhau: gateID.toString(),
       FullName: fullName,
@@ -1019,19 +1037,16 @@ class Declaration extends React.Component {
     });
   };
 
-  renderModal = () => {
+  renderAlert = () => {
     const {intl} = this.props;
-    const {formatMessage} = intl;
-    const {visibleModalSuccess} = this.state;
+    const {visibleAlert, alertTitle, alertContent} = this.state;
 
     return (
-      <ModalBase
-        isVisibleModal={visibleModalSuccess}
-        title={formatMessage(messages.declareSuccess)}>
-        <View style={styles.lBtnModal}>
-          <ButtonConfirm text={'OK'} onPress={this.onModalSuccessPress} />
-        </View>
-      </ModalBase>
+      <ModalNotify
+        isVisible={visibleAlert}
+        content={alertContent}
+        onPress={this.hiddenAlert}
+      />
     );
   };
 
@@ -1179,6 +1194,32 @@ class Declaration extends React.Component {
     );
   };
 
+  onEmaiInputBlur = () => {
+    const {email} = this.state;
+    if (email && !regxEmail.test(email)) {
+      // Alert.alert('23432432');
+    }
+  };
+
+  showAlert = (title, content) => {
+    this.setState({
+      alertTitle: title,
+      alertContent: content,
+      visibleAlert: true,
+    });
+  };
+
+  hiddenAlert = () => {
+    this.setState({
+      visibleAlert: false,
+    });
+  };
+
+  navigateOTPEntry = () => {
+    const {navigation} = this.props;
+    navigation.navigate(SCREEN.ENTRY_VERIFY_OTP);
+  };
+
   render() {
     const {
       portraitURL,
@@ -1245,8 +1286,10 @@ class Declaration extends React.Component {
       afterQuarantine_Wards,
       quarantinePlace,
       otherQuarantinePlace,
+      objectGUID,
     } = this.state;
     const {language} = this.context;
+    const {AppMode} = configuration;
     const vietnamese = language === 'vi';
 
     const startVN = this.isIDVietNam(startCountryID);
@@ -1284,6 +1327,20 @@ class Declaration extends React.Component {
           <ScrollView
             style={styles.scroll}
             keyboardShouldPersistTaps={'handled'}>
+            {AppMode !== 'entry' && objectGUID && (
+              <View style={styles.OTPEntryContainer}>
+                <TouchableOpacity
+                  style={styles.btnOTPEntry}
+                  onPress={this.navigateOTPEntry}>
+                  <Text style={styles.btnOTPEntryContent}>
+                    {formatMessage(messages.btnEntryOTP)}
+                  </Text>
+                </TouchableOpacity>
+                <MediumText style={styles.label2}>
+                  {formatMessage(messages.content4)}
+                </MediumText>
+              </View>
+            )}
             <SwitchLanguage />
             <Text style={styles.label1}>
               {formatMessage(messages.content1)}
@@ -1439,7 +1496,6 @@ class Declaration extends React.Component {
               title={formatMessage(messages.passportNumber)}
               star={true}
               placeholder={formatMessage(messages.passportPlaceholder)}
-              keyboardType={'phone-pad'}
               onChangeText={this.onPassportInputChange}
               value={passport}
             />
@@ -1494,6 +1550,7 @@ class Declaration extends React.Component {
               title={formatMessage(messages.vehicleNumber)}
               onChangeText={this.onVehicleNumberInputChange}
               value={vehicleNumber}
+              maxLength={35}
             />
 
             {/*So ghe*/}
@@ -1502,6 +1559,7 @@ class Declaration extends React.Component {
               title={formatMessage(messages.vehicleSeat)}
               onChangeText={this.onVehicleSeatInputChange}
               value={vehicleSeat}
+              maxLength={20}
             />
             {/*</View>*/}
 
@@ -1520,7 +1578,7 @@ class Declaration extends React.Component {
                 mode="date"
                 onConfirm={this.confirmPickerStartDate}
                 onCancel={this.cancelPickerStartDate}
-                // date={startDate}
+                date={startDate || this.now}
                 maximumDate={endDate}
               />
             </View>
@@ -1540,7 +1598,7 @@ class Declaration extends React.Component {
                 mode="date"
                 onConfirm={this.confirmPickerEndDate}
                 onCancel={this.cancelPickerEndDate}
-                date={endDate}
+                date={endDate || this.now}
                 minimumDate={startDate}
               />
             </View>
@@ -1808,6 +1866,7 @@ class Declaration extends React.Component {
                 textStyle={styles.headerTwo}
                 containerStyle={styles.headerTwoContainer}
                 onChangeText={this.onNumberPhoneInputChange}
+                keyboardType={'phone-pad'}
                 star
                 value={numberPhone}
               />
@@ -1817,6 +1876,7 @@ class Declaration extends React.Component {
                 textStyle={styles.headerTwo}
                 containerStyle={styles.headerTwoContainer}
                 onChangeText={this.onEmailInputChange}
+                onBlur={this.onEmaiInputBlur}
                 value={email}
               />
             </View>
@@ -2042,7 +2102,7 @@ class Declaration extends React.Component {
                 mode="date"
                 onConfirm={this.confirmPickerTestDate}
                 onCancel={this.cancelPickerTestDate}
-                date={testDate}
+                date={testDate || this.now}
               />
             </View>
 
@@ -2059,7 +2119,7 @@ class Declaration extends React.Component {
             </View>
           </ScrollView>
         </SafeAreaView>
-        {this.renderModal()}
+        {this.renderAlert()}
       </KeyboardAvoidingView>
     );
   }

@@ -30,6 +30,7 @@ import {
   SafeAreaView,
   View,
   Image,
+  Alert,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import FastImage from 'react-native-fast-image';
@@ -72,6 +73,15 @@ class UtilityScreen extends React.Component {
     const {locale} = intl;
     const title = locale === 'vi' ? app.title : app.titleEn;
 
+    const {PhoneNumber} = configuration;
+    if (!PhoneNumber) {
+      Alert.alert(
+        'Bluezone',
+        'Bạn cần đăng ký số điện thoại để có thể sử dụng chức năng này',
+      );
+      return;
+    }
+
     switch (app.screen) {
       case SCREEN.DOMESTIC_DECLARATION:
         navigation.navigate(SCREEN.DOMESTIC_DECLARATION, {title});
@@ -87,7 +97,9 @@ class UtilityScreen extends React.Component {
         if (AppMode === 'entry') {
         } else {
         }
-        navigation.navigate(SCREEN.ENTRY);
+        navigation.navigate(SCREEN.ENTRY, {
+          tabFocus: AppMode === 'entry' ? 'DailyDeclare' : 'EntryDeclare',
+        });
         break;
       default:
         break;
@@ -101,7 +113,10 @@ class UtilityScreen extends React.Component {
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <StatusBar hidden={true} />
-        <Header title={locale === 'vi' ? 'Tiện ích' : 'Utilities'} showBack={false} />
+        <Header
+          title={locale === 'vi' ? 'Tiện ích' : 'Utilities'}
+          showBack={false}
+        />
         <View style={styles.grid}>
           {HasApp.map(id => {
             const app = App[id];

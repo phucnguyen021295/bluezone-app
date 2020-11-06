@@ -50,7 +50,8 @@ const SCREEN = {
   DOMESTIC_DECLARATION: 'DomesticDeclaration',
   ENTRY_DECLARATION: 'EntryDeclaration',
   ENTRY_DECLARATION_SUCCESS: 'EntryDeclarationSuccess',
-  ENTRY: 'ENTRY',
+  ENTRY: 'Entry',
+  ENTRY_VERIFY_OTP: 'EntryVerifyOTP',
   FAQ: 'FAQ',
 };
 
