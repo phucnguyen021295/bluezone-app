@@ -308,6 +308,7 @@
     "bluezone.entryForm.testResult": "Check test results",
     "bluezone.entryForm.negative": "Negative",
     "bluezone.entryForm.positive": "Positive",
+    "bluezone.entryForm.testDate": "Test date",
     "bluezone.entryForm.sendContent": "Submit",
     "bluezone.entryForm.declareSuccess": "Successful entry declaration",
     "bluezone.entryForm.cancel": "Cancel",

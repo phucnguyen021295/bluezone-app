@@ -290,7 +290,6 @@ class App extends React.Component {
 
   onNotificationOpened = remoteMessage => {
     const {loading, isHome} = this.state;
-    debugger;
     console.log('onNotificationOpened');
     if (!remoteMessage) {
       return;
