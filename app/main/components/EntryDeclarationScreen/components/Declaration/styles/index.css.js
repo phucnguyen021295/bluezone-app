@@ -22,7 +22,7 @@
 'use strict';
 
 import {Platform, StyleSheet} from 'react-native';
-import * as fontSize from '../../../../core/fontSize';
+import * as fontSize from '../../../../../../core/fontSize';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,6 +56,10 @@ const styles = StyleSheet.create({
 
   headerTwo: {
     fontSize: fontSize.small,
+  },
+
+  itemSelect: {
+    paddingLeft: 20
   },
 
   headerTwoContainer: {

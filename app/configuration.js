@@ -390,7 +390,7 @@ const configuration = {
     buttonTextEn: 'Enable Bluetooth',
   },
   TimeAutoEnableBluetooth: 3600000,
-  AppTabIds: ['Home', 'Notify', 'Utilities', 'Faq', 'Info'],
+  AppTabIds: ['Home', 'Notify', 'Faq', 'Info'],
 };
 
 const _defaultFunc = () => {};

@@ -28,9 +28,10 @@ import {TouchableOpacity, View} from 'react-native';
 import styles from './styles/index.css';
 
 function RadioButton(props) {
-  const {checked, onPress, radioStyle, checkedCircleStyle} = props;
+  const {disabled, checked, onPress, radioStyle, checkedCircleStyle} = props;
   return (
     <TouchableOpacity
+      disabled={disabled}
       activeOpacity={1}
       style={[styles.circle, radioStyle]}
       onPress={onPress}>
@@ -48,6 +49,7 @@ RadioButton.defaultProps = {
   onPress: () => {},
   radioStyle: {},
   checkedCircleStyle: {},
+  disabled: false,
 };
 
 export default RadioButton;

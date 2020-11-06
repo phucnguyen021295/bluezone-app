@@ -51,6 +51,7 @@ import ModalBase from '../../../base/components/ModalBase';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import {EntryLanguageContext} from './components/LanguageContext';
 import SwitchLanguage from './components/SwitchLanguage';
+import Declaration from './components/Declaration';
 
 // Api
 import {
@@ -86,7 +87,7 @@ import messages from '../../../core/msg/entryForm';
 
 const VIETNAM_ID = '234';
 
-class Declaration extends React.Component {
+class EntryDeclarationScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -165,6 +166,8 @@ class Declaration extends React.Component {
 
     this.lastAfterQuarantineProvinceIDApi = null;
     this.lastAfterQuarantineDistrictIDApi = null;
+
+    this.form = true;
   }
 
   componentDidMount() {
@@ -1280,783 +1283,796 @@ class Declaration extends React.Component {
               title={formatMessage(messages.header)}
             />
           )}
-          <ScrollView
-            style={styles.scroll}
-            keyboardShouldPersistTaps={'handled'}>
-            <SwitchLanguage />
-            <Text style={styles.label1}>
-              {formatMessage(messages.content1)}
-            </Text>
-            <Text style={styles.labelRed}>
-              {formatMessage(messages.content2)}
-            </Text>
-
-            {/*Anh chan dung*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.portrait)}
-                star
-              />
-
-              <View style={styles.portraitContainer}>
-                <TouchableOpacity
-                  onPress={this.onSelectPortrait}
-                  activeOpacity={1}
-                  style={
-                    portraitBase64 || portraitURL
-                      ? styles.portraitImageBtn
-                      : styles.portraitBtn
-                  }>
-                  <Image style={styles.portraitImage} source={portraitSource} />
-                  {!portraitBase64 && !portraitURL && (
-                    <Image
-                      style={styles.camera}
-                      source={require('./images/camera.png')}
-                    />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            {/*Cua khau*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.gate)}
-                star
-              />
-              <SelectPicker
-                enableSearch={true}
-                data={gates}
-                loading={!gates}
-                value={gateID}
-                content={gateName}
-                headerText={formatMessage(messages.selectGate)}
-                placeholder={formatMessage(messages.select)}
-                onVisible={this.onVisiblePickerGate}
-                onSelect={this.onSelectGate}
-              />
-            </View>
-
-            {/*Ho ten*/}
-            <FormInput
-              title={formatMessage(messages.fullName)}
-              star={true}
-              autoCapitalize="characters"
-              onChangeText={this.onFullNameInputChange}
-              value={fullName}
-            />
-
-            {/*Nam sinh*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.yearOfBirth)}
-                star
-              />
-              <SelectPicker
-                data={yearBirth}
-                value={yearOfBirth}
-                headerText={formatMessage(messages.selectYearOfBirth)}
-                placeholder={formatMessage(messages.select)}
-                onSelect={this.onSelectYearOfBirth}
-              />
-            </View>
-
-            {/*Gioi tinh*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                text={formatMessage(messages.gender)}
-                styleContainer={styles.itemTitle}
-                star
-              />
-              <View style={styles.flexRow}>
-                <TouchableOpacity
-                  style={styles.genderFirstItemContainer}
-                  onPress={this.selectGenderMale}>
-                  <RadioButton
-                    checked={gender === '1'}
-                    onPress={this.selectGenderMale}
-                  />
-                  <MediumText
-                    style={styles.gender}
-                    text={formatMessage(messages.male)}
-                  />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.genderItemContainer}
-                  onPress={this.selectGenderFemale}>
-                  <RadioButton
-                    checked={gender === '2'}
-                    onPress={this.selectGenderFemale}
-                  />
-                  <MediumText
-                    style={styles.gender}
-                    text={formatMessage(messages.female)}
-                  />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={styles.genderItemContainer}
-                  onPress={this.selectGenderOther}>
-                  <RadioButton
-                    checked={gender === '3'}
-                    onPress={this.selectGenderOther}
-                  />
-                  <MediumText
-                    style={styles.gender}
-                    text={formatMessage(messages.genderOther)}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            {/*Quoc tich*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.nationality)}
-                star
-              />
-              <SelectPicker
-                enableSearch={true}
-                data={countries}
-                loading={!countries}
-                value={nationalityID}
-                content={nationalityName}
-                headerText={formatMessage(messages.selectNationality)}
-                placeholder={formatMessage(messages.select)}
-                onVisible={this.onVisiblePickerCountry}
-                onSelect={this.onSelectNationality}
-              />
-            </View>
-
-            {/*So ho chieu / giay thong hanh*/}
-            <FormInput
-              title={formatMessage(messages.passportNumber)}
-              star={true}
-              placeholder={formatMessage(messages.passportPlaceholder)}
-              keyboardType={'phone-pad'}
-              onChangeText={this.onPassportInputChange}
-              value={passport}
-            />
-
-            {/*Thong tin di lai*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.vehicleInformation)}
-                star
-              />
-              <View style={styles.flexRow}>
-                <CheckBox
-                  checked={vehicle_Planes}
-                  title={formatMessage(messages.planes)}
-                  onPress={() => this.onChangeStatusVehicle('vehicle_Planes')}
-                  containerStyle={styles.checkboxContainer}
-                  textStyle={styles.checkBoxText}
-                />
-                <CheckBox
-                  checked={vehicle_Ship}
-                  title={formatMessage(messages.ship)}
-                  onPress={() => this.onChangeStatusVehicle('vehicle_Ship')}
-                  containerStyle={styles.checkboxContainer}
-                  textStyle={styles.checkBoxText}
-                />
-                <CheckBox
-                  checked={vehicle_Car}
-                  title={formatMessage(messages.car)}
-                  onPress={() => this.onChangeStatusVehicle('vehicle_Car')}
-                  containerStyle={styles.checkboxContainer}
-                  textStyle={styles.checkBoxText}
-                />
-              </View>
-
-              <TextInfo
-                styleContainer={[styles.headerTwoContainer, {marginTop: 10}]}
-                style={styles.headerTwo}
-                text={formatMessage(messages.vehicleOther)}
-              />
-              <TextInput
-                style={styles.textInput}
-                onChangeText={this.onOtherVehiclesInputChange}
-                value={otherVehicles}
-              />
-            </View>
-
-            {/*<View style={styles.flexRow}>*/}
-            {/*So hieu phuong tien*/}
-            <FormInput
-              containerStyle={styles.vehicleNumber}
-              title={formatMessage(messages.vehicleNumber)}
-              onChangeText={this.onVehicleNumberInputChange}
-              value={vehicleNumber}
-            />
-
-            {/*So ghe*/}
-            <FormInput
-              containerStyle={styles.vehicleSeat}
-              title={formatMessage(messages.vehicleSeat)}
-              onChangeText={this.onVehicleSeatInputChange}
-              value={vehicleSeat}
-            />
-            {/*</View>*/}
-
-            {/*Ngay khoi hanh*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.startDay)}
-                star
-              />
-              <Text style={styles.date} onPress={this.showPickerStartDate}>
-                {startDateString}
+          {this.form ? (
+            <Declaration data={this.state} />
+          ) : (
+            <ScrollView
+              style={styles.scroll}
+              keyboardShouldPersistTaps={'handled'}>
+              <SwitchLanguage />
+              <Text style={styles.label1}>
+                {formatMessage(messages.content1)}
               </Text>
-              <DateTimePickerModal
-                isVisible={isPickerStartDateVisible}
-                mode="date"
-                onConfirm={this.confirmPickerStartDate}
-                onCancel={this.cancelPickerStartDate}
-                // date={startDate}
-                maximumDate={endDate}
-              />
-            </View>
-
-            {/*Ngay nhap canh*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.endDay)}
-                star
-              />
-              <Text style={styles.date} onPress={this.showPickerEndDate}>
-                {endDateString}
+              <Text style={styles.labelRed}>
+                {formatMessage(messages.content2)}
               </Text>
-              <DateTimePickerModal
-                isVisible={isPickerEndDateVisible}
-                mode="date"
-                onConfirm={this.confirmPickerEndDate}
-                onCancel={this.cancelPickerEndDate}
-                date={endDate}
-                minimumDate={startDate}
-              />
-            </View>
 
-            {/*Dia diem khoi hanh*/}
-            <View>
-              <TextInfo
-                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-                text={formatMessage(messages.startPlace)}
-              />
-              <View style={styles.item2Container}>
+              {/*Anh chan dung*/}
+              <View style={styles.itemContainer}>
                 <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.country)}
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.portrait)}
+                  star
+                />
+
+                <View style={styles.portraitContainer}>
+                  <TouchableOpacity
+                    onPress={this.onSelectPortrait}
+                    activeOpacity={1}
+                    style={
+                      portraitBase64 || portraitURL
+                        ? styles.portraitImageBtn
+                        : styles.portraitBtn
+                    }>
+                    <Image
+                      style={styles.portraitImage}
+                      source={portraitSource}
+                    />
+                    {!portraitBase64 && !portraitURL && (
+                      <Image
+                        style={styles.camera}
+                        source={require('./images/camera.png')}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/*Cua khau*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.gate)}
+                  star
+                />
+                <SelectPicker
+                  enableSearch={true}
+                  data={gates}
+                  loading={!gates}
+                  value={gateID}
+                  content={gateName}
+                  headerText={formatMessage(messages.selectGate)}
+                  placeholder={formatMessage(messages.select)}
+                  onVisible={this.onVisiblePickerGate}
+                  onSelect={this.onSelectGate}
+                />
+              </View>
+
+              {/*Ho ten*/}
+              <FormInput
+                title={formatMessage(messages.fullName)}
+                star={true}
+                autoCapitalize="characters"
+                onChangeText={this.onFullNameInputChange}
+                value={fullName}
+              />
+
+              {/*Nam sinh*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.yearOfBirth)}
+                  star
+                />
+                <SelectPicker
+                  data={yearBirth}
+                  value={yearOfBirth}
+                  headerText={formatMessage(messages.selectYearOfBirth)}
+                  placeholder={formatMessage(messages.select)}
+                  onSelect={this.onSelectYearOfBirth}
+                />
+              </View>
+
+              {/*Gioi tinh*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  text={formatMessage(messages.gender)}
+                  styleContainer={styles.itemTitle}
+                  star
+                />
+                <View style={styles.flexRow}>
+                  <TouchableOpacity
+                    style={styles.genderFirstItemContainer}
+                    onPress={this.selectGenderMale}>
+                    <RadioButton
+                      checked={gender === '1'}
+                      onPress={this.selectGenderMale}
+                    />
+                    <MediumText
+                      style={styles.gender}
+                      text={formatMessage(messages.male)}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.genderItemContainer}
+                    onPress={this.selectGenderFemale}>
+                    <RadioButton
+                      checked={gender === '2'}
+                      onPress={this.selectGenderFemale}
+                    />
+                    <MediumText
+                      style={styles.gender}
+                      text={formatMessage(messages.female)}
+                    />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.genderItemContainer}
+                    onPress={this.selectGenderOther}>
+                    <RadioButton
+                      checked={gender === '3'}
+                      onPress={this.selectGenderOther}
+                    />
+                    <MediumText
+                      style={styles.gender}
+                      text={formatMessage(messages.genderOther)}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/*Quoc tich*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.nationality)}
                   star
                 />
                 <SelectPicker
                   enableSearch={true}
                   data={countries}
                   loading={!countries}
-                  value={startCountryID}
-                  content={startCountryName}
-                  headerText={formatMessage(messages.selectCountry)}
+                  value={nationalityID}
+                  content={nationalityName}
+                  headerText={formatMessage(messages.selectNationality)}
                   placeholder={formatMessage(messages.select)}
                   onVisible={this.onVisiblePickerCountry}
-                  onSelect={this.onSelectStartCountry}
+                  onSelect={this.onSelectNationality}
                 />
               </View>
-              <View style={styles.item2Container}>
+
+              {/*So ho chieu / giay thong hanh*/}
+              <FormInput
+                title={formatMessage(messages.passportNumber)}
+                star={true}
+                placeholder={formatMessage(messages.passportPlaceholder)}
+                keyboardType={'phone-pad'}
+                onChangeText={this.onPassportInputChange}
+                value={passport}
+              />
+
+              {/*Thong tin di lai*/}
+              <View style={styles.itemContainer}>
                 <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.province)}
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.vehicleInformation)}
                   star
                 />
-                {startVN ? (
+                <View style={styles.flexRow}>
+                  <CheckBox
+                    checked={vehicle_Planes}
+                    title={formatMessage(messages.planes)}
+                    onPress={() => this.onChangeStatusVehicle('vehicle_Planes')}
+                    containerStyle={styles.checkboxContainer}
+                    textStyle={styles.checkBoxText}
+                  />
+                  <CheckBox
+                    checked={vehicle_Ship}
+                    title={formatMessage(messages.ship)}
+                    onPress={() => this.onChangeStatusVehicle('vehicle_Ship')}
+                    containerStyle={styles.checkboxContainer}
+                    textStyle={styles.checkBoxText}
+                  />
+                  <CheckBox
+                    checked={vehicle_Car}
+                    title={formatMessage(messages.car)}
+                    onPress={() => this.onChangeStatusVehicle('vehicle_Car')}
+                    containerStyle={styles.checkboxContainer}
+                    textStyle={styles.checkBoxText}
+                  />
+                </View>
+
+                <TextInfo
+                  styleContainer={[styles.headerTwoContainer, {marginTop: 10}]}
+                  style={styles.headerTwo}
+                  text={formatMessage(messages.vehicleOther)}
+                />
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={this.onOtherVehiclesInputChange}
+                  value={otherVehicles}
+                />
+              </View>
+
+              {/*<View style={styles.flexRow}>*/}
+              {/*So hieu phuong tien*/}
+              <FormInput
+                containerStyle={styles.vehicleNumber}
+                title={formatMessage(messages.vehicleNumber)}
+                onChangeText={this.onVehicleNumberInputChange}
+                value={vehicleNumber}
+              />
+
+              {/*So ghe*/}
+              <FormInput
+                containerStyle={styles.vehicleSeat}
+                title={formatMessage(messages.vehicleSeat)}
+                onChangeText={this.onVehicleSeatInputChange}
+                value={vehicleSeat}
+              />
+              {/*</View>*/}
+
+              {/*Ngay khoi hanh*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.startDay)}
+                  star
+                />
+                <Text style={styles.date} onPress={this.showPickerStartDate}>
+                  {startDateString}
+                </Text>
+                <DateTimePickerModal
+                  isVisible={isPickerStartDateVisible}
+                  mode="date"
+                  onConfirm={this.confirmPickerStartDate}
+                  onCancel={this.cancelPickerStartDate}
+                  // date={startDate}
+                  maximumDate={endDate}
+                />
+              </View>
+
+              {/*Ngay nhap canh*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.endDay)}
+                  star
+                />
+                <Text style={styles.date} onPress={this.showPickerEndDate}>
+                  {endDateString}
+                </Text>
+                <DateTimePickerModal
+                  isVisible={isPickerEndDateVisible}
+                  mode="date"
+                  onConfirm={this.confirmPickerEndDate}
+                  onCancel={this.cancelPickerEndDate}
+                  date={endDate}
+                  minimumDate={startDate}
+                />
+              </View>
+
+              {/*Dia diem khoi hanh*/}
+              <View>
+                <TextInfo
+                  styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                  text={formatMessage(messages.startPlace)}
+                />
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.country)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={countries}
+                    loading={!countries}
+                    value={startCountryID}
+                    content={startCountryName}
+                    headerText={formatMessage(messages.selectCountry)}
+                    placeholder={formatMessage(messages.select)}
+                    onVisible={this.onVisiblePickerCountry}
+                    onSelect={this.onSelectStartCountry}
+                  />
+                </View>
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.province)}
+                    star
+                  />
+                  {startVN ? (
+                    <SelectPicker
+                      enableSearch={true}
+                      data={provinces}
+                      loading={!provinces}
+                      value={startProvinceID}
+                      content={startProvinceName}
+                      headerText={formatMessage(messages.selectProvince)}
+                      placeholder={formatMessage(messages.select)}
+                      onVisible={this.onVisiblePickerProvince}
+                      onSelect={this.onSelectStartProvince}
+                    />
+                  ) : (
+                    <TextInput
+                      style={styles.textInput}
+                      onChangeText={this.onStartProvinceInputChange}
+                      value={startProvince}
+                    />
+                  )}
+                </View>
+              </View>
+
+              {/*Dia diem noi den*/}
+              <View>
+                <TextInfo
+                  styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                  text={formatMessage(messages.endPlace)}
+                />
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.country)}
+                    star
+                  />
+                  <View style={styles.labelVietNam}>
+                    <Text>{formatMessage(messages.vietnam)}</Text>
+                  </View>
+                </View>
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.province)}
+                    star
+                  />
                   <SelectPicker
                     enableSearch={true}
                     data={provinces}
                     loading={!provinces}
-                    value={startProvinceID}
-                    content={startProvinceName}
+                    value={endProvinceID}
+                    content={endProvinceName}
                     headerText={formatMessage(messages.selectProvince)}
                     placeholder={formatMessage(messages.select)}
                     onVisible={this.onVisiblePickerProvince}
-                    onSelect={this.onSelectStartProvince}
+                    onSelect={this.onSelectEndProvince}
                   />
-                ) : (
+                </View>
+                <FormInput
+                  title={formatMessage(messages.country21Day)}
+                  textStyle={styles.headerTwo}
+                  onChangeText={this.onCountry21DayInputChange}
+                  value={country21Day}
+                  star
+                />
+              </View>
+
+              {/*Dia chi luu tru sau khi cach ly*/}
+              <View>
+                <TextInfo
+                  styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                  text={formatMessage(messages.afterQuarantinePlace)}
+                />
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.vnProvince)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={provinces}
+                    loading={!provinces}
+                    value={afterQuarantine_ProvinceID}
+                    content={afterQuarantine_ProvinceName}
+                    headerText={formatMessage(messages.vnSelectProvince)}
+                    placeholder={formatMessage(messages.select)}
+                    onVisible={this.onVisiblePickerProvince}
+                    onSelect={this.onSelectAfterQuarantineProvince}
+                  />
+                </View>
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.vnDistrict)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={afterQuarantine_Districts}
+                    loading={!afterQuarantine_Districts}
+                    value={afterQuarantine_DistrictID}
+                    content={afterQuarantine_DistrictName}
+                    headerText={formatMessage(messages.vnSelectDistrict)}
+                    placeholder={formatMessage(messages.select)}
+                    onSelect={this.onSelectAfterQuarantinePDistrict}
+                    onVisible={this.onVisiblePickerAfterQuarantineDistrict}
+                    shouldVisible={this.shouldVisibleAfterQuarantineDistrict}
+                  />
+                </View>
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.vnWard)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={afterQuarantine_Wards}
+                    loading={!afterQuarantine_Wards}
+                    value={afterQuarantine_WardID}
+                    content={afterQuarantine_WardName}
+                    headerText={formatMessage(messages.vnSelectWard)}
+                    placeholder={formatMessage(messages.select)}
+                    onSelect={this.onSelectAfterQuarantineWard}
+                    onVisible={this.onVisiblePickerAfterQuarantineWard}
+                    shouldVisible={this.shouldVisibleAfterQuarantineWard}
+                  />
+                </View>
+
+                <FormInput
+                  title={formatMessage(messages.afterQuarantineAddress)}
+                  textStyle={styles.headerTwo}
+                  containerStyle={styles.headerTwoContainer}
+                  onChangeText={this.onAfterQuarantineAddressInputChange}
+                  value={afterQuarantine_Address}
+                  star
+                />
+              </View>
+
+              {/*Dia chi lien lac tai viet nam*/}
+              <View>
+                <TextInfo
+                  styleContainer={[styles.itemTitle, {paddingTop: 10}]}
+                  text={formatMessage(messages.vnContactAddress)}
+                />
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.vnProvince)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={provinces}
+                    loading={!provinces}
+                    value={vn_ProvinceID}
+                    content={vn_ProvinceName}
+                    headerText={formatMessage(messages.vnSelectProvince)}
+                    placeholder={formatMessage(messages.select)}
+                    onVisible={this.onVisiblePickerProvince}
+                    onSelect={this.onSelectVNProvince}
+                  />
+                </View>
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.vnDistrict)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={vn_Districts}
+                    loading={!vn_Districts}
+                    value={vn_DistrictID}
+                    content={vn_DistrictName}
+                    headerText={formatMessage(messages.vnSelectDistrict)}
+                    placeholder={formatMessage(messages.select)}
+                    onSelect={this.onSelectVNPDistrict}
+                    onVisible={this.onVisiblePickerVNDistrict}
+                    shouldVisible={this.shouldVisibleVNDistrict}
+                  />
+                </View>
+
+                <View style={styles.item2Container}>
+                  <TextInfo
+                    styleContainer={styles.headerTwoContainer}
+                    style={styles.headerTwo}
+                    text={formatMessage(messages.vnWard)}
+                    star
+                  />
+                  <SelectPicker
+                    enableSearch={true}
+                    data={vn_Wards}
+                    loading={!vn_Wards}
+                    value={vn_WardID}
+                    content={vn_WardName}
+                    headerText={formatMessage(messages.vnSelectWard)}
+                    placeholder={formatMessage(messages.select)}
+                    onSelect={this.onSelectVNWard}
+                    onVisible={this.onVisiblePickerVNWard}
+                    shouldVisible={this.shouldVisibleVNWard}
+                  />
+                </View>
+
+                <FormInput
+                  title={formatMessage(messages.vnAddress)}
+                  textStyle={styles.headerTwo}
+                  containerStyle={styles.headerTwoContainer}
+                  onChangeText={this.onVNAddressInputChange}
+                  value={vn_Address}
+                  star
+                />
+
+                <FormInput
+                  title={formatMessage(messages.phoneNumber)}
+                  textStyle={styles.headerTwo}
+                  containerStyle={styles.headerTwoContainer}
+                  onChangeText={this.onNumberPhoneInputChange}
+                  star
+                  value={numberPhone}
+                />
+
+                <FormInput
+                  title={formatMessage(messages.email)}
+                  textStyle={styles.headerTwo}
+                  containerStyle={styles.headerTwoContainer}
+                  onChangeText={this.onEmailInputChange}
+                  value={email}
+                />
+              </View>
+
+              {/*Trieu chung trong 21 ngay*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.symptom21Day)}
+                  star
+                />
+                <View style={{paddingBottom: 10}}>
+                  <View style={styles.rowSymptom0}>
+                    <MediumText style={styles.nameSymptom}>
+                      {formatMessage(messages.symptom)}
+                    </MediumText>
+                    <MediumText style={styles.buttonSymptom}>
+                      {formatMessage(messages.yes)}
+                    </MediumText>
+                    <MediumText style={styles.buttonSymptom}>
+                      {formatMessage(messages.no)}
+                    </MediumText>
+                  </View>
+
+                  {symptomData.map((symptomItem, index) => (
+                    <View
+                      key={symptomItem.id}
+                      style={
+                        index % 2 === 0
+                          ? styles.rowSymptom1
+                          : styles.rowSymptom2
+                      }>
+                      <Text style={styles.nameSymptom}>
+                        {vietnamese ? symptomItem.name : symptomItem.nameEn}
+                        <Text style={styles.star}> *</Text>
+                      </Text>
+                      <TouchableOpacity
+                        style={styles.checkboxSymptom}
+                        activeOpacity={1}
+                        onPress={() =>
+                          this.onSelectSymptom(symptomItem.id, true)
+                        }>
+                        <RadioButton
+                          checked={symptom[symptomItem.id] === true}
+                          onPress={() =>
+                            this.onSelectSymptom(symptomItem.id, true)
+                          }
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.checkboxSymptom}
+                        activeOpacity={1}
+                        onPress={() =>
+                          this.onSelectSymptom(symptomItem.id, false)
+                        }>
+                        <RadioButton
+                          checked={symptom[symptomItem.id] === false}
+                          onPress={() =>
+                            this.onSelectSymptom(symptomItem.id, false)
+                          }
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                </View>
+                <FormInput
+                  textStyle={styles.headerTwo}
+                  containerStyle={{
+                    paddingTop: 0,
+                    paddingBottom: 0,
+                  }}
+                  title={formatMessage(messages.vacxinContent)}
+                  onChangeText={this.onVacXinInputChange}
+                  value={vacxin}
+                />
+              </View>
+
+              {/*Lich su phoi nhiem trong 21 ngay*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.exposureHistory21Day)}
+                  star
+                />
+                <View>
+                  <View style={styles.rowSymptom0}>
+                    <MediumText style={styles.nameSymptom} />
+                    <MediumText style={styles.buttonSymptom}>
+                      {formatMessage(messages.yes)}
+                    </MediumText>
+                    <MediumText style={styles.buttonSymptom}>
+                      {formatMessage(messages.no)}
+                    </MediumText>
+                  </View>
+
+                  {exposureHistoryData.map(exposureItem => (
+                    <View key={exposureItem.id} style={styles.rowSymptom1}>
+                      <Text style={styles.nameSymptom}>
+                        {vietnamese ? exposureItem.name : exposureItem.nameEn}
+                        <Text style={styles.star}> *</Text>
+                      </Text>
+                      <TouchableOpacity
+                        style={styles.checkboxSymptom}
+                        activeOpacity={1}
+                        onPress={() =>
+                          this.onSelectExposureHistory(exposureItem.id, true)
+                        }>
+                        <RadioButton
+                          checked={exposureHistory[exposureItem.id] === true}
+                          onPress={() =>
+                            this.onSelectExposureHistory(exposureItem.id, true)
+                          }
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.checkboxSymptom}
+                        activeOpacity={1}
+                        onPress={() =>
+                          this.onSelectExposureHistory(exposureItem.id, false)
+                        }>
+                        <RadioButton
+                          checked={exposureHistory[exposureItem.id] === false}
+                          onPress={() =>
+                            this.onSelectExposureHistory(exposureItem.id, false)
+                          }
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                </View>
+              </View>
+
+              {/*Co so cach ly*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.quarantinePlace)}
+                  star
+                />
+                {quarantinePlaceData.map(item => {
+                  return (
+                    <CheckBox1
+                      key={item.id}
+                      title={language === 'vi' ? item.name : item.nameEn}
+                      containerStyle={styles.checkboxContainer}
+                      textStyle={styles.checkBoxText}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      size={18}
+                      onPress={() => this.onSelectQuarantinePlace(item.id)}
+                      checked={item.id === quarantinePlace}
+                    />
+                  );
+                })}
+
+                {quarantinePlace === 'quarantineOther' && (
                   <TextInput
-                    style={styles.textInput}
-                    onChangeText={this.onStartProvinceInputChange}
-                    value={startProvince}
+                    style={[styles.textInput]}
+                    onChangeText={this.onOtherQuarantinePlaceInputChange}
+                    value={otherQuarantinePlace}
                   />
                 )}
               </View>
-            </View>
 
-            {/*Dia diem noi den*/}
-            <View>
-              <TextInfo
-                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-                text={formatMessage(messages.endPlace)}
-              />
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.country)}
-                  star
-                />
-                <View style={styles.labelVietNam}>
-                  <Text>{formatMessage(messages.vietnam)}</Text>
-                </View>
-              </View>
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.province)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={provinces}
-                  loading={!provinces}
-                  value={endProvinceID}
-                  content={endProvinceName}
-                  headerText={formatMessage(messages.selectProvince)}
-                  placeholder={formatMessage(messages.select)}
-                  onVisible={this.onVisiblePickerProvince}
-                  onSelect={this.onSelectEndProvince}
-                />
-              </View>
-              <FormInput
-                title={formatMessage(messages.country21Day)}
-                textStyle={styles.headerTwo}
-                onChangeText={this.onCountry21DayInputChange}
-                value={country21Day}
-                star
-              />
-            </View>
-
-            {/*Dia chi luu tru sau khi cach ly*/}
-            <View>
-              <TextInfo
-                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-                text={formatMessage(messages.afterQuarantinePlace)}
-              />
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.vnProvince)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={provinces}
-                  loading={!provinces}
-                  value={afterQuarantine_ProvinceID}
-                  content={afterQuarantine_ProvinceName}
-                  headerText={formatMessage(messages.vnSelectProvince)}
-                  placeholder={formatMessage(messages.select)}
-                  onVisible={this.onVisiblePickerProvince}
-                  onSelect={this.onSelectAfterQuarantineProvince}
-                />
-              </View>
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.vnDistrict)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={afterQuarantine_Districts}
-                  loading={!afterQuarantine_Districts}
-                  value={afterQuarantine_DistrictID}
-                  content={afterQuarantine_DistrictName}
-                  headerText={formatMessage(messages.vnSelectDistrict)}
-                  placeholder={formatMessage(messages.select)}
-                  onSelect={this.onSelectAfterQuarantinePDistrict}
-                  onVisible={this.onVisiblePickerAfterQuarantineDistrict}
-                  shouldVisible={this.shouldVisibleAfterQuarantineDistrict}
-                />
-              </View>
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.vnWard)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={afterQuarantine_Wards}
-                  loading={!afterQuarantine_Wards}
-                  value={afterQuarantine_WardID}
-                  content={afterQuarantine_WardName}
-                  headerText={formatMessage(messages.vnSelectWard)}
-                  placeholder={formatMessage(messages.select)}
-                  onSelect={this.onSelectAfterQuarantineWard}
-                  onVisible={this.onVisiblePickerAfterQuarantineWard}
-                  shouldVisible={this.shouldVisibleAfterQuarantineWard}
-                />
-              </View>
-
-              <FormInput
-                title={formatMessage(messages.afterQuarantineAddress)}
-                textStyle={styles.headerTwo}
-                containerStyle={styles.headerTwoContainer}
-                onChangeText={this.onAfterQuarantineAddressInputChange}
-                value={afterQuarantine_Address}
-                star
-              />
-            </View>
-
-            {/*Dia chi lien lac tai viet nam*/}
-            <View>
-              <TextInfo
-                styleContainer={[styles.itemTitle, {paddingTop: 10}]}
-                text={formatMessage(messages.vnContactAddress)}
-              />
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.vnProvince)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={provinces}
-                  loading={!provinces}
-                  value={vn_ProvinceID}
-                  content={vn_ProvinceName}
-                  headerText={formatMessage(messages.vnSelectProvince)}
-                  placeholder={formatMessage(messages.select)}
-                  onVisible={this.onVisiblePickerProvince}
-                  onSelect={this.onSelectVNProvince}
-                />
-              </View>
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.vnDistrict)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={vn_Districts}
-                  loading={!vn_Districts}
-                  value={vn_DistrictID}
-                  content={vn_DistrictName}
-                  headerText={formatMessage(messages.vnSelectDistrict)}
-                  placeholder={formatMessage(messages.select)}
-                  onSelect={this.onSelectVNPDistrict}
-                  onVisible={this.onVisiblePickerVNDistrict}
-                  shouldVisible={this.shouldVisibleVNDistrict}
-                />
-              </View>
-
-              <View style={styles.item2Container}>
-                <TextInfo
-                  styleContainer={styles.headerTwoContainer}
-                  style={styles.headerTwo}
-                  text={formatMessage(messages.vnWard)}
-                  star
-                />
-                <SelectPicker
-                  enableSearch={true}
-                  data={vn_Wards}
-                  loading={!vn_Wards}
-                  value={vn_WardID}
-                  content={vn_WardName}
-                  headerText={formatMessage(messages.vnSelectWard)}
-                  placeholder={formatMessage(messages.select)}
-                  onSelect={this.onSelectVNWard}
-                  onVisible={this.onVisiblePickerVNWard}
-                  shouldVisible={this.shouldVisibleVNWard}
-                />
-              </View>
-
-              <FormInput
-                title={formatMessage(messages.vnAddress)}
-                textStyle={styles.headerTwo}
-                containerStyle={styles.headerTwoContainer}
-                onChangeText={this.onVNAddressInputChange}
-                value={vn_Address}
-                star
-              />
-
-              <FormInput
-                title={formatMessage(messages.phoneNumber)}
-                textStyle={styles.headerTwo}
-                containerStyle={styles.headerTwoContainer}
-                onChangeText={this.onNumberPhoneInputChange}
-                star
-                value={numberPhone}
-              />
-
-              <FormInput
-                title={formatMessage(messages.email)}
-                textStyle={styles.headerTwo}
-                containerStyle={styles.headerTwoContainer}
-                onChangeText={this.onEmailInputChange}
-                value={email}
-              />
-            </View>
-
-            {/*Trieu chung trong 21 ngay*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.symptom21Day)}
-                star
-              />
-              <View style={{paddingBottom: 10}}>
-                <View style={styles.rowSymptom0}>
-                  <MediumText style={styles.nameSymptom}>
-                    {formatMessage(messages.symptom)}
-                  </MediumText>
-                  <MediumText style={styles.buttonSymptom}>
-                    {formatMessage(messages.yes)}
-                  </MediumText>
-                  <MediumText style={styles.buttonSymptom}>
-                    {formatMessage(messages.no)}
-                  </MediumText>
-                </View>
-
-                {symptomData.map((symptomItem, index) => (
-                  <View
-                    key={symptomItem.id}
-                    style={
-                      index % 2 === 0 ? styles.rowSymptom1 : styles.rowSymptom2
-                    }>
-                    <Text style={styles.nameSymptom}>
-                      {vietnamese ? symptomItem.name : symptomItem.nameEn}
-                      <Text style={styles.star}> *</Text>
-                    </Text>
-                    <TouchableOpacity
-                      style={styles.checkboxSymptom}
-                      activeOpacity={1}
-                      onPress={() =>
-                        this.onSelectSymptom(symptomItem.id, true)
-                      }>
-                      <RadioButton
-                        checked={symptom[symptomItem.id] === true}
-                        onPress={() =>
-                          this.onSelectSymptom(symptomItem.id, true)
-                        }
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.checkboxSymptom}
-                      activeOpacity={1}
-                      onPress={() =>
-                        this.onSelectSymptom(symptomItem.id, false)
-                      }>
-                      <RadioButton
-                        checked={symptom[symptomItem.id] === false}
-                        onPress={() =>
-                          this.onSelectSymptom(symptomItem.id, false)
-                        }
-                      />
-                    </TouchableOpacity>
-                  </View>
-                ))}
-              </View>
-              <FormInput
-                textStyle={styles.headerTwo}
-                containerStyle={{
-                  paddingTop: 0,
-                  paddingBottom: 0,
-                }}
-                title={formatMessage(messages.vacxinContent)}
-                onChangeText={this.onVacXinInputChange}
-                value={vacxin}
-              />
-            </View>
-
-            {/*Lich su phoi nhiem trong 21 ngay*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.exposureHistory21Day)}
-                star
-              />
+              {/*Phieu ket qua xet nghiem*/}
               <View>
-                <View style={styles.rowSymptom0}>
-                  <MediumText style={styles.nameSymptom} />
-                  <MediumText style={styles.buttonSymptom}>
-                    {formatMessage(messages.yes)}
-                  </MediumText>
-                  <MediumText style={styles.buttonSymptom}>
-                    {formatMessage(messages.no)}
-                  </MediumText>
-                </View>
-
-                {exposureHistoryData.map(exposureItem => (
-                  <View key={exposureItem.id} style={styles.rowSymptom1}>
-                    <Text style={styles.nameSymptom}>
-                      {vietnamese ? exposureItem.name : exposureItem.nameEn}
-                      <Text style={styles.star}> *</Text>
-                    </Text>
-                    <TouchableOpacity
-                      style={styles.checkboxSymptom}
-                      activeOpacity={1}
-                      onPress={() =>
-                        this.onSelectExposureHistory(exposureItem.id, true)
-                      }>
-                      <RadioButton
-                        checked={exposureHistory[exposureItem.id] === true}
-                        onPress={() =>
-                          this.onSelectExposureHistory(exposureItem.id, true)
-                        }
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.testResult)}
+                />
+                <View
+                  style={[
+                    styles.flexRow,
+                    {paddingTop: 8, paddingBottom: 10, alignItems: 'center'},
+                  ]}>
+                  <TouchableOpacity
+                    onPress={this.onSelectTestResultImage}
+                    style={
+                      testResultImageBase64 || testResultImageURL
+                        ? styles.testResultImageBtn
+                        : styles.testResultBtn
+                    }>
+                    {testResultImageBase64 || testResultImageURL ? (
+                      <Image
+                        style={styles.testResultImage}
+                        source={testResultImageSource}
                       />
+                    ) : null}
+                  </TouchableOpacity>
+
+                  <View style={{marginLeft: 20}}>
+                    <TouchableOpacity
+                      style={styles.rowSymptom1}
+                      onPress={() => this.selectTestResult(true)}>
+                      <RadioButton
+                        checked={testResult === true}
+                        onPress={() => this.selectTestResult(true)}
+                      />
+                      <MediumText>
+                        {formatMessage(messages.negative)}
+                      </MediumText>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={styles.checkboxSymptom}
-                      activeOpacity={1}
-                      onPress={() =>
-                        this.onSelectExposureHistory(exposureItem.id, false)
-                      }>
+                      style={styles.rowSymptom1}
+                      onPress={() => this.selectTestResult(false)}>
                       <RadioButton
-                        checked={exposureHistory[exposureItem.id] === false}
-                        onPress={() =>
-                          this.onSelectExposureHistory(exposureItem.id, false)
-                        }
+                        checked={testResult === false}
+                        onPress={() => this.selectTestResult(false)}
                       />
+                      <MediumText>
+                        {formatMessage(messages.positive)}
+                      </MediumText>
                     </TouchableOpacity>
                   </View>
-                ))}
-              </View>
-            </View>
-
-            {/*Co so cach ly*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.quarantinePlace)}
-                star
-              />
-              {quarantinePlaceData.map(item => {
-                return (
-                  <CheckBox1
-                    key={item.id}
-                    title={language === 'vi' ? item.name : item.nameEn}
-                    containerStyle={styles.checkboxContainer}
-                    textStyle={styles.checkBoxText}
-                    checkedIcon="dot-circle-o"
-                    uncheckedIcon="circle-o"
-                    size={18}
-                    onPress={() => this.onSelectQuarantinePlace(item.id)}
-                    checked={item.id === quarantinePlace}
-                  />
-                );
-              })}
-
-              {quarantinePlace === 'quarantineOther' && (
-                <TextInput
-                  style={[styles.textInput]}
-                  onChangeText={this.onOtherQuarantinePlaceInputChange}
-                  value={otherQuarantinePlace}
-                />
-              )}
-            </View>
-
-            {/*Phieu ket qua xet nghiem*/}
-            <View>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.testResult)}
-              />
-              <View
-                style={[
-                  styles.flexRow,
-                  {paddingTop: 8, paddingBottom: 10, alignItems: 'center'},
-                ]}>
-                <TouchableOpacity
-                  onPress={this.onSelectTestResultImage}
-                  style={
-                    testResultImageBase64 || testResultImageURL
-                      ? styles.testResultImageBtn
-                      : styles.testResultBtn
-                  }>
-                  {testResultImageBase64 || testResultImageURL ? (
-                    <Image
-                      style={styles.testResultImage}
-                      source={testResultImageSource}
-                    />
-                  ) : null}
-                </TouchableOpacity>
-
-                <View style={{marginLeft: 20}}>
-                  <TouchableOpacity
-                    style={styles.rowSymptom1}
-                    onPress={() => this.selectTestResult(true)}>
-                    <RadioButton
-                      checked={testResult === true}
-                      onPress={() => this.selectTestResult(true)}
-                    />
-                    <MediumText>{formatMessage(messages.negative)}</MediumText>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.rowSymptom1}
-                    onPress={() => this.selectTestResult(false)}>
-                    <RadioButton
-                      checked={testResult === false}
-                      onPress={() => this.selectTestResult(false)}
-                    />
-                    <MediumText>{formatMessage(messages.positive)}</MediumText>
-                  </TouchableOpacity>
                 </View>
               </View>
-            </View>
 
-            {/*Ngay xet nghiem*/}
-            <View style={styles.itemContainer}>
-              <TextInfo
-                styleContainer={styles.itemTitle}
-                text={formatMessage(messages.testDate)}
-              />
-              <Text style={styles.date} onPress={this.showPickerTestDate}>
-                {testDateString}
-              </Text>
-              <DateTimePickerModal
-                isVisible={isPickerTestDateVisible}
-                mode="date"
-                onConfirm={this.confirmPickerTestDate}
-                onCancel={this.cancelPickerTestDate}
-                date={testDate}
-              />
-            </View>
-
-            <Text style={styles.labelRed}>
-              {formatMessage(messages.content3)}
-            </Text>
-
-            <View style={styles.btnSendContainer}>
-              <TouchableOpacity style={styles.btnSend} onPress={this.onSend}>
-                <Text style={styles.btnSendContent}>
-                  {formatMessage(messages.sendContent)}
+              {/*Ngay xet nghiem*/}
+              <View style={styles.itemContainer}>
+                <TextInfo
+                  styleContainer={styles.itemTitle}
+                  text={formatMessage(messages.testDate)}
+                />
+                <Text style={styles.date} onPress={this.showPickerTestDate}>
+                  {testDateString}
                 </Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
+                <DateTimePickerModal
+                  isVisible={isPickerTestDateVisible}
+                  mode="date"
+                  onConfirm={this.confirmPickerTestDate}
+                  onCancel={this.cancelPickerTestDate}
+                  date={testDate}
+                />
+              </View>
+
+              <Text style={styles.labelRed}>
+                {formatMessage(messages.content3)}
+              </Text>
+
+              <View style={styles.btnSendContainer}>
+                <TouchableOpacity style={styles.btnSend} onPress={this.onSend}>
+                  <Text style={styles.btnSendContent}>
+                    {formatMessage(messages.sendContent)}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          )}
         </SafeAreaView>
         {this.renderModal()}
       </KeyboardAvoidingView>
@@ -2064,14 +2080,14 @@ class Declaration extends React.Component {
   }
 }
 
-Declaration.propTypes = {
+EntryDeclarationScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-Declaration.defaultProps = {
+EntryDeclarationScreen.defaultProps = {
   displayHeader: true,
 };
 
-Declaration.contextType = EntryLanguageContext;
+EntryDeclarationScreen.contextType = EntryLanguageContext;
 
-export default injectIntl(Declaration);
+export default injectIntl(EntryDeclarationScreen);
