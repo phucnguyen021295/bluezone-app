@@ -223,31 +223,35 @@ class SelectPicker extends React.PureComponent {
         isVisible={isVisible}
         contentStyle={{flex: 1}}
         onBackdropPress={this.onHideModal}>
-        {headerText && <Header onBack={this.onHideModal} title={headerText} />}
-        {enableSearch && (
-          <TextInput
-            style={[styles.textInput]}
-            onChangeText={this.onChangeSearchKey}
-            value={searchKey}
-            placeholder={formatMessage(messages.search)}
-          />
-        )}
-        {!loading ? (
-          <FlatList
-            keyboardShouldPersistTaps={'handled'}
-            data={_data}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{paddingBottom: 15}}
-            getItemLayout={this.getItemLayout}
-            keyExtractor={item => item.id.toString()}
-            renderItem={this.renderItem}
-            initialNumToRender={60}
-          />
-        ) : (
-          <View style={{flex: 1, justifyContent: 'center'}}>
-            <ActivityIndicator size="large" color={'#015cd0'} />
-          </View>
-        )}
+        <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
+          {headerText && (
+            <Header onBack={this.onHideModal} title={headerText} />
+          )}
+          {enableSearch && (
+            <TextInput
+              style={[styles.textInput]}
+              onChangeText={this.onChangeSearchKey}
+              value={searchKey}
+              placeholder={formatMessage(messages.search)}
+            />
+          )}
+          {!loading ? (
+            <FlatList
+              keyboardShouldPersistTaps={'handled'}
+              data={_data}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{paddingBottom: 15}}
+              getItemLayout={this.getItemLayout}
+              keyExtractor={item => item.id.toString()}
+              renderItem={this.renderItem}
+              initialNumToRender={60}
+            />
+          ) : (
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <ActivityIndicator size="large" color={'#015cd0'} />
+            </View>
+          )}
+        </SafeAreaView>
       </ModalBase>
     );
   }

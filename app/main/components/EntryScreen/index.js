@@ -69,7 +69,6 @@ const EntryDeclareSuccessScreen = props => {
           style: {
             borderTopColor: '#dddddd',
             borderTopWidth: 0.5,
-            height: isIPhoneX ? TAB_BAR_IPHONEX_HEIGHT : TAB_BAR_HEIGHT,
           },
           tabStyle: {
             height: TAB_BAR_HEIGHT,
@@ -89,7 +88,7 @@ const EntryDeclareSuccessScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-                text={'TO khai nhap canh'}
+                text={'Tờ khai nhập cảnh'}
                 style={[
                   {
                     fontSize: fontSize.normal,
@@ -110,7 +109,7 @@ const EntryDeclareSuccessScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-                text={'Khai bao hang ngay'}
+                text={'Khai báo hàng ngày'}
                 style={[
                   {
                     fontSize: fontSize.normal,

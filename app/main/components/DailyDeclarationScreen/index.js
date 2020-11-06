@@ -25,13 +25,13 @@ import React from 'react';
 import {StatusBar, SafeAreaView, View, ScrollView} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
-import {CheckBox} from 'react-native-elements';
 
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
 import Header from '../../../base/components/Header';
 import ButtonBase from '../../../base/components/ButtonBase';
 import HealthMonitoringItem from './components/HealthMonitoringItem';
+import CheckBox from '../../../base/components/CheckBox';
 
 // Apis
 import {
@@ -283,12 +283,9 @@ class DailyDeclaration extends React.Component {
               return (
                 <CheckBox
                   key={item.StateID}
-                  iconType={'ionicon'}
                   iconRight
                   title={name}
                   disabled={this.checkDisabledCheckbox(item.StateID)}
-                  checkedIcon="ios-checkbox-outline"
-                  uncheckedIcon="ios-square-outline"
                   checked={selected}
                   onPress={() => this.selectItem(item)}
                   containerStyle={styles.containerStyleCheckbox}
