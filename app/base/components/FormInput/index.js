@@ -62,6 +62,8 @@ function FormInput(props) {
     containerStyle,
     textStyle,
     inputStyle,
+    disable,
+    value,
     ...otherProps
   } = props;
   return (
@@ -70,7 +72,11 @@ function FormInput(props) {
         <MediumText text={title} style={[styles.titleStyle, textStyle]} />
         {star && <Text text={' *'} style={styles.star} />}
       </Text>
-      <TextInput style={[styles.inputStyle, inputStyle]} {...otherProps} />
+      {disable ? (
+        <Text text={value} style={styles.itemSelected} />
+      ) : (
+        <TextInput style={[styles.inputStyle, inputStyle]} {...otherProps} />
+      )}
     </View>
   );
 }

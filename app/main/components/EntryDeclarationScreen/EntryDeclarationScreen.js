@@ -52,6 +52,7 @@ import ModalNotify from '../HomeScreen/components/ModalNotify/ModalNotify';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import {EntryLanguageContext} from './components/LanguageContext';
 import SwitchLanguage from './components/SwitchLanguage';
+import Declaration from './components/Declaration';
 
 // Api
 import {
@@ -90,7 +91,7 @@ import messages from '../../../core/msg/entryForm';
 const VIETNAM_ID = '234';
 const regxEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-class Declaration extends React.Component {
+class EntryDeclarationScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -171,6 +172,7 @@ class Declaration extends React.Component {
 
     this.lastAfterQuarantineProvinceIDApi = null;
     this.lastAfterQuarantineDistrictIDApi = null;
+    this.form = true;
   }
 
   componentDidMount() {
@@ -1324,6 +1326,9 @@ class Declaration extends React.Component {
               title={formatMessage(messages.header)}
             />
           )}
+
+          {this.form ? <Declaration data={this.state} /> : null}
+
           <ScrollView
             style={styles.scroll}
             keyboardShouldPersistTaps={'handled'}>
@@ -2125,14 +2130,14 @@ class Declaration extends React.Component {
   }
 }
 
-Declaration.propTypes = {
+EntryDeclarationScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-Declaration.defaultProps = {
+EntryDeclarationScreen.defaultProps = {
   displayHeader: true,
 };
 
-Declaration.contextType = EntryLanguageContext;
+EntryDeclarationScreen.contextType = EntryLanguageContext;
 
-export default injectIntl(Declaration);
+export default injectIntl(EntryDeclarationScreen);
