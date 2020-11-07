@@ -200,7 +200,10 @@ class SelectPicker extends React.PureComponent {
   }
 
   onHideModal() {
-    this.setState({isVisible: false});
+    this.setState({
+      isVisible: false,
+      searchKey: '',
+    });
   }
 
   getItemLayout = (data, index) => {

@@ -108,7 +108,7 @@ class EntryDeclarationScreen extends React.Component {
       gateName: '',
       fullName: '',
       yearOfBirth: null,
-      gender: null,
+      gender: '1',
       nationalityID: null,
       nationalityName: '',
       passport: '',
@@ -580,7 +580,7 @@ class EntryDeclarationScreen extends React.Component {
   };
 
   cancelPickerStartDate = () => {
-    this.changeState('isPickerStartDateVisible', true);
+    this.changeStateWithOutSave({isPickerStartDateVisible: false});
   };
 
   confirmPickerEndDate = date => {
@@ -592,7 +592,7 @@ class EntryDeclarationScreen extends React.Component {
   };
 
   cancelPickerEndDate = () => {
-    this.changeState('isPickerEndDateVisible', true);
+    this.changeStateWithOutSave({isPickerEndDateVisible: false});
   };
 
   confirmPickerTestDate = date => {
@@ -604,7 +604,7 @@ class EntryDeclarationScreen extends React.Component {
   };
 
   cancelPickerTestDate = () => {
-    this.changeState('isPickerTestDateVisible', true);
+    this.changeStateWithOutSave({isPickerTestDateVisible: false});
   };
 
   onSelectStartCountry = (id, name) => {
