@@ -51,10 +51,6 @@ const styles = StyleSheet.create({
     color: 'red',
     fontSize: fontSize.fontSize16,
   },
-
-  itemSelected: {
-    paddingLeft: 20,
-  },
 });
 
 export default styles;

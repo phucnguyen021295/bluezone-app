@@ -1410,7 +1410,7 @@ const getConfigComponentsApp = (
 const checkModeEntry = (success, failure) => {
   const {PhoneNumber, TokenFirebase} = configuration;
   getData(
-    `${DOMAIN}/api/Region/GetProvinceVN`,
+    `${DOMAIN}/api/AppInforEntry/CheckMode`,
     {PhoneNumber, TokenFirebase},
     success,
     failure,

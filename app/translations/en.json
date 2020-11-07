@@ -321,6 +321,7 @@
     "bluezone.entryForm.errorForm2": "You need to select district information",
     "bluezone.entryForm.errorForm3": "Declaration information is not correct. Please update the information fields that are available",
     "bluezone.entryForm.errorForm4": "An error occurred. Please try again",
+    "bluezone.entryForm.errorForm5": "Email address is not valid",
     "bluezone.entryForm.notification": "Notification",
     "bluezone.entryForm.enterInput": "Enter input",
     "bluezone.entryForm.search": "Search",

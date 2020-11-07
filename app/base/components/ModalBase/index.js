@@ -49,8 +49,8 @@ function ModalBase(props) {
       animationIn="zoomInDown"
       animationOut="zoomOutUp"
       backdropOpacity={0.65}
-      animationInTiming={600}
-      animationOutTiming={600}
+      animationInTiming={500}
+      animationOutTiming={500}
       backdropTransitionInTiming={0}
       backdropTransitionOutTiming={0}
       onBackButtonPress={onCloseModal}

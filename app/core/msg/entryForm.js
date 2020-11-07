@@ -314,6 +314,10 @@ export default defineMessages({
     id: 'bluezone.entryForm.errorForm4',
     defaultMessage: 'Có lỗi xảy ra. Vui lòng thử lại',
   },
+  errorForm5: {
+    id: 'bluezone.entryForm.errorForm5',
+    defaultMessage: 'Địa chỉ email không hợp lệ',
+  },
   notification: {
     id: 'bluezone.entryForm.notification',
     defaultMessage: 'Thông báo',

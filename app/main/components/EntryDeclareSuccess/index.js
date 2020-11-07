@@ -22,21 +22,12 @@
 'use strict';
 
 import React from 'react';
-import {
-  StatusBar,
-  SafeAreaView,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, View, TouchableOpacity} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
-import Header from '../../../base/components/Header';
-import ButtonBase from '../../../base/components/ButtonBase';
-import {LanguageContext} from '../../../../LanguageContext';
 
 import SCREEN from '../../nameScreen';
 
@@ -48,7 +39,7 @@ const EntryDeclareSuccessScreen = props => {
   const {code, passport} = route.params;
 
   const updateEntry = () => {
-    navigation.navigate(SCREEN.ENTRY_DECLARATION);
+    navigation.replace(SCREEN.ENTRY_DECLARATION);
   };
 
   const goBack = () => {

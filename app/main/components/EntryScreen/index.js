@@ -57,7 +57,7 @@ const EntryDeclareSuccessScreen = props => {
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
       <Header title={'Nhập cảnh'} />
       <Tab.Navigator
-        initialRouteName={initialRouteName}
+        initialRouteName={'EntryDeclare'}
         tabBarPosition={'top'}
         tabBarOptions={{
           showIcon: false,

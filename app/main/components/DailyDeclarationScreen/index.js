@@ -22,7 +22,7 @@
 'use strict';
 
 import React from 'react';
-import {StatusBar, SafeAreaView, View, ScrollView} from 'react-native';
+import {StatusBar, SafeAreaView, View, ScrollView, Alert} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 
@@ -175,6 +175,15 @@ class DailyDeclaration extends React.Component {
 
     const InforEntryObjectGuid = await getEntryObjectGUIDInformation();
     const InforEntryPersonObjectGuid = await getInforEntryPersonObjectGuid();
+
+    if (!InforEntryObjectGuid || !InforEntryPersonObjectGuid) {
+      Alert.alert(
+        'Bluezone',
+        'Bạn cần phải hoàn thành tờ khai y tế trước khi sử dụng chức năng này.',
+      );
+      return;
+    }
+
     const LtinforEntryPersonReportDetail = this.getLtinforEntryPersonReportDetail(
       ListItem,
     );

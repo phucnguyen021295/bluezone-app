@@ -73,9 +73,13 @@ function FormInput(props) {
         {star && <Text text={' *'} style={styles.star} />}
       </Text>
       {disable ? (
-        <Text text={value} style={styles.itemSelected} />
+        <Text text={value} />
       ) : (
-        <TextInput style={[styles.inputStyle, inputStyle]} {...otherProps} />
+        <TextInput
+          value={value}
+          style={[styles.inputStyle, inputStyle]}
+          {...otherProps}
+        />
       )}
     </View>
   );

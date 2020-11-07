@@ -323,6 +323,7 @@
   "bluezone.entryForm.errorForm2": "Bạn cần phải chọn thông tin quận/huyện trước",
   "bluezone.entryForm.errorForm3": "Thông tin tờ khai chưa chính xác. Bạn vui lòng cập nhật các trường thông tin còn trống",
   "bluezone.entryForm.errorForm4": "Có lỗi xảy ra. Vui lòng thử lại",
+  "bluezone.entryForm.errorForm5": "Địa chỉ email không hợp lệ",
   "bluezone.entryForm.notification": "Thông báo",
   "bluezone.entryForm.enterInput": "Nhập thông tin",
   "bluezone.entryForm.search": "Tìm kiếm",

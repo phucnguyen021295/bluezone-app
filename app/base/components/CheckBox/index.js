@@ -25,7 +25,7 @@ import React from 'react';
 import {Image} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 
-function RadioButton(props) {
+function CheckBoxCustom(props) {
   return (
     <CheckBox
       activeOpacity={1}
@@ -36,11 +36,11 @@ function RadioButton(props) {
   );
 }
 
-RadioButton.defaultProps = {
+CheckBoxCustom.defaultProps = {
   checked: false,
   onPress: () => {},
   radioStyle: {},
   checkedCircleStyle: {},
 };
 
-export default RadioButton;
+export default CheckBoxCustom;
