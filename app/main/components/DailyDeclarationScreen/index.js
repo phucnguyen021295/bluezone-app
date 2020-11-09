@@ -298,7 +298,13 @@ class DailyDeclaration extends React.Component {
                   checked={selected}
                   onPress={() => this.selectItem(item)}
                   containerStyle={styles.containerStyleCheckbox}
-                  textStyle={{marginRight: 10, marginLeft: 0}}
+                  textStyle={{
+                    marginRight: 10,
+                    marginLeft: 0,
+                    color: this.checkDisabledCheckbox(item.StateID)
+                      ? '#C5C5C5'
+                      : '#000',
+                  }}
                 />
               );
             })}

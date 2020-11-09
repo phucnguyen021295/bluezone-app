@@ -46,6 +46,9 @@ const EntryDeclareSuccessScreen = props => {
     navigation.goBack();
   };
 
+  const {intl} = this.props;
+  const {formatMessage} = intl;
+
   return (
     <SafeAreaView>
       <View style={styles.infoContainer}>

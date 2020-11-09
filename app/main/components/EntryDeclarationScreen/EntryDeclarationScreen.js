@@ -57,6 +57,7 @@ import Declaration from './components/Declaration';
 import {
   entryDeclaration,
   getEntryInfo,
+  getEntryInfoByPhoneNumber,
   getAllCountryApi,
   getAllAirPortApi,
   getAllProvinceApi,
@@ -182,7 +183,7 @@ class EntryDeclarationScreen extends React.Component {
     this.objectGUID = objectGUID;
     getEntryInfoDeclare().then(info => {
       if (!info) {
-        getEntryInfo(objectGUID, data => {
+        getEntryInfoByPhoneNumber(data => {
           this.bindEntryInfoData(data);
         });
         return;
@@ -636,13 +637,13 @@ class EntryDeclarationScreen extends React.Component {
 
     this.changeState({
       afterQuarantine_ProvinceID: id,
+      afterQuarantine_ProvinceName: name,
       afterQuarantine_Districts: null,
       afterQuarantine_DistrictID: null,
       afterQuarantine_DistrictName: '',
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
       afterQuarantine_WardName: '',
-      afterQuarantine_ProvinceName: name,
     });
   };
 
@@ -2206,7 +2207,11 @@ class EntryDeclarationScreen extends React.Component {
                         style={styles.testResultImage}
                         source={testResultImageSource}
                       />
-                    ) : null}
+                    ) : (
+                      <MediumText style={styles.selectImage}>
+                        {formatMessage(messages.selectImage)}
+                      </MediumText>
+                    )}
                   </TouchableOpacity>
 
                   <View style={{marginLeft: 20}}>

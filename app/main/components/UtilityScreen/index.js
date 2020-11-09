@@ -45,10 +45,10 @@ import {syncConfigComponentApp} from './data/dataConfigComponentApp';
 import styles from './styles/index.css';
 
 const IMAGE = {
-  '1': require('./styles/images/anh.jpeg'),
-  '2': require('./styles/images/anh.jpeg'),
-  '3': require('./styles/images/anh.jpeg'),
-  '4': require('./styles/images/anh.jpeg'),
+  '1': require('./styles/images/entry.png'),
+  '2': require('./styles/images/entry.png'),
+  '3': require('./styles/images/entry.png'),
+  '4': require('./styles/images/entry.png'),
 };
 
 class UtilityScreen extends React.Component {

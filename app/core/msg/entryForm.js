@@ -253,6 +253,10 @@ export default defineMessages({
     id: 'bluezone.entryForm.testResult',
     defaultMessage: 'Phiếu kết quả xét nghiệm',
   },
+  selectImage: {
+    id: 'bluezone.entryForm.selectImage',
+    defaultMessage: 'Chọn ảnh',
+  },
   negative: {
     id: 'bluezone.entryForm.negative',
     defaultMessage: 'Âm tính',
