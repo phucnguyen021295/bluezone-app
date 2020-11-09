@@ -68,4 +68,8 @@ export default defineMessages({
     id: 'bluezone.dailyDeclaration.info',
     defaultMessage: 'Thông tin',
   },
+  error1: {
+    id: 'bluezone.dailyDeclaration.error1',
+    defaultMessage: 'Bạn cần phải hoàn thành tờ khai y tế trước khi sử dụng chức năng này.',
+  },
 });

@@ -77,7 +77,9 @@ class UtilityScreen extends React.Component {
     if (!PhoneNumber) {
       Alert.alert(
         'Bluezone',
-        'Bạn cần đăng ký số điện thoại để có thể sử dụng chức năng này',
+        locale === 'vi'
+          ? 'Bạn cần đăng ký số điện thoại để có thể sử dụng chức năng này.'
+          : 'You need to register a phone number to be able to use this function.',
       );
       return;
     }
