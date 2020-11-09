@@ -638,8 +638,10 @@ class EntryDeclarationScreen extends React.Component {
       afterQuarantine_ProvinceID: id,
       afterQuarantine_Districts: null,
       afterQuarantine_DistrictID: null,
+      afterQuarantine_DistrictName: '',
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
+      afterQuarantine_WardName: '',
       afterQuarantine_ProvinceName: name,
     });
   };
@@ -652,9 +654,10 @@ class EntryDeclarationScreen extends React.Component {
 
     this.changeState({
       afterQuarantine_DistrictID: id,
+      afterQuarantine_DistrictName: name,
       afterQuarantine_Wards: null,
       afterQuarantine_WardID: null,
-      afterQuarantine_DistrictName: name,
+      afterQuarantine_WardName: '',
     });
   };
 
@@ -676,8 +679,10 @@ class EntryDeclarationScreen extends React.Component {
       vn_ProvinceName: name,
       vn_Districts: null,
       vn_DistrictID: null,
+      vn_DistrictName: '',
       vn_Wards: null,
       vn_WardID: null,
+      vn_WardName: '',
     });
   };
 
@@ -692,6 +697,7 @@ class EntryDeclarationScreen extends React.Component {
       vn_DistrictName: name,
       vn_Wards: null,
       vn_WardID: null,
+      vn_WardName: '',
     });
   };
 

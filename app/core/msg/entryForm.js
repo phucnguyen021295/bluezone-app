@@ -206,7 +206,7 @@ export default defineMessages({
   },
   vnSelectWard: {
     id: 'bluezone.entryForm.vnSelectWard',
-    defaultMessage: 'Chọn phường xã',
+    defaultMessage: 'Chọn phường/xã',
   },
   vnAddress: {
     id: 'bluezone.entryForm.vnAddress',
