@@ -165,8 +165,7 @@ class SelectPicker extends React.PureComponent {
   };
 
   onShowSelect = () => {
-    const {shouldVisible, onVisible} = this.props;
-    onVisible && onVisible();
+    const {shouldVisible} = this.props;
     if (shouldVisible && !shouldVisible()) {
       return;
     }
@@ -216,7 +215,7 @@ class SelectPicker extends React.PureComponent {
 
   renderModal() {
     const {isVisible, searchKey, _data} = this.state;
-    const {loading, headerText, enableSearch} = this.props;
+    const {loading, headerText, enableSearch, onVisible} = this.props;
 
     const {intl} = this.props;
     const {formatMessage} = intl;
@@ -225,6 +224,7 @@ class SelectPicker extends React.PureComponent {
       <ModalBase
         isVisible={isVisible}
         contentStyle={{flex: 1}}
+        onModalShow={onVisible}
         onBackdropPress={this.onHideModal}>
         <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
           {headerText && (
