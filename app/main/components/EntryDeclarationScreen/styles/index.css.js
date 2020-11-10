@@ -175,9 +175,16 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     borderWidth: 1,
     borderColor: '#707070',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   testResultImageBtn: {},
+
+  selectImage: {
+    fontSize: fontSize.small,
+    color: '#000',
+  },
 
   testResultImage: {
     width: 131,

@@ -21,27 +21,28 @@
 
 'use strict';
 
-import React from 'react';
-import {
-  StatusBar,
-  SafeAreaView,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import * as PropTypes from 'prop-types';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 // Components
-import Text, {MediumText} from '../../../base/components/Text';
-import EntryDeclarationScreen from '../EntryDeclarationScreen';
-import DailyDeclarationScreen from '../DailyDeclarationScreen';
-
-import {isIPhoneX} from '../../../core/utils/isIPhoneX';
-import * as fontSize from '../../../core/fontSize';
 import Header from '../../../base/components/Header';
+import Text from '../../../base/components/Text';
+import EntryDeclarationScreen from '../EntryDeclarationScreen/EntryDeclarationScreen';
+import DailyDeclarationScreen from '../DailyDeclarationScreen';
+import ContextProvider from '../EntryDeclarationScreen/components/LanguageContext';
+import LanguageProvider from '../EntryDeclarationScreen/components/LanguageProvider';
+
+// Styles
+import * as fontSize from '../../../core/fontSize';
+import styles from './styles/index.css';
+
 import {heightPercentageToDP} from '../../../core/utils/dimension';
+import {translationMessages} from '../../../i18n';
+
+import messages from '../../../core/msg/entryScreen';
 
 // Styles
 
@@ -49,15 +50,18 @@ export const TAB_BAR_HEIGHT = heightPercentageToDP((42 / 720) * 100);
 
 export const Tab = createMaterialTopTabNavigator();
 
-const EntryDeclareSuccessScreen = props => {
+const EntryTabScreen = props => {
   const {route} = props;
   const initialRouteName = route.params?.tabFocus;
 
+  const {intl} = props;
+  const {formatMessage} = intl;
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
-      <Header title={'Nhập cảnh'} />
+      <Header title={formatMessage(messages.entry)} />
       <Tab.Navigator
-        initialRouteName={'EntryDeclare'}
+        initialRouteName={initialRouteName}
         tabBarPosition={'top'}
         tabBarOptions={{
           showIcon: false,
@@ -67,10 +71,11 @@ const EntryDeclareSuccessScreen = props => {
             opacity: 0,
           },
           style: {
-            borderTopColor: '#dddddd',
-            borderTopWidth: 0.5,
+            borderBottomWidth: 0.5,
+            borderBottomColor: '#747474',
             height: TAB_BAR_HEIGHT,
-            marginTop: 10,
+            shadowRadius: 0,
+            elevation: 0,
           },
           tabStyle: {
             height: TAB_BAR_HEIGHT,
@@ -90,12 +95,14 @@ const EntryDeclareSuccessScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-                text={'Tờ khai nhập cảnh'}
-                style={{
-                  fontSize: fontSize.normal,
-                  marginBottom: 4,
-                  color: focused ? '#015cd0' : '#747474',
-                }}
+
+                text={formatMessage(messages.entryDeclare)}
+                style={[
+                  styles.tabHeader,
+                  {
+                    color: focused ? '#015cd0' : '#747474',
+                  },
+                ]}
               />
             ),
           }}>
@@ -107,12 +114,14 @@ const EntryDeclareSuccessScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-                text={'Khai báo hàng ngày'}
-                style={{
-                  fontSize: fontSize.normal,
-                  marginBottom: 4,
-                  color: focused ? '#015cd0' : '#747474',
-                }}
+                text={formatMessage(messages.dailyDeclare)}
+                style={[
+                  styles.tabHeader,
+                  ,
+                  {
+                    color: focused ? '#015cd0' : '#747474',
+                  },
+                ]}
               />
             ),
           }}>
@@ -123,8 +132,26 @@ const EntryDeclareSuccessScreen = props => {
   );
 };
 
-EntryDeclareSuccessScreen.propTypes = {
+EntryTabScreen.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(EntryDeclareSuccessScreen);
+const EntryTabScreenFinal = injectIntl(EntryTabScreen);
+
+class EntryScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <ContextProvider>
+        <LanguageProvider messages={translationMessages}>
+          <EntryTabScreenFinal {...this.props} />
+        </LanguageProvider>
+      </ContextProvider>
+    );
+  }
+}
+
+export default EntryScreen;

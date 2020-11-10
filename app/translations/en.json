@@ -306,6 +306,7 @@
     "bluezone.entryForm.exposureHistory21Day": "Exposure history: For the past 21 days, you have",
     "bluezone.entryForm.quarantinePlace": "Quarantine place",
     "bluezone.entryForm.testResult": "Check test results",
+    "bluezone.entryForm.selectImage": "Select image",
     "bluezone.entryForm.negative": "Negative",
     "bluezone.entryForm.positive": "Positive",
     "bluezone.entryForm.testDate": "Test date",
@@ -338,5 +339,10 @@
     "bluezone.dailyDeclaration.btnAgreeModal": "Agree",
     "bluezone.dailyDeclaration.titleSafe": "Safe",
     "bluezone.dailyDeclaration.titleRisk": "Risk of infection sick",
-    "bluezone.dailyDeclaration.info": "Information"
+    "bluezone.dailyDeclaration.info": "Information",
+    "bluezone.dailyDeclaration.error1": "You need to complete an entry declaration before using this function.",
+
+    "bluezone.entryScreen.entry": "Entry",
+    "bluezone.entryScreen.entryDeclare": "Entry declaration",
+    "bluezone.entryScreen.dailyDeclare": "Daily declaration"
 }

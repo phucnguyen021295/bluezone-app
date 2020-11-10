@@ -1288,6 +1288,19 @@ const getEntryInfo = (guid, success, failure) => {
   );
 };
 
+const getEntryInfoByPhoneNumber = (success, failure) => {
+  const {PhoneNumber, TokenFirebase} = configuration;
+  getData(
+    `${DOMAIN}/api/AppInforEntry/GetOneByPhoneNumber`,
+    {
+      PhoneNumber,
+      TokenFirebase,
+    },
+    success,
+    failure,
+  );
+};
+
 const getAllCountryApi = (success = _defaultFunc, failure = _defaultFunc) => {
   getData(`${DOMAIN}/api/Region/GetAllCountry`, {}, success, failure);
 };
@@ -1468,6 +1481,7 @@ export {
   getAnswerMessage,
   getQuestionFAQ,
   getEntryInfo,
+  getEntryInfoByPhoneNumber,
   entryDeclaration,
   getAllCountryApi,
   getAllAirPortApi,

@@ -44,9 +44,9 @@ import RegisterInformation from './app/main/components/RegisterInformationScreen
 import ContactHistory from './app/main/components/ContactHistoryScreen';
 // import ScanScreen from './app/main/components/ScanScreen';
 import FAQ from './app/main/components/FAQScreen';
-import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
-import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
-import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
+// import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
+// import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
+// import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
 import EntryDeclareSuccess from './app/main/components/EntryDeclareSuccess';
 import Entry from './app/main/components/EntryScreen';
 import EntryVerifyOTP from './app/main/components/EntryVerifyOTPScreen';
@@ -495,18 +495,18 @@ class App extends React.Component {
                   component={ContactHistory}
                 />
                 <Stack.Screen name={SCREEN.WELCOME} component={Welcome} />
-                <Stack.Screen
-                  name={SCREEN.DAILY_DECLARATION}
-                  component={DailyDeclaration}
-                />
-                <Stack.Screen
-                  name={SCREEN.DOMESTIC_DECLARATION}
-                  component={DomesticDeclaration}
-                />
-                <Stack.Screen
-                  name={SCREEN.ENTRY_DECLARATION}
-                  component={EntryDeclaration}
-                />
+                {/*<Stack.Screen*/}
+                {/*  name={SCREEN.DAILY_DECLARATION}*/}
+                {/*  component={DailyDeclaration}*/}
+                {/*/>*/}
+                {/*<Stack.Screen*/}
+                {/*  name={SCREEN.DOMESTIC_DECLARATION}*/}
+                {/*  component={DomesticDeclaration}*/}
+                {/*/>*/}
+                {/*<Stack.Screen*/}
+                {/*  name={SCREEN.ENTRY_DECLARATION}*/}
+                {/*  component={EntryDeclaration}*/}
+                {/*/>*/}
                 <Stack.Screen
                   name={SCREEN.ENTRY_DECLARATION_SUCCESS}
                   component={EntryDeclareSuccess}

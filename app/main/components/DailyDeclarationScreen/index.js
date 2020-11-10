@@ -170,6 +170,8 @@ class DailyDeclaration extends React.Component {
   }
 
   async onSendInfo() {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
     let {itemsSelected} = this.state;
     const ListItem = itemsSelected.length > 0 ? itemsSelected : [5];
 
@@ -177,10 +179,7 @@ class DailyDeclaration extends React.Component {
     const InforEntryPersonObjectGuid = await getInforEntryPersonObjectGuid();
 
     if (!InforEntryObjectGuid || !InforEntryPersonObjectGuid) {
-      Alert.alert(
-        'Bluezone',
-        'Bạn cần phải hoàn thành tờ khai y tế trước khi sử dụng chức năng này.',
-      );
+      Alert.alert('Bluezone', formatMessage(message.error1));
       return;
     }
 
@@ -298,7 +297,13 @@ class DailyDeclaration extends React.Component {
                   checked={selected}
                   onPress={() => this.selectItem(item)}
                   containerStyle={styles.containerStyleCheckbox}
-                  textStyle={{marginRight: 10, marginLeft: 0}}
+                  textStyle={{
+                    marginRight: 10,
+                    marginLeft: 0,
+                    color: this.checkDisabledCheckbox(item.StateID)
+                      ? '#C5C5C5'
+                      : '#000',
+                  }}
                 />
               );
             })}
