@@ -91,15 +91,11 @@ const EntryDeclareSuccessScreen = props => {
             tabBarLabel: ({focused}) => (
               <Text
                 text={'Tờ khai nhập cảnh'}
-                style={[
-                  {
-                    fontSize: fontSize.normal,
-                    marginBottom: 4,
-                  },
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                  },
-                ]}
+                style={{
+                  fontSize: fontSize.normal,
+                  marginBottom: 4,
+                  color: focused ? '#015cd0' : '#747474',
+                }}
               />
             ),
           }}>
@@ -112,15 +108,11 @@ const EntryDeclareSuccessScreen = props => {
             tabBarLabel: ({focused}) => (
               <Text
                 text={'Khai báo hàng ngày'}
-                style={[
-                  {
-                    fontSize: fontSize.normal,
-                    marginBottom: 4,
-                  },
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                  },
-                ]}
+                style={{
+                  fontSize: fontSize.normal,
+                  marginBottom: 4,
+                  color: focused ? '#015cd0' : '#747474',
+                }}
               />
             ),
           }}>
