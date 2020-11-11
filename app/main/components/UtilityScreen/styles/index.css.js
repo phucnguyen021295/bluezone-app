@@ -22,36 +22,13 @@
 'use strict';
 
 import {StyleSheet} from 'react-native';
-import * as fontSize from '../../../../core/fontSize';
+import {heightPercentageToDP} from '../../../../core/utils/dimension';
+
+const APP_LIST_MARGIN_TOP = heightPercentageToDP((51 / 720) * 100);
 
 const styles = StyleSheet.create({
-  grid: {
-    marginTop: 36,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginVertical: 15,
-  },
-  item: {
-    alignItems: 'center',
-    width: '33.3%',
-  },
-  itemImage: {
-    width: 60,
-    height: 60,
-  },
-
-  itemText: {
-    paddingHorizontal: 5,
-    color: '#000000',
-    fontSize: fontSize.fontSize11,
-    paddingVertical: 8,
-    textAlign: 'center',
-    paddingBottom: 30,
+  contentContainerStyle: {
+    marginTop: APP_LIST_MARGIN_TOP,
   },
 });
 

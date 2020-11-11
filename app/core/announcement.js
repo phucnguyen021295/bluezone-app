@@ -56,7 +56,6 @@ const isUpdateVersion = notify => {
 const showNotify = async notify => {
   const language = (await getLanguage()) || 'vi';
   const notifyLang = notify.data.Notify.TypeLanguage;
-  debugger;
 
   if (!notifyLang || notifyLang.toUpperCase() !== language.toUpperCase()) {
     return;

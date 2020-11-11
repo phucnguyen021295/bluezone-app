@@ -29,30 +29,30 @@ import {
   widthPercentageToDP,
 } from '../../../../core/utils/dimension';
 
-const HEIGHT_HEADER = heightPercentageToDP((316 / 720) * 100);
+const HEIGHT_HEADER = heightPercentageToDP((270 / 720) * 100);
 const HEIGHT_SCAN_HEADER = heightPercentageToDP((90 / 720) * 100);
 const HEIGHT_IMG = heightPercentageToDP((72 / 720) * 100);
-const PADDING_HOR = widthPercentageToDP((26 / 360) * 100);
-const PAD_TOP = heightPercentageToDP((14 / 720) * 100);
+const PADDING_HOR = widthPercentageToDP((20 / 360) * 100);
+const PAD_TOP = heightPercentageToDP((20 / 720) * 100);
 const PAD_TOP1 = heightPercentageToDP((17 / 720) * 100);
 const MAR_TOP = heightPercentageToDP((5 / 720) * 100);
 const PAD_VER = heightPercentageToDP((13 / 720) * 100);
 const RIGHT_IMG = widthPercentageToDP((22 / 360) * 100);
 const LINE_HEI = heightPercentageToDP((19 / 720) * 100);
 const HEIGHT_DEFAULT = heightPercentageToDP((40 / 720) * 100);
-const MAR_TOP2 = heightPercentageToDP((42 / 720) * 100);
+const BTN_PUBLIC_MARGIN_BOTTOM = heightPercentageToDP((15 / 720) * 100);
 const MAR_TOP3 = heightPercentageToDP((34 / 720) * 100);
-const HEI_BTN = heightPercentageToDP((27 / 720) * 100);
+const HEI_BTN = heightPercentageToDP((38 / 720) * 100);
 const WID_BTN = widthPercentageToDP((138 / 360) * 100);
 const MARGIN_QR = widthPercentageToDP((130 / 360) * 100);
 const HEIGHT_BTN_OK = heightPercentageToDP((63 / 720) * 100);
 const HEIGHT_ANN = heightPercentageToDP((225 / 720) * 100);
-const BTN_PADDING_BOTTOM = heightPercentageToDP((32 / 720) * 100);
-const CALENDAR_PADDING_BOTTOM = heightPercentageToDP((15 / 720) * 100);
+const BTN_PADDING_BOTTOM = heightPercentageToDP((26 / 720) * 100);
+const APP_LIST_PADDING_BOTTOM = heightPercentageToDP((17 / 720) * 100);
 const TEXT_CALENDAR_PADDING_TOP = heightPercentageToDP((11 / 720) * 100);
 const CALENDAR_HEIGHT = heightPercentageToDP((125 / 720) * 100);
 const TEXT_F_LINE_HEIGHT = heightPercentageToDP((20 / 720) * 100);
-const LINEAR_GRADIENT_HEIGHT = heightPercentageToDP((159 / 720) * 100);
+const LINEAR_GRADIENT_HEIGHT = heightPercentageToDP((135 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -106,13 +106,17 @@ const styles = StyleSheet.create({
     zIndex: 999,
   },
   titleImg: {
-    position: 'absolute',
+    flex: 1,
     color: '#fff',
-    fontSize: fontSize.fontSize11,
-    zIndex: 999,
-    left: PADDING_HOR,
-    right: PADDING_HOR,
+    fontSize: fontSize.smallest,
   },
+
+  textCalendar: {
+    color: '#fff',
+    fontSize: fontSize.smallest,
+    paddingLeft: 12,
+  },
+
   containerLogo: {
     // height: HEADER_BẠCKGROUND_LOGO,
     backgroundColor: blue_bluezone,
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
 
   body: {
     flex: 1,
-    paddingHorizontal: PADDING_HOR,
+    // paddingHorizontal: PADDING_HOR,
     backgroundColor: '#ffffff',
     // justifyContent: 'flex-end',
     zIndex: 100,
@@ -144,14 +148,19 @@ const styles = StyleSheet.create({
   },
 
   viewDep: {
-    // flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
   },
 
   description: {
-    fontSize: fontSize.normal,
-    lineHeight: 25,
+    position: 'absolute',
+    color: '#fff',
+    zIndex: 999,
+    left: PADDING_HOR,
+    right: PADDING_HOR,
+    bottom: 9,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end'
   },
 
   borderLogo: {
@@ -196,19 +205,31 @@ const styles = StyleSheet.create({
   },
 
   closeButtonContainer: {
-    paddingBottom: BTN_PADDING_BOTTOM,
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    paddingTop: MAR_TOP3
+    justifyContent: 'flex-end',
+    paddingBottom: BTN_PADDING_BOTTOM,
+    paddingTop: MAR_TOP3,
   },
 
   closeButton: {
     height: HEI_BTN,
     backgroundColor: '#015cd0',
-    borderRadius: 17,
+    borderRadius: HEI_BTN / 2,
     width: WID_BTN,
     paddingTop: 0,
     paddingBottom: 0,
+  },
+
+  btnPublicStyle: {
+    height: HEI_BTN,
+    borderRadius: HEI_BTN / 2,
+    width: WID_BTN,
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderColor: '#015cd0',
+    borderWidth: 1,
+    marginBottom: BTN_PUBLIC_MARGIN_BOTTOM
   },
 
   buttonIcon: {
@@ -221,11 +242,11 @@ const styles = StyleSheet.create({
     marginTop: MAR_TOP,
     fontSize: fontSize.fontSize11,
     color: '#a7a7a7',
-    marginRight: 8
+    marginRight: 8,
   },
   announce: {
     paddingTop: PAD_TOP1,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
 
   viewText: {
@@ -240,9 +261,20 @@ const styles = StyleSheet.create({
     height: LINEAR_GRADIENT_HEIGHT,
     width: '100%',
     zIndex: 998,
-  }
+  },
+
+  appStyle: {
+    paddingBottom: APP_LIST_PADDING_BOTTOM,
+  },
 });
 
-export {HEIGHT_HEADER, HEIGHT_IMG, HEIGHT_DEFAULT, RIGHT_IMG, PADDING_HOR, HEIGHT_SCAN_HEADER};
+export {
+  HEIGHT_HEADER,
+  HEIGHT_IMG,
+  HEIGHT_DEFAULT,
+  RIGHT_IMG,
+  PADDING_HOR,
+  HEIGHT_SCAN_HEADER,
+};
 
 export default styles;

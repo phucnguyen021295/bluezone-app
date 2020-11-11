@@ -249,6 +249,7 @@
     "bluezone.welcome.perpetualCalendar": "Perpetual Calendar",
     "bluezone.welcome.notify": "You are not in close contact with F0 yet!",
     "bluezone.welcome.close": "OK",
+    "bluezone.welcome.public": "Public",
 
     "bluezone.entryForm.header": "Medical declaration for people on entry",
     "bluezone.entryForm.content1": "This is an important document, your information will help the health agency to contact when needed to prevent an epidemic of infectious diseases.",
