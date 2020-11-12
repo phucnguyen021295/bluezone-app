@@ -22,13 +22,34 @@
 'use strict';
 
 import {StyleSheet} from 'react-native';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../core/utils/dimension';
+import {blue_bluezone} from '../../../../core/color';
 
 const APP_LIST_MARGIN_TOP = heightPercentageToDP((51 / 720) * 100);
+const BTN_HEIGHT = heightPercentageToDP((54 / 720) * 100);
+const BTN_PADDING_HORIZONTAL = widthPercentageToDP((49 / 360) * 100);
 
 const styles = StyleSheet.create({
   contentContainerStyle: {
     marginTop: APP_LIST_MARGIN_TOP,
+  },
+
+  titleStyle: {
+    paddingLeft: 10.2,
+    color: '#ffffff',
+  },
+
+  buttonStyle: {
+    backgroundColor: blue_bluezone,
+    borderRadius: BTN_HEIGHT / 2,
+    height: BTN_HEIGHT,
+  },
+
+  containerStyle: {
+    paddingHorizontal: BTN_PADDING_HORIZONTAL,
   },
 });
 

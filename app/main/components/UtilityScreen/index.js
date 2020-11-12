@@ -22,12 +22,13 @@
 'use strict';
 
 import React from 'react';
-import {StatusBar, SafeAreaView} from 'react-native';
+import {StatusBar, SafeAreaView, Image, View} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 
 // Components
 import AppList from './components/AppList';
 import Header from '../../../base/components/Header';
+import ButtonBase from '../../../base/components/ButtonBase';
 
 // Styles
 import styles from './styles/index.css';
@@ -47,7 +48,23 @@ class UtilityScreen extends React.Component {
           title={locale === 'vi' ? 'Tiện ích' : 'Utilities'}
           showBack={false}
         />
-        <AppList contentContainerStyle={styles.contentContainerStyle} />
+        <View style={{flex: 1}}>
+          <View style={{flexDirection: 'row'}}>
+            <AppList contentContainerStyle={styles.contentContainerStyle} />
+          </View>
+          <ButtonBase
+            title={locale === 'vi' ? 'Công cộng' : 'Publish'}
+            icon={
+              <Image
+                source={require('./styles/images/publish.png')}
+                style={{width: 30, height: 30}}
+              />
+            }
+            titleStyle={styles.titleStyle}
+            buttonStyle={styles.buttonStyle}
+            containerStyle={styles.containerStyle}
+          />
+        </View>
       </SafeAreaView>
     );
   }
