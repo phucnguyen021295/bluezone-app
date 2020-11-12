@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
   },
 
   btncalendar: {
-    // paddingBottom: CALENDAR_PADDING_BOTTOM,
     paddingTop: TEXT_CALENDAR_PADDING_TOP,
   },
 

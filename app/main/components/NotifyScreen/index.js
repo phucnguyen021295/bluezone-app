@@ -28,8 +28,8 @@ import FastImage from 'react-native-fast-image';
 
 // Components
 import Text from '../../../base/components/Text';
-import NotifySession from './NotifySession';
 import AppHeader from '../../../base/components/Header';
+import NotifyList from './NotifyList';
 
 // Styles
 import styles from './styles/index.css';
@@ -258,13 +258,7 @@ class NotifyScreen extends React.Component {
         />
         {notifications.length > 0 ? (
           <View style={styles.wrapper}>
-            <NotifySession
-              title={formatMessage(message.announcement)}
-              data={dataNtf}
-              styleTitle={styles.titleNtf}
-              styleTextTitle={styles.textTitleNtf}
-              onGet={this.onGetDataFromDB}
-            />
+            <NotifyList onGet={this.onGetDataFromDB} data={dataNtf} />
           </View>
         ) : (
           <View style={[styles.listEmptyContainer, {height: height - 135}]}>
