@@ -21,36 +21,38 @@
 
 'use strict';
 
-import {defineMessages} from 'react-intl';
+import {StyleSheet} from 'react-native';
+import * as fontSize from '../../../../../../core/fontSize';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../../../core/utils/dimension';
 
-export default defineMessages({
-  alert: {
-    id: 'bluezone.welcome.alert',
-    defaultMessage: 'Thông báo',
+const ICON = heightPercentageToDP((58 / 720) * 100);
+const GIRD_PADDING_HORIZONTAL = widthPercentageToDP((49 / 360) * 100);
+const TEXT_PADDING_TOP = heightPercentageToDP((8 / 720) * 100);
+
+const styles = StyleSheet.create({
+  contentContainerStyle: {
+    paddingHorizontal: GIRD_PADDING_HORIZONTAL,
   },
-  contentAlert: {
-    id: 'bluezone.welcome.contentAlert',
-    defaultMessage:
-      'Chức năng đang phát triển, sẽ cập nhật trong thời gian tới',
+
+  columnWrapperStyle: {
+    justifyContent: 'space-between',
   },
-  closeAlert: {
-    id: 'bluezone.welcome.closeAlert',
-    defaultMessage: 'Đóng',
+
+  appStyle: {
+    paddingBottom: 30,
   },
-  perpetualCalendar: {
-    id: 'bluezone.welcome.perpetualCalendar',
-    defaultMessage: 'Lịch Vạn Niên',
+
+  imageStyle: {
+    width: ICON,
+    height: ICON,
   },
-  notify: {
-    id: 'bluezone.welcome.notify',
-    defaultMessage: 'Bạn chưa tiếp xúc gần với F0 nào!',
-  },
-  close: {
-    id: 'bluezone.welcome.close',
-    defaultMessage: 'OK',
-  },
-  public: {
-    id: 'bluezone.welcome.public',
-    defaultMessage: 'Công cộng',
+
+  titleStyle: {
+    color: '#000000',
+    fontSize: fontSize.fontSize11,
+    paddingTop: TEXT_PADDING_TOP,
+    textAlign: 'center',
   },
 });
+
+export default styles;

@@ -71,7 +71,7 @@ class NotifySession extends React.Component {
     const uri =
       item.largeIcon && item.largeIcon.length > 0
         ? {uri: item.largeIcon}
-        : require('./styles/images/corona.png');
+        : require('./styles/images/bluezone.png');
     const textTime = this.getTime(item.timestamp);
     const {Language} = configuration;
 

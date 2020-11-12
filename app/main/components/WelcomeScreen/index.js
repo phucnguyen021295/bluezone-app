@@ -39,8 +39,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import HeaderFull from './Header/HeaderFull';
 import ImageBackgroundBase from './ImageBackgroundBase';
 import ButtonBase from '../../../base/components/ButtonBase';
-import ButtonIconText from '../../../base/components/ButtonIconText';
 import Text, {LightText} from '../../../base/components/Text';
+import AppList from '../UtilityScreen/components/AppList';
 
 // Api
 import {dev} from '../../../core/apis/server';
@@ -150,7 +150,7 @@ class WelcomeScreen extends React.Component {
     if (Language === 'vi') {
       return `${day}/${month}/${year}`;
     }
-    return `${monthEn[month - 1]} ${day}, ${year}`;
+    return `${month}/${day}/${year}`;
   };
 
   getLunar = () => {
@@ -161,13 +161,9 @@ class WelcomeScreen extends React.Component {
     const year = date.getFullYear();
     const lunarDate = getLunarDate(day, month, year);
     if (Language === 'vi') {
-      return `${lunarDate.day} tháng ${lunarDate.month} ${
-        can[(year + 6) % 10]
-      } ${chi[(year + 8) % 12]}`;
+      return `${lunarDate.day}/${lunarDate.month} AL`;
     }
-    return `${monthEn[lunarDate.month - 1]} ${lunarDate.day}, ${
-      canEn[(year + 6) % 10]
-    } ${chiEn[(year + 8) % 12]} Year`;
+    return `${lunarDate.month}/${lunarDate.day}/${year}`;
   };
 
   onSelect = () => {
@@ -267,7 +263,7 @@ class WelcomeScreen extends React.Component {
   };
 
   render() {
-    const {width, images, info, setHeight, textF} = this.state;
+    const {width, images, info, setHeight} = this.state;
     const {intl} = this.props;
     const {formatMessage} = intl;
     const {Language} = configuration;
@@ -288,30 +284,6 @@ class WelcomeScreen extends React.Component {
               top: 0,
             }}
           />
-          {/*<TouchableOpacity activeOpacity={1} onPress={this.onChange}>*/}
-          {/*  {display === 'fit' && bars > 0.15 ? (*/}
-          {/*    <Header*/}
-          {/*      styleImg={{*/}
-          {/*        width: width,*/}
-          {/*        height: HEIGHT_HEADER - setHeight,*/}
-          {/*        zIndex: 100,*/}
-          {/*      }}*/}
-          {/*      uri={images.uri}*/}
-          {/*      onLoad={this.onLoad}*/}
-          {/*    />*/}
-          {/*  ) : (*/}
-          {/*    <HeaderFull*/}
-          {/*      styleImg={{*/}
-          {/*        width: width,*/}
-          {/*        height: HEIGHT_HEADER - setHeight,*/}
-          {/*        zIndex: 100,*/}
-          {/*        backgroundColor: 'rgba(0,0,0,0.34)',*/}
-          {/*      }}*/}
-          {/*      uri={images.uri}*/}
-          {/*      onLoad={this.onLoad}*/}
-          {/*    />*/}
-          {/*  )}*/}
-          {/*</TouchableOpacity>*/}
           <HeaderFull
             styleImg={{
               width: width,
@@ -322,15 +294,16 @@ class WelcomeScreen extends React.Component {
             uri={images.uri}
             onLoad={this.onLoad}
           />
-          <LightText
-            style={[
-              styles.titleImg,
-              {
-                bottom: 12,
-              },
-            ]}>
-            {Language === 'vi' ? images.address : images.addressEn}
-          </LightText>
+          <View style={styles.description}>
+            <LightText style={styles.titleImg}>
+              {Language === 'vi' ? images.address : images.addressEn}
+            </LightText>
+            <LightText style={styles.textCalendar}>
+              {Language === 'vi'
+                ? `${this.getDate()} - ${this.getLunar()}`
+                : this.getDate()}
+            </LightText>
+          </View>
           <LinearGradient
             colors={['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 0.62)']}
             style={styles.linearGradient}
@@ -347,33 +320,17 @@ class WelcomeScreen extends React.Component {
           <LightText style={styles.note}>{info.user}</LightText>
         </TouchableOpacity>
         <View style={styles.body}>
-          <View style={styles.announce}>
-            <View style={styles.calendar}>
-              {Language === 'vi' ? (
-                <>
-                  <Text style={styles.titleCalendar}>
-                    {`${dayOfWeek} - ${this.getDate()}`}
-                  </Text>
-                  <Text style={styles.titleLunar}>{this.getLunar()}</Text>
-                  <ButtonIconText
-                    text={formatMessage(message.perpetualCalendar)}
-                    onPress={this.onSelect}
-                    styleText={styles.textInvite}
-                    styleBtn={styles.btncalendar}
-                  />
-                </>
-              ) : (
-                <>
-                  <Text style={styles.titleCalendar}>{dayOfWeek}</Text>
-                  <Text style={styles.titleLunar}>{this.getDate()}</Text>
-                </>
-              )}
-            </View>
-          </View>
-          <View style={styles.viewText}>
-            <Text style={styles.titleAlert}>{textF}</Text>
-          </View>
+          <AppList
+            appStyle={styles.appStyle}
+            contentContainerStyle={styles.announce}
+          />
           <View style={styles.closeButtonContainer}>
+            <ButtonBase
+              title={formatMessage(message.public)}
+              onPress={this.onGoBack}
+              buttonStyle={styles.btnPublicStyle}
+              titleStyle={{fontSize: fontSize.smaller, color: '#015cd0'}}
+            />
             <ButtonBase
               title={formatMessage(message.close)}
               onPress={this.onGoBack}

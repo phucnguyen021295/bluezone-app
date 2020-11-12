@@ -95,6 +95,7 @@ const EntryTabScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
+
                 text={formatMessage(messages.entryDeclare)}
                 style={[
                   styles.tabHeader,

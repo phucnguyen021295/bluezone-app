@@ -351,6 +351,7 @@ class App extends React.Component {
       if (obj.data._group === NOTIFICATION_TYPE.SEND_HTML_NEWS) {
         if (loading) {
           this.screenOpenNotification = SCREEN.DETAIL_NEW_WELCOME;
+          this.paramsOpenNotification = params;
         } else if (isHome) {
           navigate(SCREEN.DETAIL_NEW, params);
         } else {
@@ -359,6 +360,7 @@ class App extends React.Component {
       } else {
         if (loading) {
           this.screenOpenNotification = SCREEN.PAGE_WEBVIEW_WELCOME;
+          this.paramsOpenNotification = params;
         } else if (isHome) {
           navigate(SCREEN.PAGE_WEBVIEW, params);
         } else {
