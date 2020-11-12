@@ -330,6 +330,8 @@
   "bluezone.entryForm.search": "Tìm kiếm",
   "bluezone.entryForm.btnEntryOTP": "Xác nhận nhập cảnh",
   "bluezone.entryForm.content4": "*Sử dụng khi làm thủ tục nhập cảnh",
+  "bluezone.entryForm.disconnect": "Mất kết nối\nMột số nội dung chỉ có thể khai báo khi có internet.",
+  "bluezone.entryForm.connecting": "Đang kết nối...",
 
   "bluezone.dailyDeclaration.option": "Chọn thông tin sức khỏe hiện tại của bạn",
   "bluezone.dailyDeclaration.btnSendInfo": "Gửi thông tin",

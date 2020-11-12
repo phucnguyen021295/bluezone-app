@@ -512,6 +512,7 @@ const setEntryLanguage = EntryLanguage => {
 const setAppMode = mode => {
   Object.assign(configuration, {AppMode: mode});
   setAppModeStorage(mode);
+  Service.setMode(mode);
 };
 
 // TODO xem xet bo ham nay di

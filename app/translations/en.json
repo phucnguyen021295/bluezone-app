@@ -328,6 +328,8 @@
     "bluezone.entryForm.search": "Search",
     "bluezone.entryForm.btnEntryOTP": "Entry confirmation",
     "bluezone.entryForm.content4": "*Use when making entry procedures",
+    "bluezone.entryForm.disconnect": "*Disconnect\nSome content can only be declared when there is internet.",
+    "bluezone.entryForm.connecting": "*Connecting...",
 
     "bluezone.dailyDeclaration.option": "Choose your current health information",
     "bluezone.dailyDeclaration.btnSendInfo": "Send information",

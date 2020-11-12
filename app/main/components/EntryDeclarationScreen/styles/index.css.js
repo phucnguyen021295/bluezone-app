@@ -309,6 +309,22 @@ const styles = StyleSheet.create({
     marginTop: 15,
     alignItems: 'center',
   },
+
+  connectContent: {
+    color: '#FFF',
+    fontSize: 13,
+    textAlign: 'center',
+  },
+
+  connectRed: {
+    backgroundColor: '#FF0000',
+    paddingVertical: 5,
+  },
+
+  connectGreen: {
+    backgroundColor: '#00FF00',
+    paddingVertical: 5,
+  },
 });
 
 export default styles;

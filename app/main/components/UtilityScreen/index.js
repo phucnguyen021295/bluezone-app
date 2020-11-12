@@ -74,15 +74,15 @@ class UtilityScreen extends React.Component {
     const title = locale === 'vi' ? app.title : app.titleEn;
 
     const {PhoneNumber} = configuration;
-    if (!PhoneNumber) {
-      Alert.alert(
-        'Bluezone',
-        locale === 'vi'
-          ? 'Bạn cần đăng ký số điện thoại để có thể sử dụng chức năng này.'
-          : 'You need to register a phone number to be able to use this function.',
-      );
-      return;
-    }
+    // if (!PhoneNumber) {
+    //   Alert.alert(
+    //     'Bluezone',
+    //     locale === 'vi'
+    //       ? 'Bạn cần đăng ký số điện thoại để có thể sử dụng chức năng này.'
+    //       : 'You need to register a phone number to be able to use this function.',
+    //   );
+    //   return;
+    // }
 
     switch (app.screen) {
       case SCREEN.DOMESTIC_DECLARATION:

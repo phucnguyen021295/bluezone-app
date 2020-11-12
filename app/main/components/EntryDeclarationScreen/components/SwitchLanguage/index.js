@@ -129,7 +129,7 @@ class SwitchLanguage extends React.Component {
             <View>
               <ScrollView
                 showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{paddingTop: 16, paddingHorizontal: 5}}
+                contentContainerStyle={{paddingTop: 10, paddingHorizontal: 5}}
                 horizontal={true}>
                 {languages.map(item => {
                   return (

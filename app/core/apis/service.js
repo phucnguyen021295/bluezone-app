@@ -95,6 +95,10 @@ const getBluezoneIdFirst6Char = async () => {
   return getFirst6Char(bzId);
 };
 
+const setMode = mode => {
+  TraceCovid.setMode(mode);
+};
+
 const setContentNotify = (title, content) => {
   Platform.OS === 'android' && TraceCovid.setContentNotify(title, content);
 };
@@ -143,6 +147,7 @@ const service = {
   getBluezoneId,
   getBluezoneIdFirst6Char,
   setContentNotify,
+  setMode,
   getVersion,
   getFontScale,
   androidOpenSettings,

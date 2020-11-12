@@ -37,6 +37,7 @@ import {CheckBox as CheckBox1} from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import NetInfo from '@react-native-community/netinfo';
 
 // Components
 import Text, {MediumText} from '../../../base/components/Text';
@@ -101,7 +102,7 @@ class EntryDeclarationScreen extends React.Component {
 
     this.now = new Date();
 
-    const {AppMode} = configuration;
+    const {AppMode, PhoneNumber} = configuration;
     this.state = {
       portraitURL: null,
       portraitBase64: null,
@@ -148,7 +149,7 @@ class EntryDeclarationScreen extends React.Component {
       vn_WardID: null,
       vn_WardName: '',
       vn_Address: '',
-      numberPhone: '',
+      numberPhone: PhoneNumber,
       email: '',
       symptom: {},
       vacxin: '',
@@ -168,6 +169,7 @@ class EntryDeclarationScreen extends React.Component {
       afterQuarantine_Wards: null,
       quarantinePlace: null,
       otherQuarantinePlace: '',
+      statusInternet: 'connected', // connected, connecting, disconnect
       // isView: AppMode === 'entry',
     };
     this.lastVNProvinceIDApi = null;
@@ -195,7 +197,39 @@ class EntryDeclarationScreen extends React.Component {
       this.objectGUID = objectGUID;
     });
     reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
+
+    NetInfo.fetch().then(state => {
+      this.handleConnectionChange(state.isConnected);
+    });
+
+    this.unsubscribeConnectionChange = NetInfo.addEventListener(state => {
+      this.handleConnectionChange(state.isConnected);
+    });
   }
+
+  componentWillUnmount() {
+    this.unsubscribeConnectionChange();
+    clearTimeout(this.timeoutConnected);
+  }
+
+  handleConnectionChange = value => {
+    const oldValue = this.state.statusInternet !== 'disconnect';
+    if (oldValue !== value) {
+      this.setState({
+        statusInternet: oldValue ? 'disconnect' : 'connecting',
+      });
+
+      if (value) {
+        this.timeoutConnected = setTimeout(() => {
+          this.setState({
+            statusInternet: 'connected',
+          });
+        }, 3000);
+      } else {
+        clearTimeout(this.timeoutConnected);
+      }
+    }
+  };
 
   bindEntryInfoData = info => {
     const _vehicleData = JSON.parse(info.ThongTinDiLai);
@@ -922,6 +956,10 @@ class EntryDeclarationScreen extends React.Component {
       contentError = 'Thiếu thông tin phương tiện đi lại';
     }
 
+    if (vehicle_Planes && (!vehicleNumber || !vehicleSeat)) {
+      contentError = 'Thiếu thông tin về số hiệu phương tiện và số ghế';
+    }
+
     if (!startDateString) {
       contentError = 'Thiếu thông tin ngày khởi hành';
     }
@@ -1414,6 +1452,7 @@ class EntryDeclarationScreen extends React.Component {
       quarantinePlace,
       otherQuarantinePlace,
       objectGUID,
+      statusInternet,
       isView,
     } = this.state;
     const {language} = this.context;
@@ -1451,6 +1490,21 @@ class EntryDeclarationScreen extends React.Component {
               styleTitle={styles.textHeader}
               title={formatMessage(messages.header)}
             />
+          )}
+
+          {statusInternet !== 'connected' && (
+            <View
+              style={
+                statusInternet === 'disconnect'
+                  ? styles.connectRed
+                  : styles.connectGreen
+              }>
+              <Text style={styles.connectContent}>
+                {statusInternet === 'disconnect'
+                  ? formatMessage(messages.disconnect)
+                  : formatMessage(messages.connecting)}
+              </Text>
+            </View>
           )}
 
           {isView ? (
