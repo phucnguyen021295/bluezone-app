@@ -52,7 +52,7 @@ export const Tab = createMaterialTopTabNavigator();
 
 const EntryTabScreen = props => {
   const {route} = props;
-  const initialRouteName = route.params?.tabFocus;
+  const initialRouteName = route.params?.tabFocus || 'EntryDeclare';
 
   const {intl} = props;
   const {formatMessage} = intl;
@@ -95,7 +95,6 @@ const EntryTabScreen = props => {
           options={{
             tabBarLabel: ({focused}) => (
               <Text
-
                 text={formatMessage(messages.entryDeclare)}
                 style={[
                   styles.tabHeader,

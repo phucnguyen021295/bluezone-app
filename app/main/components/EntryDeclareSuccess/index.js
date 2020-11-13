@@ -33,48 +33,53 @@ import SCREEN from '../../nameScreen';
 
 // Styles
 import styles from './styles/index.css';
+import messages from '../../../core/msg/entryScreen';
 
 const EntryDeclareSuccessScreen = props => {
-  const {route, navigation} = props;
+  const {route, navigation, intl} = props;
   const {code, passport} = route.params;
 
   const updateEntry = () => {
-    navigation.replace(SCREEN.ENTRY_DECLARATION);
+    navigation.replace(SCREEN.ENTRY, {
+      tabFocus: 'EntryDeclare',
+    });
   };
 
   const goBack = () => {
     navigation.goBack();
   };
 
-  const {intl} = this.props;
   const {formatMessage} = intl;
 
   return (
     <SafeAreaView>
       <View style={styles.infoContainer}>
         <View style={styles.infoRow}>
-          <MediumText style={styles.info}>Code: </MediumText>
+          <MediumText style={styles.info}>
+            {`${formatMessage(messages.code)}: `}
+          </MediumText>
           <MediumText style={styles.infoValue}>{code}</MediumText>
         </View>
         <View style={styles.infoRow}>
-          <MediumText style={styles.info}>Passport: </MediumText>
+          <MediumText style={styles.info}>
+            {`${formatMessage(messages.passport)}: `}
+          </MediumText>
           <MediumText style={styles.infoValue}>{passport}</MediumText>
         </View>
       </View>
       <MediumText style={styles.thank}>
-        Trân trọng cảm ơn quý khách đã hoàn thành việc khai báo y tế.
+        {formatMessage(messages.content1)}
       </MediumText>
-      <Text style={styles.text}>
-        Quý khách cần đến nơi làm việc của nhân viên kiểm dịch y tế để lấy bản
-        xác nhận trước khi qua quầy làm thủ tục xuất nhập cảnh.
-      </Text>
+      <Text style={styles.text}>{formatMessage(messages.content2)}</Text>
       <View
         style={{
           alignItems: 'center',
           marginTop: 20,
         }}>
         <TouchableOpacity style={styles.button1} onPress={updateEntry}>
-          <Text style={styles.buttonText1}>Cập nhật lại tờ khai</Text>
+          <Text style={styles.buttonText1}>
+            {formatMessage(messages.updateEntryInfo)}
+          </Text>
         </TouchableOpacity>
       </View>
       <View
@@ -83,7 +88,9 @@ const EntryDeclareSuccessScreen = props => {
           marginTop: 20,
         }}>
         <TouchableOpacity style={styles.button2} onPress={goBack}>
-          <Text style={styles.buttonText2}>Quay lại trang chủ</Text>
+          <Text style={styles.buttonText2}>
+            {formatMessage(messages.backHome)}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -92,6 +99,7 @@ const EntryDeclareSuccessScreen = props => {
 
 EntryDeclareSuccessScreen.propTypes = {
   intl: intlShape.isRequired,
+  navigation: PropTypes.object,
 };
 
 export default injectIntl(EntryDeclareSuccessScreen);

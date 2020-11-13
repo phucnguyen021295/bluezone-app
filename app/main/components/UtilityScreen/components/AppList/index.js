@@ -22,6 +22,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Text, TouchableOpacity, FlatList, Alert} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import FastImage from 'react-native-fast-image';
@@ -32,7 +33,6 @@ import {syncConfigComponentApp} from '../../data/dataConfigComponentApp';
 
 // Styles
 import styles from './styles/index.css';
-import ButtonBase from "../../../../../base/components/ButtonBase";
 
 const IMAGE = {
   '1': require('./styles/images/medicalSearch.png'),
@@ -141,6 +141,7 @@ class AppList extends React.Component {
 
 AppList.propTypes = {
   intl: intlShape.isRequired,
+  navigation: PropTypes.object,
 };
 
 AppList.defaultProps = {

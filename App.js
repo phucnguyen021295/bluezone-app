@@ -446,8 +446,21 @@ class App extends React.Component {
                   component={PhoneNumberRegister}
                 />
                 <Stack.Screen
+                  name={SCREEN.PHONE_NUMBER_VERITY_OTP}
+                  component={PhoneNumberVerifyOTP}
+                />
+                <Stack.Screen
                   name={SCREEN.REGISTER_INFORMATION}
                   component={RegisterInformation}
+                />
+                <Stack.Screen
+                  name={SCREEN.ENTRY_DECLARATION_SUCCESS}
+                  component={EntryDeclareSuccess}
+                />
+                <Stack.Screen name={SCREEN.ENTRY} component={Entry} />
+                <Stack.Screen
+                  name={SCREEN.ENTRY_VERIFY_OTP}
+                  component={EntryVerifyOTP}
                 />
               </Stack.Navigator>
             ) : (
