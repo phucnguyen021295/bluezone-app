@@ -27,7 +27,7 @@ import 'moment/locale/vi'; // without this line it didn't work
 import {injectIntl, intlShape} from 'react-intl';
 
 // Components
-import {TouchableOpacity, View, VirtualizedList} from 'react-native';
+import {TouchableOpacity, View, FlatList} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Text from '../../../base/components/Text';
 import {MediumText} from '../../../base/components/Text';
@@ -95,12 +95,12 @@ class NotifySession extends React.Component {
           </View>
           <View style={styles.content}>
             <TextDisplay
-              numberOfLines={isTypeNotifyNew ? 2 : 1}
+              numberOfLines={1}
               style={[
                 !item.unRead ? styles.titleTextUnread : styles.titleText,
-                isTypeNotifyNew && {marginRight: 40},
+                isTypeNotifyNew && {color: '#015cd0'}
               ]}>
-              {isTypeNotifyNew ? text : title}
+              {title}
             </TextDisplay>
             <View
               style={{
@@ -109,13 +109,12 @@ class NotifySession extends React.Component {
                 alignItems: 'flex-end',
               }}>
               <TextDisplay
-                numberOfLines={isTypeNotifyNew ? 1 : 2}
+                numberOfLines={2}
                 style={[
                   {flex: 1, marginRight: 18},
                   !item.unRead ? styles.desTextUnread : styles.desText,
-                  isTypeNotifyNew && {color: '#015cd0'},
                 ]}>
-                {isTypeNotifyNew ? title : text}
+                {text}
               </TextDisplay>
               <TextDisplay
                 style={[
@@ -131,10 +130,6 @@ class NotifySession extends React.Component {
   };
 
   keyExtractor = item => item.notifyId;
-
-  getItemCount = data => (data ? data.length : 0);
-
-  getItem = (data, index) => data[index];
 
   handleOnScroll = event => {
     const {onGet, data} = this.props;
@@ -165,14 +160,11 @@ class NotifySession extends React.Component {
   render() {
     const {data} = this.props;
     return (
-      <VirtualizedList
+      <FlatList
         onScroll={this.handleOnScroll}
         data={data.items}
-        initialNumToRender={4}
         renderItem={this.renderItem}
         keyExtractor={this.keyExtractor}
-        getItemCount={this.getItemCount}
-        getItem={this.getItem}
       />
     );
   }

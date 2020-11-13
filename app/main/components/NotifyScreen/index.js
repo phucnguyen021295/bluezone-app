@@ -31,9 +31,6 @@ import Text from '../../../base/components/Text';
 import AppHeader from '../../../base/components/Header';
 import NotifyList from './NotifyList';
 
-// Styles
-import styles from './styles/index.css';
-
 // Utils
 import {getNotifyList} from '../../../core/db/SqliteDb';
 import {
@@ -50,12 +47,24 @@ import {
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 
+// Styles
+import styles, {
+  HEADER_HEIGHT,
+  NOTIFY_HEIGHT,
+  TAB_BAR_HEIGHT,
+} from './styles/index.css';
+
 export const notifyScreenTool = {};
+
+const {height} = Dimensions.get('window');
+
+const COUNT_NOTIFY = parseInt(
+  (height - HEADER_HEIGHT - TAB_BAR_HEIGHT) / NOTIFY_HEIGHT + 3,
+);
 
 class NotifyScreen extends React.Component {
   constructor(props) {
     super(props);
-    const {height} = Dimensions.get('window');
     this.state = {
       notifications: [],
       height: height,
@@ -68,8 +77,7 @@ class NotifyScreen extends React.Component {
     Dimensions.addEventListener('change', this.handleDimensionsChange);
     this.initData();
     navigation.addListener('focus', () => {
-      const {notifications} = this.state;
-      this.initData(notifications && notifications.length);
+      this.initData(COUNT_NOTIFY);
     });
 
     // this.removeMessageListener = registerMessageHandler(notifyObj => {
@@ -93,12 +101,7 @@ class NotifyScreen extends React.Component {
   }
 
   getList = () => {
-    const {notifications} = this.state;
-    if (notifications.length > 10) {
-      this.initData(notifications.length + 1);
-    } else {
-      this.initData();
-    }
+    this.initData(COUNT_NOTIFY);
   };
 
   initData = async count => {
@@ -122,12 +125,16 @@ class NotifyScreen extends React.Component {
   };
 
   onGetDataFromDB = async (timespan, callback) => {
-    getNotifyList(timespan, items => {
-      callback();
-      this.setState(prev => ({
-        notifications: prev.notifications.concat(items),
-      }));
-    });
+    getNotifyList(
+      timespan,
+      items => {
+        callback();
+        this.setState(prev => ({
+          notifications: prev.notifications.concat(items),
+        }));
+      },
+      COUNT_NOTIFY,
+    );
   };
 
   onPressWarning = item => {

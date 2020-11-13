@@ -27,12 +27,14 @@ import {large} from '../../../../core/fontSize';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 import {heightPercentageToDP} from '../../../../core/utils/dimension';
 
-const HEADER_HEIGHT = heightPercentageToDP((44 / 720) * 100);
-const NOTIFY_HEIGHT = heightPercentageToDP((72 / 720) * 100);
+export const NOTIFY_HEIGHT = heightPercentageToDP((72 / 720) * 100);
 const NOTIFY_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
 const AVATAR_HEIGHT = heightPercentageToDP((52 / 720) * 100);
 const AVATAR_WIDTH = heightPercentageToDP((52 / 720) * 100);
 const TEXT_LIGHT_HEIGHT = heightPercentageToDP((22 / 720) * 100);
+
+export const HEADER_HEIGHT = heightPercentageToDP((70 / 720) * 100);
+export const TAB_BAR_HEIGHT = heightPercentageToDP((52 / 720) * 100);
 
 const styles = StyleSheet.create({
   container: {
@@ -66,13 +68,6 @@ const styles = StyleSheet.create({
     height: 44,
     backgroundColor: '#f166001a',
     paddingLeft: 22,
-    justifyContent: 'center',
-  },
-  titleNtf: {
-    width: '100%',
-    height: HEADER_HEIGHT,
-    backgroundColor: '#015cd01a',
-    paddingHorizontal: 20,
     justifyContent: 'center',
   },
   textHeader: {
@@ -144,7 +139,6 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    justifyContent: 'space-between',
     paddingTop: 23,
   },
 

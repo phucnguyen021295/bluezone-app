@@ -43,6 +43,7 @@ import log from './log';
 import tmpl, * as msg from '../const/log';
 import {reportPushAnalytics} from './analytics';
 import {internalVersion} from './version';
+import {removeNotificationLimit} from "./db/SqliteDb";
 
 // Thong bao & canh bao
 const validateNotificationMessage = notify => {
@@ -56,7 +57,7 @@ const handleNotificationMessage = notify => {
     notify.data.timestamp ||
     new Date().getTime();
   notify.data.notifyId = _notifyId + '';
-  createNews(notify);
+  createNews(notify, () => removeNotificationLimit());
 };
 
 const handleNotification = notify => {

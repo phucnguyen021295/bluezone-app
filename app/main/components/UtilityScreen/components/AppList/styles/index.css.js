@@ -23,7 +23,10 @@
 
 import {StyleSheet} from 'react-native';
 import * as fontSize from '../../../../../../core/fontSize';
-import {heightPercentageToDP, widthPercentageToDP} from '../../../../../../core/utils/dimension';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../../../core/utils/dimension';
 
 const ICON = heightPercentageToDP((58 / 720) * 100);
 const GIRD_PADDING_HORIZONTAL = widthPercentageToDP((49 / 360) * 100);
