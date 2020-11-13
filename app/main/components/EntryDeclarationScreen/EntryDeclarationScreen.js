@@ -1440,7 +1440,11 @@ class EntryDeclarationScreen extends React.Component {
 
     requestEntry(
       this.state.objectGUID,
-      () => {
+      data => {
+        if (data.ModeEntry) {
+          setAppMode('entry');
+          this.changeStateWithOutSave({appMode: 'entry'});
+        }
         this.showAlert(formatMessage(messages.requestEntrySuccess));
       },
       () => {
