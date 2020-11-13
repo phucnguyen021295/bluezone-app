@@ -465,16 +465,16 @@ export const yearBirth = [
 export const symptomData = [
   {id: 'sot', name: 'Sốt', nameEn: 'Fever'},
   {id: 'ho', name: 'Ho', nameEn: 'Cough'},
-  {id: 'kho_tho', name: 'Khó thở', nameEn: 'Shortness of breath'},
+  {id: 'kho_tho', name: 'Khó thở', nameEn: 'Difficulty of breathing'},
   {id: 'dau_hong', name: 'Đau họng', nameEn: 'Sore throat'},
-  {id: 'non_buon_non', name: 'Nôn / Buồn nôn', nameEn: 'Vomiting / Nausea'},
+  {id: 'non_buon_non', name: 'Nôn / Buồn nôn', nameEn: 'Vomiting'},
   {id: 'tieu_chay', name: 'Tiêu chảy', nameEn: 'Diarrhea'},
   {
     id: 'xuat_huyet_ngoai_da',
     name: 'Xuất huyết ngoài da',
-    nameEn: 'Skin bleeding',
+    nameEn: 'Skin haemorrhage',
   },
-  {id: 'noi_ban_ngoai_da', name: 'Nổi ban ngoài da', nameEn: 'Skin rash'},
+  {id: 'noi_ban_ngoai_da', name: 'Nổi ban ngoài da', nameEn: 'Rash'},
 ];
 
 export const exposureHistoryData = [
@@ -483,12 +483,12 @@ export const exposureHistoryData = [
     name:
       'Đến trang trại chăn nuôi / chợ buôn bán động vật sống / cơ sở giết mổ động vật / tiếp xúc động vật',
     nameEn:
-      'Go to a farm / live animal market / animal slaughter facility / animal contact',
+      'Visit any poultry farm / living animal market / slaughter house / contact to animal',
   },
   {
     id: 'exposure2',
     name: 'Tiếp xúc gần (< 2m) với người mắc bệnh viêm đường hô hấp do nCOV',
-    nameEn: 'Close contact (<2m) with nCOV respiratory infections',
+    nameEn: 'Have close contact (<2m) with nCOV-induced respiratory infections',
   },
 ];
 

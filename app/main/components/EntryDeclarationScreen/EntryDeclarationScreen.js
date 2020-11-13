@@ -116,7 +116,7 @@ class EntryDeclarationScreen extends React.Component {
       nationalityID: null,
       nationalityName: '',
       passport: '',
-      vehicle_Planes: false,
+      vehicle_Plane: false,
       vehicle_Ship: false,
       vehicle_Car: false,
       otherVehicles: '',
@@ -166,9 +166,9 @@ class EntryDeclarationScreen extends React.Component {
       countries: null,
       provinces: null,
       vn_Districts: null,
-      vn_Wards: null,
+      vn_Ward: null,
       afterQuarantine_Districts: null,
-      afterQuarantine_Wards: null,
+      afterQuarantine_Ward: null,
       quarantinePlace: null,
       otherQuarantinePlace: '',
       statusInternet: 'connected', // connected, connecting, disconnect
@@ -185,29 +185,7 @@ class EntryDeclarationScreen extends React.Component {
     const objectGUID = await getEntryObjectGUIDInformation();
     this.changeStateWithOutSave({objectGUID: objectGUID});
     this.objectGUID = objectGUID;
-    getEntryInfoDeclare().then(info => {
-      // if (!info) {
-      this.state.appMode !== 'entry' &&
-        getEntryInfoByPhoneNumber(data => {
-          if (data.ModeEntry) {
-            setAppMode('entry');
-            this.changeStateWithOutSave({appMode: 'entry'});
-          }
-          if (
-            new Date(data.LastUpdate).getTime() >
-            new Date(this.lastUpdate).getTime()
-          ) {
-            this.bindEntryInfoData(data);
-          }
-        });
-      // return;
-      // }
-      this.bindEntryInfoData(info);
-    });
-    getEntryObjectGUIDInformation().then(objectGUID => {
-      this.changeStateWithOutSave({objectGUID: objectGUID});
-      this.objectGUID = objectGUID;
-    });
+    getEntryInfoDeclare().then(this.getEntryInfoDeclareStorageCb);
     reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
 
     NetInfo.fetch().then(state => {
@@ -223,6 +201,33 @@ class EntryDeclarationScreen extends React.Component {
     this.unsubscribeConnectionChange && this.unsubscribeConnectionChange();
     clearTimeout(this.timeoutConnected);
   }
+
+  getEntryInfoDeclareStorageCb = info => {
+    info && this.bindEntryInfoData(info);
+    // if (!info) {
+    if (this.state.appMode !== 'entry') {
+      getEntryInfoByPhoneNumber(data => {
+        if (!data) {
+          return;
+        }
+        if (data.ModeEntry) {
+          setAppMode('entry');
+          this.changeStateWithOutSave({appMode: 'entry'});
+        }
+
+        if (
+          !this.lastUpdate ||
+          new Date(data.LastUpdate).getTime() >
+            new Date(this.lastUpdate).getTime()
+        ) {
+          setEntryInfoDeclare(data);
+          this.bindEntryInfoData(data);
+        }
+      });
+    }
+    // return;
+    // }
+  };
 
   handleConnectionChange = value => {
     const oldValue = this.state.statusInternet !== 'disconnect';
@@ -272,7 +277,7 @@ class EntryDeclarationScreen extends React.Component {
       nationalityID: info.MaQuocTich && info.MaQuocTich.toString(),
       nationalityName: info.TenQuocTich,
       passport: info.SoHoChieu,
-      vehicle_Planes: _vehicleData.find(i => i.ID === '1')?.Value,
+      vehicle_Plane: _vehicleData.find(i => i.ID === '1')?.Value,
       vehicle_Ship: _vehicleData.find(i => i.ID === '2')?.Value,
       vehicle_Car: _vehicleData.find(i => i.ID === '3')?.Value,
       otherVehicles: info.ThongTinDiLaiKhac,
@@ -366,7 +371,7 @@ class EntryDeclarationScreen extends React.Component {
       gender,
       nationalityID,
       passport,
-      vehicle_Planes,
+      vehicle_Plane,
       vehicle_Ship,
       vehicle_Car,
       otherVehicles,
@@ -444,7 +449,7 @@ class EntryDeclarationScreen extends React.Component {
       MaQuocTich: nationalityID,
       SoHoChieu: passport,
       ThongTinDiLai: JSON.stringify([
-        {ID: '1', Value: vehicle_Planes},
+        {ID: '1', Value: vehicle_Plane},
         {ID: '2', Value: vehicle_Ship},
         {ID: '3', Value: vehicle_Car},
       ]),
@@ -508,8 +513,6 @@ class EntryDeclarationScreen extends React.Component {
         delete data[property];
       }
     }
-
-    console.log(data);
 
     setEntryInfoDeclare(data);
   };
@@ -689,7 +692,7 @@ class EntryDeclarationScreen extends React.Component {
       afterQuarantine_Districts: null,
       afterQuarantine_DistrictID: null,
       afterQuarantine_DistrictName: '',
-      afterQuarantine_Wards: null,
+      afterQuarantine_Ward: null,
       afterQuarantine_WardID: null,
       afterQuarantine_WardName: '',
     });
@@ -704,7 +707,7 @@ class EntryDeclarationScreen extends React.Component {
     this.changeState({
       afterQuarantine_DistrictID: id,
       afterQuarantine_DistrictName: name,
-      afterQuarantine_Wards: null,
+      afterQuarantine_Ward: null,
       afterQuarantine_WardID: null,
       afterQuarantine_WardName: '',
     });
@@ -729,7 +732,7 @@ class EntryDeclarationScreen extends React.Component {
       vn_Districts: null,
       vn_DistrictID: null,
       vn_DistrictName: '',
-      vn_Wards: null,
+      vn_Ward: null,
       vn_WardID: null,
       vn_WardName: '',
     });
@@ -744,7 +747,7 @@ class EntryDeclarationScreen extends React.Component {
     this.changeState({
       vn_DistrictID: id,
       vn_DistrictName: name,
-      vn_Wards: null,
+      vn_Ward: null,
       vn_WardID: null,
       vn_WardName: '',
     });
@@ -930,7 +933,7 @@ class EntryDeclarationScreen extends React.Component {
       gender,
       nationalityID,
       passport,
-      vehicle_Planes,
+      vehicle_Plane,
       vehicle_Ship,
       vehicle_Car,
       otherVehicles,
@@ -1003,11 +1006,11 @@ class EntryDeclarationScreen extends React.Component {
       contentError = 'Thiếu thông tin số hộ chiếu hoặc giấy thông hành';
     }
 
-    if (!vehicle_Planes && !vehicle_Ship && !vehicle_Car) {
+    if (!vehicle_Plane && !vehicle_Ship && !vehicle_Car) {
       contentError = 'Thiếu thông tin phương tiện đi lại';
     }
 
-    if (vehicle_Planes && (!vehicleNumber || !vehicleSeat)) {
+    if (vehicle_Plane && (!vehicleNumber || !vehicleSeat)) {
       contentError = 'Thiếu thông tin về số hiệu phương tiện và số ghế';
     }
 
@@ -1113,7 +1116,7 @@ class EntryDeclarationScreen extends React.Component {
       MaQuocTich: nationalityID.toString(),
       SoHoChieu: passport,
       ThongTinDiLai: JSON.stringify([
-        {ID: '1', Value: vehicle_Planes},
+        {ID: '1', Value: vehicle_Plane},
         {ID: '2', Value: vehicle_Ship},
         {ID: '3', Value: vehicle_Car},
       ]),
@@ -1352,7 +1355,7 @@ class EntryDeclarationScreen extends React.Component {
           id: RegionID,
           name: RegionName,
         }));
-        this.setState({afterQuarantine_Wards: _data});
+        this.setState({afterQuarantine_Ward: _data});
       },
       () => {},
     );
@@ -1400,7 +1403,7 @@ class EntryDeclarationScreen extends React.Component {
           id: RegionID,
           name: RegionName,
         }));
-        this.setState({vn_Wards: _data});
+        this.setState({vn_Ward: _data});
       },
       () => {},
     );
@@ -1448,7 +1451,7 @@ class EntryDeclarationScreen extends React.Component {
       nationalityID,
       nationalityName,
       passport,
-      vehicle_Planes,
+      vehicle_Plane,
       vehicle_Ship,
       vehicle_Car,
       otherVehicles,
@@ -1497,9 +1500,9 @@ class EntryDeclarationScreen extends React.Component {
       countries,
       provinces,
       vn_Districts,
-      vn_Wards,
+      vn_Ward,
       afterQuarantine_Districts,
-      afterQuarantine_Wards,
+      afterQuarantine_Ward,
       quarantinePlace,
       otherQuarantinePlace,
       objectGUID,
@@ -1751,9 +1754,9 @@ class EntryDeclarationScreen extends React.Component {
                 />
                 <View style={styles.flexRow}>
                   <CheckBox
-                    checked={vehicle_Planes}
+                    checked={vehicle_Plane}
                     title={formatMessage(messages.planes)}
-                    onPress={() => this.onChangeStatusVehicle('vehicle_Planes')}
+                    onPress={() => this.onChangeStatusVehicle('vehicle_Plane')}
                     containerStyle={styles.checkboxContainer}
                     textStyle={styles.checkBoxText}
                   />
@@ -2005,8 +2008,8 @@ class EntryDeclarationScreen extends React.Component {
                   />
                   <SelectPicker
                     enableSearch={true}
-                    data={afterQuarantine_Wards}
-                    loading={!afterQuarantine_Wards}
+                    data={afterQuarantine_Ward}
+                    loading={!afterQuarantine_Ward}
                     value={afterQuarantine_WardID}
                     content={afterQuarantine_WardName}
                     headerText={formatMessage(messages.vnSelectWard)}
@@ -2084,8 +2087,8 @@ class EntryDeclarationScreen extends React.Component {
                   />
                   <SelectPicker
                     enableSearch={true}
-                    data={vn_Wards}
-                    loading={!vn_Wards}
+                    data={vn_Ward}
+                    loading={!vn_Ward}
                     value={vn_WardID}
                     content={vn_WardName}
                     headerText={formatMessage(messages.vnSelectWard)}

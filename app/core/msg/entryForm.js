@@ -340,7 +340,7 @@ export default defineMessages({
   },
   btnEntryOTP: {
     id: 'bluezone.entryForm.btnEntryOTP',
-    defaultMessage: 'Xác nhận nhập cảnh',
+    defaultMessage: 'Yêu cầu nhập cảnh',
   },
   content4: {
     id: 'bluezone.entryForm.content4',

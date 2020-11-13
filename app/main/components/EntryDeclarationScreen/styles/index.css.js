@@ -302,7 +302,8 @@ const styles = StyleSheet.create({
   label2: {
     color: '#000',
     marginTop: 7,
-    fontSize: fontSize.smaller,
+    fontSize: fontSize.small,
+    textAlign: 'center',
   },
 
   OTPEntryContainer: {
