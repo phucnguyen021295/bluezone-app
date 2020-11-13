@@ -58,6 +58,7 @@ import {remoteMessageListener} from './app/core/push';
 import decorateMainAppStart from './app/main/decorateMainAppStart';
 import {navigationRef, navigate} from './RootNavigation';
 import {registerMessageHandler, registerNotification} from './app/core/fcm';
+import {removeNotificationLimit} from './app/core/db/SqliteDb';
 
 // Api
 import {registerResourceLanguageChange} from './app/core/language';

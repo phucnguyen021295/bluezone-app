@@ -192,7 +192,7 @@ const deleteNotify = (notifyId, success, failure) => {
   });
 };
 
-const getNotifyList = (timestamp, callback, count = 15) => {
+const getNotifyList = (timestamp, callback, count = 12) => {
   let SQL_QUERY = timestamp
     ? 'SELECT * FROM notify WHERE timestamp < ? ORDER BY timestamp DESC LIMIT ?'
     : 'SELECT * FROM notify ORDER BY timestamp DESC LIMIT ?';
@@ -248,8 +248,7 @@ const getNewsNotification = (timestamp, callback) => {
         }
         callback(temp);
       },
-      (error, error2) => {
-      },
+      (error, error2) => {},
     );
   });
 };
@@ -394,6 +393,23 @@ const getCountBluezoneByDays = (timestamp, success, failure) => {
   });
 };
 
+const removeNotificationLimit = callback => {
+  db = open();
+  db.transaction(txn => {
+    txn.executeSql('SELECT * FROM notify', [], (tx, results) => {
+      if (results.rows.length >= 60) {
+        txn.executeSql(
+          'DELETE FROM `notify` order by timestamp ASC LIMIT 1',
+          [],
+          (txTemp, results) => {
+            callback(results.rows.item(0).count);
+          },
+        );
+      }
+    });
+  });
+};
+
 export {
   open,
   close,
@@ -410,4 +426,5 @@ export {
   getAllDevLog,
   clearDevLog,
   getCountBluezoneByDays,
+  removeNotificationLimit,
 };

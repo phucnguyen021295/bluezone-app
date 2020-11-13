@@ -347,6 +347,7 @@
   "bluezone.dailyDeclaration.titleRisk": "Nguy cơ nhiễm bệnh",
   "bluezone.dailyDeclaration.info": "Thông tin",
   "bluezone.dailyDeclaration.error1": "Bạn cần phải hoàn thành tờ khai y tế trước khi sử dụng chức năng này.",
+  "bluezone.dailyDeclaration.declared": "Ngày hôm nay bạn đã khai báo rồi.",
 
   "bluezone.entryScreen.entry": "Nhập cảnh",
   "bluezone.entryScreen.entryDeclare": "Tờ khai nhập cảnh",
