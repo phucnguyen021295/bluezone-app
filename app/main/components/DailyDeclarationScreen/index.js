@@ -45,6 +45,8 @@ import {
   getEntryObjectGUIDInformation,
   setHealthMonitoring,
   getHealthMonitoring,
+  setTimeHealthMonitoring,
+  getTimeHealthMonitoring,
 } from '../../../core/storage';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
@@ -92,6 +94,7 @@ class DailyDeclaration extends React.Component {
     this.state = {
       isVisibleError: false,
       isVisibleSuccess: false,
+      isVisibleSendError: false,
       itemsSelected: [],
       data: [],
     };
@@ -111,6 +114,7 @@ class DailyDeclaration extends React.Component {
     this.getListHealthMonitoring = this.getListHealthMonitoring.bind(this);
     this.renderModal = this.renderModal.bind(this);
     this.onCloseAlertError = this.onCloseAlertError.bind(this);
+    this.formatDate = this.formatDate.bind(this);
   }
 
   componentDidMount() {
@@ -169,10 +173,28 @@ class DailyDeclaration extends React.Component {
     return LtinforEntryPersonReportDetail;
   }
 
+  formatDate(CreateDate) {
+    const date = new Date(CreateDate);
+    const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+    const month =
+      date.getMonth() > 8 ? date.getMonth() + 1 : `0${date.getMonth()}`;
+    return `${day}/${month}/${date.getFullYear()}`;
+  }
+
   async onSendInfo() {
     const {intl} = this.props;
     const {formatMessage} = intl;
     let {itemsSelected} = this.state;
+
+    const TimeHealthMonitoring = await getTimeHealthMonitoring();
+    if (
+      TimeHealthMonitoring &&
+      this.formatDate(TimeHealthMonitoring) === this.formatDate(new Date())
+    ) {
+      this.setState({isVisibleSendError: true});
+      return;
+    }
+
     const ListItem = itemsSelected.length > 0 ? itemsSelected : [5];
 
     const InforEntryObjectGuid = await getEntryObjectGUIDInformation();
@@ -218,6 +240,7 @@ class DailyDeclaration extends React.Component {
     });
 
     setHealthMonitoring(data);
+    setTimeHealthMonitoring(new Date().getTime());
   }
 
   InsertEntryPersonReportError(error) {
@@ -236,12 +259,17 @@ class DailyDeclaration extends React.Component {
   }
 
   onCloseAlertError() {
-    this.setState({isVisibleError: false, isVisibleSuccess: false});
+    this.setState({isVisibleError: false, isVisibleSuccess: false, isVisibleSendError: false});
   }
 
   renderModal() {
     const {intl} = this.props;
-    const {isProcessing, isVisibleError, isVisibleSuccess} = this.state;
+    const {
+      isProcessing,
+      isVisibleError,
+      isVisibleSucces,
+      isVisibleSendError,
+    } = this.state;
     const {formatMessage} = intl;
     return (
       <>
@@ -257,9 +285,21 @@ class DailyDeclaration extends React.Component {
           </View>
         </ModalBase>
         <ModalBase
-          isVisibleModal={isVisibleSuccess}
+          isVisibleModal={isVisibleSucces}
           title={formatMessage(message.titleModal)}
           description={formatMessage(message.describeSuccessModal)}>
+          <View style={styles.modalFooter}>
+            <ButtonConfirm
+              text={formatMessage(message.btnAgreeModal)}
+              onPress={this.onCloseAlertError}
+            />
+          </View>
+        </ModalBase>
+
+        <ModalBase
+          isVisibleModal={isVisibleSendError}
+          title={formatMessage(message.titleModal)}
+          description={formatMessage(message.declared)}>
           <View style={styles.modalFooter}>
             <ButtonConfirm
               text={formatMessage(message.btnAgreeModal)}
@@ -316,9 +356,11 @@ class DailyDeclaration extends React.Component {
             titleStyle={styles.textInvite}
           />
 
-          <MediumText style={styles.title}>
-            {formatMessage(message.trackHistory)}
-          </MediumText>
+          {data.length > 0 ? (
+            <MediumText style={styles.title}>
+              {formatMessage(message.trackHistory)}
+            </MediumText>
+          ) : null}
 
           <View>
             {data.map((item, index) => (

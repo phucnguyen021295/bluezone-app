@@ -345,6 +345,7 @@
     "bluezone.dailyDeclaration.titleRisk": "Risk of infection sick",
     "bluezone.dailyDeclaration.info": "Information",
     "bluezone.dailyDeclaration.error1": "You need to complete an entry declaration before using this function.",
+    "bluezone.dailyDeclaration.declared": "Today you have declared already.",
 
     "bluezone.entryScreen.entry": "Entry",
     "bluezone.entryScreen.entryDeclare": "Entry declaration",
