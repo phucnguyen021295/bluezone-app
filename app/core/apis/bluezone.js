@@ -1279,6 +1279,15 @@ const entryDeclaration = (
   }, createErrorFn(failure));
 };
 
+const requestEntry = (guid, success, failure) => {
+  getData(
+    `${DOMAIN}/api/AppInforEntry/RequestEntry`,
+    {InforEntryObjectGuid: guid},
+    success,
+    failure,
+  );
+};
+
 const getEntryInfo = (guid, success, failure) => {
   getData(
     `${DOMAIN}/api/AppInforEntry/GetOne`,
@@ -1483,6 +1492,7 @@ export {
   getEntryInfo,
   getEntryInfoByPhoneNumber,
   entryDeclaration,
+  requestEntry,
   getAllCountryApi,
   getAllAirPortApi,
   getAllProvinceApi,

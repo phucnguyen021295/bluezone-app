@@ -342,6 +342,10 @@ export default defineMessages({
     id: 'bluezone.entryForm.btnEntryOTP',
     defaultMessage: 'Yêu cầu nhập cảnh',
   },
+  requestEntrySuccess: {
+    id: 'bluezone.entryForm.requestEntrySuccess',
+    defaultMessage: 'Yêu cầu nhập cảnh thành công',
+  },
   content4: {
     id: 'bluezone.entryForm.content4',
     defaultMessage: '*Sử dụng khi làm thủ tục nhập cảnh',

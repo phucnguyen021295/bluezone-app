@@ -58,6 +58,7 @@ import Declaration from './components/Declaration';
 import {
   entryDeclaration,
   getEntryInfo,
+  requestEntry,
   getEntryInfoByPhoneNumber,
   getAllCountryApi,
   getAllAirPortApi,
@@ -1434,9 +1435,18 @@ class EntryDeclarationScreen extends React.Component {
   };
 
   navigateOTPEntry = () => {
-    // TODO by NhatPA: CẦn gọi api để bổ sung kịch bản còn thiếu.
-    // const {navigation} = this.props;
-    // navigation.navigate(SCREEN.ENTRY_VERIFY_OTP);
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+
+    requestEntry(
+      this.state.objectGUID,
+      () => {
+        this.showAlert(formatMessage(messages.requestEntrySuccess));
+      },
+      () => {
+        this.showAlert(formatMessage(messages.errorForm4));
+      },
+    );
   };
 
   render() {
