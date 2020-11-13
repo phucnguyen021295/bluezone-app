@@ -165,7 +165,7 @@ class VerifyOTPScreen extends React.Component {
   };
 
   doFinishedWorks(gotoMainScreen = false, goBack = false) {
-    const {onFinished, name, route} = this.props;
+    const {onFinished, name, route, navigation} = this.props;
 
     // Trường hợp theo wizard
     if (onFinished) {
@@ -183,6 +183,11 @@ class VerifyOTPScreen extends React.Component {
 
     if (!gotoMainScreen && !goBack) {
       setTimeout(() => {
+        if (route.params.contextScreen) {
+          navigation.goBack();
+          return true;
+        }
+
         this.props.navigation.replace(SCREEN.REGISTER_INFORMATION, {
           phoneNumber: this.PhoneNumber,
         });

@@ -31,6 +31,7 @@ import {
   View,
 } from 'react-native';
 import CheckBox from '../../../../../base/components/CheckBox';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 // Components
 import Text, {MediumText} from '../../../../../base/components/Text';
@@ -146,6 +147,15 @@ const Declaration = props => {
 
   return (
     <ScrollView style={styles.scroll}>
+      <View style={styles.tickGreenContainer}>
+        <FontAwesome
+          name={'check-circle'}
+          size={30}
+          style={styles.iconTickGreen}
+        />
+        <MediumText style={styles.tickContent}>{numberPhone}</MediumText>
+      </View>
+
       <Text style={styles.label1}>{formatMessage(messages.content1)}</Text>
       <Text style={styles.labelRed}>{formatMessage(messages.content2)}</Text>
 

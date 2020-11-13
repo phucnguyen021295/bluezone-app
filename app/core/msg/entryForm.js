@@ -322,6 +322,10 @@ export default defineMessages({
     id: 'bluezone.entryForm.errorForm5',
     defaultMessage: 'Địa chỉ email không hợp lệ',
   },
+  errorForm6: {
+    id: 'bluezone.entryForm.errorForm6',
+    defaultMessage: 'Số điện thoại không đúng, vui lòng nhập lại.',
+  },
   notification: {
     id: 'bluezone.entryForm.notification',
     defaultMessage: 'Thông báo',

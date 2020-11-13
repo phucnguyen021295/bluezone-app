@@ -35,6 +35,7 @@ import {
   retrySyncTokenFirebaseAgain,
   syncTokenFirebase,
   setConfiguration,
+  setAppMode,
 } from '../configuration';
 import {mergeResourceLanguage} from './language';
 import {addJob} from './jobScheduler';
@@ -204,6 +205,17 @@ const handleReportPushAnalytics = notify => {
   reportPushAnalytics(key);
 };
 
+const validateAppMode = notify => {
+  return true;
+};
+
+const handleAppMode = notify => {
+  if (!validateAppMode(notify)) {
+    return;
+  }
+  setAppMode(notify.data.AppMode);
+};
+
 const remoteMessageListener = async notify => {
   log.info(tmpl(msg.PUSH_RECEIVE, notify?.data?.Type), notify);
 
@@ -263,6 +275,9 @@ const remoteMessageListener = async notify => {
       break;
     case NOTIFICATION_TYPE.UPDATE_VERSION:
       handleNotification(_notify);
+      break;
+    case NOTIFICATION_TYPE.APP_MODE:
+      handleAppMode(_notify);
       break;
   }
 };

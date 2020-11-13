@@ -326,6 +326,7 @@
   "bluezone.entryForm.errorForm3": "Thông tin tờ khai chưa chính xác. Bạn vui lòng cập nhật các trường thông tin còn trống",
   "bluezone.entryForm.errorForm4": "Có lỗi xảy ra. Vui lòng thử lại",
   "bluezone.entryForm.errorForm5": "Địa chỉ email không hợp lệ",
+  "bluezone.entryForm.errorForm6": "Số điện thoại không đúng, vui lòng nhập lại.",
   "bluezone.entryForm.notification": "Thông báo",
   "bluezone.entryForm.enterInput": "Nhập thông tin",
   "bluezone.entryForm.search": "Tìm kiếm",
@@ -349,5 +350,11 @@
 
   "bluezone.entryScreen.entry": "Nhập cảnh",
   "bluezone.entryScreen.entryDeclare": "Tờ khai nhập cảnh",
-  "bluezone.entryScreen.dailyDeclare": "Khai báo hàng ngày"
+  "bluezone.entryScreen.dailyDeclare": "Khai báo hàng ngày",
+  "bluezone.entryScreen.code": "Code",
+  "bluezone.entryScreen.passport": "Passport",
+  "bluezone.entryScreen.content1": "Trân trọng cảm ơn quý khách đã hoàn thành việc khai báo y tế.",
+  "bluezone.entryScreen.content2": "Quý khách cần đến nơi làm việc của nhân viên kiểm dịch y tế để lấy bản xác nhận trước khi qua quầy làm thủ tục xuất nhập cảnh.",
+  "bluezone.entryScreen.updateEntryInfo": "Cập nhật lại tờ khai",
+  "bluezone.entryScreen.backHome": "Quay lại trang chủ"
 }

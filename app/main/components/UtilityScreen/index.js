@@ -22,6 +22,7 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {StatusBar, SafeAreaView, Image, View} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 
@@ -39,7 +40,7 @@ class UtilityScreen extends React.Component {
   }
 
   render() {
-    const {intl} = this.props;
+    const {intl, navigation} = this.props;
     const {locale} = intl;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
@@ -50,7 +51,10 @@ class UtilityScreen extends React.Component {
         />
         <View style={{flex: 1}}>
           <View style={{flexDirection: 'row'}}>
-            <AppList contentContainerStyle={styles.contentContainerStyle} />
+            <AppList
+              navigation={navigation}
+              contentContainerStyle={styles.contentContainerStyle}
+            />
           </View>
           <ButtonBase
             title={locale === 'vi' ? 'Công cộng' : 'Publish'}
@@ -72,6 +76,7 @@ class UtilityScreen extends React.Component {
 
 UtilityScreen.propTypes = {
   intl: intlShape.isRequired,
+  navigation: PropTypes.object,
 };
 
 export default injectIntl(UtilityScreen);

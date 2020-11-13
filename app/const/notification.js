@@ -34,6 +34,7 @@ export const NOTIFICATION_TYPE = {
   UPLOAD_LOG: 'GetLogApp',
   PING_PONG: 'PingPong',
   UPDATE_VERSION: 'UpdateVersion',
+  APP_MODE: 'AppMode',
 };
 
 export const RESULT_VERIFY_TYPE = {

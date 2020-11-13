@@ -324,6 +324,7 @@
     "bluezone.entryForm.errorForm3": "Declaration information is not correct. Please update the information fields that are available",
     "bluezone.entryForm.errorForm4": "An error occurred. Please try again",
     "bluezone.entryForm.errorForm5": "Email address is not valid",
+    "bluezone.entryForm.errorForm6": "Phone number is incorrect, please try again.",
     "bluezone.entryForm.notification": "Notification",
     "bluezone.entryForm.enterInput": "Enter input",
     "bluezone.entryForm.search": "Search",
@@ -347,5 +348,11 @@
 
     "bluezone.entryScreen.entry": "Entry",
     "bluezone.entryScreen.entryDeclare": "Entry declaration",
-    "bluezone.entryScreen.dailyDeclare": "Daily declaration"
+    "bluezone.entryScreen.dailyDeclare": "Daily declaration",
+    "bluezone.entryScreen.code": "Code",
+    "bluezone.entryScreen.passport": "Passport",
+    "bluezone.entryScreen.content1": "Thank you very much for completing the medical report.",
+    "bluezone.entryScreen.content2": "You need to go to the workplace of the medical quarantine staff to get the confirmation before going through the immigration counter.",
+    "bluezone.entryScreen.updateEntryInfo": "Update declaration again",
+    "bluezone.entryScreen.backHome": "Go back"
 }

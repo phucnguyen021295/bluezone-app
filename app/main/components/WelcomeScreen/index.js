@@ -264,7 +264,7 @@ class WelcomeScreen extends React.Component {
 
   render() {
     const {width, images, info, setHeight} = this.state;
-    const {intl} = this.props;
+    const {intl, navigation} = this.props;
     const {formatMessage} = intl;
     const {Language} = configuration;
     const dow = Language === 'vi' ? dayVi : dayEn;
@@ -321,6 +321,7 @@ class WelcomeScreen extends React.Component {
         </TouchableOpacity>
         <View style={styles.body}>
           <AppList
+            navigation={navigation}
             appStyle={styles.appStyle}
             contentContainerStyle={styles.announce}
           />

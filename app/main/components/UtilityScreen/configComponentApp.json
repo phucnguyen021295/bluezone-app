@@ -5,32 +5,27 @@
     "1": {
       "id": "1",
       "title": "Tra cứu y tế",
-      "titleEn": "Medical lookup",
-      "screen": "Entry"
+      "titleEn": "Medical lookup"
     },
     "2": {
       "id": "2",
       "title": "Sức khỏe",
-      "titleEn": "Health",
-      "screen": "Entry"
+      "titleEn": "Health"
     },
     "3": {
       "id": "3",
       "title": "SKPN",
-      "titleEn": "SKPN",
-      "screen": "Entry"
+      "titleEn": "SKPN"
     },
     "4": {
       "id": "4",
       "title": "Lịch",
-      "titleEn": "Calendar",
-      "screen": "Entry"
+      "titleEn": "Calendar"
     },
     "5": {
       "id": "5",
       "title": "Tiêm chủng",
-      "titleEn": "Vacxin",
-      "screen": "Entry"
+      "titleEn": "Vacxin"
     },
     "6": {
       "id": "6",

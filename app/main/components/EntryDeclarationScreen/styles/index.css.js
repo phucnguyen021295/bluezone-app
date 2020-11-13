@@ -325,6 +325,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#00FF00',
     paddingVertical: 5,
   },
+
+  tickGreenContainer: {
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  iconTickGreen: {
+    color: 'green',
+    marginRight: 10,
+  },
+
+  tickContent: {
+    fontSize: fontSize.fontSize16,
+    color: '#000',
+  },
 });
 
 export default styles;

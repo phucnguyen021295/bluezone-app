@@ -63,6 +63,7 @@ import {
   getAllAirPortApi,
   getAllProvinceApi,
   getRegionByParentID,
+  CreateAndSendOTPCode,
 } from '../../../core/apis/bluezone';
 
 // Storage
@@ -92,6 +93,7 @@ import messages from '../../../core/msg/entryForm';
 
 const VIETNAM_ID = '234';
 const regxEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const regxEmailPhoneNumber = /^[\+]?[0-9]{9,15}\b/;
 
 class EntryDeclarationScreen extends React.Component {
   constructor(props) {
@@ -170,7 +172,7 @@ class EntryDeclarationScreen extends React.Component {
       quarantinePlace: null,
       otherQuarantinePlace: '',
       statusInternet: 'connected', // connected, connecting, disconnect
-      // isView: AppMode === 'entry',
+      appMode: AppMode,
     };
     this.lastVNProvinceIDApi = null;
     this.lastVNDistrictIDApi = null;
@@ -184,12 +186,22 @@ class EntryDeclarationScreen extends React.Component {
     this.changeStateWithOutSave({objectGUID: objectGUID});
     this.objectGUID = objectGUID;
     getEntryInfoDeclare().then(info => {
-      if (!info) {
+      // if (!info) {
+      this.state.appMode !== 'entry' &&
         getEntryInfoByPhoneNumber(data => {
-          this.bindEntryInfoData(data);
+          if (data.ModeEntry) {
+            setAppMode('entry');
+            this.changeStateWithOutSave({appMode: 'entry'});
+          }
+          if (
+            new Date(data.LastUpdate).getTime() >
+            new Date(this.lastUpdate).getTime()
+          ) {
+            this.bindEntryInfoData(data);
+          }
         });
-        return;
-      }
+      // return;
+      // }
       this.bindEntryInfoData(info);
     });
     getEntryObjectGUIDInformation().then(objectGUID => {
@@ -208,7 +220,7 @@ class EntryDeclarationScreen extends React.Component {
   }
 
   componentWillUnmount() {
-    this.unsubscribeConnectionChange();
+    this.unsubscribeConnectionChange && this.unsubscribeConnectionChange();
     clearTimeout(this.timeoutConnected);
   }
 
@@ -326,6 +338,8 @@ class EntryDeclarationScreen extends React.Component {
         : null,
       otherQuarantinePlace: info.ChonCoSoCachLy_Khac,
     };
+
+    this.lastUpdate = info.LastUpdate || info.CreateDate;
 
     for (const property in data) {
       if (
@@ -867,9 +881,46 @@ class EntryDeclarationScreen extends React.Component {
     this.changeStateWithOutSave({otherQuarantinePlace: text});
   };
 
+  createAndSendOTPCode = () => {
+    const {numberPhone} = this.state;
+    const {TokenFirebase} = configuration;
+
+    CreateAndSendOTPCode(
+      numberPhone,
+      TokenFirebase,
+      this.createAndSendOTPCodeSuccess,
+      this.createAndSendOTPCodeFailure,
+    );
+  };
+
+  createAndSendOTPCodeSuccess = () => {
+    const {numberPhone} = this.state;
+    this.props.navigation.navigate(SCREEN.PHONE_NUMBER_VERITY_OTP, {
+      phoneNumber: numberPhone,
+      contextScreen: 'entry',
+    });
+  };
+
+  createAndSendOTPCodeFailure = () => {
+    const {intl} = this.props;
+    const {formatMessage} = intl;
+    this.showAlert(formatMessage(messages.errorForm4));
+  };
+
   onSend = () => {
     const {intl} = this.props;
     const {formatMessage} = intl;
+
+    const {PhoneNumber} = configuration;
+    if (!PhoneNumber) {
+      const {numberPhone} = this.state;
+      if (!regxEmailPhoneNumber.test(numberPhone)) {
+        this.showAlert(formatMessage(messages.errorForm6));
+        return;
+      }
+      this.createAndSendOTPCode();
+      return;
+    }
 
     const {
       portraitBase64,
@@ -1173,7 +1224,6 @@ class EntryDeclarationScreen extends React.Component {
       passport: this.state.passport,
     });
 
-    setAppMode('entry');
     setEntryInfoDeclare({
       ...data.Object,
       TenCuaKhau: gateName,
@@ -1381,8 +1431,9 @@ class EntryDeclarationScreen extends React.Component {
   };
 
   navigateOTPEntry = () => {
-    const {navigation} = this.props;
-    navigation.navigate(SCREEN.ENTRY_VERIFY_OTP);
+    // TODO by NhatPA: CẦn gọi api để bổ sung kịch bản còn thiếu.
+    // const {navigation} = this.props;
+    // navigation.navigate(SCREEN.ENTRY_VERIFY_OTP);
   };
 
   render() {
@@ -1454,9 +1505,9 @@ class EntryDeclarationScreen extends React.Component {
       objectGUID,
       statusInternet,
       isView,
+      appMode,
     } = this.state;
     const {language} = this.context;
-    const {AppMode} = configuration;
     const vietnamese = language === 'vi';
 
     const startVN = this.isIDVietNam(startCountryID);
@@ -1507,26 +1558,26 @@ class EntryDeclarationScreen extends React.Component {
             </View>
           )}
 
-          {isView ? (
+          {appMode === 'entry' ? (
             <Declaration data={this.state} />
           ) : (
             <ScrollView
               style={styles.scroll}
               keyboardShouldPersistTaps={'handled'}>
-              {/*{AppMode !== 'entry' && objectGUID && (*/}
-              {/*  <View style={styles.OTPEntryContainer}>*/}
-              {/*    <TouchableOpacity*/}
-              {/*      style={styles.btnOTPEntry}*/}
-              {/*      onPress={this.navigateOTPEntry}>*/}
-              {/*      <Text style={styles.btnOTPEntryContent}>*/}
-              {/*        {formatMessage(messages.btnEntryOTP)}*/}
-              {/*      </Text>*/}
-              {/*    </TouchableOpacity>*/}
-              {/*    <MediumText style={styles.label2}>*/}
-              {/*      {formatMessage(messages.content4)}*/}
-              {/*    </MediumText>*/}
-              {/*  </View>*/}
-              {/*)}*/}
+              {appMode !== 'entry' && objectGUID && (
+                <View style={styles.OTPEntryContainer}>
+                  <TouchableOpacity
+                    style={styles.btnOTPEntry}
+                    onPress={this.navigateOTPEntry}>
+                    <Text style={styles.btnOTPEntryContent}>
+                      {formatMessage(messages.btnEntryOTP)}
+                    </Text>
+                  </TouchableOpacity>
+                  <MediumText style={styles.label2}>
+                    {formatMessage(messages.content4)}
+                  </MediumText>
+                </View>
+              )}
               <SwitchLanguage />
               <Text style={styles.label1}>
                 {formatMessage(messages.content1)}

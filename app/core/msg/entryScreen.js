@@ -36,4 +36,28 @@ export default defineMessages({
     id: 'bluezone.entryScreen.dailyDeclare',
     defaultMessage: 'Khai báo hàng ngày',
   },
+  code: {
+    id: 'bluezone.entryScreen.code',
+    defaultMessage: 'Khai báo hàng ngày',
+  },
+  passport: {
+    id: 'bluezone.entryScreen.passport',
+    defaultMessage: 'Code',
+  },
+  content1: {
+    id: 'bluezone.entryScreen.content1',
+    defaultMessage: 'Passport',
+  },
+  content2: {
+    id: 'bluezone.entryScreen.content2',
+    defaultMessage: 'Trân trọng cảm ơn ...',
+  },
+  updateEntryInfo: {
+    id: 'bluezone.entryScreen.updateEntryInfo',
+    defaultMessage: 'Quý khách cần đến nơi làm...',
+  },
+  backHome: {
+    id: 'bluezone.entryScreen.backHome',
+    defaultMessage: 'Quay lại trang chủ',
+  },
 });
