@@ -78,7 +78,6 @@ class DetailNewScreen extends React.PureComponent {
   render() {
     const {news} = this.state;
     const {route} = this.props;
-    debugger;
     const item = (route && route.params.item) || {};
     const {Language} = configuration;
     //

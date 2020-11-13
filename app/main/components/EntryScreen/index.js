@@ -134,6 +134,7 @@ const EntryTabScreen = props => {
 
 EntryTabScreen.propTypes = {
   intl: intlShape.isRequired,
+  navigation: PropTypes.object,
 };
 
 const EntryTabScreenFinal = injectIntl(EntryTabScreen);
