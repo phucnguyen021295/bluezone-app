@@ -30,7 +30,7 @@ import * as PropTypes from 'prop-types';
 import Text, {MediumText} from '../../../../../base/components/Text';
 import ButtonBase from '../../../../../base/components/ButtonBase';
 
-import {listSymptom} from '../../index';
+import {listSymptomData} from '../../data';
 
 // Styles
 import styles from './styles/index.css';
@@ -52,7 +52,7 @@ class DailyDeclaration extends React.Component {
     const ListItem = item.ListItem;
     let textInfo = '';
     ListItem.map(id => {
-      const symptom = listSymptom.filter(it => it.StateID === id);
+      const symptom = listSymptomData.filter(it => it.StateID === id);
       if (symptom.length === 0) {
         return;
       }

@@ -57,13 +57,7 @@ import message from '../../../core/msg/dailyDeclaration';
 import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import ModalBase from '../../../base/components/ModalBase';
 
-export const listSymptom = [
-  {StateID: 1, name: 'Sốt', nameEn: 'Fever'},
-  {StateID: 2, name: 'Ho', nameEn: 'Cough'},
-  {StateID: 3, name: 'Khó thở', nameEn: 'Dyspnea'},
-  {StateID: 4, name: 'Đau người, mệt mỏi', nameEn: 'Body pain, fatigue'},
-  {StateID: 5, name: 'Khỏe mạnh', nameEn: 'Healthy'},
-];
+import {listSymptomData} from './data';
 
 let LtinforEntryPersonReportDetail = [
   {
@@ -325,7 +319,7 @@ class DailyDeclaration extends React.Component {
             {formatMessage(message.option)}
           </MediumText>
           <View style={styles.listCheckbox}>
-            {listSymptom.map(item => {
+            {listSymptomData.map(item => {
               const selected = !!itemsSelected.find(i => i === item.StateID);
               const name = locale === 'vi' ? item.name : item.nameEn;
               return (
