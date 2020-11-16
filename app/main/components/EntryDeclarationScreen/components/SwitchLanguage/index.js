@@ -107,7 +107,7 @@ const languages = [
   // },
 ];
 
-class SwitchLanguage extends React.Component {
+class SwitchLanguage extends React.PureComponent {
   constructor(props) {
     super(props);
   }

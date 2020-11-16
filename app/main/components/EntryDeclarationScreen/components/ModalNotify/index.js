@@ -34,7 +34,7 @@ import {injectIntl, intlShape} from 'react-intl';
 
 import styles from './styles/index.css';
 
-class Index extends React.Component {
+class Index extends React.PureComponent {
   constructor(props) {
     super(props);
   }

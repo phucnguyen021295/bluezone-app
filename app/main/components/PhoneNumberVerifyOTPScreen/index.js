@@ -373,8 +373,7 @@ class VerifyOTPScreen extends React.Component {
   checkModeEntryPhoneNumber = () => {
     checkModeEntry(
       data => {
-        alert(JSON.stringify(data));
-        if (data.Object.result) {
+        if (data.Object.Result) {
           setAppMode('entry');
         }
       },

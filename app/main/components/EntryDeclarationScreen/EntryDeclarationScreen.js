@@ -94,7 +94,7 @@ import messages from '../../../core/msg/entryForm';
 
 const VIETNAM_ID = '234';
 const regxEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-const regxEmailPhoneNumber = /^[\+]?[0-9]{9,15}\b/;
+const regxPhoneNumber = /^[\+]?[0-9]{9,15}\b/;
 
 class EntryDeclarationScreen extends React.Component {
   constructor(props) {
@@ -211,7 +211,7 @@ class EntryDeclarationScreen extends React.Component {
         if (!data) {
           return;
         }
-        if (data.ModeEntry) {
+        if (data.Object.ModeEntry) {
           setAppMode('entry');
           this.changeStateWithOutSave({appMode: 'entry'});
         }
@@ -221,8 +221,12 @@ class EntryDeclarationScreen extends React.Component {
           new Date(data.LastUpdate).getTime() >
             new Date(this.lastUpdate).getTime()
         ) {
-          setEntryInfoDeclare(data);
-          this.bindEntryInfoData(data);
+          setEntryObjectGUIDInformation(data.Object.ObjectGuid);
+          setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
+          this.changeStateWithOutSave({objectGUID: data.Object.ObjectGuid});
+          this.objectGUID = data.Object.ObjectGuid;
+          setEntryInfoDeclare(data.Object);
+          this.bindEntryInfoData(data.Object);
         }
       });
     }
@@ -918,11 +922,17 @@ class EntryDeclarationScreen extends React.Component {
     const {PhoneNumber} = configuration;
     if (!PhoneNumber) {
       const {numberPhone} = this.state;
-      if (!regxEmailPhoneNumber.test(numberPhone)) {
+      if (!regxPhoneNumber.test(numberPhone)) {
         this.showAlert(formatMessage(messages.errorForm6));
         return;
       }
-      this.createAndSendOTPCode();
+
+      this.props.navigation.navigate(SCREEN.PHONE_NUMBER_REGISTER, {
+        phoneNumber: numberPhone,
+        contextScreen: 'entry',
+      });
+
+      // this.createAndSendOTPCode();
       return;
     }
 
@@ -1271,7 +1281,7 @@ class EntryDeclarationScreen extends React.Component {
     if (!gates) {
       getAllAirPortApi(
         data => {
-          const _data = data.map(({AirPortID, AirPortName}) => ({
+          const _data = data.Object.map(({AirPortID, AirPortName}) => ({
             id: AirPortID.toString(),
             name: AirPortName,
           }));
@@ -1287,7 +1297,7 @@ class EntryDeclarationScreen extends React.Component {
     if (!countries) {
       getAllCountryApi(
         data => {
-          const _data = data.map(({RegionID, RegionName}) => ({
+          const _data = data.Object.map(({RegionID, RegionName}) => ({
             id: RegionID.toString(),
             name: RegionName,
           }));
@@ -1303,7 +1313,7 @@ class EntryDeclarationScreen extends React.Component {
     if (!provinces) {
       getAllProvinceApi(
         data => {
-          const _data = data.map(({RegionID, RegionName}) => ({
+          const _data = data.Object.map(({RegionID, RegionName}) => ({
             id: RegionID.toString(),
             name: RegionName,
           }));
@@ -1328,7 +1338,7 @@ class EntryDeclarationScreen extends React.Component {
     getRegionByParentID(
       afterQuarantine_ProvinceID,
       data => {
-        const _data = data.map(({RegionID, RegionName}) => ({
+        const _data = data.Object.map(({RegionID, RegionName}) => ({
           id: RegionID.toString(),
           name: RegionName,
         }));
@@ -1352,7 +1362,7 @@ class EntryDeclarationScreen extends React.Component {
     getRegionByParentID(
       afterQuarantine_DistrictID,
       data => {
-        const _data = data.map(({RegionID, RegionName}) => ({
+        const _data = data.Object.map(({RegionID, RegionName}) => ({
           id: RegionID,
           name: RegionName,
         }));
@@ -1376,7 +1386,7 @@ class EntryDeclarationScreen extends React.Component {
     getRegionByParentID(
       vn_ProvinceID,
       data => {
-        const _data = data.map(({RegionID, RegionName}) => ({
+        const _data = data.Object.map(({RegionID, RegionName}) => ({
           id: RegionID,
           name: RegionName,
         }));
@@ -1400,7 +1410,7 @@ class EntryDeclarationScreen extends React.Component {
     getRegionByParentID(
       vn_DistrictID,
       data => {
-        const _data = data.map(({RegionID, RegionName}) => ({
+        const _data = data.Object.map(({RegionID, RegionName}) => ({
           id: RegionID,
           name: RegionName,
         }));
@@ -1441,7 +1451,7 @@ class EntryDeclarationScreen extends React.Component {
     requestEntry(
       this.state.objectGUID,
       data => {
-        if (data.ModeEntry) {
+        if (data.Object.ModeEntry) {
           setAppMode('entry');
           this.changeStateWithOutSave({appMode: 'entry'});
         }

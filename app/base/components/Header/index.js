@@ -33,7 +33,7 @@ import IconBack from './styles/images/IconBack';
 import styles, {ICON_WIDTH, ICON_HEIGHT} from './styles/index.css';
 import {blue_bluezone} from '../../../core/color';
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   constructor(props) {
     super(props);
     this.onGoBack = this.onGoBack.bind(this);

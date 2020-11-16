@@ -29,7 +29,7 @@ import Entry from './EntryDeclarationScreen';
 
 import {translationMessages} from '../../../i18n';
 
-class Declaration extends React.Component {
+class Declaration extends React.PureComponent {
   constructor(props) {
     super(props);
   }

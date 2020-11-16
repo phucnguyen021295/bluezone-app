@@ -25,7 +25,7 @@ import configuration from '../../../../configuration';
 
 export const EntryLanguageContext = React.createContext();
 
-class LanguageContextComponent extends React.Component {
+class LanguageContextComponent extends React.PureComponent {
   constructor(props) {
     super(props);
     let language = configuration.EntryLanguage;
