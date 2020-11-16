@@ -568,7 +568,7 @@ class EntryDeclarationScreen extends React.Component {
     ImagePicker.showImagePicker(
       {
         ...options,
-        cancelButtonTitle: formatMessage(messages.cancel),
+        cancelButtonTitle: formatMessage(headerTextIOS),
         takePhotoButtonTitle: formatMessage(messages.takePhoto),
         chooseFromLibraryButtonTitle: formatMessage(messages.selectLibrary),
       },
@@ -1852,9 +1852,9 @@ class EntryDeclarationScreen extends React.Component {
                   date={startDate || this.now}
                   maximumDate={endDate}
                   locale={language}
-                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
-                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
-                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
+                  headerTextIOS={formatMessage(messages.pickDate)}
+                  cancelTextIOS={formatMessage(messages.cancel)}
+                  confirmTextIOS={formatMessage(messages.confirm)}
                 />
               </View>
 
@@ -1876,9 +1876,9 @@ class EntryDeclarationScreen extends React.Component {
                   date={endDate || this.now}
                   minimumDate={startDate}
                   locale={language}
-                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
-                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
-                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
+                  headerTextIOS={formatMessage(messages.pickDate)}
+                  cancelTextIOS={formatMessage(messages.cancel)}
+                  confirmTextIOS={formatMessage(messages.confirm)}
                 />
               </View>
 
@@ -2396,9 +2396,9 @@ class EntryDeclarationScreen extends React.Component {
                   onCancel={this.cancelPickerTestDate}
                   date={testDate || this.now}
                   locale={language}
-                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
-                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
-                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
+                  headerTextIOS={formatMessage(messages.pickDate)}
+                  cancelTextIOS={formatMessage(messages.cancel)}
+                  confirmTextIOS={formatMessage(messages.confirm)}
                 />
               </View>
 

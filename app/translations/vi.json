@@ -315,7 +315,7 @@
   "bluezone.entryForm.testDate": "Ngày xét nghiệm",
   "bluezone.entryForm.sendContent": "Gửi tờ khai",
   "bluezone.entryForm.declareSuccess": "Khai báo nhập cảnh thành công",
-  "bluezone.entryForm.cancel": "Đóng",
+  "bluezone.entryForm.cancel": "Hủy bỏ",
   "bluezone.entryForm.selectPortrait": "Chọn ảnh chân dung",
   "bluezone.entryForm.selectTestResult": "Chọn ảnh kết quả xét nghiệm",
   "bluezone.entryForm.takePhoto": "Chụp ảnh…",
@@ -335,6 +335,8 @@
   "bluezone.entryForm.content4": "*Chức năng này chỉ dùng khi làm thủ tục nhập cảnh",
   "bluezone.entryForm.disconnect": "Mất kết nối\nMột số nội dung chỉ có thể khai báo khi có internet.",
   "bluezone.entryForm.connecting": "Đang kết nối...",
+  "bluezone.entryForm.pickDate": "Chọn ngày",
+  "bluezone.entryForm.confirm": "Chọn",
 
   "bluezone.dailyDeclaration.option": "Chọn thông tin sức khỏe hiện tại của bạn",
   "bluezone.dailyDeclaration.btnSendInfo": "Gửi thông tin",

@@ -279,7 +279,7 @@ export default defineMessages({
   },
   cancel: {
     id: 'bluezone.entryForm.cancel',
-    defaultMessage: 'Đóng',
+    defaultMessage: 'Hủy bỏ',
   },
   selectPortrait: {
     id: 'bluezone.entryForm.selectPortrait',
@@ -358,5 +358,13 @@ export default defineMessages({
   connecting: {
     id: 'bluezone.entryForm.connecting',
     defaultMessage: 'Đang kết nối...',
+  },
+  pickDate: {
+    id: 'bluezone.entryForm.pickDate',
+    defaultMessage: 'Chọn ngày',
+  },
+  confirm: {
+    id: 'bluezone.entryForm.confirm',
+    defaultMessage: 'Chọn',
   },
 });

@@ -333,6 +333,8 @@
     "bluezone.entryForm.content4": "*For use during entry procedures",
     "bluezone.entryForm.disconnect": "*Disconnect\nSome content can only be declared when there is internet.",
     "bluezone.entryForm.connecting": "*Connecting...",
+    "bluezone.entryForm.pickDate": "Pick a date",
+    "bluezone.entryForm.confirm": "Confirm",
 
     "bluezone.dailyDeclaration.option": "Choose your current health information",
     "bluezone.dailyDeclaration.btnSendInfo": "Send information",
