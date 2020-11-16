@@ -69,12 +69,13 @@ const visibleModal = {
   isVisibleWrongPhoneNumber: false,
 };
 
-class RegisterScreen extends React.Component {
+class RegisterScreen extends React.PureComponent {
   constructor(props) {
     super(props);
     const _state = {};
     Object.assign(_state, visibleModal, {
-      numberPhone: '',
+      numberPhone: props.route?.params?.phoneNumber || '',
+      editable: !props.route?.params?.phoneNumber,
       isSelected: true,
       isShowKeyboard: false,
     });
@@ -135,7 +136,7 @@ class RegisterScreen extends React.Component {
   }
 
   doFinishedWorks(gotoMainScreen) {
-    const {onFinished, name} = this.props;
+    const {onFinished, name, route} = this.props;
     const {numberPhone} = this.state;
 
     // Trường hợp theo wizard
@@ -151,6 +152,7 @@ class RegisterScreen extends React.Component {
 
     this.props.navigation.replace(SCREEN.PHONE_NUMBER_VERITY_OTP, {
       phoneNumber: numberPhone,
+      contextScreen: route?.params?.contextScreen,
     });
   }
 
@@ -309,7 +311,7 @@ class RegisterScreen extends React.Component {
 
   render() {
     const {intl} = this.props;
-    const {numberPhone, isSelected} = this.state;
+    const {numberPhone, isSelected, editable} = this.state;
     const {formatMessage} = intl;
     const disabled = numberPhone.length === 0;
     return (
@@ -341,6 +343,8 @@ class RegisterScreen extends React.Component {
                 allowFontScaling={false}
                 placeholder={formatMessage(message.pleaseEnterYourPhone)}
                 onChangeText={this.onPhoneNumberChange}
+                value={numberPhone}
+                editable={editable}
               />
               <View style={styles.checkboxContainer}>
                 <CheckBox

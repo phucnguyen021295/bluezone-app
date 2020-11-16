@@ -82,7 +82,7 @@ let LtinforEntryPersonReportDetail = [
   },
 ];
 
-class DailyDeclaration extends React.Component {
+class DailyDeclaration extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

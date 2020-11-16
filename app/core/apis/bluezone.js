@@ -1354,7 +1354,7 @@ const getData = (
     })
     .then(response => {
       if (response.status === 200 && response.data.isOk === true) {
-        success(response.data.Object);
+        success(response.data);
       } else {
         failure(response);
       }
