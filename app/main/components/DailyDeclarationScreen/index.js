@@ -261,7 +261,7 @@ class DailyDeclaration extends React.Component {
     const {
       isProcessing,
       isVisibleError,
-      isVisibleSucces,
+      isVisibleSuccess,
       isVisibleSendError,
     } = this.state;
     const {formatMessage} = intl;
@@ -279,7 +279,7 @@ class DailyDeclaration extends React.Component {
           </View>
         </ModalBase>
         <ModalBase
-          isVisibleModal={isVisibleSucces}
+          isVisibleModal={isVisibleSuccess}
           title={formatMessage(message.titleModal)}
           description={formatMessage(message.describeSuccessModal)}>
           <View style={styles.modalFooter}>

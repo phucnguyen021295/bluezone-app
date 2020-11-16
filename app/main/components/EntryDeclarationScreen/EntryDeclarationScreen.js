@@ -49,7 +49,6 @@ import RadioButton from '../../../base/components/RadioButton';
 import SelectPicker from '../../../base/components/SelectPicker';
 import TextInfo from './components/TextInfo';
 import ModalNotify from './components/ModalNotify';
-import {ButtonConfirm} from '../../../base/components/ButtonText/ButtonModal';
 import {EntryLanguageContext} from './components/LanguageContext';
 import SwitchLanguage from './components/SwitchLanguage';
 import Declaration from './components/Declaration';
@@ -1842,6 +1841,10 @@ class EntryDeclarationScreen extends React.Component {
                   onCancel={this.cancelPickerStartDate}
                   date={startDate || this.now}
                   maximumDate={endDate}
+                  locale={language}
+                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
+                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
+                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
                 />
               </View>
 
@@ -1862,6 +1865,10 @@ class EntryDeclarationScreen extends React.Component {
                   onCancel={this.cancelPickerEndDate}
                   date={endDate || this.now}
                   minimumDate={startDate}
+                  locale={language}
+                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
+                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
+                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
                 />
               </View>
 
@@ -2378,6 +2385,10 @@ class EntryDeclarationScreen extends React.Component {
                   onConfirm={this.confirmPickerTestDate}
                   onCancel={this.cancelPickerTestDate}
                   date={testDate || this.now}
+                  locale={language}
+                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
+                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
+                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
                 />
               </View>
 
