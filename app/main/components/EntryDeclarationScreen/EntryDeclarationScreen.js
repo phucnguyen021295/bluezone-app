@@ -568,7 +568,7 @@ class EntryDeclarationScreen extends React.Component {
     ImagePicker.showImagePicker(
       {
         ...options,
-        cancelButtonTitle: formatMessage(headerTextIOS),
+        cancelButtonTitle: formatMessage(messages.cancel),
         takePhotoButtonTitle: formatMessage(messages.takePhoto),
         chooseFromLibraryButtonTitle: formatMessage(messages.selectLibrary),
       },
