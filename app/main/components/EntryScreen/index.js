@@ -30,10 +30,11 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 // Components
 import Header from '../../../base/components/Header';
 import Text from '../../../base/components/Text';
-import EntryDeclarationScreen from '../EntryDeclarationScreen/EntryDeclarationScreen';
+import EntryDeclarationScreen from '../EntryDeclarationScreen';
 import DailyDeclarationScreen from '../DailyDeclarationScreen';
-import ContextProvider from '../EntryDeclarationScreen/components/LanguageContext';
-import LanguageProvider from '../EntryDeclarationScreen/components/LanguageProvider';
+// import Declaration from '../EntryDeclarationScreen/components/EntryInfo';
+// import ContextProvider from '../EntryDeclarationScreen/components/LanguageContext';
+// import LanguageProvider from '../EntryDeclarationScreen/components/LanguageProvider';
 
 // Styles
 import * as fontSize from '../../../core/fontSize';
@@ -91,24 +92,6 @@ const EntryTabScreen = props => {
           allowFontScaling: false,
         }}>
         <Tab.Screen
-          name={'EntryDeclare'}
-          options={{
-            tabBarLabel: ({focused}) => (
-              <Text
-                text={formatMessage(messages.entryDeclare)}
-                style={[
-                  styles.tabHeader,
-                  {
-                    color: focused ? '#015cd0' : '#747474',
-                  },
-                ]}
-              />
-            ),
-          }}>
-          {props => <EntryDeclarationScreen displayHeader={false} {...props} />}
-        </Tab.Screen>
-
-        <Tab.Screen
           name={'DailyDeclare'}
           options={{
             tabBarLabel: ({focused}) => (
@@ -126,6 +109,29 @@ const EntryTabScreen = props => {
           }}>
           {props => <DailyDeclarationScreen displayHeader={false} {...props} />}
         </Tab.Screen>
+        <Tab.Screen
+          name={'EntryDeclare'}
+          options={{
+            tabBarLabel: ({focused}) => (
+              <Text
+                text={formatMessage(messages.entryDeclare)}
+                style={[
+                  styles.tabHeader,
+                  {
+                    color: focused ? '#015cd0' : '#747474',
+                  },
+                ]}
+              />
+            ),
+          }}>
+          {props => (
+            <EntryDeclarationScreen
+              displayHeader={false}
+              data={{}}
+              {...props}
+            />
+          )}
+        </Tab.Screen>
       </Tab.Navigator>
     </SafeAreaView>
   );
@@ -138,20 +144,22 @@ EntryTabScreen.propTypes = {
 
 const EntryTabScreenFinal = injectIntl(EntryTabScreen);
 
-class EntryScreen extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export default EntryTabScreenFinal;
 
-  render() {
-    return (
-      <ContextProvider>
-        <LanguageProvider messages={translationMessages}>
-          <EntryTabScreenFinal {...this.props} />
-        </LanguageProvider>
-      </ContextProvider>
-    );
-  }
-}
-
-export default EntryScreen;
+// class EntryScreen extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+//
+//   render() {
+//     return (
+//       <ContextProvider>
+//         <LanguageProvider messages={translationMessages}>
+//           <EntryTabScreenFinal {...this.props} />
+//         </LanguageProvider>
+//       </ContextProvider>
+//     );
+//   }
+// }
+//
+// export default EntryScreen;

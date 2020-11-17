@@ -51,7 +51,7 @@ import TextInfo from './components/TextInfo';
 import ModalNotify from './components/ModalNotify';
 import {EntryLanguageContext} from './components/LanguageContext';
 import SwitchLanguage from './components/SwitchLanguage';
-import Declaration from './components/Declaration';
+import EntryInfo from './components/EntryInfo';
 
 // Api
 import {
@@ -95,7 +95,7 @@ const VIETNAM_ID = '234';
 const regxEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const regxPhoneNumber = /^[\+]?[0-9]{9,15}\b/;
 
-class EntryDeclarationScreen extends React.Component {
+class EntryForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -1450,19 +1450,20 @@ class EntryDeclarationScreen extends React.Component {
     requestEntry(
       this.state.objectGUID,
       data => {
-        if (data.Object.ModeEntry) {
-          setAppMode('entry');
-          this.changeStateWithOutSave({appMode: 'entry'});
-        }
-        this.showAlert(formatMessage(messages.requestEntrySuccess));
+        // if (data.Object.ModeEntry) {
+        //   setAppMode('entry');
+        //   this.changeStateWithOutSave({appMode: 'entry'});
+        // }
+        // this.showAlert(formatMessage(messages.requestEntrySuccess));
       },
       () => {
-        this.showAlert(formatMessage(messages.errorForm4));
+        // this.showAlert(formatMessage(messages.errorForm4));
       },
     );
   };
 
   render() {
+    const {intl, displayHeader, language} = this.props;
     const {
       portraitURL,
       portraitBase64,
@@ -1533,13 +1534,11 @@ class EntryDeclarationScreen extends React.Component {
       isView,
       appMode,
     } = this.state;
-    const {language} = this.context;
+
+    const {formatMessage} = intl;
     const vietnamese = language === 'vi';
 
     const startVN = this.isIDVietNam(startCountryID);
-
-    const {intl, displayHeader} = this.props;
-    const {formatMessage} = intl;
 
     const portraitSource =
       portraitBase64 || portraitURL
@@ -1585,7 +1584,7 @@ class EntryDeclarationScreen extends React.Component {
           )}
 
           {appMode === 'entry' ? (
-            <Declaration data={this.state} />
+            <EntryInfo data={this.state} />
           ) : (
             <ScrollView
               style={styles.scroll}
@@ -2422,16 +2421,14 @@ class EntryDeclarationScreen extends React.Component {
   }
 }
 
-EntryDeclarationScreen.propTypes = {
+EntryForm.propTypes = {
   intl: intlShape.isRequired,
   navigation: PropTypes.object,
   route: PropTypes.object,
 };
 
-EntryDeclarationScreen.defaultProps = {
+EntryForm.defaultProps = {
   displayHeader: true,
 };
 
-EntryDeclarationScreen.contextType = EntryLanguageContext;
-
-export default injectIntl(EntryDeclarationScreen);
+export default injectIntl(EntryForm);

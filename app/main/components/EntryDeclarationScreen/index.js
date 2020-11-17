@@ -23,11 +23,21 @@
 
 import React from 'react';
 
-import ContextProvider from './components/LanguageContext';
+import ContextProvider, {
+  EntryLanguageContext,
+} from './components/LanguageContext';
 import LanguageProvider from './components/LanguageProvider';
-import Entry from './EntryDeclarationScreen';
+import EntryForm from './EntryForm';
 
 import {translationMessages} from '../../../i18n';
+import decorateEntry from './decorateEntry';
+
+// const Entry = () => {
+//   const {language} = useContext(EntryLanguageContext);
+//   return <EntryDeclarationScreen language={language} {...this.props} />;
+// };
+
+const Entry = decorateEntry(EntryForm, EntryLanguageContext);
 
 class Declaration extends React.PureComponent {
   constructor(props) {

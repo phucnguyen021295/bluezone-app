@@ -89,11 +89,11 @@ class AppList extends React.Component {
       case 'Entry':
         const {AppMode} = configuration;
         if (AppMode === 'entry') {
+          navigation.navigate(SCREEN.ENTRY);
         } else {
+          navigation.navigate(SCREEN.ENTRY_DECLARATION);
         }
-        navigation.navigate(SCREEN.ENTRY, {
-          tabFocus: AppMode === 'entry' ? 'DailyDeclare' : 'EntryDeclare',
-        });
+
         break;
       default:
         break;
