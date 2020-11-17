@@ -129,13 +129,14 @@ class SelectPicker extends React.PureComponent {
       });
     }
     if (prevState.searchKey !== searchKey || prevProps.data !== data) {
-      const _data = !searchKey
-        ? data
-        : data.filter(({name}) =>
-            this.convertVietNamese(name).includes(
-              this.convertVietNamese(searchKey),
-            ),
-          );
+      const _data =
+        searchKey && data && typeof data.filter === 'function'
+          ? data.filter(({name}) =>
+              this.convertVietNamese(name).includes(
+                this.convertVietNamese(searchKey),
+              ),
+            )
+          : data;
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         _data,
@@ -201,7 +202,11 @@ class SelectPicker extends React.PureComponent {
   onHideModal() {
     this.setState({
       isVisible: false,
-      searchKey: '',
+    });
+    setTimeout(() => {
+      this.setState({
+        searchKey: '',
+      });
     });
   }
 

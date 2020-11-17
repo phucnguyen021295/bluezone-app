@@ -1219,7 +1219,7 @@ class EntryDeclarationScreen extends React.Component {
       gateName,
       nationalityName,
       startCountryName,
-      startProvinceID,
+      startCountryID,
       startProvinceName,
       startProvince,
       endProvinceName,
@@ -1230,7 +1230,7 @@ class EntryDeclarationScreen extends React.Component {
       vn_DistrictName,
       vn_WardName,
     } = this.state;
-    const startVN = this.isIDVietNam(startProvinceID);
+    const startVN = this.isIDVietNam(startCountryID);
 
     navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
       code: data.Object.ObjectGuid,
