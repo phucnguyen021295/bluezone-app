@@ -22,37 +22,63 @@
 'use strict';
 
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import ContextProvider, {
   EntryLanguageContext,
 } from './components/LanguageContext';
 import LanguageProvider from './components/LanguageProvider';
-import EntryForm from './EntryForm';
-
 import {translationMessages} from '../../../i18n';
 import decorateEntry from './decorateEntry';
+import SCREEN from '../../nameScreen';
+import PhoneNumberRegister from '../PhoneNumberRegisterScreen';
+import PhoneNumberVerifyOTP from '../PhoneNumberVerifyOTPScreen';
+import RegisterInformation from '../RegisterInformationScreen';
+import EntryDeclareSuccess from '../EntryDeclareSuccess';
+import EntryForm from './EntryForm';
 
-// const Entry = () => {
-//   const {language} = useContext(EntryLanguageContext);
-//   return <EntryDeclarationScreen language={language} {...this.props} />;
-// };
+const Stack = createStackNavigator();
 
-const Entry = decorateEntry(EntryForm, EntryLanguageContext);
+const MAIN_INITIAL_ROUTE = SCREEN.ENTRY_DECLARATION;
 
-class Declaration extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const EntryDeclaration = decorateEntry(EntryForm, EntryLanguageContext);
 
-  render() {
-    return (
-      <ContextProvider>
-        <LanguageProvider messages={translationMessages}>
-          <Entry {...this.props} />
-        </LanguageProvider>
-      </ContextProvider>
-    );
-  }
-}
+const Declaration = ({route}) => {
+  return (
+    <ContextProvider>
+      <LanguageProvider messages={translationMessages}>
+        <Stack.Navigator
+          id="entry"
+          headerMode="none"
+          mode="card"
+          initialRouteName={MAIN_INITIAL_ROUTE}>
+          <Stack.Screen
+            name={SCREEN.ENTRY_DECLARATION}
+            component={EntryDeclaration}
+            initialParams={route.params}
+          />
+          <Stack.Screen
+            name={SCREEN.PHONE_NUMBER_REGISTER}
+            component={PhoneNumberRegister}
+          />
+          <Stack.Screen
+            name={SCREEN.PHONE_NUMBER_VERITY_OTP}
+            component={PhoneNumberVerifyOTP}
+          />
+          <Stack.Screen
+            name={SCREEN.REGISTER_INFORMATION}
+            component={RegisterInformation}
+          />
+
+          <Stack.Screen
+            name={SCREEN.ENTRY_DECLARATION_SUCCESS}
+            component={EntryDeclareSuccess}
+          />
+        </Stack.Navigator>
+      </LanguageProvider>
+    </ContextProvider>
+  );
+};
 
 export default Declaration;

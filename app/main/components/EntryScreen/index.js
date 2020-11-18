@@ -30,11 +30,13 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 // Components
 import Header from '../../../base/components/Header';
 import Text from '../../../base/components/Text';
-import EntryDeclarationScreen from '../EntryDeclarationScreen';
 import DailyDeclarationScreen from '../DailyDeclarationScreen';
-// import Declaration from '../EntryDeclarationScreen/components/EntryInfo';
-// import ContextProvider from '../EntryDeclarationScreen/components/LanguageContext';
-// import LanguageProvider from '../EntryDeclarationScreen/components/LanguageProvider';
+import ContextProvider, {
+  EntryLanguageContext,
+} from '../EntryDeclarationScreen/components/LanguageContext';
+import LanguageProvider from '../EntryDeclarationScreen/components/LanguageProvider';
+import EntryForm from '../EntryDeclarationScreen/EntryForm';
+import decorateEntry from '../EntryDeclarationScreen/decorateEntry';
 
 // Styles
 import * as fontSize from '../../../core/fontSize';
@@ -51,10 +53,9 @@ export const TAB_BAR_HEIGHT = heightPercentageToDP((42 / 720) * 100);
 
 export const Tab = createMaterialTopTabNavigator();
 
-const EntryTabScreen = props => {
-  const {route} = props;
-  const initialRouteName = route.params?.tabFocus || 'EntryDeclare';
+const EntryDeclaration = decorateEntry(EntryForm, EntryLanguageContext);
 
+const EntryTabScreen = props => {
   const {intl} = props;
   const {formatMessage} = intl;
 
@@ -62,7 +63,7 @@ const EntryTabScreen = props => {
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
       <Header title={formatMessage(messages.entry)} />
       <Tab.Navigator
-        initialRouteName={initialRouteName}
+        initialRouteName={'DailyDeclare'}
         tabBarPosition={'top'}
         tabBarOptions={{
           showIcon: false,
@@ -124,13 +125,7 @@ const EntryTabScreen = props => {
               />
             ),
           }}>
-          {props => (
-            <EntryDeclarationScreen
-              displayHeader={false}
-              data={{}}
-              {...props}
-            />
-          )}
+          {props => <EntryDeclaration displayHeader={false} {...props} />}
         </Tab.Screen>
       </Tab.Navigator>
     </SafeAreaView>
@@ -144,22 +139,22 @@ EntryTabScreen.propTypes = {
 
 const EntryTabScreenFinal = injectIntl(EntryTabScreen);
 
-export default EntryTabScreenFinal;
+// export default EntryTabScreenFinal;
 
-// class EntryScreen extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-//
-//   render() {
-//     return (
-//       <ContextProvider>
-//         <LanguageProvider messages={translationMessages}>
-//           <EntryTabScreenFinal {...this.props} />
-//         </LanguageProvider>
-//       </ContextProvider>
-//     );
-//   }
-// }
-//
-// export default EntryScreen;
+class EntryScreen extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <ContextProvider>
+        <LanguageProvider messages={translationMessages}>
+          <EntryTabScreenFinal {...this.props} />
+        </LanguageProvider>
+      </ContextProvider>
+    );
+  }
+}
+
+export default EntryScreen;

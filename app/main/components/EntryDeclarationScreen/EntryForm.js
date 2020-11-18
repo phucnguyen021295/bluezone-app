@@ -173,6 +173,7 @@ class EntryForm extends React.Component {
       otherQuarantinePlace: '',
       statusInternet: 'connected', // connected, connecting, disconnect
       appMode: AppMode,
+      objectGUID: props?.route?.params?.objectGUID,
     };
     this.lastVNProvinceIDApi = null;
     this.lastVNDistrictIDApi = null;
@@ -182,9 +183,10 @@ class EntryForm extends React.Component {
   }
 
   async componentDidMount() {
-    const objectGUID = await getEntryObjectGUIDInformation();
-    this.changeStateWithOutSave({objectGUID: objectGUID});
-    this.objectGUID = objectGUID;
+    if (this.state.objectGUID) {
+      const objectGUID = await getEntryObjectGUIDInformation();
+      this.changeStateWithOutSave({objectGUID: objectGUID});
+    }
     getEntryInfoDeclare().then(this.getEntryInfoDeclareStorageCb);
     reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
 
@@ -223,7 +225,6 @@ class EntryForm extends React.Component {
           setEntryObjectGUIDInformation(data.Object.ObjectGuid);
           setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
           this.changeStateWithOutSave({objectGUID: data.Object.ObjectGuid});
-          this.objectGUID = data.Object.ObjectGuid;
           setEntryInfoDeclare(data.Object);
           this.bindEntryInfoData(data.Object);
         }
@@ -980,6 +981,7 @@ class EntryForm extends React.Component {
       otherQuarantinePlace,
       testDateString,
       testDate,
+      objectGUID,
     } = this.state;
 
     const _startDate = moment(startDate).format('YYYY/MM/DD');
@@ -988,7 +990,7 @@ class EntryForm extends React.Component {
 
     const titleError = '';
     let contentError;
-    if (!this.objectGUID && !portraitBase64) {
+    if (!objectGUID && !portraitBase64) {
       contentError = 'Thiếu thông tin ảnh chân dung';
     }
 
@@ -1117,7 +1119,7 @@ class EntryForm extends React.Component {
     });
 
     const data = {
-      ObjectGuid: this.objectGUID || '00000000-0000-0000-0000-000000000000',
+      ObjectGuid: objectGUID || '00000000-0000-0000-0000-000000000000',
       AnhChanDungBase64: portraitBase64,
       MaCuaKhau: gateID.toString(),
       FullName: fullName,
@@ -1210,7 +1212,12 @@ class EntryForm extends React.Component {
     //   TrieuChungBenh: `[{"ID":"sot","Text":"Sốt","Value":true},{"ID":"ho","Text":"Ho","Value":true},{"ID":"kho_tho","Text":"Khó thở","Value":true},{"ID":"dau_hong","Text":"Đau họng","Value":true},{"ID":"non_buon_non","Text":"Nôn / Buồn nôn","Value":false},{"ID":"tieu_chay","Text":"Tiêu chảy","Value":false},{"ID":"xuat_huyet_ngoai_da","Text":"Xuất huyết ngoài da","Value":false},{"ID":"noi_ban_ngoai_da","Text":"Nổi ban ngoài da","Value":false}]`,VacXinSuDung: "Đây là các xin",
     // };
 
-    entryDeclaration(data, this.declareSuccess, this.declareError);
+    // entryDeclaration(data, this.declareSuccess, this.declareError);
+
+    this.props.navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
+      code: '123213',
+      passport: '345345',
+    });
   };
 
   declareSuccess = data => {
