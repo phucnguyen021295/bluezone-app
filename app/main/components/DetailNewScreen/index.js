@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {ScrollView, SafeAreaView, Dimensions, Linking} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import HTML from 'react-native-render-html';
@@ -38,8 +38,9 @@ import {CUSTOM_STYLES} from './styles/index.css';
 import configuration from '../../../configuration';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
+import * as fontSize from '../../../core/fontSize';
 
-class DetailNewScreen extends React.PureComponent {
+class DetailNewScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -86,11 +87,12 @@ class DetailNewScreen extends React.PureComponent {
       item.title ||
       item.titleEn;
 
+    debugger;
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <Header
           colorIcon={'#000000'}
-          styleTitle={{paddingHorizontal: 50, color: '#000000'}}
+          styleTitle={{paddingHorizontal: 50, color: '#000000', fontSize: fontSize.fontSize19}}
           title={title}
         />
         <ScrollView>

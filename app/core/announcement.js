@@ -86,7 +86,7 @@ const showNotify = async notify => {
 
 // TODO xem lai cach goi nay. Sua de thuc hien qua ham callback trong tung ham phia duoi.
 const reloadNotificationList = () => {
-  notifyScreenTool && notifyScreenTool.getList();
+  notifyScreenTool.getList && notifyScreenTool.getList();
 };
 
 /**
