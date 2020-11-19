@@ -95,12 +95,12 @@ class DetailNewScreen extends PureComponent {
           styleTitle={{paddingHorizontal: 50, color: '#000000', fontSize: fontSize.fontSize19}}
           title={title}
         />
-        <ScrollView>
+        <ScrollView contentContainerStyle={{paddingTop: 12}}>
           <HTML
             onLinkPress={this.onLinkPress}
             html={news?.data?.content}
             tagsStyles={CUSTOM_STYLES}
-            imagesMaxWidth={Dimensions.get('window').width}
+            imagesMaxWidth={Dimensions.get('window').width - 40}
             allowFontScaling={false}
           />
         </ScrollView>

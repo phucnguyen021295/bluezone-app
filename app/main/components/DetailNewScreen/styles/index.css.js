@@ -31,6 +31,7 @@ const CUSTOM_STYLES = {
     fontFamily: 'Roboto-Regular',
     marginBottom: 7,
     marginHorizontal: 20,
+    textAlign: 'justify',
     // textAlignVertical: 'bottom',
   },
   br: {
@@ -43,11 +44,26 @@ const CUSTOM_STYLES = {
   h1: {
     marginVertical: 10,
     color: '#000',
+    marginHorizontal: 20,
+    textAlign: 'justify',
   },
   h2: {
     marginVertical: 7,
     color: '#000',
     marginHorizontal: 20,
+    textAlign: 'justify',
+  },
+
+  h3: {
+    marginBottom: 7,
+    lineHeight: 30,
+    marginHorizontal: 20,
+    textAlign: 'justify',
+  },
+  h4: {
+    marginVertical: 7,
+    marginHorizontal: 20,
+    textAlign: 'justify',
   },
   ul: {
     paddingLeft: 5,
@@ -60,5 +76,14 @@ const CUSTOM_STYLES = {
   a: {
     fontSize: fontSize.normal,
   },
+
+  figure: {
+    marginHorizontal: 20,
+  },
+
+  img: {
+    borderRadius: 6,
+    marginBottom: 8,
+  }
 };
 export {CUSTOM_STYLES};

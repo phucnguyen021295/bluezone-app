@@ -19,7 +19,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -110,7 +110,7 @@ import {readNotification} from './app/core/announcement';
 const HomeScreen = decorateMainAppStart(Home);
 const Stack = createStackNavigator();
 
-class App extends React.Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
 

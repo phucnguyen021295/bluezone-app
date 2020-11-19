@@ -21,21 +21,20 @@
 
 'use strict';
 
-import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import React, {PureComponent} from 'react';
 import {View, AppState, Linking, Platform} from 'react-native';
 import {withNavigation} from '@react-navigation/compat';
 import {injectIntl, intlShape} from 'react-intl';
-
-// Components
-import ModalBase from './ModalNotify';
-import {LanguageContext} from '../../../../../../LanguageContext';
-
 import {
   PERMISSIONS,
   requestMultiple,
   requestNotifications,
 } from 'react-native-permissions';
+
+// Components
+import ModalBase from './ModalNotify';
+import {LanguageContext} from '../../../../../../LanguageContext';
+
 import configuration from '../../../../../configuration';
 import {
   registerBluetoothStateListener,
@@ -45,7 +44,7 @@ import {
 // Language
 import message from '../../../../../core/msg/home';
 
-class ModalNotify extends React.Component {
+class ModalNotify extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

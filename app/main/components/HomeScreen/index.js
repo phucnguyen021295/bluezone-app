@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {View, StatusBar, AppState} from 'react-native';
 import * as PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
@@ -62,7 +62,7 @@ const modalStatusDefault = {
   isCheckRegisterPhone: false,
 };
 
-class HomeTab extends React.Component {
+class HomeTab extends PureComponent {
   constructor(props) {
     super(props);
     this.state = Object.assign({}, modalStatusDefault, {
