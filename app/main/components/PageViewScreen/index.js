@@ -20,7 +20,7 @@
  */
 
 'use strict';
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -33,7 +33,7 @@ import Header from '../../../base/components/Header';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 
-class PageViewScreen extends Component {
+class PageViewScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.reload = this.reload.bind(this);

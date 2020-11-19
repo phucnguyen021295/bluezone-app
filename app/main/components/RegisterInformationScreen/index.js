@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {injectIntl, intlShape} from 'react-intl';
 import {
   SafeAreaView,
@@ -77,7 +77,7 @@ if (Platform.OS === 'android') {
   }
 }
 
-class RegisterInformationScreen extends React.Component {
+class RegisterInformationScreen extends PureComponent {
   // Render any loading content that you like here
   constructor(props) {
     super(props);

@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import * as PropTypes from 'prop-types';
 
@@ -33,7 +33,7 @@ import {LanguageContext} from '../../../../../../LanguageContext';
 import styles from './styles/index.css';
 import {setLanguage} from '../../../../../configuration';
 
-class SwitchLanguage extends React.Component {
+class SwitchLanguage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

@@ -38,6 +38,7 @@ import {CUSTOM_STYLES} from './styles/index.css';
 import configuration from '../../../configuration';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
+import * as fontSize from '../../../core/fontSize';
 
 class DetailNewScreen extends React.PureComponent {
   constructor(props) {
@@ -90,15 +91,15 @@ class DetailNewScreen extends React.PureComponent {
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <Header
           colorIcon={'#000000'}
-          styleTitle={{paddingHorizontal: 50, color: '#000000'}}
+          styleTitle={{paddingHorizontal: 50, color: '#000000', fontSize: fontSize.fontSize19}}
           title={title}
         />
-        <ScrollView>
+        <ScrollView contentContainerStyle={{paddingTop: 12}}>
           <HTML
             onLinkPress={this.onLinkPress}
             html={news?.data?.content}
             tagsStyles={CUSTOM_STYLES}
-            imagesMaxWidth={Dimensions.get('window').width}
+            imagesMaxWidth={Dimensions.get('window').width - 40}
             allowFontScaling={false}
           />
         </ScrollView>
