@@ -39,6 +39,7 @@ import Header from '../../../base/components/Header';
 
 // Log
 import log from '../../../core/log';
+import {formatDate} from '../../../core/db/SqliteDb';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 
@@ -70,7 +71,7 @@ class ViewLogScreen extends React.Component {
       dataGet => {
         const n = dataLog.concat(dataGet);
         const s = n.map(({timestamp, key, data}) => {
-          return `${this.formatDate(timestamp)}: ${key}${
+          return `${formatDate(timestamp)}: ${key}${
             data ? `\n${data}` : ''
           }\n------------------------------------------------------------------`;
         });
@@ -106,26 +107,6 @@ class ViewLogScreen extends React.Component {
       this.timeRequestLast = timeNow;
       this.onGet(this.lastTimestamp);
     }
-  };
-
-  formatDate = m => {
-    if (!m) {
-      return 'Not time';
-    }
-    const n = new Date(m);
-    return (
-      n.getUTCFullYear() +
-      '/' +
-      (n.getUTCMonth() + 1) +
-      '/' +
-      n.getUTCDate() +
-      ' ' +
-      n.getHours() +
-      ':' +
-      n.getMinutes() +
-      ':' +
-      n.getSeconds()
-    );
   };
 
   copyLog = () => {
