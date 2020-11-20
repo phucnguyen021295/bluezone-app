@@ -31,6 +31,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Image,
+  Platform,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import {CheckBox as CheckBox1} from 'react-native-elements';
@@ -1566,7 +1567,10 @@ class EntryForm extends React.Component {
         : null;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.flexOne}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        keyboardVerticalOffset={40}
+        style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           {displayHeader && (
             <Header

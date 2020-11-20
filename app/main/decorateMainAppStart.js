@@ -133,7 +133,7 @@ function decorateMainAppStart(AppStack) {
     registerUserError = () => {};
 
     render() {
-      return <AppStack />;
+      return <AppStack {...this.props} />;
     }
   }
 
