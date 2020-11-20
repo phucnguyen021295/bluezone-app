@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {DeviceEventEmitter, View, AppState} from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
@@ -48,7 +48,7 @@ import {injectIntl, intlShape} from 'react-intl';
 // Styles
 import configuration from '../../../../../configuration';
 
-class ModalNotify extends React.Component {
+class ModalNotify extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

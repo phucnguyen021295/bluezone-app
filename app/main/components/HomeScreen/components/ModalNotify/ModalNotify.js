@@ -23,9 +23,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import {View} from 'react-native';
 
 // Components
-import {View} from 'react-native';
 import ButtonBase from '../../../../../base/components/ButtonBase';
 import {MediumText} from '../../../../../base/components/Text';
 import ModalBase from '../../../../../base/components/ModalBase';
@@ -34,31 +34,24 @@ import {injectIntl, intlShape} from 'react-intl';
 
 import styles from './styles/index.css';
 
-class ModalNotify extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const {isVisible, content, onPress, btnText} = this.props;
-    return (
-      <ModalBase
-        isVisibleModal={isVisible}
-        description={content}
-        styleDescription={styles.textContent}>
-        <View style={styles.container}>
-          <ButtonBase
-            title={btnText}
-            onPress={onPress}
-            buttonStyle={styles.buttonConfirm}
-            titleStyle={styles.textButtonConfirm}
-            titleComponent={
-              <MediumText text={btnText} style={styles.textBtn} />
-            }
-          />
-        </View>
-      </ModalBase>
-    );
-  }
+function ModalNotify(props) {
+  const {isVisible, content, onPress, btnText} = props;
+  return (
+    <ModalBase
+      isVisibleModal={isVisible}
+      description={content}
+      styleDescription={styles.textContent}>
+      <View style={styles.container}>
+        <ButtonBase
+          title={btnText}
+          onPress={onPress}
+          buttonStyle={styles.buttonConfirm}
+          titleStyle={styles.textButtonConfirm}
+          titleComponent={<MediumText text={btnText} style={styles.textBtn} />}
+        />
+      </View>
+    </ModalBase>
+  );
 }
 
 ModalNotify.propTypes = {

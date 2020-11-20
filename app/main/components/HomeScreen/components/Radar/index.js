@@ -21,9 +21,8 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {Platform, TouchableOpacity, Dimensions} from 'react-native';
-import * as PropTypes from 'prop-types';
 import LottieView from 'lottie-react-native';
 
 // Components
@@ -68,11 +67,14 @@ const {height} = Dimensions.get('window');
 const RADAR_HEIGHT_VI = isIPhoneX
   ? SCANNING_VI_HEIGHT - BOTTOM_IPHONEX_HEIGHT
   : SCANNING_VI_HEIGHT;
-const RADAR_HEIGHT_EN = Platform.OS === 'ios' && height === 568 ? SCANNING_EN_HEIGHT - IPHONE_5_HEIGHT : isIPhoneX
-  ? SCANNING_EN_HEIGHT - BOTTOM_IPHONEX_HEIGHT
-  : SCANNING_EN_HEIGHT;
+const RADAR_HEIGHT_EN =
+  Platform.OS === 'ios' && height === 568
+    ? SCANNING_EN_HEIGHT - IPHONE_5_HEIGHT
+    : isIPhoneX
+    ? SCANNING_EN_HEIGHT - BOTTOM_IPHONEX_HEIGHT
+    : SCANNING_EN_HEIGHT;
 
-class Index extends React.Component {
+class Index extends PureComponent {
   constructor(props) {
     super(props);
     this.mapDevice = {};
