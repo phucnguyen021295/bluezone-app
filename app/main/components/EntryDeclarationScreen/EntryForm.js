@@ -1568,8 +1568,8 @@ class EntryForm extends React.Component {
 
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : null}
-        keyboardVerticalOffset={40}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 40 ? 'padding' : -220}
         style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           {displayHeader && (
@@ -2183,10 +2183,10 @@ class EntryForm extends React.Component {
                     <MediumText style={styles.nameSymptom}>
                       {formatMessage(messages.symptom)}
                     </MediumText>
-                    <MediumText style={styles.buttonSymptom}>
+                    <MediumText style={styles.text1}>
                       {formatMessage(messages.yes)}
                     </MediumText>
-                    <MediumText style={styles.buttonSymptom}>
+                    <MediumText style={styles.text1}>
                       {formatMessage(messages.no)}
                     </MediumText>
                   </View>
@@ -2316,6 +2316,7 @@ class EntryForm extends React.Component {
                       textStyle={styles.checkBoxText}
                       checkedIcon="dot-circle-o"
                       uncheckedIcon="circle-o"
+                      activeOpacity={1}
                       size={18}
                       onPress={() => this.onSelectQuarantinePlace(item.id)}
                       checked={item.id === quarantinePlace}
@@ -2345,6 +2346,7 @@ class EntryForm extends React.Component {
                     {paddingTop: 8, paddingBottom: 10, alignItems: 'center'},
                   ]}>
                   <TouchableOpacity
+                    activeOpacity={1}
                     onPress={this.onSelectTestResultImage}
                     style={
                       testResultImageBase64 || testResultImageURL
@@ -2366,6 +2368,7 @@ class EntryForm extends React.Component {
                   <View style={{marginLeft: 20}}>
                     <TouchableOpacity
                       style={styles.rowSymptom1}
+                      activeOpacity={1}
                       onPress={() => this.selectTestResult(true)}>
                       <RadioButton
                         checked={testResult === true}
@@ -2377,6 +2380,7 @@ class EntryForm extends React.Component {
                     </TouchableOpacity>
                     <TouchableOpacity
                       style={styles.rowSymptom1}
+                      activeOpacity={1}
                       onPress={() => this.selectTestResult(false)}>
                       <RadioButton
                         checked={testResult === false}
