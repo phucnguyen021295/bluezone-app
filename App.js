@@ -47,7 +47,7 @@ import ContactHistory from './app/main/components/ContactHistoryScreen';
 import FAQ from './app/main/components/FAQScreen';
 // import DailyDeclaration from './app/main/components/DailyDeclarationScreen';
 // import DomesticDeclaration from './app/main/components/DomesticDeclarationScreen';
-// import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
+import EntryDeclaration from './app/main/components/EntryDeclarationScreen';
 import EntryDeclareSuccess from './app/main/components/EntryDeclareSuccess';
 import Entry from './app/main/components/EntryScreen';
 import EntryVerifyOTP from './app/main/components/EntryVerifyOTPScreen';
@@ -465,6 +465,10 @@ class App extends PureComponent {
                   component={RegisterInformation}
                 />
                 <Stack.Screen
+                  name={SCREEN.ENTRY_DECLARATION}
+                  component={EntryDeclaration}
+                />
+                <Stack.Screen
                   name={SCREEN.ENTRY_DECLARATION_SUCCESS}
                   component={EntryDeclareSuccess}
                 />
@@ -529,10 +533,10 @@ class App extends PureComponent {
                 {/*  name={SCREEN.DOMESTIC_DECLARATION}*/}
                 {/*  component={DomesticDeclaration}*/}
                 {/*/>*/}
-                {/*<Stack.Screen*/}
-                {/*  name={SCREEN.ENTRY_DECLARATION}*/}
-                {/*  component={EntryDeclaration}*/}
-                {/*/>*/}
+                <Stack.Screen
+                  name={SCREEN.ENTRY_DECLARATION}
+                  component={EntryDeclaration}
+                />
                 <Stack.Screen
                   name={SCREEN.ENTRY_DECLARATION_SUCCESS}
                   component={EntryDeclareSuccess}

@@ -23,6 +23,7 @@
 
 import {Platform} from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
+import RNFS from 'react-native-fs';
 
 import {dev} from '../apis/server';
 
@@ -410,6 +411,70 @@ const removeNotificationLimit = callback => {
   });
 };
 
+const getServiceLog = callback => {
+  db = open();
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT * FROM log_service',
+      [],
+      (txTemp, results) => {
+        let temp = [];
+        if (results.rows.length > 0) {
+          for (let i = 0; i < results.rows.length; ++i) {
+            temp.push(results.rows.item(i));
+          }
+        }
+        callback(temp);
+      },
+      (error, error2) => {},
+    );
+  });
+};
+
+const formatDate = m => {
+  if (!m) {
+    return 'Not time';
+  }
+  const n = new Date(m);
+  return (
+    n.getUTCFullYear() +
+    '/' +
+    (n.getUTCMonth() + 1) +
+    '/' +
+    n.getUTCDate() +
+    ' ' +
+    n.getHours() +
+    ':' +
+    n.getMinutes() +
+    ':' +
+    n.getSeconds()
+  );
+};
+
+const writeServiceLog = (success, failed) => {
+  getServiceLog(data => {
+    const now = new Date().getTime();
+    const root = RNFS.DocumentDirectoryPath;
+
+    const logFileName = 'serviceLog';
+    const logFileType = 'txt';
+
+    const content = data
+      .map(
+        ({timestamp, name, status}) =>
+          `${timestamp} ${name} ${status ? 'ON' : 'OFF'}`,
+      )
+      .join('\n');
+
+    const _logFilePath = `${root}/${logFileName}_${now}_${logFileType}`;
+    RNFS.writeFile(_logFilePath, content, 'utf8')
+      .then(result => {
+        success(_logFilePath);
+      })
+      .catch(failed);
+  }, failed);
+};
+
 export {
   open,
   close,
@@ -427,4 +492,7 @@ export {
   clearDevLog,
   getCountBluezoneByDays,
   removeNotificationLimit,
+  getServiceLog,
+  formatDate,
+  writeServiceLog,
 };

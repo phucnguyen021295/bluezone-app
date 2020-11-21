@@ -113,7 +113,6 @@ class DailyDeclaration extends React.PureComponent {
 
   componentDidMount() {
     reportScreenAnalytics(SCREEN.DAILY_DECLARATION);
-
     this.getListHealthMonitoring();
   }
 
@@ -149,7 +148,7 @@ class DailyDeclaration extends React.PureComponent {
     } else {
       itemsSelected.push(item.StateID);
     }
-    this.setState({itemsSelected: itemsSelected});
+    this.setState({itemsSelected: [...itemsSelected]});
   }
 
   getLtinforEntryPersonReportDetail(ListItem) {
@@ -253,7 +252,11 @@ class DailyDeclaration extends React.PureComponent {
   }
 
   onCloseAlertError() {
-    this.setState({isVisibleError: false, isVisibleSuccess: false, isVisibleSendError: false});
+    this.setState({
+      isVisibleError: false,
+      isVisibleSuccess: false,
+      isVisibleSendError: false,
+    });
   }
 
   renderModal() {

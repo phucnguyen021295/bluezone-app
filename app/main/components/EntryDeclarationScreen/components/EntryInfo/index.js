@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {intlShape, injectIntl} from 'react-intl';
 import {
   Image,
@@ -30,12 +30,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import CheckBox from '../../../../../base/components/CheckBox';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {CheckBox as CheckBox1} from 'react-native-elements';
 
 // Components
 import Text, {MediumText} from '../../../../../base/components/Text';
 import TextInfo from '../TextInfo';
+import CheckBox from '../../../../../base/components/CheckBox';
+import RadioButton from '../../../../../base/components/RadioButton';
+import {LanguageContext} from '../../../../../../LanguageContext';
+import SwitchLanguage from '../SwitchLanguage';
 
 // core
 import messages from '../../../../../core/msg/entryForm';
@@ -47,15 +51,11 @@ import {
   exposureHistoryData,
   quarantinePlaceData,
   symptomData,
-  yearBirth,
 } from '../../data';
-import RadioButton from '../../../../../base/components/RadioButton';
-import {CheckBox as CheckBox1} from 'react-native-elements';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {LanguageContext} from '../../../../../../LanguageContext';
 
 const Declaration = props => {
   const {intl, data} = props;
+
   const {formatMessage} = intl;
 
   const {language} = useContext(LanguageContext);
@@ -63,12 +63,10 @@ const Declaration = props => {
   const {
     portraitURL,
     portraitBase64,
-    gateID,
     gateName,
     fullName,
     yearOfBirth,
     gender,
-    nationalityID,
     nationalityName,
     passport,
     vehicle_Planes,
@@ -77,32 +75,18 @@ const Declaration = props => {
     otherVehicles,
     vehicleNumber,
     vehicleSeat,
-    isPickerStartDateVisible,
     startDateString,
-    startDate,
-    isPickerEndDateVisible,
     endDateString,
-    endDate,
-    startCountryID,
     startCountryName,
-    startProvince,
-    startProvinceID,
     startProvinceName,
     country21Day,
-    endProvinceID,
     endProvinceName,
-    afterQuarantine_ProvinceID,
     afterQuarantine_ProvinceName,
-    afterQuarantine_DistrictID,
     afterQuarantine_DistrictName,
-    afterQuarantine_WardID,
     afterQuarantine_WardName,
     afterQuarantine_Address,
-    vn_ProvinceID,
     vn_ProvinceName,
-    vn_DistrictID,
     vn_DistrictName,
-    vn_WardID,
     vn_WardName,
     vn_Address,
     numberPhone,
@@ -114,15 +98,6 @@ const Declaration = props => {
     testResultImageBase64,
     testResult,
     testDateString,
-    testDate,
-    isPickerTestDateVisible,
-    gates,
-    countries,
-    provinces,
-    vn_Districts,
-    vn_Wards,
-    afterQuarantine_Districts,
-    afterQuarantine_Wards,
     quarantinePlace,
     otherQuarantinePlace,
   } = data;
@@ -156,6 +131,7 @@ const Declaration = props => {
         <MediumText style={styles.tickContent}>{numberPhone}</MediumText>
       </View>
 
+      <SwitchLanguage />
       <Text style={styles.label1}>{formatMessage(messages.content1)}</Text>
       <Text style={styles.labelRed}>{formatMessage(messages.content2)}</Text>
 
@@ -680,7 +656,7 @@ const Declaration = props => {
         <Text>{testDateString}</Text>
       </View>
 
-      <Text style={styles.labelRed}>{formatMessage(messages.content3)}</Text>
+      <Text style={styles.labelRed} />
     </ScrollView>
   );
 };

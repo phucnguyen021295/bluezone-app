@@ -253,7 +253,7 @@
   "bluezone.welcome.close": "OK",
   "bluezone.welcome.public": "Công cộng",
 
-  "bluezone.entryForm.header": "Tờ khai Y tế đối với người nhập cảnh",
+  "bluezone.entryForm.header": "Tờ khai y tế nhập cảnh",
   "bluezone.entryForm.content1": "Đây là tài liệu quan trọng, thông tin của Anh/Chị sẽ giúp cơ quan y tế liên lạc khi cần thiết để phòng chống dịch bệnh truyền nhiễm.",
   "bluezone.entryForm.content2": "Khuyến cáo: Khai báo thông tin sai là vi phạm pháp luật Việt Nam và có thể xử lý hình sự.",
   "bluezone.entryForm.content3": "Dữ liệu bạn cung cấp hoàn toàn bảo mật và chỉ phục vụ cho việc phòng chống dịch, thuộc quản lý của Ban chỉ đạo quốc gia về Phòng chống dịch Covid-19. Khi bạn nhấn nút \"Gửi\" là bạn đã hiểu và đồng ý.",
@@ -315,7 +315,7 @@
   "bluezone.entryForm.testDate": "Ngày xét nghiệm",
   "bluezone.entryForm.sendContent": "Gửi tờ khai",
   "bluezone.entryForm.declareSuccess": "Khai báo nhập cảnh thành công",
-  "bluezone.entryForm.cancel": "Đóng",
+  "bluezone.entryForm.cancel": "Hủy bỏ",
   "bluezone.entryForm.selectPortrait": "Chọn ảnh chân dung",
   "bluezone.entryForm.selectTestResult": "Chọn ảnh kết quả xét nghiệm",
   "bluezone.entryForm.takePhoto": "Chụp ảnh…",
@@ -335,6 +335,8 @@
   "bluezone.entryForm.content4": "*Chức năng này chỉ dùng khi làm thủ tục nhập cảnh",
   "bluezone.entryForm.disconnect": "Mất kết nối\nMột số nội dung chỉ có thể khai báo khi có internet.",
   "bluezone.entryForm.connecting": "Đang kết nối...",
+  "bluezone.entryForm.pickDate": "Chọn ngày",
+  "bluezone.entryForm.confirm": "Chọn",
 
   "bluezone.dailyDeclaration.option": "Chọn thông tin sức khỏe hiện tại của bạn",
   "bluezone.dailyDeclaration.btnSendInfo": "Gửi thông tin",

@@ -251,7 +251,7 @@
     "bluezone.welcome.close": "OK",
     "bluezone.welcome.public": "Public",
 
-    "bluezone.entryForm.header": "medical declaration form for entry",
+    "bluezone.entryForm.header": "Medical declaration form for entry",
     "bluezone.entryForm.content1": "This is an important document, your information helps health authorities contact you when necessary to prevent communicable diseases.",
     "bluezone.entryForm.content2": "Warning: Declaring false information is a violation of Vietnamese law and may be subject to criminal handling.",
     "bluezone.entryForm.content3": "The data you provide is completely confidential and only serves the prevention of epidemics, under the management of the Vietnam National Steering Committee for COVID-19 Epidemic Prevention and Control. When you press \"Submit\", you understand and agree with this statement.",
@@ -333,6 +333,8 @@
     "bluezone.entryForm.content4": "*For use during entry procedures",
     "bluezone.entryForm.disconnect": "*Disconnect\nSome content can only be declared when there is internet.",
     "bluezone.entryForm.connecting": "*Connecting...",
+    "bluezone.entryForm.pickDate": "Pick a date",
+    "bluezone.entryForm.confirm": "Confirm",
 
     "bluezone.dailyDeclaration.option": "Choose your current health information",
     "bluezone.dailyDeclaration.btnSendInfo": "Send information",

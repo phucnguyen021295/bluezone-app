@@ -23,6 +23,7 @@
 
 import * as React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import moment from 'moment';
 
 // Components
 import TabScreen from './components/TabScreen';
@@ -32,11 +33,21 @@ import SCREEN from '../../nameScreen';
 import {isIPhoneX} from '../../../core/utils/isIPhoneX';
 import {smallest} from '../../../core/fontSize';
 import {reportScreenAnalytics} from '../../../core/analytics';
+import {writeServiceLog} from '../../../core/db/SqliteDb';
+import {
+  getLastTimeUploadServiceLog,
+  setLastTimeUploadServiceLog,
+} from '../../../core/storage';
+import log from '../../../core/log';
 
 import configuration from '../../../configuration';
 
 // Styles
 import {TAB_BAR_HEIGHT, TAB_BAR_IPHONEX_HEIGHT} from './style/index.css';
+import NetInfo from '@react-native-community/netinfo';
+import RNFS from 'react-native-fs';
+import {uploadServiceLog} from '../../../core/apis/bluezone';
+import * as msg from '../../../const/log';
 
 // Consts
 export const Tab = createMaterialTopTabNavigator();
@@ -44,11 +55,70 @@ export const Tab = createMaterialTopTabNavigator();
 class HomeTabScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.isConnected = null;
+    this.uploaded = false;
   }
 
   componentDidMount() {
     reportScreenAnalytics(SCREEN.HOME);
+    this.handleServiceLog().then();
   }
+
+  componentWillUnmount() {
+    this.unsubscribeConnectionChange && this.unsubscribeConnectionChange();
+  }
+
+  handleServiceLog = async () => {
+    const {AppMode} = configuration;
+    if (AppMode !== 'entry') {
+      return;
+    }
+    const lastTimeUpload = await getLastTimeUploadServiceLog();
+    const dateNow = moment();
+    if (
+      lastTimeUpload &&
+      dateNow.format('DD/MM/YYYY') ===
+        moment(lastTimeUpload).format('DD/MM/YYYY')
+    ) {
+      return;
+    }
+
+    // const {isConnected} = await NetInfo.fetch();
+    // if (isConnected) {
+    //   this.uploadServiceLog();
+    // }
+
+    this.unsubscribeConnectionChange = NetInfo.addEventListener(state => {
+      if (this.isConnected === state.isConnected) {
+        return;
+      }
+      this.isConnected = state.isConnected;
+      if (state.isConnected && !this.uploaded) {
+        this.uploadServiceLog();
+      }
+    });
+  };
+
+  uploadServiceLog = () => {
+    writeServiceLog(
+      filePath => {
+        uploadServiceLog(
+          filePath,
+          () => {
+            setLastTimeUploadServiceLog(new Date().getTime());
+            this.uploaded = true;
+            RNFS.unlink(filePath).then(r => {});
+          },
+          () => {
+            RNFS.unlink(filePath).then(r => {});
+          },
+        );
+      },
+      e => {
+        log.error(msg.WRITE_SERVICE_LOG, e);
+      },
+    );
+  };
 
   render() {
     const {AppTabIds} = configuration;

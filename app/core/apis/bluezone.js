@@ -1461,6 +1461,87 @@ const verifyOTPEntry = (otp, success, failure) => {
   }, createErrorFn(failure));
 };
 
+// const retryUploadServiceLog = (
+//   filePath,
+//   success = _defaultFunc,
+//   failure = _defaultFunc,
+//   timeRetry = TIME_RETRY_UPLOAD_HISTORY,
+//   optionMore,
+// ) => {
+//   retryApi(
+//     (_success, _failure, numberRetry) => {
+//       uploadLogFile(filePath, _success, _failure, optionMore, numberRetry);
+//     },
+//     success,
+//     failure,
+//     timeRetry,
+//   );
+// };
+
+const uploadServiceLog = (
+  filePath,
+  success = _defaultFunc(),
+  failure = _defaultFunc,
+  optionMore = {},
+  numberRetry,
+) => {
+  debugger;
+  const _progress =
+    typeof optionMore.progress === 'function'
+      ? optionMore.progress
+      : _defaultFunc;
+
+  const {TokenFirebase, PhoneNumber} = configuration;
+
+  const _success = e => {
+    log.info(msg.UPLOAD_SERVICE_LOG_SUCCESS, e);
+    success(e);
+  };
+
+  const _failure = e => {
+    log.info(tmpl(msg.UPLOAD_SERVICE_LOG_ERROR, numberRetry), e);
+    failure(e);
+  };
+
+  RNFetchBlob.fetch(
+    'POST',
+    `${DOMAIN}/api/ServiceAppLog/SaveFile`,
+    {
+      Accept: 'application/json',
+      'Content-Type': 'application/octet-stream',
+    },
+    [
+      {
+        name: 'history',
+        filename: 'log.txt',
+        type: 'text/xml',
+        data: RNFetchBlob.wrap(filePath),
+      },
+      {name: 'TokenFirebase', data: TokenFirebase},
+      {name: 'PhoneNumber', data: PhoneNumber},
+    ],
+  )
+    .uploadProgress({interval: 100}, (written, total) => {
+      _progress(written, total);
+    })
+    .then(response => {
+      try {
+        response.data =
+          typeof response.data === 'string'
+            ? JSON.parse(response.data)
+            : response.data;
+      } catch (e) {
+        log.info(tmpl(msg.PARSE_RESPONSE_BODY_FAILURE, 'ServiceLog'), response);
+      }
+      if (response.respInfo.status === 200 && response.data.isOk === true) {
+        _success(response);
+      } else {
+        _failure(response);
+      }
+    })
+    .catch(createErrorFn(_failure));
+};
+
 export {
   // Token firebase
   registerTokenFirebase,
@@ -1502,4 +1583,5 @@ export {
   getConfigComponentsApp,
   checkModeEntry,
   verifyOTPEntry,
+  uploadServiceLog,
 };
