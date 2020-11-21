@@ -1560,7 +1560,7 @@ class EntryDeclarationScreen extends React.Component {
         : null;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.flexOne}>
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={150} style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           {displayHeader && (
             <Header
