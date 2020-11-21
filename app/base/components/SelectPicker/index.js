@@ -28,7 +28,6 @@ import {
   FlatList,
   View,
   SafeAreaView,
-  KeyboardAvoidingView,
   TextInput,
 } from 'react-native';
 import * as PropTypes from 'prop-types';
@@ -36,7 +35,7 @@ import {injectIntl, intlShape} from 'react-intl';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 // Components
-import Text, {MediumText} from '../Text';
+import Text from '../Text';
 import ModalBase from '../ModalBase/ButtonHalf';
 import Header from '../Header';
 
@@ -129,13 +128,14 @@ class SelectPicker extends React.PureComponent {
       });
     }
     if (prevState.searchKey !== searchKey || prevProps.data !== data) {
-      const _data = !searchKey
-        ? data
-        : data.filter(({name}) =>
-            this.convertVietNamese(name).includes(
-              this.convertVietNamese(searchKey),
-            ),
-          );
+      const _data =
+        searchKey && data && typeof data.filter === 'function'
+          ? data.filter(({name}) =>
+              this.convertVietNamese(name).includes(
+                this.convertVietNamese(searchKey),
+              ),
+            )
+          : data;
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         _data,
@@ -201,9 +201,15 @@ class SelectPicker extends React.PureComponent {
   onHideModal() {
     this.setState({
       isVisible: false,
-      searchKey: '',
     });
   }
+
+  handleModalHide = () => {
+    this.props.enableSearch &&
+      this.setState({
+        searchKey: '',
+      });
+  };
 
   getItemLayout = (data, index) => {
     return {length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index: index};
@@ -224,7 +230,9 @@ class SelectPicker extends React.PureComponent {
       <ModalBase
         isVisible={isVisible}
         contentStyle={{flex: 1}}
+        onBackButtonPress={this.onHideModal}
         onModalShow={onVisible}
+        onModalHide={this.handleModalHide}
         onBackdropPress={this.onHideModal}>
         <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
           {headerText && (

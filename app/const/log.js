@@ -67,6 +67,11 @@ export const WRITE_LOG_FILE = 'Lỗi ghi lịch sử log ra file';
 export const UPLOAD_LOG_FILE_SUCCESS = 'Đẩy file log thành công';
 export const UPLOAD_LOG_FILE_ERROR = 'Đẩy file log lỗi - lần {1}';
 
+// Service log
+export const WRITE_SERVICE_LOG = 'Lỗi ghi service log ra file';
+export const UPLOAD_SERVICE_LOG_SUCCESS = 'Đẩy service log thành công';
+export const UPLOAD_SERVICE_LOG_ERROR = 'Đẩy service log lỗi - lần {1}';
+
 /**
  * Tra ve noi dung ghi log
  * @param template

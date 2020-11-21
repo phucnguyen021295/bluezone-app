@@ -31,6 +31,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Image,
+  Platform,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import {CheckBox as CheckBox1} from 'react-native-elements';
@@ -51,7 +52,7 @@ import TextInfo from './components/TextInfo';
 import ModalNotify from './components/ModalNotify';
 import {EntryLanguageContext} from './components/LanguageContext';
 import SwitchLanguage from './components/SwitchLanguage';
-import Declaration from './components/Declaration';
+import EntryInfo from './components/EntryInfo';
 
 // Api
 import {
@@ -95,7 +96,7 @@ const VIETNAM_ID = '234';
 const regxEmail = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const regxPhoneNumber = /^[\+]?[0-9]{9,15}\b/;
 
-class EntryDeclarationScreen extends React.Component {
+class EntryForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -173,6 +174,7 @@ class EntryDeclarationScreen extends React.Component {
       otherQuarantinePlace: '',
       statusInternet: 'connected', // connected, connecting, disconnect
       appMode: AppMode,
+      objectGUID: props?.route?.params?.objectGUID,
     };
     this.lastVNProvinceIDApi = null;
     this.lastVNDistrictIDApi = null;
@@ -182,9 +184,10 @@ class EntryDeclarationScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const objectGUID = await getEntryObjectGUIDInformation();
-    this.changeStateWithOutSave({objectGUID: objectGUID});
-    this.objectGUID = objectGUID;
+    if (this.state.objectGUID) {
+      const objectGUID = await getEntryObjectGUIDInformation();
+      this.changeStateWithOutSave({objectGUID: objectGUID});
+    }
     getEntryInfoDeclare().then(this.getEntryInfoDeclareStorageCb);
     reportScreenAnalytics(SCREEN.ENTRY_DECLARATION);
 
@@ -223,7 +226,6 @@ class EntryDeclarationScreen extends React.Component {
           setEntryObjectGUIDInformation(data.Object.ObjectGuid);
           setInforEntryPersonObjectGuid(data.Object.InforEntryPersonObjectGuid);
           this.changeStateWithOutSave({objectGUID: data.Object.ObjectGuid});
-          this.objectGUID = data.Object.ObjectGuid;
           setEntryInfoDeclare(data.Object);
           this.bindEntryInfoData(data.Object);
         }
@@ -980,6 +982,7 @@ class EntryDeclarationScreen extends React.Component {
       otherQuarantinePlace,
       testDateString,
       testDate,
+      objectGUID,
     } = this.state;
 
     const _startDate = moment(startDate).format('YYYY/MM/DD');
@@ -988,7 +991,7 @@ class EntryDeclarationScreen extends React.Component {
 
     const titleError = '';
     let contentError;
-    if (!this.objectGUID && !portraitBase64) {
+    if (!objectGUID && !portraitBase64) {
       contentError = 'Thiếu thông tin ảnh chân dung';
     }
 
@@ -1117,7 +1120,7 @@ class EntryDeclarationScreen extends React.Component {
     });
 
     const data = {
-      ObjectGuid: this.objectGUID || '00000000-0000-0000-0000-000000000000',
+      ObjectGuid: objectGUID || '00000000-0000-0000-0000-000000000000',
       AnhChanDungBase64: portraitBase64,
       MaCuaKhau: gateID.toString(),
       FullName: fullName,
@@ -1210,7 +1213,12 @@ class EntryDeclarationScreen extends React.Component {
     //   TrieuChungBenh: `[{"ID":"sot","Text":"Sốt","Value":true},{"ID":"ho","Text":"Ho","Value":true},{"ID":"kho_tho","Text":"Khó thở","Value":true},{"ID":"dau_hong","Text":"Đau họng","Value":true},{"ID":"non_buon_non","Text":"Nôn / Buồn nôn","Value":false},{"ID":"tieu_chay","Text":"Tiêu chảy","Value":false},{"ID":"xuat_huyet_ngoai_da","Text":"Xuất huyết ngoài da","Value":false},{"ID":"noi_ban_ngoai_da","Text":"Nổi ban ngoài da","Value":false}]`,VacXinSuDung: "Đây là các xin",
     // };
 
-    entryDeclaration(data, this.declareSuccess, this.declareError);
+    // entryDeclaration(data, this.declareSuccess, this.declareError);
+
+    this.props.navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
+      code: '123213',
+      passport: '345345',
+    });
   };
 
   declareSuccess = data => {
@@ -1219,7 +1227,7 @@ class EntryDeclarationScreen extends React.Component {
       gateName,
       nationalityName,
       startCountryName,
-      startProvinceID,
+      startCountryID,
       startProvinceName,
       startProvince,
       endProvinceName,
@@ -1230,7 +1238,7 @@ class EntryDeclarationScreen extends React.Component {
       vn_DistrictName,
       vn_WardName,
     } = this.state;
-    const startVN = this.isIDVietNam(startProvinceID);
+    const startVN = this.isIDVietNam(startCountryID);
 
     navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
       code: data.Object.ObjectGuid,
@@ -1450,19 +1458,20 @@ class EntryDeclarationScreen extends React.Component {
     requestEntry(
       this.state.objectGUID,
       data => {
-        if (data.Object.ModeEntry) {
-          setAppMode('entry');
-          this.changeStateWithOutSave({appMode: 'entry'});
-        }
-        this.showAlert(formatMessage(messages.requestEntrySuccess));
+        // if (data.Object.ModeEntry) {
+        //   setAppMode('entry');
+        //   this.changeStateWithOutSave({appMode: 'entry'});
+        // }
+        // this.showAlert(formatMessage(messages.requestEntrySuccess));
       },
       () => {
-        this.showAlert(formatMessage(messages.errorForm4));
+        // this.showAlert(formatMessage(messages.errorForm4));
       },
     );
   };
 
   render() {
+    const {intl, displayHeader, language} = this.props;
     const {
       portraitURL,
       portraitBase64,
@@ -1533,13 +1542,11 @@ class EntryDeclarationScreen extends React.Component {
       isView,
       appMode,
     } = this.state;
-    const {language} = this.context;
+
+    const {formatMessage} = intl;
     const vietnamese = language === 'vi';
 
     const startVN = this.isIDVietNam(startCountryID);
-
-    const {intl, displayHeader} = this.props;
-    const {formatMessage} = intl;
 
     const portraitSource =
       portraitBase64 || portraitURL
@@ -1560,7 +1567,10 @@ class EntryDeclarationScreen extends React.Component {
         : null;
 
     return (
-      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={150} style={styles.flexOne}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        keyboardVerticalOffset={40}
+        style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           {displayHeader && (
             <Header
@@ -1585,7 +1595,7 @@ class EntryDeclarationScreen extends React.Component {
           )}
 
           {appMode === 'entry' ? (
-            <Declaration data={this.state} />
+            <EntryInfo data={this.state} />
           ) : (
             <ScrollView
               style={styles.scroll}
@@ -1852,9 +1862,9 @@ class EntryDeclarationScreen extends React.Component {
                   date={startDate || this.now}
                   maximumDate={endDate}
                   locale={language}
-                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
-                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
-                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
+                  headerTextIOS={formatMessage(messages.pickDate)}
+                  cancelTextIOS={formatMessage(messages.cancel)}
+                  confirmTextIOS={formatMessage(messages.confirm)}
                 />
               </View>
 
@@ -1876,9 +1886,9 @@ class EntryDeclarationScreen extends React.Component {
                   date={endDate || this.now}
                   minimumDate={startDate}
                   locale={language}
-                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
-                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
-                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
+                  headerTextIOS={formatMessage(messages.pickDate)}
+                  cancelTextIOS={formatMessage(messages.cancel)}
+                  confirmTextIOS={formatMessage(messages.confirm)}
                 />
               </View>
 
@@ -2396,9 +2406,9 @@ class EntryDeclarationScreen extends React.Component {
                   onCancel={this.cancelPickerTestDate}
                   date={testDate || this.now}
                   locale={language}
-                  headerTextIOS={language === 'vi' ? 'Chọn ngày' : 'Choose a date'}
-                  cancelTextIOS={language === 'vi' ? 'Bỏ qua' : 'Cancel'}
-                  confirmTextIOS={language === 'vi' ? 'Chọn' : 'Confirm'}
+                  headerTextIOS={formatMessage(messages.pickDate)}
+                  cancelTextIOS={formatMessage(messages.cancel)}
+                  confirmTextIOS={formatMessage(messages.confirm)}
                 />
               </View>
 
@@ -2422,16 +2432,14 @@ class EntryDeclarationScreen extends React.Component {
   }
 }
 
-EntryDeclarationScreen.propTypes = {
+EntryForm.propTypes = {
   intl: intlShape.isRequired,
   navigation: PropTypes.object,
   route: PropTypes.object,
 };
 
-EntryDeclarationScreen.defaultProps = {
+EntryForm.defaultProps = {
   displayHeader: true,
 };
 
-EntryDeclarationScreen.contextType = EntryLanguageContext;
-
-export default injectIntl(EntryDeclarationScreen);
+export default injectIntl(EntryForm);

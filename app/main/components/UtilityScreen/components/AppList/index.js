@@ -23,7 +23,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Text, TouchableOpacity, FlatList, Alert} from 'react-native';
+import {Text, TouchableOpacity, FlatList} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import FastImage from 'react-native-fast-image';
 
@@ -33,6 +33,7 @@ import {syncConfigComponentApp} from '../../data/dataConfigComponentApp';
 
 // Styles
 import styles from './styles/index.css';
+import {getEntryObjectGUIDInformation} from '../../../../../core/storage';
 
 const IMAGE = {
   '1': require('./styles/images/medicalSearch.png'),
@@ -60,7 +61,7 @@ class AppList extends React.Component {
     });
   }
 
-  onChangeEvent(app) {
+  async onChangeEvent(app) {
     const {navigation, intl} = this.props;
     const {locale} = intl;
     const title = locale === 'vi' ? app.title : app.titleEn;
@@ -89,11 +90,14 @@ class AppList extends React.Component {
       case 'Entry':
         const {AppMode} = configuration;
         if (AppMode === 'entry') {
+          navigation.navigate(SCREEN.ENTRY);
         } else {
+          const objectGUID = await getEntryObjectGUIDInformation();
+          navigation.navigate(SCREEN.ENTRY_DECLARATION, {
+            objectGUID: objectGUID,
+          });
         }
-        navigation.navigate(SCREEN.ENTRY, {
-          tabFocus: AppMode === 'entry' ? 'DailyDeclare' : 'EntryDeclare',
-        });
+
         break;
       default:
         break;

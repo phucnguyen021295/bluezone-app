@@ -28,6 +28,7 @@ import {
   getPartialDevLog,
   getAllDevLog,
   clearDevLog,
+  formatDate,
 } from '../db/SqliteDb';
 import {dev} from '../apis/server';
 import {
@@ -129,12 +130,18 @@ const broadcastEventListener = status => {
 };
 
 const writeFileLog = (success, failed) => {
-  getAllDevLog(data => {
+  getAllDevLog(_data => {
     const now = new Date().getTime();
     const root = RNFS.DocumentDirectoryPath;
+    const content = _data
+      .map(
+        ({timestamp, key, data}) =>
+          `${formatDate(timestamp)}: ${key}${data ? `\n${data}` : ''}`,
+      )
+      .join('\n');
 
     const _logFilePath = `${root}/${logFileName}_${now}_${logFileType}`;
-    RNFS.writeFile(_logFilePath, 'content', 'utf8')
+    RNFS.writeFile(_logFilePath, content, 'utf8')
       .then(result => {
         success(_logFilePath);
       })
