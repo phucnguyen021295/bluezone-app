@@ -21,7 +21,7 @@
 
 'use strict';
 
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {ScrollView, SafeAreaView, Dimensions, Linking} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import HTML from 'react-native-render-html';
@@ -32,6 +32,7 @@ import {getNews} from '../../../core/apis/bluezone';
 
 // Components
 import Header from '../../../base/components/Header';
+import Text from '../../../base/components/Text';
 
 // Styles
 import {CUSTOM_STYLES} from './styles/index.css';
@@ -40,7 +41,7 @@ import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 import * as fontSize from '../../../core/fontSize';
 
-class DetailNewScreen extends React.PureComponent {
+class DetailNewScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -89,12 +90,9 @@ class DetailNewScreen extends React.PureComponent {
 
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-        <Header
-          colorIcon={'#000000'}
-          styleTitle={{paddingHorizontal: 50, color: '#000000', fontSize: fontSize.fontSize19}}
-          title={title}
-        />
+        <Header title={Language === 'vi' ? 'Tin tức' : 'New'} />
         <ScrollView contentContainerStyle={{paddingTop: 12}}>
+          <Text text={title} style={{paddingHorizontal: 20, fontFamily: 'OpenSans-Semibold', fontSize: fontSize.fontSize20, lineHeight: fontSize.fontSize20 * 1.15}} />
           <HTML
             onLinkPress={this.onLinkPress}
             html={news?.data?.content}

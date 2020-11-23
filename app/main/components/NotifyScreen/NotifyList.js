@@ -25,12 +25,11 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/vi'; // without this line it didn't work
 import {injectIntl, intlShape} from 'react-intl';
-
-// Components
 import {TouchableOpacity, View, FlatList} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import Text from '../../../base/components/Text';
-import {MediumText} from '../../../base/components/Text';
+
+// Components
+import Text, {MediumText} from '../../../base/components/Text';
 
 import {NOTIFICATION_TYPE} from '../../../const/notification';
 
@@ -81,11 +80,11 @@ class NotifySession extends React.Component {
       item.titleEn;
     const text =
       (Language === 'vi' ? item.text : item.textEn) || item.text || item.textEn;
-    const TextDisplay = !item.unRead ? MediumText : Text;
+    // const TextDisplay = !item.unRead ? MediumText : Text;
 
-    const isTypeNotifyNew =
-      item._group === NOTIFICATION_TYPE.SEND_URL_NEW ||
-      item._group === NOTIFICATION_TYPE.SEND_HTML_NEWS;
+    // const isTypeNotifyNew =
+    //   item._group === NOTIFICATION_TYPE.SEND_URL_NEW ||
+    //   item._group === NOTIFICATION_TYPE.SEND_HTML_NEWS;
 
     return (
       <TouchableOpacity onPress={_callback} style={styles.NotifyContainer}>
@@ -94,34 +93,24 @@ class NotifySession extends React.Component {
             <FastImage source={uri} style={styles.avatar} />
           </View>
           <View style={styles.content}>
-            <TextDisplay
-              numberOfLines={1}
-              style={[
-                !item.unRead ? styles.titleTextUnread : styles.titleText,
-                isTypeNotifyNew && {color: '#015cd0'}
-              ]}>
-              {title}
-            </TextDisplay>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'flex-end',
-              }}>
-              <TextDisplay
-                numberOfLines={2}
+            <Text
+              text={text}
+              numberOfLines={2}
+              style={[styles.bodyStyle, item.unRead && {color: '#777777'}]}
+            />
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text
+                text={title}
+                numberOfLines={1}
                 style={[
-                  {flex: 1, marginRight: 18},
-                  !item.unRead ? styles.desTextUnread : styles.desText,
-                ]}>
-                {text}
-              </TextDisplay>
-              <TextDisplay
-                style={[
-                  !item.unRead ? styles.textTimerUnread : styles.textTimer,
-                ]}>
-                {textTime}
-              </TextDisplay>
+                  styles.title,
+                  !item.unRead
+                    ? {fontFamily: 'OpenSans-SemiBold'}
+                    : {color: '#888888'},
+                ]}
+              />
+              <View style={styles.dot} />
+              <Text text={textTime} style={styles.date} />
             </View>
           </View>
         </View>

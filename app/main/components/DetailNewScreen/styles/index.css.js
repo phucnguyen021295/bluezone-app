@@ -27,12 +27,11 @@ const CUSTOM_STYLES = {
   p: {
     color: '#000',
     fontSize: fontSize.normal,
-    lineHeight: 30,
+    lineHeight: 23,
     fontFamily: 'Roboto-Regular',
     marginBottom: 7,
     marginHorizontal: 20,
     textAlign: 'justify',
-    // textAlignVertical: 'bottom',
   },
   br: {
     display: 'none',
@@ -45,25 +44,21 @@ const CUSTOM_STYLES = {
     marginVertical: 10,
     color: '#000',
     marginHorizontal: 20,
-    textAlign: 'justify',
   },
   h2: {
     marginVertical: 7,
     color: '#000',
     marginHorizontal: 20,
-    textAlign: 'justify',
   },
 
   h3: {
     marginBottom: 7,
     lineHeight: 30,
     marginHorizontal: 20,
-    textAlign: 'justify',
   },
   h4: {
     marginVertical: 7,
     marginHorizontal: 20,
-    textAlign: 'justify',
   },
   ul: {
     paddingLeft: 5,
@@ -82,7 +77,6 @@ const CUSTOM_STYLES = {
   },
 
   img: {
-    borderRadius: 6,
     marginBottom: 8,
   }
 };
