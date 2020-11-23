@@ -96,27 +96,30 @@ const styles = StyleSheet.create({
 
   rowSymptom0: {
     flexDirection: 'row',
-    paddingVertical: 10,
     backgroundColor: '#d9d9d9',
   },
 
   rowSymptom1: {
     flexDirection: 'row',
-    paddingVertical: 10,
-    alignItems: 'center',
   },
 
   rowSymptom2: {
     flexDirection: 'row',
-    paddingVertical: 10,
-    alignItems: 'center',
     backgroundColor: '#f2f2f2',
   },
 
   nameSymptom: {
     flex: 1,
+    paddingVertical: 10,
     paddingLeft: 6,
     fontSize: fontSize.small,
+  },
+
+  text1: {
+    paddingVertical: 10,
+    fontSize: fontSize.small,
+    width: 55,
+    textAlign: 'center',
   },
 
   buttonSymptom: {
@@ -127,6 +130,7 @@ const styles = StyleSheet.create({
 
   checkboxSymptom: {
     width: 55,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 
