@@ -21,8 +21,7 @@
 
 'use strict';
 
-import React from 'react';
-import * as PropTypes from 'prop-types';
+import React, {PureComponent} from 'react';
 import {injectIntl, intlShape} from 'react-intl';
 import {SafeAreaView, StatusBar, View, Linking, ScrollView} from 'react-native';
 
@@ -47,7 +46,7 @@ import * as fontSize from '../../../core/fontSize';
 import configuration from '../../../configuration';
 import SCREEN from '../../nameScreen';
 
-class InfoScreen extends React.Component {
+class InfoScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

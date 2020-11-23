@@ -22,7 +22,6 @@
 'use strict';
 
 import React from 'react';
-import * as PropTypes from 'prop-types';
 
 // Components
 import {SafeAreaView, StatusBar, View, ScrollView} from 'react-native';
@@ -37,7 +36,7 @@ import message from '../../../core/msg/intro';
 // Logo
 import IconBYT from './styles/images/iconBoYTe';
 import IconBTT from '../HomeScreen/styles/images/IconBTT';
-import {reportScreenAnalytics} from "../../../core/analytics";
+import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
 
 class IntroductionScreen extends React.Component {
