@@ -25,13 +25,14 @@ import {Platform, StyleSheet} from 'react-native';
 import * as fontSize from '../../../../core/fontSize';
 import {large} from '../../../../core/fontSize';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
-import {heightPercentageToDP} from '../../../../core/utils/dimension';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
 
 export const NOTIFY_HEIGHT = heightPercentageToDP((72 / 720) * 100);
 const NOTIFY_PADDING_VERTICAL = heightPercentageToDP((10 / 720) * 100);
 const AVATAR_HEIGHT = heightPercentageToDP((52 / 720) * 100);
 const AVATAR_WIDTH = heightPercentageToDP((52 / 720) * 100);
 const TEXT_LIGHT_HEIGHT = heightPercentageToDP((22 / 720) * 100);
+const TITLE_MAX_WIDTH = widthPercentageToDP((170 / 360) * 100);
 
 export const HEADER_HEIGHT = heightPercentageToDP((70 / 720) * 100);
 export const TAB_BAR_HEIGHT = heightPercentageToDP((52 / 720) * 100);
@@ -107,10 +108,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 13,
   },
+
+  bodyStyle: {
+    fontFamily: 'OpenSans-SemiBold',
+    lineHeight: fontSize.fontSize16 * 1.38,
+    fontSize: fontSize.fontSize16,
+  },
+
   titleText: {
-    lineHeight: TEXT_LIGHT_HEIGHT,
-    fontSize: fontSize.larger,
-    color: '#000000',
+    color: '#777777',
   },
 
   titleTextUnread: {
@@ -155,6 +161,27 @@ const styles = StyleSheet.create({
   empty: {
     width: 44,
     height: 64,
+  },
+
+  title: {
+    color: '#015cd0',
+    fontSize: fontSize.small,
+    lineHeight: fontSize.fontSize16 * 1.38,
+    maxWidth: TITLE_MAX_WIDTH,
+  },
+
+  date: {
+    color: '#858585',
+    fontSize: fontSize.small,
+    lineHeight: fontSize.fontSize16 * 1.38,
+  },
+
+  dot: {
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#888888',
+    marginHorizontal: 9,
   },
 });
 
