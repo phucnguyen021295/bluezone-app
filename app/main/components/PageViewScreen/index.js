@@ -21,17 +21,14 @@
 
 'use strict';
 import React, {PureComponent} from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  ActivityIndicator,
-} from 'react-native';
+import {SafeAreaView, StatusBar, ActivityIndicator} from 'react-native';
 import PropTypes from 'prop-types';
 import {WebView} from 'react-native-webview';
 import Error from './Error';
 import Header from '../../../base/components/Header';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
+import configuration from '../../../configuration';
 
 class PageViewScreen extends PureComponent {
   constructor(props) {
@@ -75,17 +72,14 @@ class PageViewScreen extends PureComponent {
 
   render() {
     const {route} = this.props;
+    const {Language} = configuration;
     const item = route.params?.item;
     const data = item?.data;
 
     return (
       <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
         <StatusBar hidden={true} />
-        <Header
-          colorIcon={'#000000'}
-          styleTitle={{paddingHorizontal: 50, color: '#000000'}}
-          title={item.title}
-        />
+        <Header title={Language === 'vi' ? 'Tin tức' : 'New'} />
         <WebView
           ref={this.setRef}
           source={{
