@@ -22,16 +22,31 @@
 'use strict';
 
 import * as fontSize from '../../../../core/fontSize';
+import {StyleSheet} from 'react-native';
+import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
+import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
+
+const HEADER_MAX_HEIGHT = heightPercentageToDP((70 / 720) * 100);
+const HEADER_IPHONE_X_HEIGHT = heightPercentageToDP((50 / 720) * 100);
+const FIGURE_MARGIN_VERTICAL = heightPercentageToDP((21 / 720) * 100);
+const CONTENT_PADDING_TOP = heightPercentageToDP((95 / 720) * 100);
+const MARGIN_HORIZONTAL = widthPercentageToDP((20 / 360) * 100);
+const P_MARGIN_BOTTOM = heightPercentageToDP((7 / 720) * 100);
+const H1_MARGIN_BOTTOM = heightPercentageToDP((10 / 720) * 100);
+const H234_MARGIN_BOTTOM = heightPercentageToDP((7 / 720) * 100);
+
+export const HEADER_HEIGHT = isIPhoneX
+  ? HEADER_IPHONE_X_HEIGHT
+  : HEADER_MAX_HEIGHT;
 
 const CUSTOM_STYLES = {
   p: {
     color: '#000',
     fontSize: fontSize.normal,
-    lineHeight: 23,
+    lineHeight: fontSize.normal * 1.53,
     fontFamily: 'Roboto-Regular',
-    marginBottom: 7,
-    marginHorizontal: 20,
-    textAlign: 'justify',
+    marginBottom: P_MARGIN_BOTTOM,
+    marginHorizontal: MARGIN_HORIZONTAL,
   },
   br: {
     display: 'none',
@@ -41,30 +56,41 @@ const CUSTOM_STYLES = {
     fontFamily: 'Roboto-Medium',
   },
   h1: {
-    marginVertical: 10,
+    marginBottom: H1_MARGIN_BOTTOM,
     color: '#000',
-    marginHorizontal: 20,
+    marginHorizontal: MARGIN_HORIZONTAL,
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: fontSize.fontSize20,
+    lineHeight: fontSize.fontSize20 * 1.15,
   },
   h2: {
-    marginVertical: 7,
+    marginBottom: H234_MARGIN_BOTTOM,
     color: '#000',
-    marginHorizontal: 20,
+    marginHorizontal: MARGIN_HORIZONTAL,
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: fontSize.fontSize20,
+    lineHeight: fontSize.fontSize20 * 1.15,
   },
 
   h3: {
-    marginBottom: 7,
-    lineHeight: 30,
-    marginHorizontal: 20,
+    marginBottom: H234_MARGIN_BOTTOM,
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: fontSize.fontSize20,
+    lineHeight: fontSize.fontSize20 * 1.15,
+    marginHorizontal: MARGIN_HORIZONTAL,
   },
   h4: {
-    marginVertical: 7,
-    marginHorizontal: 20,
+    marginBottom: H234_MARGIN_BOTTOM,
+    marginHorizontal: MARGIN_HORIZONTAL,
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: fontSize.fontSize20,
+    lineHeight: fontSize.fontSize20 * 1.15,
   },
   ul: {
     paddingLeft: 5,
   },
   li: {
-    lineHeight: 24,
+    lineHeight: fontSize.normal * 1.53,
     color: '#000',
     fontSize: fontSize.normal,
   },
@@ -73,11 +99,40 @@ const CUSTOM_STYLES = {
   },
 
   figure: {
-    marginHorizontal: 20,
+    marginHorizontal: MARGIN_HORIZONTAL,
+    marginVertical: FIGURE_MARGIN_VERTICAL,
   },
 
   img: {
-    marginBottom: 8,
-  }
+    marginBottom: 5,
+  },
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+
+  contentContainerStyle: {
+    paddingTop: CONTENT_PADDING_TOP,
+  },
+
+  titleStyle: {
+    color: '#000000',
+    paddingHorizontal: MARGIN_HORIZONTAL,
+    fontFamily: 'OpenSans-Semibold',
+    fontSize: fontSize.fontSize20,
+    lineHeight: fontSize.fontSize20 * 1.15,
+  },
+
+  creator: {
+    fontSize: fontSize.fontSize14,
+    color: '#000000',
+    lineHeight: fontSize.fontSize14 * 1.21,
+  },
+});
+
 export {CUSTOM_STYLES};
+
+export default styles;

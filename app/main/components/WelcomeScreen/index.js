@@ -31,7 +31,7 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-  AppState,
+  AppState, BackHandler,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -98,6 +98,7 @@ class WelcomeScreen extends React.Component {
     this.randomDisplay();
     Dimensions.addEventListener('change', this.onDimensionsChange);
     AppState.addEventListener('change', this.handleAppStateChange);
+    BackHandler.addEventListener('hardwareBackPress', this.onGoBack);
 
     reportScreenAnalytics(SCREEN.WELCOME);
   }
@@ -105,6 +106,7 @@ class WelcomeScreen extends React.Component {
   componentWillUnmount() {
     Dimensions.removeEventListener('change', this.onDimensionsChange);
     AppState.removeEventListener('change', this.handleAppStateChange);
+    BackHandler.removeEventListener('hardwareBackPress', this.onGoBack);
   }
 
   onDimensionsChange(e) {
@@ -197,7 +199,7 @@ class WelcomeScreen extends React.Component {
 
     if (onFinished) {
       onFinished();
-      return;
+      return true;
     }
 
     this.props.navigation.goBack();

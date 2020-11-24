@@ -22,7 +22,14 @@
 'use strict';
 
 import React, {PureComponent} from 'react';
-import {ScrollView, SafeAreaView, Dimensions, Linking} from 'react-native';
+import {
+  ScrollView,
+  SafeAreaView,
+  Dimensions,
+  Linking,
+  View,
+  Animated,
+} from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import HTML from 'react-native-render-html';
 import 'moment/locale/vi'; // without this line it didn't work
@@ -35,18 +42,34 @@ import Header from '../../../base/components/Header';
 import Text from '../../../base/components/Text';
 
 // Styles
-import {CUSTOM_STYLES} from './styles/index.css';
+import styles, {CUSTOM_STYLES, HEADER_HEIGHT} from './styles/index.css';
 import configuration from '../../../configuration';
 import {reportScreenAnalytics} from '../../../core/analytics';
 import SCREEN from '../../nameScreen';
-import * as fontSize from '../../../core/fontSize';
+import moment from 'moment';
+
+const HEADER_MAX_HEIGHT = HEADER_HEIGHT;
 
 class DetailNewScreen extends PureComponent {
   constructor(props) {
     super(props);
+    const headerAnimated = new Animated.Value(0);
     this.state = {
       news: {},
+      headerAnimated: headerAnimated,
     };
+
+    this.clampedScroll = Animated.diffClamp(
+      headerAnimated.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+        extrapolateLeft: 'clamp',
+      }),
+      0,
+      HEADER_MAX_HEIGHT,
+    );
+    this.formatDate = this.formatDate.bind(this);
+    this.formatHours = this.formatHours.bind(this);
   }
 
   componentDidMount() {
@@ -77,25 +100,74 @@ class DetailNewScreen extends PureComponent {
     });
   };
 
-  render() {
-    const {news} = this.state;
-    const {route} = this.props;
-    const item = (route && route.params.item) || {};
+  formatDate(time) {
     const {Language} = configuration;
-    //
-    const title =
-      (Language === 'vi' ? item.title : item.titleEn) ||
-      item.title ||
-      item.titleEn;
+    if (Language === 'en') {
+      return moment(time).format('MM/DD/YYYY');
+    }
+    return moment(time).format('DD/MM/YYYY');
+  }
+
+  formatHours(time) {
+    return moment(time).format('HH:mm');
+  }
+
+  render() {
+    const {news, headerAnimated} = this.state;
+    const {Language} = configuration;
+    const data = news?.data;
+
+    const animationHeader = this.clampedScroll.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT],
+      outputRange: [0, -HEADER_MAX_HEIGHT],
+      extrapolate: 'clamp',
+    });
 
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-        <Header title={Language === 'vi' ? 'Tin tức' : 'New'} />
-        <ScrollView contentContainerStyle={{paddingTop: 12}}>
-          <Text text={title} style={{paddingHorizontal: 20, fontFamily: 'OpenSans-Semibold', fontSize: fontSize.fontSize20, lineHeight: fontSize.fontSize20 * 1.15}} />
+      <SafeAreaView style={styles.container}>
+        <Animated.View
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            height: HEADER_MAX_HEIGHT,
+            transform: [{translateY: animationHeader}],
+            backgroundColor: '#ffffff',
+            zIndex: 99,
+            // borderBottomColor: '#efefef',
+            // borderBottomWidth: 1,
+          }}>
+          <Header title={Language === 'vi' ? 'Tin tức' : 'New'} />
+        </Animated.View>
+        <ScrollView
+          onScroll={Animated.event([
+            {nativeEvent: {contentOffset: {y: headerAnimated}}},
+          ])}
+          contentContainerStyle={styles.contentContainerStyle}>
+          <Text text={data?.title} style={styles.titleStyle} />
+          <View
+            style={{
+              flexDirection: 'row',
+              paddingHorizontal: 20,
+              flexWrap: 'wrap',
+              paddingTop: 7,
+              paddingBottom: 7,
+            }}>
+            <Text text={data?.creator} style={styles.creator} />
+            <Text text={' | '} style={styles.creator} />
+            <Text
+              text={this.formatDate(data?.createDate)}
+              style={styles.creator}
+            />
+            <Text text={' | '} style={styles.creator} />
+            <Text
+              text={this.formatHours(data?.createDate)}
+              style={styles.creator}
+            />
+          </View>
           <HTML
             onLinkPress={this.onLinkPress}
-            html={news?.data?.content}
+            html={data?.content}
             tagsStyles={CUSTOM_STYLES}
             imagesMaxWidth={Dimensions.get('window').width - 40}
             allowFontScaling={false}
