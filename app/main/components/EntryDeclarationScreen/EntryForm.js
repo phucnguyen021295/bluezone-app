@@ -933,7 +933,6 @@ class EntryForm extends React.Component {
         contextScreen: 'entry',
       });
 
-      // this.createAndSendOTPCode();
       return;
     }
 
@@ -1213,12 +1212,12 @@ class EntryForm extends React.Component {
     //   TrieuChungBenh: `[{"ID":"sot","Text":"Sốt","Value":true},{"ID":"ho","Text":"Ho","Value":true},{"ID":"kho_tho","Text":"Khó thở","Value":true},{"ID":"dau_hong","Text":"Đau họng","Value":true},{"ID":"non_buon_non","Text":"Nôn / Buồn nôn","Value":false},{"ID":"tieu_chay","Text":"Tiêu chảy","Value":false},{"ID":"xuat_huyet_ngoai_da","Text":"Xuất huyết ngoài da","Value":false},{"ID":"noi_ban_ngoai_da","Text":"Nổi ban ngoài da","Value":false}]`,VacXinSuDung: "Đây là các xin",
     // };
 
-    // entryDeclaration(data, this.declareSuccess, this.declareError);
+    entryDeclaration(data, this.declareSuccess, this.declareError);
 
-    this.props.navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
-      code: '123213',
-      passport: '345345',
-    });
+    // this.props.navigation.replace(SCREEN.ENTRY_DECLARATION_SUCCESS, {
+    //   code: '123213',
+    //   passport: '345345',
+    // });
   };
 
   declareSuccess = data => {
@@ -1568,8 +1567,8 @@ class EntryForm extends React.Component {
 
     return (
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 40 ? 'padding' : -220}
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        // keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : -220}
         style={styles.flexOne}>
         <SafeAreaView style={styles.container}>
           {displayHeader && (

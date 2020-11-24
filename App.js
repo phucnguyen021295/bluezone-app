@@ -294,7 +294,6 @@ class App extends PureComponent {
   onNotificationOpened = remoteMessage => {
     const {loading, isHome} = this.state;
     console.log('onNotificationOpened');
-    debugger;
     if (!remoteMessage) {
       return;
     }
