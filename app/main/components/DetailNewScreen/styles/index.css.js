@@ -22,14 +22,18 @@
 'use strict';
 
 import * as fontSize from '../../../../core/fontSize';
-import {StyleSheet} from 'react-native';
-import {heightPercentageToDP, widthPercentageToDP} from '../../../../core/utils/dimension';
+import {StyleSheet, Platform} from 'react-native';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from '../../../../core/utils/dimension';
 import {isIPhoneX} from '../../../../core/utils/isIPhoneX';
 
 const HEADER_MAX_HEIGHT = heightPercentageToDP((70 / 720) * 100);
 const HEADER_IPHONE_X_HEIGHT = heightPercentageToDP((50 / 720) * 100);
 const FIGURE_MARGIN_VERTICAL = heightPercentageToDP((21 / 720) * 100);
-const CONTENT_PADDING_TOP = heightPercentageToDP((95 / 720) * 100);
+const CONTENT_ANDROID_PADDING_TOP = heightPercentageToDP((50 / 720) * 100);
+const CONTENT_IOS_PADDING_TOP = heightPercentageToDP((30 / 720) * 100);
 const MARGIN_HORIZONTAL = widthPercentageToDP((20 / 360) * 100);
 const P_MARGIN_BOTTOM = heightPercentageToDP((7 / 720) * 100);
 const H1_MARGIN_BOTTOM = heightPercentageToDP((10 / 720) * 100);
@@ -115,7 +119,10 @@ const styles = StyleSheet.create({
   },
 
   contentContainerStyle: {
-    paddingTop: CONTENT_PADDING_TOP,
+    paddingTop:
+      Platform.OS === 'ios'
+        ? CONTENT_IOS_PADDING_TOP
+        : CONTENT_ANDROID_PADDING_TOP,
   },
 
   titleStyle: {
@@ -130,6 +137,14 @@ const styles = StyleSheet.create({
     fontSize: fontSize.fontSize14,
     color: '#000000',
     lineHeight: fontSize.fontSize14 * 1.21,
+  },
+
+  info: {
+    flexDirection: 'row',
+    paddingHorizontal: MARGIN_HORIZONTAL,
+    flexWrap: 'wrap',
+    paddingTop: H234_MARGIN_BOTTOM,
+    paddingBottom: H234_MARGIN_BOTTOM,
   },
 });
 

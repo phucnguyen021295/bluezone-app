@@ -29,6 +29,7 @@ import {
   Linking,
   View,
   Animated,
+  Platform,
 } from 'react-native';
 import {injectIntl, intlShape} from 'react-intl';
 import HTML from 'react-native-render-html';
@@ -49,6 +50,7 @@ import SCREEN from '../../nameScreen';
 import moment from 'moment';
 
 const HEADER_MAX_HEIGHT = HEADER_HEIGHT;
+const ScrollViewAnimated = Animated.createAnimatedComponent(ScrollView);
 
 class DetailNewScreen extends PureComponent {
   constructor(props) {
@@ -126,33 +128,36 @@ class DetailNewScreen extends PureComponent {
     return (
       <SafeAreaView style={styles.container}>
         <Animated.View
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            height: HEADER_MAX_HEIGHT,
-            transform: [{translateY: animationHeader}],
-            backgroundColor: '#ffffff',
-            zIndex: 99,
-            // borderBottomColor: '#efefef',
-            // borderBottomWidth: 1,
-          }}>
+          style={[
+            {
+              height: HEADER_MAX_HEIGHT,
+              backgroundColor: '#ffffff',
+              zIndex: 99,
+            },
+            Platform.OS === 'android'
+              ? {
+                  position: 'absolute',
+                  left: 0,
+                  right: 0,
+                  transform: [{translateY: animationHeader}],
+                }
+              : {
+                  borderBottomColor: '#efefef',
+                  borderBottomWidth: 1,
+                },
+          ]}>
           <Header title={Language === 'vi' ? 'Tin tức' : 'New'} />
         </Animated.View>
-        <ScrollView
-          onScroll={Animated.event([
-            {nativeEvent: {contentOffset: {y: headerAnimated}}},
-          ])}
+        <ScrollViewAnimated
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: headerAnimated}}}],
+            {
+              useNativeDriver: true,
+            },
+          )}
           contentContainerStyle={styles.contentContainerStyle}>
           <Text text={data?.title} style={styles.titleStyle} />
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingHorizontal: 20,
-              flexWrap: 'wrap',
-              paddingTop: 7,
-              paddingBottom: 7,
-            }}>
+          <View style={styles.info}>
             <Text text={data?.creator} style={styles.creator} />
             <Text text={' | '} style={styles.creator} />
             <Text
@@ -172,7 +177,7 @@ class DetailNewScreen extends PureComponent {
             imagesMaxWidth={Dimensions.get('window').width - 40}
             allowFontScaling={false}
           />
-        </ScrollView>
+        </ScrollViewAnimated>
       </SafeAreaView>
     );
   }

@@ -238,12 +238,12 @@ class ModalNotify extends PureComponent {
           onPress={this.onTurnOnPermissionBLE}
           btnText={formatMessage(message.openSettingPermissionBlueTooth)}
         />
-        <ModalBase
-          isVisible={isVisibleBLE}
-          content={_NOTIFI_BLE_IOS_TEXT}
-          onPress={this.onTurnOnBLE}
-          btnText={formatMessage(message.openSettingBluetooth)}
-        />
+        {/*<ModalBase*/}
+        {/*  isVisible={isVisibleBLE}*/}
+        {/*  content={_NOTIFI_BLE_IOS_TEXT}*/}
+        {/*  onPress={this.onTurnOnBLE}*/}
+        {/*  btnText={formatMessage(message.openSettingBluetooth)}*/}
+        {/*/>*/}
         <ModalBase
           isVisible={isVisiblePermissionNotify}
           content={_NOTIFI_PERMISSION_TEXT}

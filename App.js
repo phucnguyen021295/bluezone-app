@@ -202,14 +202,6 @@ class App extends PureComponent {
     // Check whether an initial notification is available
     registerInitialNotification(this.onNotificationOpened);
 
-    const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
-    this.eventListener = eventEmitter.addListener(
-      'notifications_notification_opened',
-      event => {
-        debugger;
-      },
-    );
-
     this.removeMessageListener = registerMessageHandler(async notifyObj => {
       // TODO can sua ve dung dev trong server.js het => Khong duoc, __DEV__ nay chi dung cho debugger thoi
       if (__DEV__) {
