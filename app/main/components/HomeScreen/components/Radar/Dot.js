@@ -24,7 +24,7 @@
 import React from 'react';
 import LottieView from 'lottie-react-native';
 
-class Dot extends React.Component {
+class Dot extends React.PureComponent {
   constructor(props) {
     super(props);
     this.play = this.play.bind(this);
@@ -60,7 +60,7 @@ class Dot extends React.Component {
       this.isPlaying = true;
       this.playAgain = false;
       const timeNow = new Date().getTime();
-      const radarFrame = Math.floor(
+      const radarFrame = Math.round(
         ((timeNow - objectRadar.timeStart) / 1000) * 30,
       );
       const k = dot.otherBeginFrame - radarFrame;
@@ -69,11 +69,12 @@ class Dot extends React.Component {
         this.ref && this.ref.play();
       }
 
-      if (Math.abs(k) >= 4) {
-        this.ref && this.ref.play(dot.otherBeginFrame - k, dot.otherEndFrame);
-      } else {
-        this.ref && this.ref.play(dot.otherBeginFrame, dot.otherEndFrame);
-      }
+      // if (Math.abs(k) >= 4) {
+      //   this.ref && this.ref.play(dot.otherBeginFrame - k, dot.otherEndFrame);
+      // } else {
+      //   this.ref && this.ref.play(dot.otherBeginFrame, dot.otherEndFrame);
+      // }
+      this.ref && this.ref.play(dot.otherBeginFrame - k, dot.otherEndFrame);
       return;
     }
     this.isPlaying = false;

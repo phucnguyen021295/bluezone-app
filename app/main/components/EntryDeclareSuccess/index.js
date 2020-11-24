@@ -40,9 +40,7 @@ const EntryDeclareSuccessScreen = props => {
   const {code, passport} = route.params;
 
   const updateEntry = () => {
-    navigation.replace(SCREEN.ENTRY, {
-      tabFocus: 'EntryDeclare',
-    });
+    navigation.replace(SCREEN.ENTRY_DECLARATION);
   };
 
   const goBack = () => {
