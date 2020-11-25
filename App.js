@@ -23,7 +23,6 @@ import React, {PureComponent} from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {NativeEventEmitter, NativeModules} from 'react-native';
 
 // Components
 import LoadingScreen from './app/main/components/LoadingScreen';
@@ -57,9 +56,8 @@ import LanguageProvider from './app/base/LanguageProvider';
 import {translationMessages} from './app/i18n';
 import {remoteMessageListener} from './app/core/push';
 import decorateMainAppStart from './app/main/decorateMainAppStart';
-import {navigationRef, navigate} from './RootNavigation';
+import {navigationRef, navigate, push} from './RootNavigation';
 import {registerMessageHandler, registerNotification} from './app/core/fcm';
-import {removeNotificationLimit} from './app/core/db/SqliteDb';
 
 // Api
 import {registerResourceLanguageChange} from './app/core/language';
@@ -355,18 +353,18 @@ class App extends PureComponent {
           this.screenOpenNotification = SCREEN.DETAIL_NEW_WELCOME;
           this.paramsOpenNotification = params;
         } else if (isHome) {
-          navigate(SCREEN.DETAIL_NEW, params);
+          push(SCREEN.DETAIL_NEW, params);
         } else {
-          navigate(SCREEN.DETAIL_NEW_WELCOME, params);
+          push(SCREEN.DETAIL_NEW_WELCOME, params);
         }
       } else {
         if (loading) {
           this.screenOpenNotification = SCREEN.PAGE_WEBVIEW_WELCOME;
           this.paramsOpenNotification = params;
         } else if (isHome) {
-          navigate(SCREEN.PAGE_WEBVIEW, params);
+          push(SCREEN.PAGE_WEBVIEW, params);
         } else {
-          navigate(SCREEN.PAGE_WEBVIEW_WELCOME, params);
+          push(SCREEN.PAGE_WEBVIEW_WELCOME, params);
         }
       }
     } else if (

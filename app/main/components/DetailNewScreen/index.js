@@ -55,14 +55,13 @@ const ScrollViewAnimated = Animated.createAnimatedComponent(ScrollView);
 class DetailNewScreen extends PureComponent {
   constructor(props) {
     super(props);
-    const headerAnimated = new Animated.Value(0);
     this.state = {
       news: {},
-      headerAnimated: headerAnimated,
     };
 
+    this.headerAnimated = new Animated.Value(0);
     this.clampedScroll = Animated.diffClamp(
-      headerAnimated.interpolate({
+      this.headerAnimated.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 1],
         extrapolateLeft: 'clamp',
@@ -70,6 +69,9 @@ class DetailNewScreen extends PureComponent {
       0,
       HEADER_MAX_HEIGHT,
     );
+
+    this.animationHeader = this.headerAnimated;
+
     this.formatDate = this.formatDate.bind(this);
     this.formatHours = this.formatHours.bind(this);
   }
@@ -90,6 +92,13 @@ class DetailNewScreen extends PureComponent {
     );
 
     reportScreenAnalytics(SCREEN.DETAIL_NEW);
+
+    const animationHeader = this.clampedScroll.interpolate({
+      inputRange: [0, HEADER_MAX_HEIGHT],
+      outputRange: [0, -HEADER_MAX_HEIGHT],
+      extrapolate: 'clamp',
+    });
+    this.animationHeader = animationHeader;
   }
 
   getNewFail(repponse) {}
@@ -115,15 +124,9 @@ class DetailNewScreen extends PureComponent {
   }
 
   render() {
-    const {news, headerAnimated} = this.state;
+    const {news} = this.state;
     const {Language} = configuration;
     const data = news?.data;
-
-    const animationHeader = this.clampedScroll.interpolate({
-      inputRange: [0, HEADER_MAX_HEIGHT],
-      outputRange: [0, -HEADER_MAX_HEIGHT],
-      extrapolate: 'clamp',
-    });
 
     return (
       <SafeAreaView style={styles.container}>
@@ -139,7 +142,7 @@ class DetailNewScreen extends PureComponent {
                   position: 'absolute',
                   left: 0,
                   right: 0,
-                  transform: [{translateY: animationHeader}],
+                  transform: [{translateY: this.animationHeader}],
                 }
               : {
                   borderBottomColor: '#efefef',
@@ -148,36 +151,38 @@ class DetailNewScreen extends PureComponent {
           ]}>
           <Header title={Language === 'vi' ? 'Tin tức' : 'New'} />
         </Animated.View>
-        <ScrollViewAnimated
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: headerAnimated}}}],
-            {
-              useNativeDriver: true,
-            },
-          )}
-          contentContainerStyle={styles.contentContainerStyle}>
-          <Text text={data?.title} style={styles.titleStyle} />
-          <View style={styles.info}>
-            <Text text={data?.creator} style={styles.creator} />
-            <Text text={' | '} style={styles.creator} />
-            <Text
-              text={this.formatDate(data?.createDate)}
-              style={styles.creator}
+        {data ? (
+          <ScrollViewAnimated
+            onScroll={Animated.event(
+              [{nativeEvent: {contentOffset: {y: this.headerAnimated}}}],
+              {
+                useNativeDriver: true,
+              },
+            )}
+            contentContainerStyle={styles.contentContainerStyle}>
+            <Text text={data?.title} style={styles.titleStyle} />
+            <View style={styles.info}>
+              <Text text={data?.creator} style={styles.creator} />
+              <Text text={' | '} style={styles.creator} />
+              <Text
+                text={this.formatDate(data?.createdTime)}
+                style={styles.creator}
+              />
+              <Text text={' | '} style={styles.creator} />
+              <Text
+                text={this.formatHours(data?.createdTime)}
+                style={styles.creator}
+              />
+            </View>
+            <HTML
+              onLinkPress={this.onLinkPress}
+              html={data?.content}
+              tagsStyles={CUSTOM_STYLES}
+              imagesMaxWidth={Dimensions.get('window').width - 40}
+              allowFontScaling={false}
             />
-            <Text text={' | '} style={styles.creator} />
-            <Text
-              text={this.formatHours(data?.createDate)}
-              style={styles.creator}
-            />
-          </View>
-          <HTML
-            onLinkPress={this.onLinkPress}
-            html={data?.content}
-            tagsStyles={CUSTOM_STYLES}
-            imagesMaxWidth={Dimensions.get('window').width - 40}
-            allowFontScaling={false}
-          />
-        </ScrollViewAnimated>
+          </ScrollViewAnimated>
+        ) : null}
       </SafeAreaView>
     );
   }
